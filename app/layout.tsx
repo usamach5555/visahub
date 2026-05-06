@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import AdSlot from "@/components/ads/AdSlot";
 import { websiteSchema } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
@@ -56,12 +55,6 @@ export default function RootLayout({
       </head>
       <body>
         <Header />
-
-        {/* Top banner ad */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
-          <AdSlot slot="banner" />
-        </div>
-
         <main>{children}</main>
         <Footer />
       </body>

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SearchFilter from "@/components/SearchFilter";
-import Button from "@/components/ui/Button";
+import AdSlot from "@/components/ads/AdSlot";
 import { VISA_TYPES } from "@/data/visa-types";
+import { COUNTRIES } from "@/data/countries";
 import { faqSchema } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
@@ -40,6 +41,13 @@ const homeFaqs = [
   },
 ];
 
+const visaColors: Record<string, { from: string; to: string; badge: string; text: string }> = {
+  study:       { from: "from-blue-600",   to: "to-indigo-700",  badge: "bg-blue-100 text-blue-800",   text: "text-blue-700" },
+  work:        { from: "from-violet-600", to: "to-purple-700",  badge: "bg-violet-100 text-violet-800", text: "text-violet-700" },
+  tourist:     { from: "from-sky-500",    to: "to-cyan-600",    badge: "bg-sky-100 text-sky-800",     text: "text-sky-700" },
+  immigration: { from: "from-emerald-600",to: "to-teal-700",    badge: "bg-emerald-100 text-emerald-800", text: "text-emerald-700" },
+};
+
 export default function HomePage() {
   return (
     <>
@@ -48,259 +56,321 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(homeFaqs)) }}
       />
 
-      {/* ─── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-            <span className="text-accent-400">●</span>
-            Updated for 2026 — Free Visa Guides
+      {/* ─── FULL SCREEN COVER ──────────────────────────────────────────────── */}
+      <section className="relative min-h-screen flex flex-col overflow-hidden">
+        {/* Background layers */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0f1f5c] via-[#1E40AF] to-[#1d4ed8]" />
+        {/* Subtle grid overlay */}
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
+        {/* Glowing orbs */}
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-600/10 rounded-full blur-3xl" />
+
+        {/* Hero content */}
+        <div className="relative flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/25 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium text-white mb-8">
+            <span className="w-2 h-2 bg-accent-400 rounded-full animate-pulse" />
+            Updated for 2026 · 500+ Free Visa Guides
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-            Your Complete Guide to{" "}
-            <span className="text-accent-400">Visas & Immigration</span>{" "}
-            Worldwide
+
+          {/* Headline */}
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-6 max-w-4xl">
+            Your Complete
+            <br />
+            <span className="text-accent-400">Visa &amp; Immigration</span>
+            <br />
+            Guide Worldwide
           </h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Study abroad, work overseas, travel the world, or settle permanently — we cover every visa type for 15+ countries with step-by-step guides, requirements, and expert tips.
+
+          {/* Subheading */}
+          <p className="text-lg sm:text-xl text-blue-100/90 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Study abroad, work overseas, travel the world, or settle permanently. Step-by-step guides for{" "}
+            <span className="text-white font-semibold">15+ countries</span> — 100% free.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button href="#countries" variant="secondary" size="lg">
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 mb-16">
+            <Link
+              href="#countries"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent-500 hover:bg-accent-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 text-base"
+            >
               Browse Countries
-            </Button>
-            <Button href="/blog" variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+            <Link
+              href="/blog"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/15 hover:bg-white/25 border border-white/30 text-white font-bold rounded-2xl backdrop-blur-sm transition-all duration-200 text-base"
+            >
               Read Visa Guides
-            </Button>
+            </Link>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-14 max-w-3xl mx-auto">
-            {[
-              { label: "Countries Covered", value: "15+" },
-              { label: "Visa Guides", value: "500+" },
-              { label: "Visa Categories", value: "4" },
-              { label: "Updated", value: "2026" },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <div className="text-3xl font-extrabold text-accent-400">{s.value}</div>
-                <div className="text-sm text-blue-200 mt-1">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Visa Type Highlights ─────────────────────────────────────────── */}
-      <section id="visa-types" className="py-14 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">Explore by Visa Category</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Whether you want to study, work, travel, or immigrate permanently — find the right visa pathway for your goals.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {VISA_TYPES.map((v) => (
+          {/* Floating country flags strip */}
+          <div className="flex flex-wrap justify-center gap-3 max-w-xl mx-auto">
+            {COUNTRIES.map((c) => (
               <Link
-                key={v.slug}
-                href={`/visa/${v.slug}`}
-                className="group relative overflow-hidden bg-gradient-to-br from-primary-50 to-white border border-primary-100 rounded-2xl p-6 hover:shadow-lg hover:border-primary-300 transition-all duration-200"
+                key={c.slug}
+                href={`/country/${c.slug}`}
+                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full px-3 py-1.5 text-sm text-white/90 hover:text-white transition-all duration-150 backdrop-blur-sm"
               >
-                <div className="text-4xl mb-4">{v.icon}</div>
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary-800 mb-2">
-                  {v.name}
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-4">
-                  {v.shortDescription}
-                </p>
-                <div className="text-xs text-primary-700 font-semibold flex items-center gap-1">
-                  Full Guide
-                  <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
+                <span className="text-base">{c.flag}</span>
+                <span className="font-medium hidden sm:inline">{c.name}</span>
               </Link>
             ))}
           </div>
         </div>
+
+        {/* Stats strip at bottom of cover */}
+        <div className="relative border-t border-white/10 bg-black/20 backdrop-blur-sm">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+              {[
+                { value: "15+", label: "Countries Covered" },
+                { value: "500+", label: "Visa Guides" },
+                { value: "4", label: "Visa Categories" },
+                { value: "Free", label: "Always Free" },
+              ].map((s) => (
+                <div key={s.label}>
+                  <div className="text-3xl font-extrabold text-accent-400">{s.value}</div>
+                  <div className="text-xs text-blue-200 mt-1 font-medium tracking-wide">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* ─── Country Search & Grid ────────────────────────────────────────── */}
-      <section id="countries" className="py-14 bg-background">
+      {/* ─── VISA CATEGORIES ────────────────────────────────────────────────── */}
+      <section id="visa-types" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-primary-50 text-primary-700 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3">
+              Visa Categories
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+              Find the Right Visa for Your Goal
+            </h2>
+            <p className="text-gray-500 max-w-xl mx-auto text-base">
+              Whether you want to study, work, travel, or settle — choose your category and get a complete guide.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {VISA_TYPES.map((v) => {
+              const colors = visaColors[v.slug];
+              return (
+                <Link
+                  key={v.slug}
+                  href={`/visa/${v.slug}`}
+                  className="group relative overflow-hidden rounded-2xl border border-gray-100 hover:border-transparent hover:shadow-xl transition-all duration-300"
+                >
+                  {/* Gradient top bar */}
+                  <div className={`h-2 w-full bg-gradient-to-r ${colors.from} ${colors.to}`} />
+                  <div className="p-6 bg-white group-hover:bg-gray-50 transition-colors">
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-4 bg-gradient-to-br ${colors.from} ${colors.to} shadow-md`}>
+                      {v.icon}
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{v.name}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed mb-4 line-clamp-3">
+                      {v.shortDescription}
+                    </p>
+                    <div className={`inline-flex items-center gap-1.5 text-xs font-bold ${colors.text} group-hover:gap-2.5 transition-all`}>
+                      Full Guide
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── AD BANNER ──────────────────────────────────────────────────────── */}
+      <div className="bg-gray-50 border-y border-gray-200 py-3">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AdSlot slot="banner" />
+        </div>
+      </div>
+
+      {/* ─── COUNTRY SEARCH & GRID ──────────────────────────────────────────── */}
+      <section id="countries" className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-accent-50 text-accent-700 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3">
+              15 Destinations
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
               Find Visa Information by Country
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Search 15 destination countries and filter by visa type to quickly find the guides most relevant to your plans.
+            <p className="text-gray-500 max-w-xl mx-auto text-base">
+              Search and filter by destination country and visa type to find exactly what you need.
             </p>
           </div>
           <SearchFilter />
         </div>
       </section>
 
-      {/* ─── Featured Guides CTA ─────────────────────────────────────────── */}
-      <section className="py-12 bg-primary-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-            500+ Free Visa Guides Updated for 2026
-          </h2>
-          <p className="text-blue-200 text-lg mb-8 max-w-2xl mx-auto">
-            From step-by-step application walkthroughs to country-specific requirements and fee structures — our blog covers every scenario.
-          </p>
-          <Button href="/blog" variant="secondary" size="lg">
-            Browse All Guides
-          </Button>
+      {/* ─── HOW IT WORKS ───────────────────────────────────────────────────── */}
+      <section className="py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-primary-50 text-primary-700 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3">
+              How It Works
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+              Apply for Any Visa in 4 Steps
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { step: "01", icon: "🔍", title: "Choose Country", desc: "Select your destination from 15 countries with detailed guides." },
+              { step: "02", icon: "📋", title: "Check Requirements", desc: "Review the exact documents, fees, and eligibility for your visa type." },
+              { step: "03", icon: "📝", title: "Prepare & Apply", desc: "Follow our step-by-step checklist and submit a complete application." },
+              { step: "04", icon: "✈️", title: "Travel Confidently", desc: "Get your visa approved and travel with all the knowledge you need." },
+            ].map((item) => (
+              <div key={item.step} className="relative text-center">
+                {/* Step connector line */}
+                <div className="absolute top-8 left-1/2 w-full h-0.5 bg-gray-100 hidden lg:block -z-0" />
+                <div className="relative z-10">
+                  <div className="w-16 h-16 rounded-2xl bg-primary-50 border-2 border-primary-100 flex items-center justify-center text-3xl mx-auto mb-4">
+                    {item.icon}
+                  </div>
+                  <div className="text-xs font-bold text-primary-400 mb-1 tracking-widest">STEP {item.step}</div>
+                  <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ─── SEO Long-Form Content ────────────────────────────────────────── */}
-      <section className="py-16 bg-white">
+      {/* ─── CTA BANNER ─────────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary-900 via-primary-800 to-indigo-800 py-16">
+        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+          <div className="text-5xl mb-4">📚</div>
+          <h2 className="text-2xl sm:text-3xl font-extrabold mb-4">
+            500+ Free Visa Guides — Updated for 2026
+          </h2>
+          <p className="text-blue-200 text-base mb-8 max-w-xl mx-auto">
+            From step-by-step application walkthroughs to country-specific fee breakdowns — we have every scenario covered.
+          </p>
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-accent-500 hover:bg-accent-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
+          >
+            Browse All Guides
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+      </section>
+
+      {/* ─── SEO CONTENT ────────────────────────────────────────────────────── */}
+      <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <article className="prose-article">
-            <h2>Complete Visa and Immigration Guide: Everything You Need to Know in 2026</h2>
+          <div className="text-center mb-12">
+            <span className="inline-block bg-gray-100 text-gray-600 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3">
+              In-Depth Resource
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+              Complete Visa &amp; Immigration Guide 2026
+            </h2>
+            <p className="text-gray-500 max-w-xl mx-auto">
+              Everything you need to know about applying for visas and immigrating to the world&apos;s top destinations.
+            </p>
+          </div>
 
-            <p>
-              Applying for a visa is often the most stressful part of any international journey — whether you are planning to study at a world-class university, pursue a career abroad, take a long-awaited holiday, or start a new chapter as a permanent resident in a new country. The global immigration landscape changes constantly, with governments updating policies, introducing digital systems, and adjusting fee structures every year. That is why <strong>Global Visa Guide Hub</strong> exists — to provide you with accurate, up-to-date, and easy-to-understand visa information for the world's most popular destination countries.
-            </p>
+          <article className="prose-article space-y-8">
+            <div className="bg-primary-50 border-l-4 border-primary-600 rounded-r-xl p-5">
+              <p className="text-gray-700 leading-relaxed">
+                Applying for a visa is often the most stressful part of any international journey. The global immigration landscape changes constantly — governments update policies, introduce digital systems, and adjust fee structures every year. <strong>Global Visa Guide Hub</strong> provides accurate, easy-to-understand visa information for the world&apos;s most popular destination countries, all in one place and completely free.
+              </p>
+            </div>
 
-            <p>
-              This guide covers the four major visa categories — <strong>study visas</strong>, <strong>work visas</strong>, <strong>tourist visas</strong>, and <strong>immigration and permanent residency</strong> — for 15 countries including the United States, United Kingdom, Canada, Germany, Australia, UAE, Saudi Arabia, Turkey, Italy, Spain, France, Netherlands, Sweden, Norway, and Switzerland.
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                { icon: "🎓", title: "Study Visa", desc: "A study visa allows international students to live and study abroad. Countries like Canada, Australia, and the UK offer post-study work rights that can lead to permanent residency.", href: "/visa/study" },
+                { icon: "💼", title: "Work Visa", desc: "Work visas authorize foreign nationals to be employed in another country — from employer-sponsored visas (USA H-1B, UK Skilled Worker) to points-based systems (Canada Express Entry).", href: "/visa/work" },
+                { icon: "✈️", title: "Tourist Visa", desc: "Tourist visas allow temporary entry for leisure, sightseeing, and visiting family. The Schengen visa covers 27 European countries in a single application.", href: "/visa/tourist" },
+                { icon: "🏠", title: "Permanent Residency", desc: "PR gives foreign nationals the right to live and work indefinitely. Canada's Express Entry, Australia's SkillSelect, and Germany's settlement permit are popular pathways.", href: "/visa/immigration" },
+              ].map((item) => (
+                <Link key={item.href} href={item.href} className="group flex gap-4 p-5 bg-gray-50 hover:bg-primary-50 rounded-2xl border border-gray-100 hover:border-primary-200 transition-all duration-200">
+                  <span className="text-3xl shrink-0">{item.icon}</span>
+                  <div>
+                    <h3 className="font-bold text-gray-900 group-hover:text-primary-800 mb-1 transition-colors">{item.title}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
 
-            <h2>Understanding the Major Visa Categories</h2>
+            <h2 className="text-2xl font-bold text-primary-800">How to Choose the Right Country</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                { title: "Purpose", desc: "Each visa type has different requirements. Define your goal — study, work, visit, or settle — before choosing a destination." },
+                { title: "Processing Time", desc: "UAE and Turkey process visas in days. USA and UK can take months. Plan your timeline carefully." },
+                { title: "Cost of Living", desc: "Germany and Turkey are affordable. Switzerland and Norway are expensive. Financial requirements reflect this." },
+                { title: "PR Pathway", desc: "Canada, Australia, and Germany have transparent routes from work/study visas to permanent residency." },
+              ].map((item) => (
+                <div key={item.title} className="flex gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100">
+                  <span className="text-accent-500 font-bold text-lg shrink-0 mt-0.5">✓</span>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 text-sm">{item.title}</h4>
+                    <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-            <h3>1. Study Visa (Student Visa)</h3>
-            <p>
-              A study visa allows international students to live and study in a foreign country for the duration of their academic program. It is typically tied to enrollment at an accredited educational institution and requires proof of admission, financial capability, and in many cases, language proficiency.
-            </p>
-            <p>
-              Countries like <strong>Canada, Australia, and the United Kingdom</strong> are among the top destinations for international students. Canada issues a Study Permit through the IRCC (Immigration, Refugees and Citizenship Canada). Australia issues the Student Visa (Subclass 500) through the Department of Home Affairs. The UK issues a Student Visa through the Home Office, requiring a Confirmation of Acceptance for Studies (CAS) from a licensed sponsor institution.
-            </p>
-            <p>
-              <strong>Germany</strong> is increasingly popular due to its tuition-free public universities. International students need a national student visa (D-Visa), and after arrival, must apply for a residence permit. Germany's student visa process requires proof of admission, blocked account (€11,208 for 2026), health insurance, and language proficiency depending on the program language.
-            </p>
+            <h2 className="text-2xl font-bold text-primary-800">Common Visa Mistakes to Avoid</h2>
+            <div className="bg-red-50 border border-red-100 rounded-2xl p-5">
+              <ul className="space-y-3">
+                {[
+                  "Incomplete or unsigned application forms",
+                  "Unexplained large bank deposits that raise fraud concerns",
+                  "Photographs that do not meet official size or background specifications",
+                  "Applying too late — always allow at least 4–8 weeks before your travel date",
+                  "Missing travel insurance (mandatory for Schengen and many other destinations)",
+                  "Misrepresenting information — discrepancies cause immediate rejection",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
+                    <span className="text-red-400 shrink-0 mt-0.5">✗</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-            <h3>2. Work Visa (Employment Visa)</h3>
-            <p>
-              A work visa authorizes foreign nationals to be employed by a company in another country. The requirements differ significantly by country — from employer-sponsored visas (USA H-1B, UK Skilled Worker Visa) to points-based immigration systems (Canada Express Entry, Australia SkillSelect).
-            </p>
-            <p>
-              The <strong>USA H-1B visa</strong> is among the most competitive work visas globally, capped at 65,000 per year (plus 20,000 for US master's graduates) with an annual lottery system. In contrast, <strong>Canada's Express Entry</strong> system allows skilled workers to apply without a prior job offer, though having an LMIA-supported job offer adds significant points. The <strong>UK Skilled Worker Visa</strong> replaced the Tier 2 visa in 2021 and requires a job offer from a Home Office-approved sponsor with a salary meeting occupation-specific thresholds.
-            </p>
-            <p>
-              <strong>Germany's Skilled Immigration Act (Fachkräfteeinwanderungsgesetz)</strong>, significantly expanded in 2024 and 2025, now allows skilled workers with vocational qualifications (not just university degrees) to obtain work visas. The EU Blue Card remains a top option for university graduates with a qualifying job offer meeting minimum salary thresholds.
-            </p>
-
-            <h3>3. Tourist Visa (Visitor Visa)</h3>
-            <p>
-              Tourist visas allow temporary entry for leisure, sightseeing, visiting family and friends, or attending short events. Visa requirements vary enormously based on bilateral agreements between countries.
-            </p>
-            <p>
-              Citizens of many developed nations enjoy <strong>visa-free or visa-on-arrival access</strong> to most countries. Travelers from countries with stronger passports (USA, UK, Germany, UAE) often face fewer barriers. However, citizens of Pakistan, India, Bangladesh, and many African nations typically require prior visa approval for most destinations.
-            </p>
-            <p>
-              The <strong>Schengen Area</strong>, covering 27 European countries, operates on a single visa system. A Schengen visa allows entry to all member states for up to 90 days within a 180-day period. Since 2022, the EU has been rolling out the <strong>EES (Entry/Exit System)</strong> and <strong>ETIAS (European Travel Information and Authorisation System)</strong> for visa-exempt travelers, adding a digital layer to border management.
-            </p>
-
-            <h3>4. Immigration and Permanent Residency (PR)</h3>
-            <p>
-              Permanent residency gives foreign nationals the right to live and work in a country indefinitely without a time-limited visa. It is the final step before citizenship for most immigrants.
-            </p>
-            <p>
-              <strong>Canada's Express Entry</strong> system uses a Comprehensive Ranking System (CRS) that scores candidates on age, education, work experience, language skills, and adaptability. The highest-scoring candidates receive Invitations to Apply (ITA) in regular draws. Canada also has Provincial Nominee Programs (PNPs) that allow provinces to nominate candidates with specific skills.
-            </p>
-            <p>
-              <strong>Australia's SkillSelect</strong> points-tested system includes the Skilled Independent Visa (Subclass 189), the Skilled Nominated Visa (Subclass 190), and the Skilled Work Regional Visa (Subclass 491). Points are awarded for age, English proficiency, skilled employment, educational qualifications, and other factors.
-            </p>
-            <p>
-              <strong>Germany's settlement permit (Niederlassungserlaubnis)</strong> can be obtained after 4–5 years of qualifying residence, with German language proficiency at B1 level, stable employment, and sufficient pension contributions as key requirements.
-            </p>
-
-            <h2>How to Choose the Right Country for Your Visa Goals</h2>
-
-            <p>
-              Choosing the right destination country is as important as the visa application itself. Consider these factors:
-            </p>
-            <ul>
-              <li><strong>Purpose:</strong> Are you studying, working, traveling, or settling permanently? Each purpose requires a specific visa type, and countries vary in how welcoming they are to each category.</li>
-              <li><strong>Processing time:</strong> Some countries (UAE, Turkey) process visas in days. Others (USA, UK) can take weeks to months, especially for complex categories.</li>
-              <li><strong>Cost of living:</strong> Germany and Turkey offer relatively affordable living standards. Switzerland, Norway, and the UAE have high costs. This affects how much financial proof you need.</li>
-              <li><strong>PR pathway:</strong> If long-term settlement is your goal, prioritize countries with transparent and accessible PR pathways — Canada, Australia, and Germany lead here.</li>
-              <li><strong>English-language environment:</strong> USA, UK, Canada, and Australia are predominantly English-speaking. Germany, France, Italy, and Spain require language integration, though many programs are taught in English.</li>
-            </ul>
-
-            <h2>The Visa Application Process: A Universal Framework</h2>
-
-            <p>
-              While every country has its own specific procedures, most visa applications follow a similar framework:
-            </p>
-            <ol>
-              <li><strong>Determine your visa category</strong> — study, work, tourist, or immigration</li>
-              <li><strong>Check eligibility</strong> using the official government immigration portal</li>
-              <li><strong>Gather required documents</strong> — passport, photos, financial evidence, purpose documentation</li>
-              <li><strong>Complete the application form</strong> accurately and completely</li>
-              <li><strong>Pay the visa fee</strong> through the official portal or bank</li>
-              <li><strong>Submit biometrics</strong> at an approved visa application center</li>
-              <li><strong>Attend an interview</strong> if required (common for US visas)</li>
-              <li><strong>Track your application</strong> and respond to any requests for additional documents</li>
-              <li><strong>Collect your visa</strong> and verify all details before traveling</li>
-            </ol>
-
-            <h2>Top Countries for International Students in 2026</h2>
-
-            <p>
-              The global student visa landscape in 2026 is shaped by post-pandemic recovery, rising tuition costs in English-speaking countries, and growing demand for STEM programs. Here are the top destinations:
-            </p>
-            <ul>
-              <li><strong>Canada</strong> — Strong post-study work rights (PGWP up to 3 years), PR pathways, and multicultural cities make it the top choice for many.</li>
-              <li><strong>Germany</strong> — Tuition-free at public universities, globally ranked technical universities (TU Munich, KIT), and a growing tech economy.</li>
-              <li><strong>Australia</strong> — World-class universities (Group of Eight), strong labor market, and post-study work visa options.</li>
-              <li><strong>UK</strong> — Prestigious institutions, 2-year Graduate Route visa for post-study work, and a global research environment.</li>
-              <li><strong>Netherlands</strong> — High English-language instruction availability, innovative startup ecosystem, and EU residency rights.</li>
-            </ul>
-
-            <h2>Common Visa Mistakes and How to Avoid Them</h2>
-
-            <p>
-              Visa refusals are largely preventable. The most common reasons for rejection include:
-            </p>
-            <ul>
-              <li>Incomplete or inconsistent application forms</li>
-              <li>Insufficient financial proof or unexplained bank deposits</li>
-              <li>Lack of clear purpose or intent to return to home country</li>
-              <li>Photographs that do not meet specifications</li>
-              <li>Expired or invalid supporting documents</li>
-              <li>Missing travel insurance (required for many Schengen applications)</li>
-              <li>Previous overstays or immigration violations</li>
-            </ul>
-            <p>
-              Always apply through official embassy portals or accredited visa application centers. Avoid third-party agents who make unrealistic promises, as visa decisions rest solely with government authorities.
-            </p>
-
-            <h2>Digital Transformation in Visa Processing: What&apos;s New in 2026</h2>
-
-            <p>
-              Immigration systems worldwide are rapidly digitalizing. Key developments in 2026 include:
-            </p>
-            <ul>
-              <li><strong>UK Digital Entry Requirements:</strong> The UK has fully rolled out its Electronic Travel Authorization (ETA) for visa-exempt visitors arriving from 2024.</li>
-              <li><strong>EU ETIAS:</strong> The European Travel Information and Authorisation System (ETIAS) launches for visa-exempt travelers to the Schengen zone, requiring online pre-registration and a €7 fee.</li>
-              <li><strong>Canada IRCC Digital Portal:</strong> Canada has transitioned most applications to the fully digital IRCC portal, with biometrics captured at VACs worldwide.</li>
-              <li><strong>Australia ImmiAccount:</strong> Australia's online system allows complete digital management of student and skilled worker visas.</li>
-              <li><strong>UAE ICA Smart Services:</strong> The UAE's Identity and Citizenship Authority (ICA) offers fully digital visa and residence permit services.</li>
-            </ul>
-
-            <h2>FAQs About Visa Applications in 2026</h2>
+            <h2 className="text-2xl font-bold text-primary-800">Frequently Asked Questions</h2>
           </article>
 
-          {/* FAQ with schema */}
-          <div className="mt-6">
+          {/* FAQ */}
+          <div className="mt-5 space-y-3">
             {homeFaqs.map((faq, i) => (
-              <details key={i} className="mb-3 border border-gray-200 rounded-xl overflow-hidden group">
+              <details
+                key={i}
+                className="group border border-gray-200 rounded-2xl overflow-hidden"
+              >
                 <summary className="px-5 py-4 font-semibold text-gray-900 cursor-pointer list-none flex items-center justify-between hover:bg-primary-50 transition-colors">
-                  {faq.question}
-                  <svg className="w-5 h-5 text-primary-700 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <span>{faq.question}</span>
+                  <svg className="w-5 h-5 text-primary-600 shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </summary>
@@ -310,15 +380,28 @@ export default function HomePage() {
               </details>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="prose-article mt-8">
-            <h2>Start Your Visa Journey Today</h2>
-            <p>
-              Whether you are a first-time applicant or navigating a complex immigration case, Global Visa Guide Hub is your trusted companion. Use the country cards above to find detailed, country-specific guides. Browse our blog for the most up-to-date articles covering every visa scenario. And if you are unsure where to start, our visa type guides for <Link href="/visa/study">study</Link>, <Link href="/visa/work">work</Link>, <Link href="/visa/tourist">tourist</Link>, and <Link href="/visa/immigration">immigration</Link> visas will point you in the right direction.
-            </p>
-            <p>
-              The information on this website is regularly updated from official government immigration portals, embassy websites, and reputable immigration law sources. Always verify the latest requirements directly with the relevant embassy or consulate before submitting your application.
-            </p>
+      {/* ─── POPULAR COUNTRIES STRIP ────────────────────────────────────────── */}
+      <section className="py-14 bg-gray-50 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-xl font-bold text-gray-900 text-center mb-8">
+            Explore All Destinations
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-3">
+            {COUNTRIES.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/country/${c.slug}`}
+                className="group flex flex-col items-center gap-2 p-4 bg-white rounded-2xl border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all duration-200"
+              >
+                <span className="text-3xl">{c.flag}</span>
+                <span className="text-xs font-semibold text-gray-700 group-hover:text-primary-800 transition-colors text-center leading-tight">
+                  {c.name}
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

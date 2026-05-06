@@ -71,6 +71,9 @@ body {
   overflow: hidden;
 }
 
+/* Smooth details/summary toggle */
+details > summary::-webkit-details-marker { display: none; }
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;
