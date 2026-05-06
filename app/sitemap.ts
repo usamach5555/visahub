@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { COUNTRIES } from "@/data/countries";
 import { VISA_TYPES } from "@/data/visa-types";
 import { getAllSlugs } from "@/lib/articles";
+import { getAllProcessSlugs } from "@/data/processes";
 
 const BASE = "https://globalvisaguidehub.com";
 
@@ -28,6 +29,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const processPages: MetadataRoute.Sitemap = getAllProcessSlugs().map((slug) => ({
+    url: `${BASE}/process/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.75,
+  }));
+
   const articlePages: MetadataRoute.Sitemap = getAllSlugs().map((slug) => ({
     url: `${BASE}/blog/${slug}`,
     lastModified: new Date(),
@@ -35,5 +43,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...countryPages, ...visaTypePages, ...articlePages];
+  return [...staticPages, ...countryPages, ...visaTypePages, ...processPages, ...articlePages];
 }
