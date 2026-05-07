@@ -148,6 +148,42 @@ export const VISA_TYPES: VisaType[] = [
       { question: "Can I include my family in a PR application?", answer: "Yes. Most PR programs allow principal applicants to include a spouse/partner and dependent children in the same application." },
     ],
   },
+  {
+    slug: "business",
+    name: "Business Visa",
+    icon: "🤝",
+    description: "A business visa allows foreign nationals to enter a country for business-related activities such as attending meetings, conferences, trade fairs, or negotiating contracts — without taking up employment.",
+    shortDescription: "For entrepreneurs, investors, and professionals on business trips",
+    targetAudience: "Business owners, corporate executives, investors, conference attendees, and trade representatives",
+    typicalDuration: "1–5 years (multiple entry), single visits 30–90 days",
+    commonRequirements: [
+      "Valid passport (minimum 6 months validity)",
+      "Business invitation letter from the host company",
+      "Letter from your employer or proof of business ownership",
+      "Proof of financial means (bank statements, company financials)",
+      "Return flight booking confirmation",
+      "Hotel or accommodation booking",
+      "Completed visa application form",
+      "Recent passport-sized photographs",
+    ],
+    steps: [
+      { title: "Obtain invitation letter", description: "Request a formal business invitation letter from your host organisation in the destination country on official letterhead." },
+      { title: "Gather company documents", description: "Prepare your company registration certificate, business bank statements, and a letter from your employer confirming the business purpose of the trip." },
+      { title: "Complete application form", description: "Fill in the official visa application form accurately. Any inconsistencies with your supporting documents will cause delays or refusal." },
+      { title: "Book appointments", description: "Schedule a visa application centre appointment. Some countries (UK, USA, Schengen) require a biometrics appointment." },
+      { title: "Submit documents and pay fees", description: "Submit your complete application package and pay the visa fee. Keep the payment receipt as part of your documentation." },
+      { title: "Attend interview if required", description: "Some embassies require an in-person interview for business visa applicants. Prepare to explain the specific purpose and duration of your visit." },
+      { title: "Await processing", description: "Business visa processing takes 5–20 working days depending on the country. Expedited processing is available at many embassies for an additional fee." },
+      { title: "Collect visa and travel", description: "Once approved, collect your passport with the visa stamp, verify the entry type (single/multiple), validity dates, and maximum stay duration before travelling." },
+    ],
+    faqs: [
+      { question: "Can I work on a business visa?", answer: "No. A business visa permits business activities (meetings, conferences, negotiations) but does not authorise employment or paid work. For employment, you need a work permit or work visa." },
+      { question: "What is the difference between a business visa and a work visa?", answer: "A business visa allows temporary visits for business purposes without local employment. A work visa authorises you to be employed and receive a salary from an entity in the destination country." },
+      { question: "Can a business visa be converted to a work visa?", answer: "Generally, you cannot convert a business visa to a work visa from within the destination country. You typically need to return home and apply for a work visa from your home country." },
+      { question: "How long can I stay on a business visa?", answer: "Single entry business visas typically permit stays of 30–90 days. Multiple entry business visas may be valid for 1–5 years but each visit is still limited to 30–90 days." },
+      { question: "Do I need a business visa for virtual meetings?", answer: "No, virtual meetings, webinars, or remote collaboration do not require a business visa as you are not physically entering the country." },
+    ],
+  },
 ];
 
 export function getVisaTypeBySlug(slug: string): VisaType | undefined {

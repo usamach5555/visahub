@@ -6,14 +6,14 @@ import { COUNTRIES } from "@/data/countries";
 import { VISA_TYPES } from "@/data/visa-types";
 
 const PROCESSES = [
-  { label: "Study Visa Application", href: "/process/study-visa-application", icon: "🎓" },
-  { label: "Work Permit Application", href: "/process/work-permit-application", icon: "💼" },
-  { label: "Tourist Visa Application", href: "/process/tourist-visa-application", icon: "✈️" },
-  { label: "PR & Immigration", href: "/process/pr-immigration-application", icon: "🏠" },
-  { label: "Visa Appeal Process", href: "/process/visa-appeal-process", icon: "⚖️" },
-  { label: "Document Preparation", href: "/process/document-preparation-guide", icon: "📋" },
-  { label: "Biometrics Enrollment", href: "/process/biometrics-enrollment", icon: "🔏" },
-  { label: "Embassy Interview Guide", href: "/process/embassy-interview-guide", icon: "🏛️" },
+  { label: "Apply for Study Visa", href: "/process/apply-study-visa", icon: "🎓" },
+  { label: "Apply for Work Visa", href: "/process/apply-work-visa", icon: "💼" },
+  { label: "Visa Interview Prep", href: "/process/visa-interview-preparation", icon: "🎤" },
+  { label: "Visa Rejection Appeal", href: "/process/visa-rejection-appeal", icon: "⚖️" },
+  { label: "Tourist Visa Guide", href: "/process/tourist-visa-application", icon: "✈️" },
+  { label: "Biometrics & Health", href: "/process/biometrics-and-health-checks", icon: "🔏" },
+  { label: "Embassy Interview", href: "/process/embassy-interview-prep", icon: "🏛️" },
+  { label: "PR Application Guide", href: "/process/pr-application", icon: "🏠" },
 ];
 
 function useOutsideClick(ref: React.RefObject<HTMLElement | null>, cb: () => void) {
@@ -174,6 +174,16 @@ export default function Header() {
               }`}
             >
               Blog
+            </Link>
+
+            {/* About */}
+            <Link
+              href="/about"
+              className={`px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                scrolled ? "text-gray-700 hover:text-primary-800 hover:bg-primary-50" : "text-white/90 hover:text-white hover:bg-white/10"
+              }`}
+            >
+              About
             </Link>
           </nav>
 

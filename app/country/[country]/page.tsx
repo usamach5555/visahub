@@ -11,7 +11,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
 
 interface Props {
-  params: { country: string };
+  params: Promise<{ country: string }>;
 }
 
 export function generateStaticParams() {
@@ -19,7 +19,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const country = getCountryBySlug(params.country);
+  const { country: countrySlug } = await params;
+  const country = getCountryBySlug(countrySlug);
   if (!country) return {};
   return {
     title: `${country.name} Visa Guide ${new Date().getFullYear()} — Study, Work, Tourist & Immigration`,
@@ -96,8 +97,9 @@ const requirements: Record<string, string[]> = {
   ],
 };
 
-export default function CountryPage({ params }: Props) {
-  const country = getCountryBySlug(params.country);
+export default async function CountryPage({ params }: Props) {
+  const { country: countrySlug } = await params;
+  const country = getCountryBySlug(countrySlug);
   if (!country) notFound();
 
   const detail = getCountryDetail(country.slug);

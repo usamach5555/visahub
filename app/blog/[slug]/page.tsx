@@ -13,7 +13,7 @@ import { COUNTRIES } from "@/data/countries";
 import { VISA_TYPES } from "@/data/visa-types";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
@@ -21,7 +21,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = getArticleBySlug(params.slug);
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
   if (!article) return {};
   return {
     title: article.title,
@@ -45,8 +46,9 @@ const VISA_ICONS: Record<string, string> = {
   country: "🌍",
 };
 
-export default function BlogPostPage({ params }: Props) {
-  const article = getArticleBySlug(params.slug);
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
   if (!article) notFound();
 
   const body = buildArticleBody(article);

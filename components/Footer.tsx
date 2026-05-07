@@ -3,14 +3,14 @@ import { COUNTRIES } from "@/data/countries";
 import { VISA_TYPES } from "@/data/visa-types";
 
 const PROCESS_LINKS = [
-  { label: "Study Visa Application", href: "/process/study-visa-application" },
-  { label: "Work Permit Application", href: "/process/work-permit-application" },
-  { label: "Tourist Visa Application", href: "/process/tourist-visa-application" },
-  { label: "PR & Immigration", href: "/process/pr-immigration-application" },
-  { label: "Visa Appeal Process", href: "/process/visa-appeal-process" },
-  { label: "Document Preparation", href: "/process/document-preparation-guide" },
-  { label: "Biometrics Enrollment", href: "/process/biometrics-enrollment" },
-  { label: "Embassy Interview Guide", href: "/process/embassy-interview-guide" },
+  { label: "Apply for Study Visa", href: "/process/apply-study-visa" },
+  { label: "Apply for Work Visa", href: "/process/apply-work-visa" },
+  { label: "Visa Interview Prep", href: "/process/visa-interview-preparation" },
+  { label: "Visa Rejection Appeal", href: "/process/visa-rejection-appeal" },
+  { label: "Tourist Visa Guide", href: "/process/tourist-visa-application" },
+  { label: "Biometrics & Health", href: "/process/biometrics-and-health-checks" },
+  { label: "Embassy Interview", href: "/process/embassy-interview-prep" },
+  { label: "PR Application Guide", href: "/process/pr-application" },
 ];
 
 export default function Footer() {
@@ -90,6 +90,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Global Visa Guide Hub. All rights reserved.
           </p>
           <div className="flex gap-5 text-xs text-gray-500">
+            <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link>
             <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>

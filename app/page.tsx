@@ -42,10 +42,11 @@ const homeFaqs = [
 ];
 
 const visaColors: Record<string, { from: string; to: string; badge: string; text: string }> = {
-  study:       { from: "from-blue-600",   to: "to-indigo-700",  badge: "bg-blue-100 text-blue-800",   text: "text-blue-700" },
-  work:        { from: "from-violet-600", to: "to-purple-700",  badge: "bg-violet-100 text-violet-800", text: "text-violet-700" },
-  tourist:     { from: "from-sky-500",    to: "to-cyan-600",    badge: "bg-sky-100 text-sky-800",     text: "text-sky-700" },
+  study:       { from: "from-blue-600",   to: "to-indigo-700",  badge: "bg-blue-100 text-blue-800",      text: "text-blue-700" },
+  work:        { from: "from-violet-600", to: "to-purple-700",  badge: "bg-violet-100 text-violet-800",   text: "text-violet-700" },
+  tourist:     { from: "from-sky-500",    to: "to-cyan-600",    badge: "bg-sky-100 text-sky-800",         text: "text-sky-700" },
   immigration: { from: "from-emerald-600",to: "to-teal-700",    badge: "bg-emerald-100 text-emerald-800", text: "text-emerald-700" },
+  business:    { from: "from-amber-500",  to: "to-orange-600",  badge: "bg-amber-100 text-amber-800",     text: "text-amber-700" },
 };
 
 export default function HomePage() {
@@ -136,9 +137,9 @@ export default function HomePage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
               {[
-                { value: "15+", label: "Countries Covered" },
+                { value: "16+", label: "Countries Covered" },
                 { value: "500+", label: "Visa Guides" },
-                { value: "4", label: "Visa Categories" },
+                { value: "5", label: "Visa Categories" },
                 { value: "Free", label: "Always Free" },
               ].map((s) => (
                 <div key={s.label}>
@@ -166,7 +167,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {VISA_TYPES.map((v) => {
               const colors = visaColors[v.slug];
               return (

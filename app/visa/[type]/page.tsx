@@ -11,7 +11,7 @@ import AdSlot from "@/components/ads/AdSlot";
 import Button from "@/components/ui/Button";
 
 interface Props {
-  params: { type: string };
+  params: Promise<{ type: string }>;
 }
 
 export function generateStaticParams() {
@@ -19,7 +19,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const visa = getVisaTypeBySlug(params.type);
+  const { type } = await params;
+  const visa = getVisaTypeBySlug(type);
   if (!visa) return {};
   return {
     title: `${visa.name} Guide ${new Date().getFullYear()} — Requirements, Process & Countries`,
@@ -28,8 +29,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function VisaTypePage({ params }: Props) {
-  const visa = getVisaTypeBySlug(params.type);
+export default async function VisaTypePage({ params }: Props) {
+  const { type } = await params;
+  const visa = getVisaTypeBySlug(type);
   if (!visa) notFound();
 
   const eligibleCountries = COUNTRIES.filter((c) => c.visaTypes.includes(visa.slug));

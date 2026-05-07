@@ -8,7 +8,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
 
 interface Props {
-  params: { type: string };
+  params: Promise<{ type: string }>;
 }
 
 export function generateStaticParams() {
@@ -16,7 +16,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const process = getProcessBySlug(params.type);
+  const { type } = await params;
+  const process = getProcessBySlug(type);
   if (!process) return {};
   return {
     title: process.title,
@@ -25,8 +26,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function ProcessPage({ params }: Props) {
-  const process = getProcessBySlug(params.type);
+export default async function ProcessPage({ params }: Props) {
+  const { type } = await params;
+  const process = getProcessBySlug(type);
   if (!process) notFound();
 
   const related = PROCESSES.filter((p) =>
