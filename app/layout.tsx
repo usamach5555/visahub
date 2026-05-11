@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     "visa requirements 2026",
   ],
   metadataBase: new URL("https://www.visaprocessinfo.com"),
+  verification: {
+    google: "hnBXp2VAGXmFk2-f-7kfvH7Xd7jwZaT-RZcxxbdVZWs",
+  },
   openGraph: {
     siteName: "Global Visa Guide Hub",
     type: "website",
