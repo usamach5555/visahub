@@ -3,14 +3,14 @@ import { COUNTRIES } from "@/data/countries";
 import { VISA_TYPES } from "@/data/visa-types";
 
 const PROCESS_LINKS = [
-  { label: "Apply for Study Visa", href: "/process/apply-study-visa" },
-  { label: "Apply for Work Visa", href: "/process/apply-work-visa" },
-  { label: "Visa Interview Prep", href: "/process/visa-interview-preparation" },
-  { label: "Visa Rejection Appeal", href: "/process/visa-rejection-appeal" },
+  { label: "Apply for Study Visa", href: "/process/study-visa-application" },
+  { label: "Apply for Work Visa", href: "/process/work-permit-application" },
+  { label: "Visa Interview Prep", href: "/process/embassy-interview-guide" },
+  { label: "Visa Rejection Appeal", href: "/process/visa-appeal-process" },
   { label: "Tourist Visa Guide", href: "/process/tourist-visa-application" },
-  { label: "Biometrics & Health", href: "/process/biometrics-and-health-checks" },
-  { label: "Embassy Interview", href: "/process/embassy-interview-prep" },
-  { label: "PR Application Guide", href: "/process/pr-application" },
+  { label: "Biometrics & Health", href: "/process/biometrics-enrollment" },
+  { label: "Embassy Interview", href: "/process/embassy-interview-guide" },
+  { label: "PR Application Guide", href: "/process/pr-immigration-application" },
 ];
 
 export default function Footer() {
