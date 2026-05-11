@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import SearchFilter from "@/components/SearchFilter";
 import AdSlot from "@/components/ads/AdSlot";
 import { VISA_TYPES } from "@/data/visa-types";
@@ -656,17 +657,27 @@ export default function HomePage() {
       {/* ─── POPULAR COUNTRIES STRIP ────────────────────────────────────────── */}
       <section className="py-14 bg-gray-50 border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 text-center mb-2">
             Explore All Destinations
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-3">
+          <p className="text-center text-gray-500 text-sm mb-8">16 countries covered — click any to explore visa guides</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 gap-3">
             {COUNTRIES.map((c) => (
               <Link
                 key={c.slug}
                 href={`/country/${c.slug}`}
-                className="group flex flex-col items-center gap-2 p-4 bg-white rounded-2xl border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all duration-200"
+                className="group flex flex-col items-center gap-2.5 p-3 sm:p-4 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-primary-300 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
               >
-                <span className="text-3xl">{c.flag}</span>
+                <div className="w-12 h-8 rounded-md overflow-hidden shadow-sm border border-gray-100">
+                  <Image
+                    src={`https://flagcdn.com/w80/${c.code}.png`}
+                    alt={`${c.name} flag`}
+                    width={80}
+                    height={56}
+                    className="w-full h-full object-cover"
+                    unoptimized
+                  />
+                </div>
                 <span className="text-xs font-semibold text-gray-700 group-hover:text-primary-800 transition-colors text-center leading-tight">
                   {c.name}
                 </span>

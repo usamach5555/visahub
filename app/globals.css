@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,8 +7,8 @@
 :root {
   --color-primary: #1E40AF;
   --color-accent: #22C55E;
-  --color-background: #F9FAFB;
-  --color-foreground: #111827;
+  --color-background: #F8FAFC;
+  --color-foreground: #0F172A;
 }
 
 html {
@@ -18,14 +18,33 @@ html {
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: 450;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Slightly bolder body text for readability */
+p {
+  font-weight: 450;
+  color: #1e293b;
+}
+
+/* Make small text more legible */
+.text-sm {
+  font-weight: 450;
+}
+
+.text-xs {
+  font-weight: 500;
 }
 
 /* Prose styles for article content */
 .prose-article {
-  @apply text-gray-700 leading-relaxed;
+  @apply leading-relaxed;
+  color: #1e293b;
 }
 
 .prose-article h2 {
@@ -38,6 +57,8 @@ body {
 
 .prose-article p {
   @apply mb-4 leading-relaxed;
+  color: #1e293b;
+  font-weight: 450;
 }
 
 .prose-article ul {
@@ -49,14 +70,20 @@ body {
 }
 
 .prose-article li {
-  @apply text-gray-700;
+  color: #1e293b;
+  font-weight: 450;
 }
 
 .prose-article a {
   @apply text-primary-700 underline hover:text-primary-900 transition-colors;
 }
 
-/* Line clamp utility */
+/* Card hover effect */
+.card-hover {
+  @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5;
+}
+
+/* Line clamp utilities */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -75,17 +102,40 @@ body {
 details > summary::-webkit-details-marker { display: none; }
 
 /* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Mobile tap highlight */
+* { -webkit-tap-highlight-color: transparent; }
+
+/* Focus visible styles */
+:focus-visible {
+  outline: 2px solid #1E40AF;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
+.animate-fade-in { animation: fade-in 0.15s ease-out; }
+
+/* Responsive images */
+img { max-width: 100%; height: auto; }
+
+/* Better button touch targets on mobile */
+@media (max-width: 640px) {
+  button, a {
+    min-height: 40px;
+  }
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+
+/* Print styles */
+@media print {
+  header, footer, aside, .no-print { display: none !important; }
+  body { font-size: 12pt; color: #000; }
 }

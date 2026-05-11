@@ -11,9 +11,9 @@ const PROCESSES = [
   { label: "Visa Interview Prep", href: "/process/visa-interview-preparation", icon: "🎤" },
   { label: "Visa Rejection Appeal", href: "/process/visa-rejection-appeal", icon: "⚖️" },
   { label: "Tourist Visa Guide", href: "/process/tourist-visa-application", icon: "✈️" },
-  { label: "Biometrics & Health", href: "/process/biometrics-and-health-checks", icon: "🔏" },
-  { label: "Embassy Interview", href: "/process/embassy-interview-prep", icon: "🏛️" },
-  { label: "PR Application Guide", href: "/process/pr-application", icon: "🏠" },
+  { label: "Biometrics & Health", href: "/process/biometrics-enrollment", icon: "🔏" },
+  { label: "Embassy Interview", href: "/process/embassy-interview-guide", icon: "🏛️" },
+  { label: "PR Application Guide", href: "/process/pr-immigration-application", icon: "🏠" },
 ];
 
 function useOutsideClick(ref: React.RefObject<HTMLElement | null>, cb: () => void) {
