@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: [],
+      disallow: ["/api/", "/*.json$"],
     },
     sitemap: "https://www.visaprocessinfo.com/sitemap.xml",
   };

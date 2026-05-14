@@ -9,6 +9,7 @@ import { faqSchema, breadcrumbSchema } from "@/lib/jsonld";
 import FAQSection from "@/components/FAQSection";
 import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
+import { generateCountryKeywords } from "@/lib/seo-keywords";
 
 interface Props {
   params: Promise<{ country: string }>;
@@ -26,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${country.name} Visa Guide ${new Date().getFullYear()} — Study, Work, Tourist & Immigration`,
     description: `Complete ${country.name} visa guide for ${new Date().getFullYear()}. Requirements, fees, processing times, embassy information, and step-by-step guides for all visa types.`,
     alternates: { canonical: `https://www.visaprocessinfo.com/country/${country.slug}` },
+    keywords: generateCountryKeywords(country.name, country.slug),
   };
 }
 

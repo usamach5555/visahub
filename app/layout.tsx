@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { websiteSchema } from "@/lib/jsonld";
+import { websiteSchema, organizationSchema } from "@/lib/jsonld";
+import { HOMEPAGE_KEYWORDS } from "@/lib/seo-keywords";
 
 export const metadata: Metadata = {
   title: {
@@ -11,15 +12,7 @@ export const metadata: Metadata = {
   },
   description:
     "Comprehensive visa and immigration guides for students, workers, tourists, and immigrants. Country-specific requirements, step-by-step processes, and expert tips for 15+ countries.",
-  keywords: [
-    "visa guide",
-    "immigration guide",
-    "study visa",
-    "work visa",
-    "tourist visa",
-    "permanent residency",
-    "visa requirements 2026",
-  ],
+  keywords: HOMEPAGE_KEYWORDS,
   metadataBase: new URL("https://www.visaprocessinfo.com"),
   verification: {
     google: "hnBXp2VAGXmFk2-f-7kfvH7Xd7jwZaT-RZcxxbdVZWs",
@@ -36,6 +29,7 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
+      "max-video-preview": -1,
       "max-snippet": -1,
     },
   },
@@ -49,11 +43,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Preconnect hints for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        <link rel="preconnect" href="https://flagcdn.com" />
         {/* AdSense script — replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID */}
         {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossOrigin="anonymous" /> */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
         />
       </head>
       <body>

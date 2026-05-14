@@ -4,11 +4,12 @@ import Link from "next/link";
 import { VISA_TYPES, getVisaTypeBySlug } from "@/data/visa-types";
 import { COUNTRIES } from "@/data/countries";
 import { getArticlesByVisaType } from "@/lib/articles";
-import { faqSchema, breadcrumbSchema } from "@/lib/jsonld";
+import { faqSchema, breadcrumbSchema, howToSchema } from "@/lib/jsonld";
 import FAQSection from "@/components/FAQSection";
 import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
 import Button from "@/components/ui/Button";
+import { VISA_TYPE_KEYWORDS, HOMEPAGE_KEYWORDS, mergeKeywords } from "@/lib/seo-keywords";
 
 interface Props {
   params: Promise<{ type: string }>;
@@ -26,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${visa.name} Guide ${new Date().getFullYear()} — Requirements, Process & Countries`,
     description: `Complete ${visa.name.toLowerCase()} guide for ${new Date().getFullYear()}. Requirements, step-by-step process, fees, and country-specific information for 15+ destinations.`,
     alternates: { canonical: `https://www.visaprocessinfo.com/visa/${visa.slug}` },
+    keywords: mergeKeywords(VISA_TYPE_KEYWORDS[visa.slug] ?? [], HOMEPAGE_KEYWORDS.slice(0, 20)),
   };
 }
 
@@ -43,11 +45,17 @@ export default async function VisaTypePage({ params }: Props) {
     { name: "Visa Types", url: "https://www.visaprocessinfo.com/#visa-types" },
     { name: visa.name, url: `https://www.visaprocessinfo.com/visa/${visa.slug}` },
   ]);
+  const howToLd = howToSchema(
+    `How to Apply for a ${visa.name}`,
+    `Step-by-step guide to applying for a ${visa.name.toLowerCase()} in ${new Date().getFullYear()}.`,
+    visa.steps,
+  );
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }} />
 
       {/* Hero */}
       <div className="bg-gradient-to-br from-primary-900 to-primary-700 text-white py-14">

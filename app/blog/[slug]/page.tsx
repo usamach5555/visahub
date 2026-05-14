@@ -11,6 +11,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
 import { COUNTRIES } from "@/data/countries";
 import { VISA_TYPES } from "@/data/visa-types";
+import { BLOG_KEYWORDS, mergeKeywords } from "@/lib/seo-keywords";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -27,13 +28,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: article.title,
     description: article.metaDescription,
-    keywords: article.tags,
+    keywords: mergeKeywords(article.tags, BLOG_KEYWORDS.slice(0, 30)),
     alternates: { canonical: `https://www.visaprocessinfo.com/blog/${article.slug}` },
     openGraph: {
       title: article.title,
       description: article.metaDescription,
       type: "article",
       publishedTime: article.publishedAt,
+      modifiedTime: article.publishedAt,
     },
   };
 }

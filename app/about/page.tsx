@@ -6,6 +6,12 @@ export const metadata: Metadata = {
   description:
     "Learn about Global Visa Guide Hub — your free, independent immigration information resource covering visa guides for 15+ countries. Our mission, team, and editorial standards.",
   alternates: { canonical: "https://www.visaprocessinfo.com/about" },
+  keywords: [
+    "about Global Visa Guide Hub", "visa guide team", "immigration experts",
+    "visa information resource", "free visa guides", "immigration editorial standards",
+    "visa guide mission", "visa guide founders", "immigration advisory board",
+    "independent visa information", "trusted visa resource", "visa guide history",
+  ],
 };
 
 const STATS = [

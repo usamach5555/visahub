@@ -74,3 +74,51 @@ export function websiteSchema() {
     },
   };
 }
+
+export function organizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Global Visa Guide Hub",
+    url: "https://www.visaprocessinfo.com",
+    description:
+      "Free visa and immigration guides for 15+ countries — study, work, tourist, and PR pathways.",
+    foundingDate: "2020",
+    sameAs: [],
+  };
+}
+
+export interface HowToStep {
+  title: string;
+  description: string;
+}
+
+export function howToSchema(name: string, description: string, steps: HowToStep[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name,
+    description,
+    step: steps.map((s, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: s.title,
+      text: s.description,
+    })),
+  };
+}
+
+export function itemListSchema(name: string, items: { name: string; url: string; position: number }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name,
+    numberOfItems: items.length,
+    itemListElement: items.map((item) => ({
+      "@type": "ListItem",
+      position: item.position,
+      name: item.name,
+      url: item.url,
+    })),
+  };
+}

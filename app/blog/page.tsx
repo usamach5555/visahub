@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { ALL_ARTICLES } from "@/lib/articles";
 import BlogList from "./BlogList";
+import { itemListSchema } from "@/lib/jsonld";
+import { BLOG_KEYWORDS } from "@/lib/seo-keywords";
 
 export const metadata: Metadata = {
   title: "Visa & Immigration Blog — 500+ Guides for 2026",
   description:
     "Browse 500+ visa and immigration guides covering study visas, work permits, tourist visas, and PR pathways for the USA, UK, Canada, Australia, Germany, and more.",
   alternates: { canonical: "https://www.visaprocessinfo.com/blog" },
+  keywords: BLOG_KEYWORDS,
 };
 
 export default function BlogPage() {

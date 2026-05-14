@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PROCESSES, getProcessBySlug, getAllProcessSlugs } from "@/data/processes";
-import { faqSchema, breadcrumbSchema } from "@/lib/jsonld";
+import { faqSchema, breadcrumbSchema, howToSchema } from "@/lib/jsonld";
 import FAQSection from "@/components/FAQSection";
 import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
+import { PROCESS_KEYWORDS } from "@/lib/seo-keywords";
 
 interface Props {
   params: Promise<{ type: string }>;
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: process.title,
     description: process.metaDescription,
     alternates: { canonical: `https://www.visaprocessinfo.com/process/${process.slug}` },
+    keywords: PROCESS_KEYWORDS,
   };
 }
 
@@ -41,11 +43,17 @@ export default async function ProcessPage({ params }: Props) {
     { name: "Apply Process", url: "https://www.visaprocessinfo.com/process/study-visa-application" },
     { name: process.title, url: `https://www.visaprocessinfo.com/process/${process.slug}` },
   ]);
+  const howToLd = howToSchema(
+    process.title,
+    process.metaDescription,
+    process.steps,
+  );
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }} />
 
       {/* Hero */}
       <div className="bg-gradient-to-br from-primary-900 to-primary-700 text-white pt-24 pb-14">

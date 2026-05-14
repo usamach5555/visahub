@@ -6,12 +6,14 @@ import AdSlot from "@/components/ads/AdSlot";
 import { VISA_TYPES } from "@/data/visa-types";
 import { COUNTRIES } from "@/data/countries";
 import { faqSchema } from "@/lib/jsonld";
+import { HOMEPAGE_KEYWORDS } from "@/lib/seo-keywords";
 
 export const metadata: Metadata = {
   title: "Global Visa Guide Hub — Visa & Immigration Guides for 15+ Countries",
   description:
     "Your ultimate resource for study visas, work visas, tourist visas, and immigration guides for USA, UK, Canada, Australia, Germany, and 10+ more countries. Updated for 2026.",
   alternates: { canonical: "https://www.visaprocessinfo.com" },
+  keywords: HOMEPAGE_KEYWORDS,
 };
 
 const homeFaqs = [
