@@ -14,11 +14,11 @@ const CATEGORIES = [
 ];
 
 const VISA_ICONS: Record<string, string> = {
-  study: "🎓",
-  work: "💼",
-  tourist: "✈️",
-  immigration: "🏠",
-  country: "🌍",
+  study: "Study",
+  work: "Work",
+  tourist: "Tourist",
+  immigration: "Immigration",
+  country: "Country",
 };
 
 const PAGE_SIZE = 24;

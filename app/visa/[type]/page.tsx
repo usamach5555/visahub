@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import {
+  GraduationCap,
+  Briefcase,
+  Plane,
+  Home,
+  Building2,
+  Globe,
+  CheckCircle2,
+  ChevronDown,
+  ArrowRight,
+  BookOpen,
+} from "lucide-react";
 import { VISA_TYPES, getVisaTypeBySlug } from "@/data/visa-types";
-import { COUNTRIES } from "@/data/countries";
+import { COUNTRIES_EXTENDED } from "@/data/countries-extended";
 import { getArticlesByVisaType } from "@/lib/articles";
 import { faqSchema, breadcrumbSchema, howToSchema } from "@/lib/jsonld";
 import FAQSection from "@/components/FAQSection";
@@ -10,10 +23,27 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
 import Button from "@/components/ui/Button";
 import { VISA_TYPE_KEYWORDS, HOMEPAGE_KEYWORDS, mergeKeywords } from "@/lib/seo-keywords";
+import { getVisaTypeImageUrl } from "@/lib/images";
 
 interface Props {
   params: Promise<{ type: string }>;
 }
+
+const VISA_LUCIDE: Record<string, React.ElementType> = {
+  study:       GraduationCap,
+  work:        Briefcase,
+  tourist:     Plane,
+  immigration: Home,
+  business:    Building2,
+};
+
+const VISA_HERO_GRADIENT: Record<string, string> = {
+  study:       "from-blue-900/85 via-blue-800/70 to-blue-700/55",
+  work:        "from-violet-900/85 via-violet-800/70 to-violet-700/55",
+  tourist:     "from-sky-900/85 via-sky-800/70 to-sky-700/55",
+  immigration: "from-emerald-900/85 via-emerald-800/70 to-emerald-700/55",
+  business:    "from-amber-900/85 via-amber-800/70 to-amber-700/55",
+};
 
 export function generateStaticParams() {
   return VISA_TYPES.map((v) => ({ type: v.slug }));
@@ -23,11 +53,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { type } = await params;
   const visa = getVisaTypeBySlug(type);
   if (!visa) return {};
+  const imageUrl = getVisaTypeImageUrl(visa.slug);
   return {
     title: `${visa.name} Guide ${new Date().getFullYear()} — Requirements, Process & Countries`,
     description: `Complete ${visa.name.toLowerCase()} guide for ${new Date().getFullYear()}. Requirements, step-by-step process, fees, and country-specific information for 131 destinations worldwide.`,
     alternates: { canonical: `https://www.visaprocessinfo.com/visa/${visa.slug}` },
     keywords: mergeKeywords(VISA_TYPE_KEYWORDS[visa.slug] ?? [], HOMEPAGE_KEYWORDS.slice(0, 20)),
+    openGraph: {
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: `${visa.name} guide` }],
+    },
   };
 }
 
@@ -36,8 +70,14 @@ export default async function VisaTypePage({ params }: Props) {
   const visa = getVisaTypeBySlug(type);
   if (!visa) notFound();
 
-  const eligibleCountries = COUNTRIES.filter((c) => c.visaTypes.includes(visa.slug));
+  // Use top 24 countries from COUNTRIES_EXTENDED for display
+  const featuredCountries = COUNTRIES_EXTENDED.slice(0, 24);
+  const sidebarCountries = COUNTRIES_EXTENDED.slice(0, 6);
   const relatedArticles = getArticlesByVisaType(visa.slug);
+
+  const VisaIcon = VISA_LUCIDE[visa.slug] ?? Globe;
+  const heroGradient = VISA_HERO_GRADIENT[visa.slug] ?? VISA_HERO_GRADIENT.study;
+  const heroImageUrl = getVisaTypeImageUrl(visa.slug);
 
   const faqLd = faqSchema(visa.faqs);
   const breadcrumbLd = breadcrumbSchema([
@@ -57,23 +97,44 @@ export default async function VisaTypePage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }} />
 
-      {/* Hero */}
-      <div className="bg-gradient-to-br from-primary-900 to-primary-700 text-white py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ── Hero with photo background ── */}
+      <div className="relative text-white overflow-hidden" style={{ minHeight: "380px" }}>
+        <Image
+          src={heroImageUrl}
+          alt={`${visa.name} — visa guide`}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className={`absolute inset-0 bg-gradient-to-br ${heroGradient}`} />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
           <Breadcrumb items={[{ label: "Visa Types", href: "/#visa-types" }, { label: visa.name }]} />
-          <div className="flex items-center gap-4 mb-4">
-            <span className="text-6xl">{visa.icon}</span>
-            <h1 className="text-4xl sm:text-5xl font-extrabold">{visa.name}</h1>
-          </div>
-          <p className="text-lg text-blue-100 max-w-3xl leading-relaxed">{visa.description}</p>
-          <div className="flex flex-wrap gap-4 mt-6">
-            <div className="bg-white/10 rounded-lg px-4 py-2 text-sm">
-              <span className="text-blue-300">Target: </span>
-              <span className="text-white">{visa.targetAudience.split(",")[0]}</span>
+          <div className="flex items-center gap-4 mb-4 mt-4">
+            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30 flex-shrink-0">
+              <VisaIcon className="w-8 h-8 text-white" />
             </div>
-            <div className="bg-white/10 rounded-lg px-4 py-2 text-sm">
-              <span className="text-blue-300">Duration: </span>
-              <span className="text-white">{visa.typicalDuration}</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight drop-shadow-sm">
+              {visa.name}
+            </h1>
+          </div>
+          <p className="text-base sm:text-lg text-white/85 max-w-3xl leading-relaxed mb-6 drop-shadow-sm">
+            {visa.description}
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <div className="bg-white/15 backdrop-blur-sm border border-white/25 rounded-xl px-4 py-2 text-sm">
+              <span className="text-white/60">Target: </span>
+              <span className="text-white font-medium">{visa.targetAudience.split(",")[0]}</span>
+            </div>
+            <div className="bg-white/15 backdrop-blur-sm border border-white/25 rounded-xl px-4 py-2 text-sm">
+              <span className="text-white/60">Duration: </span>
+              <span className="text-white font-medium">{visa.typicalDuration}</span>
+            </div>
+            <div className="bg-white/15 backdrop-blur-sm border border-white/25 rounded-xl px-4 py-2 text-sm">
+              <span className="text-white/60">Available in: </span>
+              <span className="text-white font-medium">131 countries</span>
             </div>
           </div>
         </div>
@@ -86,15 +147,13 @@ export default async function VisaTypePage({ params }: Props) {
             {/* Common Requirements */}
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-5">Common {visa.name} Requirements</h2>
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
-                <ul className="space-y-3">
-                  {visa.commonRequirements.map((req, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
-                      <span className="text-accent-500 mt-0.5 shrink-0 text-base">✓</span>
-                      {req}
-                    </li>
-                  ))}
-                </ul>
+              <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-3">
+                {visa.commonRequirements.map((req, i) => (
+                  <div key={i} className="flex items-start gap-3 text-sm text-gray-700">
+                    <CheckCircle2 className="w-4 h-4 text-accent-500 mt-0.5 shrink-0" />
+                    {req}
+                  </div>
+                ))}
               </div>
             </section>
 
@@ -103,15 +162,15 @@ export default async function VisaTypePage({ params }: Props) {
               <h2 className="text-2xl font-bold text-gray-900 mb-5">
                 How to Apply: Step-by-Step Process
               </h2>
-              <ol className="space-y-4">
+              <ol className="space-y-3">
                 {visa.steps.map((step, i) => (
-                  <li key={i} className="flex gap-4">
-                    <span className="shrink-0 w-8 h-8 bg-primary-100 text-primary-800 rounded-full flex items-center justify-center font-bold text-sm">
+                  <li key={i} className="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-primary-200 transition-colors">
+                    <span className="shrink-0 w-8 h-8 bg-primary-800 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-sm">
                       {i + 1}
                     </span>
                     <div>
-                      <h3 className="font-semibold text-gray-900">{step.title}</h3>
-                      <p className="text-sm text-gray-600 mt-1 leading-relaxed">{step.description}</p>
+                      <h3 className="font-semibold text-gray-900 mb-1">{step.title}</h3>
+                      <p className="text-sm text-gray-600 leading-relaxed">{step.description}</p>
                     </div>
                   </li>
                 ))}
@@ -121,49 +180,74 @@ export default async function VisaTypePage({ params }: Props) {
             {/* In-content ad */}
             <AdSlot slot="in-content" />
 
-            {/* Countries */}
+            {/* Countries Offering */}
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-5">
                 Countries Offering {visa.name}
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {eligibleCountries.map((c) => (
+                {featuredCountries.map((c) => (
                   <Link
                     key={c.slug}
                     href={`/${c.slug}-visa-info`}
                     className="group flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all"
                   >
-                    <span className="text-2xl">{c.flag}</span>
+                    <div className="w-8 h-6 rounded-sm overflow-hidden border border-gray-100 flex-shrink-0">
+                      <Image
+                        src={`https://flagcdn.com/w40/${c.code}.png`}
+                        alt={`${c.name} flag`}
+                        width={40}
+                        height={28}
+                        className="w-full h-full object-cover"
+                        unoptimized
+                      />
+                    </div>
                     <div>
-                      <p className="font-medium text-sm text-gray-900 group-hover:text-primary-800">{c.name}</p>
-                      <p className="text-xs text-gray-500">{c.processingTime}</p>
+                      <p className="font-medium text-sm text-gray-900 group-hover:text-primary-800 leading-snug">{c.name}</p>
+                      <p className="text-xs text-gray-500">{c.processingDays[visa.slug === "tourist" ? "visit" : visa.slug as keyof typeof c.processingDays] ?? c.processingDays.visit}</p>
                     </div>
                   </Link>
                 ))}
               </div>
+              <div className="mt-4">
+                <Link
+                  href="/#countries"
+                  className="inline-flex items-center gap-2 text-sm text-primary-700 hover:text-primary-900 font-semibold transition-colors"
+                >
+                  <Globe className="w-4 h-4" />
+                  View all 131 countries
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </section>
 
-            {/* Other visa types */}
+            {/* Other Visa Types */}
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-4">Explore Other Visa Types</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {VISA_TYPES.filter((v) => v.slug !== visa.slug).map((v) => (
-                  <Link
-                    key={v.slug}
-                    href={`/visa/${v.slug}`}
-                    className="group flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all"
-                  >
-                    <span className="text-2xl">{v.icon}</span>
-                    <span className="font-medium text-sm text-gray-900 group-hover:text-primary-800">{v.name}</span>
-                  </Link>
-                ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {VISA_TYPES.filter((v) => v.slug !== visa.slug).map((v) => {
+                  const OtherIcon = VISA_LUCIDE[v.slug] ?? Globe;
+                  return (
+                    <Link
+                      key={v.slug}
+                      href={`/visa/${v.slug}`}
+                      className="group flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all"
+                    >
+                      <div className="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <OtherIcon className="w-5 h-5 text-primary-700" />
+                      </div>
+                      <span className="font-medium text-sm text-gray-900 group-hover:text-primary-800">{v.name}</span>
+                      <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-primary-600 ml-auto transition-colors" />
+                    </Link>
+                  );
+                })}
               </div>
             </section>
 
             {/* Long-form content */}
             {visa.longFormContent && visa.longFormContent.length > 0 && (
               <section className="space-y-10">
-                <h2 className="text-2xl font-bold text-gray-900">Complete {visa.name} Guide 2026</h2>
+                <h2 className="text-2xl font-bold text-gray-900">Complete {visa.name} Guide {new Date().getFullYear()}</h2>
                 {visa.longFormContent.map((section, i) => (
                   <div key={i} className="border-t border-gray-100 pt-8 first:border-0 first:pt-0">
                     <h3 className="text-xl font-bold text-primary-800 mb-4">{section.heading}</h3>
@@ -171,7 +255,7 @@ export default async function VisaTypePage({ params }: Props) {
                       {section.body.split("\n\n").map((para, j) => (
                         <p
                           key={j}
-                          className="text-sm text-gray-700 leading-relaxed"
+                          className="text-sm text-gray-700 leading-[1.8]"
                           dangerouslySetInnerHTML={{
                             __html: para
                               .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
@@ -197,7 +281,7 @@ export default async function VisaTypePage({ params }: Props) {
             {/* Related articles */}
             {relatedArticles.length > 0 && (
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 mb-5">{visa.name} Articles & Guides</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-5">{visa.name} Articles &amp; Guides</h2>
                 <div className="grid gap-3">
                   {relatedArticles.map((a) => (
                     <Link
@@ -205,10 +289,12 @@ export default async function VisaTypePage({ params }: Props) {
                       href={`/blog/${a.slug}`}
                       className="group flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all"
                     >
-                      <span className="text-2xl shrink-0 mt-0.5">{visa.icon}</span>
+                      <div className="w-9 h-9 bg-primary-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <BookOpen className="w-4 h-4 text-primary-600" />
+                      </div>
                       <div>
                         <p className="font-medium text-gray-900 group-hover:text-primary-800 text-sm leading-snug">{a.title}</p>
-                        <p className="text-xs text-gray-500 mt-1">{a.countryName} · {a.readingTimeMinutes} min read</p>
+                        <p className="text-xs text-gray-500 mt-1">{a.countryName} &middot; {a.readingTimeMinutes} min read</p>
                       </div>
                     </Link>
                   ))}
@@ -222,14 +308,14 @@ export default async function VisaTypePage({ params }: Props) {
             )}
           </div>
 
-          {/* Sidebar */}
+          {/* ── Sidebar ── */}
           <aside className="space-y-6">
             <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
               <h3 className="font-bold text-gray-900 mb-4">Quick Reference</h3>
-              <dl className="space-y-3 text-sm">
+              <dl className="space-y-4 text-sm">
                 <div>
                   <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Target Audience</dt>
-                  <dd className="text-gray-900">{visa.targetAudience}</dd>
+                  <dd className="text-gray-900 leading-relaxed">{visa.targetAudience}</dd>
                 </div>
                 <div>
                   <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Typical Duration</dt>
@@ -237,26 +323,44 @@ export default async function VisaTypePage({ params }: Props) {
                 </div>
                 <div>
                   <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Countries Available</dt>
-                  <dd className="font-medium text-gray-900">{eligibleCountries.length} countries</dd>
+                  <dd className="font-medium text-gray-900">131 countries worldwide</dd>
                 </div>
               </dl>
             </div>
 
             <div className="bg-primary-50 rounded-2xl border border-primary-100 p-5">
-              <h3 className="font-bold text-primary-900 mb-3">Need a specific country guide?</h3>
-              <p className="text-sm text-primary-800 mb-4">
+              <h3 className="font-bold text-primary-900 mb-2">Need a specific country?</h3>
+              <p className="text-sm text-primary-700 mb-4 leading-relaxed">
                 Find country-specific {visa.name.toLowerCase()} requirements and fees.
               </p>
               <div className="space-y-2">
-                {eligibleCountries.slice(0, 5).map((c) => (
+                {sidebarCountries.map((c) => (
                   <Link
                     key={c.slug}
                     href={`/${c.slug}-visa-info`}
-                    className="flex items-center gap-2 text-sm text-primary-700 hover:text-primary-900 transition-colors"
+                    className="flex items-center gap-2 text-sm text-primary-700 hover:text-primary-900 py-1 transition-colors"
                   >
-                    <span>{c.flag}</span> {c.name}
+                    <span className="w-5 h-3.5 rounded-sm overflow-hidden inline-block flex-shrink-0 border border-primary-200">
+                      <Image
+                        src={`https://flagcdn.com/w40/${c.code}.png`}
+                        alt={`${c.name} flag`}
+                        width={20}
+                        height={14}
+                        className="w-full h-full object-cover"
+                        unoptimized
+                      />
+                    </span>
+                    <span className="hover:underline">{c.name}</span>
+                    <ArrowRight className="w-3 h-3 ml-auto text-primary-400" />
                   </Link>
                 ))}
+                <Link
+                  href="/#countries"
+                  className="flex items-center gap-1.5 text-sm text-accent-700 font-semibold hover:text-accent-800 pt-1 transition-colors"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  View all 131 countries
+                </Link>
               </div>
             </div>
 

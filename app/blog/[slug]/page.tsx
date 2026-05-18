@@ -41,11 +41,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const VISA_ICONS: Record<string, string> = {
-  study: "🎓",
-  work: "💼",
-  tourist: "✈️",
-  immigration: "🏠",
-  country: "🌍",
+  study: "Study",
+  work: "Work",
+  tourist: "Tourist",
+  immigration: "Immigration",
+  country: "Country",
 };
 
 export default async function BlogPostPage({ params }: Props) {
@@ -256,7 +256,7 @@ export default async function BlogPostPage({ params }: Props) {
                   href="/blog"
                   className="text-sm text-gray-700 bg-gray-50 hover:bg-gray-100 px-3 py-1.5 rounded-full transition-colors border border-gray-200"
                 >
-                  📚 All Visa Guides
+                  All Visa Guides
                 </Link>
               </div>
             </div>
@@ -273,8 +273,8 @@ export default async function BlogPostPage({ params }: Props) {
                 <div>
                   <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Country</dt>
                   <dd>
-                    <Link href={`/country/${article.country}`} className="text-primary-700 hover:underline font-medium">
-                      {country?.flag} {article.countryName}
+                    <Link href={`/${article.country}-visa-info`} className="text-primary-700 hover:underline font-medium">
+                      {article.countryName}
                     </Link>
                   </dd>
                 </div>
