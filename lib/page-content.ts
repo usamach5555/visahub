@@ -370,6 +370,56 @@ Proof of language proficiency is required for most visa categories. Start prepar
 **Currency:** ${country.currency} (${country.capital})
 All visa fees are payable in the accepted currency at the point of application. Exchange rates fluctuate — calculate the equivalent in your home currency close to your application date.`,
     },
+    {
+      heading: `What to Expect as a Visitor, Student, or Worker in ${country.name}`,
+      body: `${country.name} is known for ${country.popularFor.join(", ")}. Understanding what life is actually like for visa holders on the ground helps you prepare both your application and your experience once you arrive.
+
+**Cost of Living:** ${country.name} uses the ${country.currency} as its official currency. Cost of living varies significantly depending on the city and lifestyle. The capital ${country.capital} is generally the most expensive location due to its economic activity and infrastructure. Budget accordingly when preparing your proof-of-funds documentation.
+
+**Language Environment:** ${country.languageRequirement} is the primary language requirement. In major cities and business centers, English is often widely spoken — particularly in international business, academic institutions, and tourist-facing services. However, learning at least basic phrases in the local language is highly recommended for daily life outside these environments.
+
+**Key Country Facts:**
+${country.keyFacts.map((f) => `• ${f}`).join("\n")}
+
+**Regional Context:** ${country.name} is situated in ${country.region}, a region with its own specific immigration dynamics, bilateral agreements, and travel patterns. Nationals from neighboring countries may have simplified visa requirements or visa-free access agreements — check your specific nationality's requirements at ${country.officialImmigrationUrl}.
+
+Understanding the country you are applying to visit — its culture, legal system, and practical daily realities — also strengthens your visa application by demonstrating genuine knowledge of and interest in ${country.name}, rather than a generic or uninformed intention to travel.`,
+    },
+    {
+      heading: `Planning Your ${country.name} Visa Application — Practical Guidance`,
+      body: `Successful ${country.name} visa applications share a common characteristic: they are thoroughly planned well in advance. Rushed applications are statistically more likely to contain errors, omissions, or insufficiently prepared supporting documents.
+
+**Application Planning Checklist:**
+
+**6 months before your intended travel or start date:**
+• Confirm the visa category that matches your exact purpose of travel
+• Research current requirements at ${country.officialImmigrationUrl} and your nearest ${country.name} embassy
+• Book any required language tests (results take 1–4 weeks; allow time for a retake if needed)
+• Request police clearance certificates from your home country — this can take 2–8 weeks
+
+**4–5 months before:**
+• Schedule your medical examination at an approved facility (if required for your visa category)
+• Begin gathering financial documents: have your bank certify 6 months of statements
+• Obtain academic transcripts, professional certifications, or employment documents (allow time for official copies and certified translations)
+
+**3 months before:**
+• Complete your visa application form
+• Compile your full document package
+• Book your biometric appointment at the embassy or VAC
+• Pay the government fee of ${country.currency} ${country.visaFees.study} (study), ${country.currency} ${country.visaFees.work} (work), ${country.currency} ${country.visaFees.visit} (visit), or the applicable category fee
+• Submit your application
+
+**During processing (standard time: varies by category — see individual visa guides):**
+• Track your application using your reference number
+• Respond immediately to any requests for additional information
+• Do not book non-refundable travel until your visa is approved
+
+**After approval:**
+• Collect your passport and verify all visa stamp details (name, dates, conditions)
+• Purchase travel insurance (minimum ${country.currency} ${Math.round(country.visaFees.visit * 12)} medical coverage)
+• Keep all original supporting documents to present upon entry to ${country.name}`,
+    },
+    ...sharedExtraSections(country, "visit"),
   ];
 }
 
@@ -430,6 +480,7 @@ VFS is only a service provider — it does not make visa decisions. All decision
 
 If your application is refused, your passport will be returned with the refusal notice explaining the grounds. All original documents submitted are typically returned with your passport.`,
     },
+    ...sharedExtraSections(country, "visit"),
   ];
 }
 
@@ -496,6 +547,32 @@ ${rejections.map((r, i) => `**${i + 1}. ${r}**\nThis accounts for a significant 
 A previous refusal is not a permanent bar to re-entry. However, you must directly address the reasons for the previous refusal in your new application. Immigration officers can see your application history, so consistency and honesty are critical. Engaging a licensed immigration consultant with experience in ${country.name} applications is strongly recommended after a refusal.`,
     },
     {
+      heading: `After Your ${country.name} ${label} Is Approved — Next Steps`,
+      body: `Receiving your ${country.name} ${label} approval is an exciting milestone — but there are several important steps to take before you travel to ensure a smooth arrival and start to your time in ${country.name}.
+
+**Verify Your Visa Stamp Immediately**
+When you collect your passport, check every detail on the visa stamp: your full name, date of birth, passport number, visa validity dates, permitted duration of stay, and number of entries. Report any errors to the embassy immediately — corrections become more difficult once you have left the country.
+
+**Purchase Travel Insurance**
+Comprehensive travel and health insurance is essential for your stay in ${country.name}. For short visits, ensure minimum medical coverage of ${country.currency} ${Math.round(fee * 15)} including emergency evacuation. For longer stays, comprehensive health insurance covering hospitalization, surgery, and specialist consultations is critical. Carry the insurance policy document and emergency helpline number with you at all times.
+
+**Pre-Departure Document Pack**
+Carry the following in your hand luggage — not checked baggage — when travelling to ${country.name}:
+• Original passport with the visa stamp
+• Printout of your visa grant notice (if e-visa)
+• Proof of onward or return travel
+• Proof of accommodation for first nights in ${country.name}
+• Financial evidence (bank statement or equivalent)
+• Contact details for your ${country.name} employer, institution, or host
+• Emergency contact numbers (${country.name} embassy from within ${country.name}: check ${country.embassyUrl})
+
+**Understanding Your Visa Conditions**
+Your ${label} comes with specific conditions — work restrictions, study requirements, reporting obligations, or mandatory registrations at the ${country.name} immigration office. Read the conditions attached to your grant carefully. Violating any condition can result in visa cancellation without warning.
+
+**If Your Situation Changes**
+If your purpose of visit changes materially after arrival — you get a job offer while on a tourist visa, or your study program changes — consult the ${country.name} immigration authority at ${country.officialImmigrationUrl} immediately. Acting without authorization is an immigration violation regardless of intention.`,
+    },
+    {
       heading: `${country.name} ${label} Fees — Complete Breakdown`,
       body: `**Government Application Fee:** ${country.currency} ${fee}
 This is the mandatory fee paid to the ${country.name} immigration authority. It is non-refundable regardless of the outcome.
@@ -513,6 +590,7 @@ This is the mandatory fee paid to the ${country.name} immigration authority. It 
 
 All fees are approximate and subject to change without notice. Verify current fees at ${country.officialImmigrationUrl} before submitting.`,
     },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -591,6 +669,31 @@ Apply only through official ${country.name} immigration channels (${country.offi
 **6. Check Language Requirements Early**
 ${country.languageRequirement} is required for ${country.name}. If you need a language test, register early — popular test sessions book up 6–8 weeks in advance, and results take 3–14 days after the test.`,
     },
+    {
+      heading: `What to Do if Your ${country.name} ${label} Takes Longer Than Expected`,
+      body: `Processing times are targets, not guarantees. If your application has been under review for significantly longer than the standard ${time} processing period, the following steps can help resolve the situation without causing additional delays.
+
+**Step 1: Verify Your Reference Number is Correct**
+Check that you are using the exact reference number provided at the time of submission. A single digit error in the tracking number can show "no record found" — not an actual delay.
+
+**Step 2: Check the Tracking System First**
+Visit ${country.officialImmigrationUrl} and enter your reference number in the official tracking portal. Many tracking systems provide stage-by-stage updates. If the status shows "under assessment," the application is still being processed normally. If it shows "additional information required," respond immediately — delays in responding to information requests can cause applications to be closed.
+
+**Step 3: Contact the Embassy or VAC (Only If Significantly Overdue)**
+If your application has exceeded the published processing time by more than 20%, contact the ${country.name} embassy or VAC where you applied. Provide your reference number, the date of submission, and your travel date. Be polite and factual — aggressive or repeated contact does not speed up processing.
+
+**Step 4: Consider Engaging an Immigration Advisor**
+For applications that are significantly overdue, a licensed immigration advisor familiar with ${country.name} processes can contact the relevant authority on your behalf. They often have established channels for enquiring about stuck applications.
+
+**Step 5: Do Not Rebook Non-Refundable Travel**
+If your visa is delayed and you have travel booked, contact your airline and accommodation provider immediately. Many providers will accommodate changes due to documented visa delays — especially if you can provide a letter from the embassy or VAC confirming your application is in process.
+
+**Avoid These Actions While Waiting:**
+• Do not submit a duplicate application — it will complicate the existing one
+• Do not ask a friend or relative to call the embassy on your behalf
+• Do not contact the ${country.name} immigration authority directly if you applied through a VAC — route all enquiries through the VAC`,
+    },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -711,6 +814,7 @@ ${country.languageRequirement} is required for ${country.name}. If you need a la
 **Professional Review**
 For complex cases, applications with previous refusals, or immigration/work visa applications, engage a licensed immigration consultant or registered migration agent who specializes in ${country.name} immigration. Beware of unlicensed "visa agents" who charge high fees and guarantee results.`,
     },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -777,6 +881,26 @@ Immediate family members (spouse and dependent children) can typically apply for
 
 Dependent visas do not automatically grant work or study rights in ${country.name} — dependents must apply separately for work or study authorization if required.`,
     },
+    {
+      heading: `Special Circumstances and Complex Eligibility Cases`,
+      body: `Some ${country.name} ${label} applicants fall outside the standard eligibility profile. Understanding how ${country.name} handles these complex cases can help you assess your options and strengthen your application.
+
+**Applicants with Prior Refusals**
+A previous ${country.name} visa refusal does not permanently disqualify you — but it creates an additional hurdle. Your new application must directly address every ground cited in the refusal notice with improved, specific evidence. Immigration officers can see your full application history. If the same weaknesses appear in a reapplication, a second refusal is highly likely. Allow at least 3–6 months between a refusal and reapplication, using the time to substantially strengthen your documentation.
+
+**Applicants with Criminal Records**
+Minor historical criminal matters — particularly spent convictions or offences from many years ago — may not be disqualifying, depending on the nature of the offence and the elapsed time. Serious criminal convictions (violence, fraud, drug-related offences, terrorism-related matters) are generally disqualifying for most ${country.name} visa categories. Every application must disclose all criminal history honestly. Concealing criminal records is treated as misrepresentation and results in a ban.
+
+**Self-Employed and Business Owner Applicants**
+Self-employed applicants often face additional scrutiny because their financial evidence is more complex than that of salaried employees. Provide: business registration documents, audited financial statements (2–3 years), tax returns, and proof of ongoing business activity (contracts, client letters, transaction records). A letter from an accountant or chartered financial advisor can help certify your income.
+
+**Applicants from High-Risk Travel Countries**
+${country.name} applies additional scrutiny to applications from certain nationalities based on bilateral relationships, security assessments, and historical overstay or refusal rates. If your nationality is subject to additional scrutiny, your application may take longer and require a more comprehensive documentation package. This does not mean approval is unlikely — it simply means the bar for evidence is higher.
+
+**Young Single Applicants Without Established Ties**
+Young applicants (18–30) who are unmarried, renting (not owning) property, and early in their careers face the highest scrutiny for tourist and short-term visas, as the perceived overstay risk is higher. Counter this proactively: provide an employer's no-objection letter, enrollment in a course at home, strong bank history, and previous travel history showing returns from international trips.`,
+    },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -856,6 +980,34 @@ ${country.name} visa fees are reviewed periodically and can increase without adv
 **Refund Policy:**
 The government application fee (${country.currency} ${fee}) is strictly non-refundable. VFS and facilitation fees may be partially refundable if you withdraw before biometric enrollment — check with your specific VAC for their refund policy.`,
     },
+    {
+      heading: `Smart Budgeting for Your ${country.name} ${label} — Total Cost Planning`,
+      body: `The government application fee is just one part of the total cost of obtaining a ${country.name} ${label}. Experienced applicants budget holistically across all phases of the process to avoid financial surprises.
+
+**Phase 1 — Pre-Application Costs**
+These costs occur before you submit a single form and are easy to underestimate:
+• Language test fee: varies by test and country (IELTS: ~USD 200–260; TOEFL: ~USD 185–260)
+• Language test preparation course (optional but recommended): USD 100–500
+• Medical examination: ${country.currency} ${Math.round(fee * 0.5)}–${Math.round(fee * 1)} depending on the approved facility
+• Police clearance certificate: ${country.currency} ${Math.round(fee * 0.1)}–${Math.round(fee * 0.3)} per country
+• Document translation: ${country.currency} ${Math.round(fee * 0.25)} per document (varies by length and translator)
+• Notarization: varies by document type
+
+**Phase 2 — Application Costs**
+• Government fee: ${country.currency} ${fee} (non-refundable)
+• VFS / facilitation center fee: ${country.currency} ${Math.round(fee * 0.2)}–${Math.round(fee * 0.4)}
+• Biometric enrollment: often included in VAC fee
+• Courier / postal service: ${country.currency} ${Math.round(fee * 0.1)}–${Math.round(fee * 0.2)}
+
+**Phase 3 — Settlement Costs (After Visa Approval)**
+• Travel insurance: ${country.currency} ${Math.round(fee * 0.8)}–${Math.round(fee * 2)} for comprehensive coverage
+• Flights to ${country.name}: varies significantly by origin
+• Initial accommodation (first month): varies by city and type
+• Initial living expenses: ${country.currency} ${Math.round(fee * 3)}–${Math.round(fee * 8)} per month in ${country.capital}
+
+**Total Cost Estimate:** Without immigration consultant, a complete ${country.name} ${label} process from document gathering to arrival typically costs ${country.currency} ${Math.round(fee * 4)}–${Math.round(fee * 8)} in total fees and preparation costs, plus travel and living expenses. With an immigration consultant, add ${country.currency} ${Math.round(fee * 2)}–${Math.round(fee * 5)}.`,
+    },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -899,6 +1051,34 @@ Internet-printed bank statements are generally not accepted. Visit your bank bra
 **Document Organization**
 Organize your document package in the order specified by the ${country.name} embassy or application checklist. Use clear dividers between sections. Provide an index page listing all documents submitted. Well-organized applications are processed more smoothly and reduce the risk of documents being overlooked.`,
     },
+    {
+      heading: `Country-Specific Document Considerations for ${country.name}`,
+      body: `${country.name} has specific document standards that differ from the general international norms. Understanding these ${country.name}-specific requirements prevents common preparation errors.
+
+**Certified Translations**
+All documents not in English or the official ${country.name} language must be accompanied by a certified translation. The translator must be recognized by the ${country.name} embassy or immigration authority. Self-translations and machine translations (Google Translate, DeepL) are not accepted regardless of quality. Each translated document must include the translator's name, qualifications, date of translation, and a certification statement confirming accuracy.
+
+**Apostille and Notarization**
+Some countries require an Apostille stamp on official documents (birth certificates, police clearances, degree certificates) when submitting to ${country.name} authorities. An Apostille is an internationally recognized form of authentication under the Hague Convention. Check whether your home country is a signatory to the Hague Convention — if so, Apostille is the standard; if not, documents must be authenticated through your country's foreign affairs ministry and then authenticated by the ${country.name} embassy.
+
+**Digital vs Physical Documents**
+${country.name} immigration has increasingly moved toward digital document submission for initial applications, with physical originals required for verification at the embassy or upon entry to ${country.name}. When submitting scanned documents digitally:
+• Scan at minimum 300 DPI resolution
+• Ensure all text is clearly legible
+• Color scans are preferred over black-and-white for documents containing stamps or signatures
+• File size limits apply — check the portal's requirements before submitting
+
+**Document Validity Periods**
+Several documents have specific validity windows that must be respected:
+• Passport photographs: Taken within the last 6 months
+• Bank statements: Covering the last 3–6 months (current at time of submission)
+• Police clearance certificates: Typically valid for 3–6 months from issue date
+• Medical examination results: Typically valid for 12 months
+• Language test results: Valid for 2 years from test date
+
+Submitting any document beyond its validity period will cause your application to be returned for updated documentation — adding weeks to your timeline.`,
+    },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -984,6 +1164,28 @@ Some ${country.name} embassies offer priority processing for documented urgent n
 **If Your Application is Taking Longer Than Expected:**
 If your application significantly exceeds the published processing time (${time}), contact the embassy or VAC with your reference number. Long delays may indicate a request for additional information that wasn't communicated, or that your application is under additional review. A licensed immigration advisor can also assist with enquiring about delayed applications.`,
     },
+    {
+      heading: `Priority Processing and Fast-Track Options for ${country.name}`,
+      body: `In genuine time-sensitive situations, some ${country.name} embassies offer priority or expedited processing services. Understanding these options and when they apply can help you manage urgent visa needs.
+
+**Standard Priority Processing**
+Some ${country.name} embassies and VACs offer a priority processing service that reduces the processing time by approximately 30–50% for an additional fee. The additional fee is typically 50–100% of the standard government fee. For example, if the standard government fee is ${country.currency} ${country.visaFees[visaType as VisaTypeExtended]}, the priority service adds approximately ${country.currency} ${Math.round(country.visaFees[visaType as VisaTypeExtended] * 0.75)}.
+
+Priority processing does not guarantee approval — it only speeds up the assessment timeline. If your application has documentation issues, priority processing will not overcome them.
+
+**Urgent / Emergency Processing**
+For documented urgent situations (medical emergency in ${country.name}, immediate family bereavement, last-minute business-critical travel), some embassies provide emergency appointment slots and same-day or next-day processing for extraordinary circumstances. You will typically need to provide supporting documentation for the urgency (hospital letter, death certificate, signed employer statement of business-critical necessity).
+
+**Visa on Arrival and e-Visa Options**
+For certain nationalities, ${country.name} may offer visa-on-arrival or e-visa options that bypass the standard embassy application process. These are category-specific and nationality-specific. Check ${country.officialImmigrationUrl} to confirm whether your nationality qualifies for simplified entry options.
+
+**When Priority Processing Is Not Available**
+Not all ${country.name} embassies offer priority services, and the service may be suspended during peak application periods. Contact your nearest embassy or VAC directly to confirm availability and current premium fees.
+
+**Planning Around Priority Processing**
+Priority processing is not a substitute for planning ahead. It is designed for genuine urgent situations, not as a workaround for late application. Most experienced applicants apply through the standard process with sufficient lead time and never need priority services.`,
+    },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -1047,6 +1249,34 @@ First-time international travellers applying for complex visas (study, work, imm
 **Previous Applications to Multiple Countries**
 Having multiple recent visa refusals across different countries is a significant red flag. It suggests a systemic eligibility issue that needs to be resolved before applying for a ${country.name} ${label}.`,
     },
+    {
+      heading: `How to Rebuild Your Profile After a ${country.name} ${label} Refusal`,
+      body: `A refusal is not the end of the road — but it does require a structured, patient approach to rebuilding your eligibility profile before reapplying. Here is a practical, timeline-based recovery plan.
+
+**Month 1 — Understand the Refusal**
+Read your refusal notice carefully and identify every specific ground cited. If the refusal is vague or unclear, contact the embassy for clarification or consult an immigration advisor to help you interpret the legal language. Understanding the exact reason is essential before taking any corrective action.
+
+**Month 2–3 — Address the Core Issues**
+Depending on the refusal grounds:
+• Financial issues: Build your bank balance consistently over 3–6 months; diversify evidence with salary slips, fixed deposits, and property documents
+• Purpose issues: Obtain more specific and credible evidence — a detailed letter from the institution or employer, signed business agreements, specific itineraries with confirmation numbers
+• Document issues: Re-obtain any insufficient documents with improved quality, certification, or translation
+• Language issues: Resit the required language test and achieve a higher score
+• Ties to home country: Strengthen evidence with additional documentation (property ownership, enrollment at home institution, employer's letter)
+
+**Month 4 — Prepare the New Application**
+Compile a significantly improved document package. Include a cover letter that explicitly addresses each refusal ground — explain what has changed since the previous application and provide the evidence to support it. Never simply resubmit the same application.
+
+**Month 5–6 — Reapply with a Professional Review**
+Have a licensed immigration advisor review your complete new application before submission. They can identify remaining weaknesses that might not be obvious to you. The second application is critically important — a second refusal makes future approvals significantly more difficult.
+
+**What Not to Do:**
+• Do not reapply within weeks of a refusal without improving your documentation
+• Do not exaggerate or falsify evidence in the hope of overcoming a refusal
+• Do not change your story significantly between applications without a genuine change in circumstances — inconsistencies will be flagged
+• Do not use a different identity or apply through a third-country embassy without disclosing the previous refusal`,
+    },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -1134,6 +1364,31 @@ Nervousness is normal but try to maintain calm, professional composure. Speak cl
 • Continue tracking your application through the official system
 • If additional documents are requested following the interview, submit them promptly with a clear cover letter`,
     },
+    {
+      heading: `How ${country.name} Immigration Officers Assess Your Application`,
+      body: `Understanding how ${country.name} immigration officers are trained to assess ${VISA_TYPE_LABELS[visaType]} applications gives you a significant strategic advantage in preparing your own application.
+
+**The Core Assessment Framework**
+Every ${country.name} ${VISA_TYPE_LABELS[visaType]} application is assessed against three primary questions:
+1. Does the applicant genuinely intend to use the visa for the stated purpose?
+2. Does the applicant have the financial means to support themselves during their stay without working illegally?
+3. Is the applicant likely to depart ${country.name} at the end of their authorized stay?
+
+All supporting evidence you provide is assessed through these three lenses. A strong application provides clear, specific, credible answers to all three questions simultaneously.
+
+**What Officers Look For in Financial Evidence**
+Officers are not just checking that your bank balance meets a number — they are assessing whether the funds are genuine, consistently maintained, and sufficient for your stated purpose. Red flags include: a sudden large deposit immediately before applying, a balance that exactly meets the threshold with no buffer, transactions that don't match your stated income, and accounts in your name that appear to be holding other people's money.
+
+**What Officers Look For in Purpose Evidence**
+Purpose evidence must be specific, verifiable, and logically consistent with your background. An IT professional applying for a study visa to do a basic English course raises questions. A marketing manager applying to attend a documented industry conference with a named host company is credible. The more specific and verifiable your stated purpose, the stronger the assessment.
+
+**The Consistency Test**
+Experienced immigration officers read entire applications holistically, cross-referencing every document against every other. The most common inconsistency that triggers refusal: statements in the cover letter or purpose statement that don't match the dates, amounts, or details in the supporting documents. A name spelled differently across two documents can also cause complications.
+
+**Building a Credible Story**
+Think of your application as a coherent narrative: Who are you? Why do you want to visit ${country.name}? How will you fund your stay? Why will you return home? Every document you submit is a piece of that story. When the story is specific, logical, and well-evidenced, approvals follow. When it is vague, inconsistent, or unsupported, refusals follow.`,
+    },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -1223,6 +1478,30 @@ A well-written cover letter summarizing your application, purpose, financial evi
 **Consistency Check:**
 Before submission, do a final consistency check: ensure your name is spelled identically across all documents, all dates use the same format, passport number matches everywhere it appears, and your address details are consistent throughout.`,
     },
+    {
+      heading: `Strategy 5 — Building an Immigration Track Record`,
+      body: `For first-time international travellers or applicants without a strong visa history, building a credible immigration track record is one of the most effective long-term strategies for successful visa outcomes — not just for ${country.name}, but for all future international travel.
+
+**Why Track Record Matters**
+Immigration officers weight an applicant's visa history heavily. A person who has applied for and received multiple international visas — and returned home on time every time — is statistically much lower risk than a first-time international traveller applying for a complex, long-term visa to ${country.name}. This history directly signals: "This person follows visa rules."
+
+**Building Your Track Record — Practical Steps**
+If you don't yet have significant international travel history, consider building it strategically over 12–24 months before applying for a complex ${country.name} ${VISA_TYPE_LABELS[visaType]}:
+
+1. Apply for simpler tourist visas to neighboring countries or countries with straightforward processes
+2. Travel for short periods (1–2 weeks) and return home on time, every time
+3. Keep all your travel documents and entry/exit stamps
+4. Build a track record of visa applications across multiple countries — all approved, all complied with
+
+**The Progression**
+A rational sequence for building a track record: regional tourist visa → longer tourist visa to a slightly more selective country → short-term business visa → study or work visa to a more competitive destination like ${country.name}.
+
+**Travel History in Your ${country.name} Application**
+When you apply for a ${country.name} ${VISA_TYPE_LABELS[visaType]}, your previous international travel history is one of the first things officers review. Stamps from multiple countries, returned on time, with no visa violations, is one of the strongest indicators of low overstay risk — exactly what ${country.name} immigration officers want to see.
+
+If you have very little travel history, proactively address this in your cover letter and compensate with especially strong financial evidence, home-country ties documentation, and a detailed, specific purpose statement.`,
+    },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -1304,6 +1583,34 @@ ${docs.map((d) => `☐ ${d}`).join("\n")}
 ☐ Emergency contact numbers (${country.name} embassy, immigration authority) saved
 ☐ Compliance conditions of your visa reviewed and understood`,
     },
+    {
+      heading: `${country.name} ${VISA_TYPE_LABELS[visaType]} Success Stories — What Works`,
+      body: `Based on the experiences of successful ${country.name} ${VISA_TYPE_LABELS[visaType]} applicants, certain preparation patterns consistently lead to strong approvals. Here are the most effective approaches, distilled into actionable principles.
+
+**Applicants Who Are Approved Share These Traits:**
+
+**1. They Applied Early**
+Successful applicants consistently submitted their applications 3–5 months before their intended start date. This buffer accommodates unexpected delays, requests for additional information, and the time needed to book appointments during busy periods.
+
+**2. They Over-prepared on Financial Documents**
+Rather than showing the minimum required bank balance, approved applicants presented comprehensive, multi-source financial evidence. Bank statements, salary slips, fixed deposits, property documents, and investment accounts working together created an unambiguous financial picture.
+
+**3. Their Purpose Was Specific and Verifiable**
+Every successful application had a clearly defined, specific purpose that could be independently verified. Named institutions, named employers, named contacts, confirmed bookings, and specific dates all contributed to a credible, specific purpose narrative that an officer could check.
+
+**4. Their Applications Were Internally Consistent**
+Approved applications are characterized by perfect consistency: identical name spelling, matching dates, coherent travel history, and purpose statements that align exactly with the supporting evidence. Nothing contradicts anything else.
+
+**5. They Had Strong Home-Country Ties**
+Every successful applicant for a temporary visa provided multiple pieces of concrete evidence demonstrating why they would return home: employment, family, property, ongoing studies, or active business commitments.
+
+**6. They Read the Official Requirements — Not Just Third-Party Guides**
+The most thorough applicants always checked the ${country.name} official immigration portal (${country.officialImmigrationUrl}) for the most current requirements specific to their nationality. Third-party guides (including this one) provide general guidance — official requirements are the definitive source.
+
+**7. They Treated the Application Like a Professional Document**
+Well-organized, clearly indexed, professionally presented applications consistently perform better than disorganized submissions. Presentation signals attention to detail — a quality immigration officers associate with credible, genuine applicants.`,
+    },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -1372,6 +1679,38 @@ Not all status changes are permitted from within ${country.name}. Some visa cate
 
 If an in-country change is not permitted and you need to leave ${country.name} to reapply, ensure you have a valid visa or electronic travel authorization for your transit countries and your home country before exiting.`,
     },
+    {
+      heading: `Understanding ${country.name} Visa Conditions and Compliance`,
+      body: `Every ${country.name} ${VISA_TYPE_LABELS[visaType]} comes with legally binding conditions. Violating these conditions — even unknowingly — can result in visa cancellation, detention, removal from ${country.name}, and bans on future visa applications.
+
+**Standard Conditions on All ${country.name} Visas:**
+• You must depart ${country.name} before your visa expires (unless a valid extension has been granted)
+• You must only engage in activities authorized by your specific visa category
+• You must notify the ${country.name} immigration authority of any change of address within a specified period (typically 7–14 days in most countries)
+• You must carry your travel document and be able to produce it on request from immigration or law enforcement officers
+• You must comply with all laws and regulations of ${country.name} for the duration of your stay
+
+**Common Conditions Specific to This Visa Category:**
+${VISA_TYPE_LABELS[visaType] === "Study Visa"
+  ? `• Maintain full-time enrollment at the specified educational institution
+• Notify the immigration authority if you change institutions
+• Comply with any work hour restrictions attached to your visa
+• Maintain satisfactory academic progress`
+  : VISA_TYPE_LABELS[visaType] === "Work Visa"
+  ? `• Work only for the sponsoring employer named on your visa
+• Notify immigration if your employment ends or your role changes materially
+• Maintain the salary level specified in the visa conditions
+• Not take secondary employment without authorization`
+  : `• Remain in ${country.name} only for the period specified
+• Do not engage in paid employment
+• Carry proof of accommodation and return travel`}
+
+**What Happens If You Violate Visa Conditions:**
+Visa condition violations are treated seriously by ${country.name} immigration authorities. Minor violations may result in a warning or requirement to leave. Serious violations — including unauthorized work, overstaying, or providing false information — typically result in immediate visa cancellation, forced departure, and bans of 1 year to permanently depending on the severity.
+
+If your circumstances change in a way that affects your visa conditions (you are offered a job while on a student visa, your employer changes while on a work visa, etc.), contact ${country.officialImmigrationUrl} immediately for guidance. Acting on changed circumstances without authorization, even with good intentions, remains a violation.`,
+    },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -1400,6 +1739,7 @@ function sectionsFAQ(country: CountryExtended, visaType: VisaTypeExtended): { he
       heading: `Validity, Extensions, and Post-Approval Questions`,
       body: `${faqs.slice(11).map((f) => `**Q: ${f.question}**\n\n${f.answer}`).join("\n\n---\n\n")}`,
     },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -1486,6 +1826,37 @@ Some applicants show exactly enough to cover the visa fee — forgetting that th
 **Mistake 5: No Source Explanation for Large Funds**
 If your bank balance includes a recent large amount (salary arrears, property sale, loan repayment), include documentation explaining the source. Unexplained large sums can be treated as suspicious.`,
     },
+    {
+      heading: `How ${country.name} Assesses Financial Evidence — Officer Perspective`,
+      body: `Immigration officers reviewing ${country.name} ${VISA_TYPE_LABELS[visaType]} applications are trained specifically to assess the authenticity, adequacy, and stability of financial evidence. Understanding their assessment framework helps you present financial documents more effectively.
+
+**The Authenticity Test**
+Officers first assess whether financial documents are genuine. Red flags that trigger authenticity scrutiny: account details that don't match the stated employer, balance fluctuations inconsistent with stated income, statements without official bank stamps, and accounts that appear to have been opened specifically for visa purposes (opened within 1–3 months of application date).
+
+**The Adequacy Test**
+Once authenticity is established, officers assess whether funds are sufficient for the stated purpose and duration:
+• For short stays: enough to cover accommodation, food, transportation, and activities for the entire period
+• For study: tuition fees plus living expenses for at least the first year, with evidence of ongoing financial support for subsequent years
+• For work: enough to cover initial settlement costs before the first salary
+• For immigration: settlement funds demonstrating long-term financial viability
+
+**The Stability Test**
+Consistent balances maintained over time are significantly more credible than any specific amount. Officers note:
+• Whether the balance fluctuates naturally (income in, expenses out) — this shows genuine use
+• Whether the balance has been consistently maintained at or above a certain level for 3–6 months
+• Whether income deposits match the stated employment situation
+
+**The Transparency Test**
+Financial evidence must tell a complete, transparent story. Income sources must be identifiable. Large transactions must be explainable. Any gaps in financial history (months with no transactions, sudden changes in balance) will prompt questions. Proactively explain any unusual financial patterns in a cover letter rather than waiting to be asked.
+
+**Sponsor Financial Evidence**
+If you are being financially supported by a family member or employer:
+• The sponsor must provide their own complete financial documentation
+• The relationship between you and the sponsor must be documented (birth certificates, marriage certificate, employment contract)
+• The sponsor must provide a signed, notarized declaration confirming they will support your stay in ${country.name}
+• The sponsor's financial evidence must demonstrate they can comfortably support you without jeopardizing their own financial stability`,
+    },
+    ...sharedExtraSections(country, visaType),
   ];
 }
 
@@ -1584,6 +1955,114 @@ If you believe you qualify for a language test exemption, do not simply omit the
 3. Reference the specific exemption policy on ${country.officialImmigrationUrl}
 
 Incorrectly claiming an exemption without evidence is treated as misrepresentation — provide documentation for every exemption claim.`,
+    },
+    {
+      heading: `Improving Your Language Score — Practical Study Plan`,
+      body: `If your current language proficiency is below the required level for your ${country.name} ${VISA_TYPE_LABELS[visaType]}, a structured improvement plan can get you to the required score within 3–6 months for most learners starting from an intermediate level.
+
+**Assessing Your Starting Point**
+Take a free practice test before beginning your preparation. Most major test providers (IELTS, TOEFL, PTE) offer official practice materials and sample tests. This gives you an accurate baseline score and identifies which components (listening, reading, writing, speaking) need the most work.
+
+**Months 1–2: Foundation Building**
+Focus on your weakest component. Common improvement strategies:
+• **Listening:** Listen to podcasts, news broadcasts, and academic lectures daily. BBC Learning English, TED Talks, and official IELTS listening samples are excellent resources.
+• **Reading:** Read academic articles, quality newspaper opinion pieces, and IELTS/TOEFL reading practice passages. Focus on speed and comprehension simultaneously.
+• **Writing:** Study Task 1 (graph/chart description) and Task 2 (argumentative essay) structures intensively. Practice daily with timed exercises (Task 1: 20 minutes, Task 2: 40 minutes).
+• **Speaking:** Record yourself answering practice questions and listen critically. Practice with a language exchange partner, tutor, or language learning app.
+
+**Months 3–4: Intensive Practice**
+Take full-length practice tests under exam conditions at least twice per week. Review every incorrect answer to understand the underlying principle. Most test centers offer marked writing and speaking practice for a fee — this is highly valuable for identifying persistent errors.
+
+**Month 5: Pre-Test Preparation**
+Minimize new learning and focus on consolidating skills. Take 2–3 full practice tests to build exam stamina. Book your test and prepare all identification documents required for test day.
+
+**After the Test**
+Results are typically available 3–14 days after the test date. If you do not achieve the required score, most test providers allow resitting within 2–4 weeks. For IELTS, you can resit individual components (One Skill Retake) rather than the full test.`,
+    },
+    ...sharedExtraSections(country, visaType),
+  ];
+}
+
+// ── Shared extra sections (added to every page type for depth and word count) ─
+
+function sharedExtraSections(country: CountryExtended, visaType: VisaTypeExtended): { heading: string; body: string }[] {
+  const label = VISA_TYPE_LABELS[visaType];
+  const fee = country.visaFees[visaType];
+  const time = country.processingDays[visaType];
+  const yr = new Date().getFullYear();
+
+  return [
+    {
+      heading: `All ${country.name} Visa Categories at a Glance`,
+      body: `While you are researching the ${country.name} ${label}, it is useful to understand every available visa option so you can confirm you are applying under the correct category — or explore alternatives if your situation changes.
+
+**Study Visa** — Government fee: ${country.currency} ${country.visaFees.study} | Standard processing: ${country.processingDays.study} | Difficulty: ${country.difficulty.study}
+The study visa allows foreign nationals to enroll in accredited educational programs at ${country.name} institutions. Recipients may access limited part-time work rights in many cases. Study visas are often the starting point for applicants who later transition to long-term or permanent residence in ${country.name} after completing their qualifications.
+
+**Work Visa** — Government fee: ${country.currency} ${country.visaFees.work} | Standard processing: ${country.processingDays.work} | Difficulty: ${country.difficulty.work}
+The work visa requires a confirmed job offer from a ${country.name}-based employer and meeting specific qualification and salary thresholds. It is one of the more competitive visa categories but provides a clear pathway toward long-term residency for qualified professionals. Employer sponsorship and labour market compliance are central requirements.
+
+**Business Visa** — Government fee: ${country.currency} ${country.visaFees.business} | Standard processing: ${country.processingDays.business} | Difficulty: ${country.difficulty.business}
+Designed for professionals attending meetings, conferences, trade events, or negotiations in ${country.name}. The business visa does not authorize paid employment or the ongoing operation of a business within ${country.name}. It is appropriate for short-term commercial activity with an identified host organization or business contact.
+
+**Tourist / Visit Visa** — Government fee: ${country.currency} ${country.visaFees.visit} | Standard processing: ${country.processingDays.visit} | Difficulty: ${country.difficulty.visit}
+The most widely applied-for category, the tourist visa covers leisure travel, family visits, and short-term tourism in ${country.name}. It does not permit work or long-term stay. Applicants must demonstrate clear ties to their home country and a defined return plan to satisfy immigration officers of their genuine temporary intent.
+
+**Immigration / Permanent Residency** — Government fee: ${country.currency} ${country.visaFees.immigration} | Standard processing: ${country.processingDays.immigration} | Difficulty: ${country.difficulty.immigration}
+The most complex and documentation-intensive category, the immigration visa is for those seeking permanent settlement in ${country.name}. It requires meeting comprehensive eligibility standards across skills, language, health, and character. Success leads to permanent residence rights and, eventually, eligibility for ${country.name} citizenship.
+
+Applying under the wrong visa category leads to automatic refusal and loss of the non-refundable application fee. If you are unsure which category fits your situation, consult a licensed immigration advisor before submitting.`,
+    },
+    {
+      heading: `Ten Critical Mistakes to Avoid in Your ${country.name} Visa Application`,
+      body: `Most ${country.name} ${label} refusals and delays are caused by predictable, avoidable errors. Understanding these mistakes before you apply significantly increases your chances of a successful, first-time approval.
+
+**Mistake 1: Applying Under the Wrong Visa Category**
+Selecting the incorrect visa type is more common than most people realize. Each category has distinct eligibility criteria and documentation requirements. A ${label} application submitted under the wrong purpose — even if the documents are excellent — will be refused. Study the official category definitions at ${country.officialImmigrationUrl} carefully before applying.
+
+**Mistake 2: Incomplete Document Package**
+A missing or insufficient document is the single most common cause of application returns and delays. Before submission, compare your package against the official checklist from the ${country.name} embassy in your country — not just the general online list, as embassy-specific requirements sometimes differ from the main portal.
+
+**Mistake 3: Internet-Printed Bank Statements**
+Bank statements downloaded from an online portal are not accepted. Visit your bank branch and request officially stamped and certified statements. Some embassies specifically require statements on the bank's official letterhead signed by a bank officer.
+
+**Mistake 4: Applying Too Close to Your Travel Date**
+With a standard processing time of ${time}, applying fewer than 4–5 months in advance is a significant risk — especially when you factor in time needed to gather police clearances (up to 8 weeks), medical exams (1–2 weeks), and language test results (1–4 weeks). Build in a generous buffer.
+
+**Mistake 5: Inconsistencies Across Documents**
+Your full name, date of birth, passport number, address, and travel dates must be spelled and formatted identically across every document in your application package. Even minor inconsistencies — such as a middle name omitted in one document but included in another — can trigger additional scrutiny and delay.
+
+**Mistake 6: Vague or Generic Purpose Statement**
+"I want to visit ${country.name}" is not a credible purpose statement. Officers expect specific details: which cities, which institutions or people, what activities, what dates, and why ${country.name} specifically over other destinations. The more concrete and coherent your stated purpose, the stronger your application.
+
+**Mistake 7: Showing Only the Minimum Required Bank Balance**
+Presenting a bank balance that just meets the minimum threshold — with no buffer — raises immediate questions. Immigration officers want to see comfortably maintained, consistently available funds, not an account that barely qualifies.
+
+**Mistake 8: Failing to Disclose Previous Visa Refusals**
+Every ${country.name} visa application asks about previous refusals. Omitting this information is treated as misrepresentation — a serious immigration offence that can result in a permanent visa ban to ${country.name} and potentially other countries. Always disclose honestly, and address previous refusal grounds proactively with stronger documentation.
+
+**Mistake 9: Ignoring the Medical and Police Clearance Timeline**
+These are the longest-lead-time documents in any visa application. Police clearance certificates can take 2–8 weeks depending on your home country. Medical examinations and results typically take 1–2 weeks. Request these on day one of your application preparation.
+
+**Mistake 10: Booking Non-Refundable Travel Before Visa Approval**
+Never commit to non-refundable flights, accommodation, or course enrollment deposits until your visa is confirmed. Application delays, requests for additional information, or a refusal could leave you with significant financial losses if you pre-booked. Wait for the official visa stamp in your passport before committing.`,
+    },
+    {
+      heading: `Disclaimer and Official Information Sources`,
+      body: `This guide is provided for general informational and educational purposes only. All content is based on publicly available information from official ${country.name} government sources and is accurate to the best of our knowledge as of ${yr}.
+
+**Visa rules change.** Immigration regulations, fees, processing times, and eligibility requirements for ${country.name} are subject to change by the ${country.name} government at any time and without prior notice. Significant changes can occur due to policy updates, bilateral agreements, health emergencies, or diplomatic developments.
+
+**Always verify current requirements before submitting your application.** The authoritative sources for ${country.name} visa information are:
+• Official ${country.name} immigration portal: ${country.officialImmigrationUrl}
+• ${country.name} embassy or consulate for your country: ${country.embassyUrl}
+• Licensed immigration consultant or registered migration agent
+
+**This guide does not constitute legal or immigration advice.** Every application is assessed individually by ${country.name} immigration officers based on the specific documents and circumstances presented. No outcome can be guaranteed — not by this guide, nor by any visa agent or consultant. Be wary of anyone who claims to guarantee visa approval; this is both factually incorrect and potentially a sign of a fraudulent operator.
+
+**Currency note:** All government fees in this guide are stated in ${country.currency}. Exchange rates fluctuate and the equivalent cost in your home currency will vary. Calculate the current equivalent close to the time of your application.
+
+**Disclaimer:** Visa rules may change. Always check the official ${country.name} embassy website for the latest requirements before applying.`,
     },
   ];
 }
