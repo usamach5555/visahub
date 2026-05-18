@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           </p>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">1. Information We Collect</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">1. Information We Collect</h2>
             <h3 className="font-semibold text-gray-800 mb-2">Automatically Collected Information</h3>
             <p className="text-gray-700 leading-relaxed mb-3">
               When you visit our website, we automatically collect certain information about your device
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">2. How We Use Your Information</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">2. How We Use Your Information</h2>
             <p className="text-gray-700 leading-relaxed mb-3">We use the information we collect to:</p>
             <ul className="space-y-2 text-gray-700 text-sm">
               {[
@@ -69,7 +69,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">3. Cookies and Tracking Technologies</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">3. Cookies and Tracking Technologies</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               We use cookies and similar tracking technologies to enhance your browsing experience and
               to understand how visitors use our site. Cookies are small text files stored on your
@@ -94,7 +94,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">4. Google AdSense and Advertising</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">4. Google AdSense and Advertising</h2>
             <p className="text-gray-700 leading-relaxed">
               We display advertisements through Google AdSense. Google, as a third-party vendor,
               uses cookies (including the DoubleClick cookie) to serve ads on our site based on your
@@ -121,7 +121,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">5. Third-Party Links</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">5. Third-Party Links</h2>
             <p className="text-gray-700 leading-relaxed">
               Our website contains links to third-party websites, including official government
               immigration portals, embassy websites, and external resources. We are not responsible
@@ -131,7 +131,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">6. Data Retention and Security</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">6. Data Retention and Security</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               We retain analytics data in anonymised, aggregated form. Contact form submissions are
               retained only for as long as necessary to respond to your enquiry, after which they
@@ -148,7 +148,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">7. Your Rights (GDPR / UK GDPR)</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">7. Your Rights (GDPR / UK GDPR)</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               If you are located in the European Economic Area (EEA) or the United Kingdom, you have
               certain rights under the General Data Protection Regulation (GDPR) or UK GDPR, including:
@@ -176,7 +176,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">8. Children&apos;s Privacy</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">8. Children&apos;s Privacy</h2>
             <p className="text-gray-700 leading-relaxed">
               Our website is not directed at children under the age of 13. We do not knowingly
               collect personal information from children. If you believe we have inadvertently
@@ -185,7 +185,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">9. Changes to This Privacy Policy</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">9. Changes to This Privacy Policy</h2>
             <p className="text-gray-700 leading-relaxed">
               We may update this Privacy Policy from time to time to reflect changes in law, our
               practices, or for other operational reasons. Changes will be posted on this page with
@@ -196,7 +196,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">10. Contact Us</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">10. Contact Us</h2>
             <p className="text-gray-700 leading-relaxed">
               If you have questions, concerns, or requests regarding this Privacy Policy or your
               personal data, please contact us at:{" "}
@@ -206,7 +206,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">11. Legal Basis for Processing (GDPR)</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">11. Legal Basis for Processing (GDPR)</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               For users in the European Economic Area and the United Kingdom, we process your personal data
               on the following legal bases as defined under the General Data Protection Regulation (GDPR)
@@ -254,7 +254,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">12. International Data Transfers</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">12. International Data Transfers</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               We use certain third-party service providers (including Google Analytics and Google AdSense)
               whose servers are located in the United States. When personal data is transferred from the
@@ -276,7 +276,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">13. Data Minimisation and Purpose Limitation</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">13. Data Minimisation and Purpose Limitation</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               We apply data minimisation principles throughout our operations. This means we only collect
               personal data that is necessary for the specific purpose for which it is collected. We do not
@@ -298,7 +298,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">14. Your Rights in Practice — How to Exercise Them</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">14. Your Rights in Practice — How to Exercise Them</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
               We are committed to making it straightforward for you to exercise your privacy rights. Here
               is practical guidance on how to exercise each right:
@@ -346,7 +346,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">15. California Privacy Rights (CCPA)</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">15. California Privacy Rights (CCPA)</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               If you are a California resident, the California Consumer Privacy Act (CCPA) provides you
               with specific rights regarding your personal information. This section describes your
@@ -376,7 +376,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">16. Security Measures in Detail</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">16. Security Measures in Detail</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               We take the security of your information seriously and implement a range of technical and
               organisational security measures appropriate to the nature and volume of data we process.

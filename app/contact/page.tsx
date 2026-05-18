@@ -66,7 +66,7 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+              <h2 className="text-xl font-bold text-primary-800 mb-6">Send Us a Message</h2>
               <form className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
@@ -230,7 +230,7 @@ export default function ContactPage() {
 
         {/* What to expect */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">What to Expect When You Contact Us</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">What to Expect When You Contact Us</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
               We receive hundreds of messages each week from readers around the world, and we want to be transparent about what you can expect when you reach out. Understanding what we can and cannot help with will ensure you get the right support as quickly as possible.
@@ -255,7 +255,7 @@ export default function ContactPage() {
 
         {/* Finding the right guide */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Finding the Right Guide Before You Contact Us</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">Finding the Right Guide Before You Contact Us</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
               Many questions we receive are already answered in our guides. Before sending us a message, we encourage you to search our site — you may find exactly what you need without waiting for a response. Here is a guide to navigating our content:
@@ -280,7 +280,7 @@ export default function ContactPage() {
 
         {/* For immigration professionals */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Information for Immigration Professionals</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">Information for Immigration Professionals</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
               We know that many immigration lawyers, consultants, education agents, and other professionals use our site as a reference resource for their clients. We welcome this and work to ensure our guides are accurate enough to be useful to professionals, not just to lay applicants.
@@ -302,7 +302,7 @@ export default function ContactPage() {
 
         {/* For media and researchers */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">For Media and Researchers</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">For Media and Researchers</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
               VisaProcessInfo has been cited as a reference in journalism about international migration, student mobility, skilled worker shortages, and visa policy changes. We are happy to provide background information, data on applicant information needs, and commentary from our editorial team for media enquiries, subject to our availability and editorial discretion.
@@ -321,7 +321,7 @@ export default function ContactPage() {
 
         {/* Frequently asked contact questions */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Frequently Asked Questions About Contacting Us</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">Frequently Asked Questions About Contacting Us</h2>
           <div className="space-y-6">
             {[
               {

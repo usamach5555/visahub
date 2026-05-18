@@ -618,7 +618,7 @@ export default function HomePage() {
           <h2 className="text-2xl font-bold text-primary-800 mb-8 text-center">Understanding the Global Immigration System in 2026</h2>
           <div className="grid lg:grid-cols-3 gap-8 text-sm text-gray-600 leading-relaxed">
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-gray-900">Points-Based Systems</h3>
+              <h3 className="text-lg font-bold text-primary-800">Points-Based Systems</h3>
               <p>
                 Points-based immigration systems have become the gold standard for skilled worker immigration
                 in the English-speaking world and are spreading globally. Canada, Australia, and the UK all
@@ -642,7 +642,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-gray-900">The Rise of Digital Nomad and Remote Work Visas</h3>
+              <h3 className="text-lg font-bold text-primary-800">The Rise of Digital Nomad and Remote Work Visas</h3>
               <p>
                 One of the most significant visa policy developments of the past three years has been the
                 proliferation of digital nomad and remote work visas. As remote work became normalised
@@ -665,7 +665,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-gray-900">Investor Visas and Citizenship by Investment</h3>
+              <h3 className="text-lg font-bold text-primary-800">Investor Visas and Citizenship by Investment</h3>
               <p>
                 Citizenship by Investment (CBI) and Residency by Investment (RBI) programmes allow high-net-worth
                 individuals to obtain citizenship or residency rights in exchange for qualifying investments —

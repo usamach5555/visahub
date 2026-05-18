@@ -114,7 +114,7 @@ export default function AboutPage() {
 
         {/* Mission */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">Our Mission</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
@@ -163,7 +163,7 @@ export default function AboutPage() {
 
         {/* Our Values */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Editorial Standards</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-8">Our Editorial Standards</h2>
           <div className="grid sm:grid-cols-2 gap-6">
             {VALUES.map((v) => (
               <div
@@ -182,7 +182,7 @@ export default function AboutPage() {
 
         {/* Team */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Team</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-8">Our Team</h2>
           <div className="grid sm:grid-cols-2 gap-6">
             {TEAM.map((member) => (
               <div
@@ -206,7 +206,7 @@ export default function AboutPage() {
 
         {/* Our Story */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">Our Story</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
               VisaProcessInfo began with a frustrating personal experience. In 2019, our founder Sarah Mitchell watched a close friend&apos;s student visa application to Canada get rejected — not because the friend was ineligible, but because she had submitted an outdated bank statement format that a new policy had made insufficient three months earlier. No one had updated the information online. The official embassy website was ambiguous. The immigration consultant they hired charged $800 and gave them generic advice that didn&apos;t account for the new requirement.
@@ -231,7 +231,7 @@ export default function AboutPage() {
 
         {/* How We Research */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">How We Research and Verify Our Guides</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">How We Research and Verify Our Guides</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
               Every guide published on VisaProcessInfo follows a strict research and verification process before it goes live. We are aware that immigration guides exist across the internet in various states of accuracy and currency, and we have deliberately built our editorial process to be as rigorous as possible given our team size and resources.
@@ -259,7 +259,7 @@ export default function AboutPage() {
 
         {/* Countries We Cover */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Why We Cover 131+ Countries</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">Why We Cover 131+ Countries</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
               Our coverage of 131+ destination countries was not chosen arbitrarily. Each country on our platform represents a meaningful immigration destination that receives a significant volume of applications from international students, workers, tourists, and permanent residency seekers. Our selection criteria balance global application volume, the complexity and importance of the immigration pathways available, and our editorial team&apos;s genuine expertise.
@@ -284,7 +284,7 @@ export default function AboutPage() {
 
         {/* Advisory Board */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Advisory Board</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">Our Advisory Board</h2>
           <p className="text-gray-700 leading-relaxed mb-8">
             Beyond our core editorial team, VisaProcessInfo is supported by an advisory board of immigration professionals who review our most complex guides and provide specialist expertise in areas outside our editors&apos; direct experience.
           </p>
@@ -333,7 +333,7 @@ export default function AboutPage() {
 
         {/* Reader Impact */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Impact</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">Our Impact</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
               Since launching in 2020, VisaProcessInfo has grown from a small blog into one of the most widely read independent immigration information resources in the English language. We measure our impact not just in traffic numbers but in the outcomes our readers achieve — the visa approvals, the university enrolments, the job offers, the family reunifications.
@@ -368,7 +368,7 @@ export default function AboutPage() {
 
         {/* How We Stay Current */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">How We Stay Current with Immigration Policy Changes</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">How We Stay Current with Immigration Policy Changes</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
               Immigration policy is one of the most rapidly changing areas of government regulation. In any given year, dozens of policy changes across our 131+ covered countries can affect visa requirements, fees, processing times, salary thresholds, English language score requirements, financial proof minimums, and dozens of other variables that directly affect applicants. Staying current requires a systematic approach.
@@ -393,7 +393,7 @@ export default function AboutPage() {
 
         {/* Working With Us */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Working With Us</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">Working With Us</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
               We are occasionally approached by organisations interested in collaborating with VisaProcessInfo. We welcome certain types of partnerships and decline others, based on whether the collaboration serves our readers&apos; interests.

@@ -34,7 +34,7 @@ export default function DisclaimerPage() {
           </div>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">1. General Information Only</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">1. General Information Only</h2>
             <p className="text-gray-700 leading-relaxed">
               VisaProcessInfo (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) operates this
               website to provide free, general information about visa and immigration processes for various
@@ -47,7 +47,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">2. Not Legal or Immigration Advice</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">2. Not Legal or Immigration Advice</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               Nothing on this website constitutes legal advice, immigration advice, or professional advice of any
               kind. Reading or using this website does not create a solicitor-client, lawyer-client, or
@@ -64,7 +64,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">3. No Guarantee of Visa Approval</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">3. No Guarantee of Visa Approval</h2>
             <p className="text-gray-700 leading-relaxed">
               Following any guide, checklist, or advice on this website does not guarantee that your visa
               application will be approved. Visa and immigration decisions are made solely and exclusively by
@@ -77,7 +77,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">4. Currency and Accuracy of Information</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">4. Currency and Accuracy of Information</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               Immigration policies, visa fees, document requirements, processing times, and eligibility
               criteria change frequently, often without public notice. While our editorial team reviews and
@@ -93,7 +93,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">5. External Links</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">5. External Links</h2>
             <p className="text-gray-700 leading-relaxed">
               This website contains links to external websites, including official government immigration
               portals, embassy websites, and related resources. These links are provided solely for your
@@ -106,7 +106,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">6. Limitation of Liability</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">6. Limitation of Liability</h2>
             <p className="text-gray-700 leading-relaxed">
               To the fullest extent permitted by applicable law, VisaProcessInfo and its owners,
               contributors, editors, and affiliates shall not be liable for any direct, indirect, incidental,
@@ -120,7 +120,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">7. No Affiliation with Government Bodies</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">7. No Affiliation with Government Bodies</h2>
             <p className="text-gray-700 leading-relaxed">
               VisaProcessInfo is an independent, privately operated information website. We are not
               affiliated with, endorsed by, or in any way connected to any government, embassy, consulate,
@@ -133,7 +133,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">8. Changes to This Disclaimer</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">8. Changes to This Disclaimer</h2>
             <p className="text-gray-700 leading-relaxed">
               We reserve the right to update or modify this disclaimer at any time without prior notice.
               Changes will be effective immediately upon posting to this page. Your continued use of this
@@ -143,7 +143,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">9. Specific Disclaimers by Content Type</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">9. Specific Disclaimers by Content Type</h2>
             <div className="space-y-5 text-gray-700">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">Visa Fee Information</h3>
@@ -209,7 +209,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">10. When to Consult a Professional</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">10. When to Consult a Professional</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
               Our guides are designed to help individuals with straightforward immigration applications
               understand the process and prepare effectively. However, there are circumstances where
@@ -252,7 +252,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">11. How to Find a Licensed Immigration Professional</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">11. How to Find a Licensed Immigration Professional</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
               If you determine that you need professional immigration advice, it is important to use
               a licensed and regulated professional. Unregulated immigration advisers — sometimes called
@@ -306,7 +306,7 @@ export default function DisclaimerPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">12. Governing Law</h2>
+            <h2 className="text-xl font-bold text-primary-800 mb-3">12. Governing Law</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               This disclaimer and your use of this website are governed by and construed in accordance
               with the laws of England and Wales. Any disputes arising from or in connection with this
