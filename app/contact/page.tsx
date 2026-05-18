@@ -1,19 +1,49 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  Mail,
+  Clock,
+  Globe,
+  PenLine,
+  Handshake,
+  Megaphone,
+  HelpCircle,
+  BookOpen,
+  GraduationCap,
+  Briefcase,
+  ClipboardList,
+  AlertTriangle,
+} from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Global Visa Guide Hub",
+  title: "Contact Us | VisaProcessInfo",
   description:
-    "Contact the Global Visa Guide Hub team for content corrections, partnership inquiries, advertising, or general questions about our visa and immigration guides.",
+    "Contact the VisaProcessInfo team for content corrections, partnership inquiries, advertising, or general questions about our visa and immigration guides.",
   alternates: { canonical: "https://www.visaprocessinfo.com/contact" },
 };
 
 const TOPICS = [
-  { icon: "✏️", title: "Content Correction", description: "Found an inaccuracy in one of our guides? Let us know so we can update it promptly." },
-  { icon: "🤝", title: "Partnership & Guest Post", description: "Immigration professionals and legal firms interested in contributing content are welcome to reach out." },
-  { icon: "📢", title: "Advertising", description: "For advertising, sponsored content, or media kit requests, contact our partnerships team." },
-  { icon: "❓", title: "General Enquiries", description: "Questions about our website, how we work, or how to find a specific guide." },
+  {
+    Icon: PenLine,
+    title: "Content Correction",
+    description: "Found an inaccuracy in one of our guides? Let us know so we can update it promptly.",
+  },
+  {
+    Icon: Handshake,
+    title: "Partnership & Guest Post",
+    description: "Immigration professionals and legal firms interested in contributing content are welcome to reach out.",
+  },
+  {
+    Icon: Megaphone,
+    title: "Advertising",
+    description: "For advertising, sponsored content, or media kit requests, contact our partnerships team.",
+  },
+  {
+    Icon: HelpCircle,
+    title: "General Enquiries",
+    description: "Questions about our website, how we work, or how to find a specific guide.",
+  },
 ];
 
 export default function ContactPage() {
@@ -107,8 +137,9 @@ export default function ContactPage() {
                   Send Message
                 </button>
               </form>
-              <p className="text-xs text-gray-400 mt-4">
-                ⚠ We do not provide personalised immigration advice. For advice specific to your situation,
+              <p className="text-xs text-gray-400 mt-4 flex items-start gap-1.5">
+                <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5 text-amber-500" />
+                We do not provide personalised immigration advice. For advice specific to your situation,
                 please consult a licensed immigration consultant or lawyer. We typically respond within 3–5 business days.
               </p>
             </div>
@@ -120,24 +151,30 @@ export default function ContactPage() {
               <h3 className="font-bold text-gray-900 mb-4">Contact Information</h3>
               <div className="space-y-3 text-sm text-gray-700">
                 <div className="flex items-start gap-3">
-                  <span className="text-xl shrink-0">📧</span>
+                  <div className="w-8 h-8 bg-primary-50 rounded-lg flex items-center justify-center shrink-0">
+                    <Mail className="w-4 h-4 text-primary-600" />
+                  </div>
                   <div>
                     <p className="font-medium text-gray-900">Email</p>
-                    <p className="text-gray-600">contact@www.visaprocessinfo.com</p>
+                    <p className="text-gray-600">contact@visaprocessinfo.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-xl shrink-0">🕐</span>
+                  <div className="w-8 h-8 bg-primary-50 rounded-lg flex items-center justify-center shrink-0">
+                    <Clock className="w-4 h-4 text-primary-600" />
+                  </div>
                   <div>
                     <p className="font-medium text-gray-900">Response Time</p>
                     <p className="text-gray-600">3–5 business days</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-xl shrink-0">🌍</span>
+                  <div className="w-8 h-8 bg-primary-50 rounded-lg flex items-center justify-center shrink-0">
+                    <Globe className="w-4 h-4 text-primary-600" />
+                  </div>
                   <div>
                     <p className="font-medium text-gray-900">Coverage</p>
-                    <p className="text-gray-600">15+ countries, 500+ guides</p>
+                    <p className="text-gray-600">131+ countries, 10,000+ guides</p>
                   </div>
                 </div>
               </div>
@@ -148,7 +185,9 @@ export default function ContactPage() {
               <div className="space-y-3">
                 {TOPICS.map((t) => (
                   <div key={t.title} className="flex items-start gap-2.5">
-                    <span className="text-lg shrink-0 mt-0.5">{t.icon}</span>
+                    <div className="w-7 h-7 bg-primary-50 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                      <t.Icon className="w-3.5 h-3.5 text-primary-600" />
+                    </div>
                     <div>
                       <p className="font-medium text-sm text-gray-900">{t.title}</p>
                       <p className="text-xs text-gray-500">{t.description}</p>
@@ -161,20 +200,24 @@ export default function ContactPage() {
             <div className="bg-primary-50 rounded-2xl border border-primary-100 p-5">
               <h3 className="font-bold text-primary-900 mb-2 text-sm">Looking for visa information?</h3>
               <p className="text-xs text-primary-800 mb-3">
-                Browse our free guides instead of contacting us — we cover 500+ visa topics.
+                Browse our free guides instead of contacting us — we cover 10,000+ visa topics across 131 countries.
               </p>
               <div className="space-y-1.5 text-sm">
                 <Link href="/blog" className="flex items-center gap-1.5 text-primary-700 hover:text-primary-900">
-                  📚 Browse all guides
+                  <BookOpen className="w-3.5 h-3.5 shrink-0" />
+                  Browse all guides
                 </Link>
                 <Link href="/visa/study" className="flex items-center gap-1.5 text-primary-700 hover:text-primary-900">
-                  🎓 Study visa guides
+                  <GraduationCap className="w-3.5 h-3.5 shrink-0" />
+                  Study visa guides
                 </Link>
                 <Link href="/visa/work" className="flex items-center gap-1.5 text-primary-700 hover:text-primary-900">
-                  💼 Work visa guides
+                  <Briefcase className="w-3.5 h-3.5 shrink-0" />
+                  Work visa guides
                 </Link>
                 <Link href="/process/study-visa-application" className="flex items-center gap-1.5 text-primary-700 hover:text-primary-900">
-                  📋 Apply process guides
+                  <ClipboardList className="w-3.5 h-3.5 shrink-0" />
+                  Application process guides
                 </Link>
               </div>
             </div>
@@ -199,7 +242,7 @@ export default function ContactPage() {
               <strong>Partnership and Guest Posts:</strong> We welcome contributions from licensed immigration lawyers, regulated immigration consultants, university international student advisors, and other verified immigration professionals. A quality guest post should be factual, sourced from official government publications, and offer genuine insight beyond what a reader could easily find on an official website. We do not publish advertorial content disguised as editorial, and we do not charge contributors for guest post placement. If your contribution is accepted, it will be reviewed by one of our editors and published with your professional credentials clearly stated.
             </p>
             <p>
-              <strong>Advertising Enquiries:</strong> Global Visa Guide Hub accepts display advertising from organisations whose services are genuinely relevant and beneficial to our readers — language test preparation providers, international student health insurance, reputable immigration advisory services, international money transfer services, and similar. We do not accept advertising from services we consider misleading or exploitative towards visa applicants. Our media kit is available on request and outlines our audience demographics, monthly traffic, and available ad placements.
+              <strong>Advertising Enquiries:</strong> VisaProcessInfo accepts display advertising from organisations whose services are genuinely relevant and beneficial to our readers — language test preparation providers, international student health insurance, reputable immigration advisory services, international money transfer services, and similar. We do not accept advertising from services we consider misleading or exploitative towards visa applicants. Our media kit is available on request and outlines our audience demographics, monthly traffic, and available ad placements.
             </p>
             <p>
               <strong>What We Cannot Help With:</strong> We are an information resource, not an immigration advisory service. We cannot assess your personal eligibility for any visa category, review your specific application documents, advise on how to handle a refusal, or represent you in any immigration proceedings. Our guides provide general information based on official requirements — they are not personalised advice. For advice specific to your circumstances, please consult a licensed immigration lawyer or registered immigration consultant in your country.
@@ -262,7 +305,7 @@ export default function ContactPage() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6">For Media and Researchers</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
-              Global Visa Guide Hub has been cited as a reference in journalism about international migration, student mobility, skilled worker shortages, and visa policy changes. We are happy to provide background information, data on applicant information needs, and commentary from our editorial team for media enquiries, subject to our availability and editorial discretion.
+              VisaProcessInfo has been cited as a reference in journalism about international migration, student mobility, skilled worker shortages, and visa policy changes. We are happy to provide background information, data on applicant information needs, and commentary from our editorial team for media enquiries, subject to our availability and editorial discretion.
             </p>
             <p>
               For journalists writing about international student numbers, visa processing delays, skilled worker visa policy changes, or immigration policy in any of our covered countries, our editors can provide on-background commentary based on our experience monitoring immigration policy and supporting applicants. We are particularly knowledgeable about the practical impact of policy changes on applicants — the gap between what policy says and what applicants actually experience in the application process.

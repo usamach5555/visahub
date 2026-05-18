@@ -3,9 +3,9 @@ import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Global Visa Guide Hub",
+  title: "Privacy Policy | VisaProcessInfo",
   description:
-    "Privacy Policy for Global Visa Guide Hub. Learn how we collect, use, and protect your personal data in accordance with GDPR and applicable privacy law.",
+    "Privacy Policy for VisaProcessInfo. Learn how we collect, use, and protect your personal data in accordance with GDPR and applicable privacy law.",
   alternates: { canonical: "https://www.visaprocessinfo.com/privacy" },
 };
 
@@ -24,7 +24,7 @@ export default function PrivacyPage() {
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 space-y-8">
 
           <p className="text-gray-700 leading-relaxed">
-            Global Visa Guide Hub (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) is
+            VisaProcessInfo (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) is
             committed to protecting your privacy. This Privacy Policy explains how we collect,
             use, disclose, and safeguard your information when you visit our website. Please read
             this policy carefully. If you disagree with its terms, please discontinue use of the site.

@@ -127,7 +127,7 @@ export default async function ProcessPage({ params }: Props) {
                         <p className="text-gray-600 text-sm leading-relaxed mb-3">{step.description}</p>
                         {step.tips && step.tips.length > 0 && (
                           <div className="bg-accent-50 border border-accent-100 rounded-xl p-4">
-                            <p className="text-xs font-bold text-accent-700 uppercase tracking-wide mb-2">💡 Tips</p>
+                            <p className="text-xs font-bold text-accent-700 uppercase tracking-wide mb-2">Tips</p>
                             <ul className="space-y-1.5">
                               {step.tips.map((tip, j) => (
                                 <li key={j} className="flex items-start gap-2 text-xs text-gray-700">

@@ -98,7 +98,11 @@ export default function BlogList({ articles }: { articles: ArticleMeta[] }) {
       {/* Article grid */}
       {paginated.length === 0 ? (
         <div className="text-center py-16 text-gray-500">
-          <p className="text-5xl mb-4">🔍</p>
+          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
           <p className="text-lg font-medium">No guides found</p>
           <p className="text-sm mt-1">Try a different search term or category</p>
         </div>
@@ -112,7 +116,7 @@ export default function BlogList({ articles }: { articles: ArticleMeta[] }) {
             >
               <div className="p-5 flex-1">
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl">{VISA_ICONS[a.visaType] ?? "📄"}</span>
+                  <span className="text-xs font-semibold text-primary-600 bg-primary-50 px-2 py-0.5 rounded">{VISA_ICONS[a.visaType] ?? "Guide"}</span>
                   <span className="text-xs font-medium text-primary-700 bg-primary-50 px-2.5 py-1 rounded-full">
                     {a.countryName}
                   </span>

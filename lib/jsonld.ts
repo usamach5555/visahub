@@ -36,11 +36,11 @@ export function articleSchema(input: ArticleSchemaInput) {
     datePublished: input.publishedAt,
     author: {
       "@type": "Organization",
-      name: input.authorName ?? "Global Visa Guide Hub",
+      name: input.authorName ?? "VisaProcessInfo",
     },
     publisher: {
       "@type": "Organization",
-      name: "Global Visa Guide Hub",
+      name: "VisaProcessInfo",
       url: "https://www.visaprocessinfo.com",
     },
   };
@@ -63,7 +63,7 @@ export function websiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Global Visa Guide Hub",
+    name: "VisaProcessInfo",
     url: "https://www.visaprocessinfo.com",
     description:
       "Comprehensive visa and immigration guides for students, workers, tourists, and immigrants worldwide.",
@@ -79,10 +79,10 @@ export function organizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Global Visa Guide Hub",
+    name: "VisaProcessInfo",
     url: "https://www.visaprocessinfo.com",
     description:
-      "Free visa and immigration guides for 15+ countries — study, work, tourist, and PR pathways.",
+      "Free visa and immigration guides for 131+ countries — study, work, tourist, and PR pathways.",
     foundingDate: "2020",
     sameAs: [],
   };

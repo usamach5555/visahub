@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AlertTriangle } from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Disclaimer | Global Visa Guide Hub",
+  title: "Disclaimer | VisaProcessInfo",
   description:
-    "Full disclaimer for Global Visa Guide Hub. Our content is for general informational purposes only and does not constitute legal or immigration advice. Read before using this website.",
+    "Full disclaimer for VisaProcessInfo. Our content is for general informational purposes only and does not constitute legal or immigration advice. Read before using this website.",
   alternates: { canonical: "https://www.visaprocessinfo.com/disclaimer" },
 };
 
@@ -24,17 +25,18 @@ export default function DisclaimerPage() {
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 space-y-8">
 
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
-            <p className="text-amber-900 font-semibold text-sm">
-              ⚠ Important: The content on Global Visa Guide Hub is provided for general informational purposes
+            <p className="text-amber-900 font-semibold text-sm flex items-start gap-2">
+              <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5 text-amber-600" />
+              <span>Important: The content on VisaProcessInfo is provided for general informational purposes
               only. It does not constitute legal advice, immigration advice, or a professional-client relationship
-              of any kind. Always verify all information with official government sources before taking any action.
+              of any kind. Always verify all information with official government sources before taking any action.</span>
             </p>
           </div>
 
           <section>
             <h2 className="text-xl font-bold text-gray-900 mb-3">1. General Information Only</h2>
             <p className="text-gray-700 leading-relaxed">
-              Global Visa Guide Hub (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) operates this
+              VisaProcessInfo (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) operates this
               website to provide free, general information about visa and immigration processes for various
               countries worldwide. All information is provided in good faith. However, we make no representations
               or warranties of any kind — express, implied, statutory, or otherwise — regarding the accuracy,
@@ -49,7 +51,7 @@ export default function DisclaimerPage() {
             <p className="text-gray-700 leading-relaxed mb-3">
               Nothing on this website constitutes legal advice, immigration advice, or professional advice of any
               kind. Reading or using this website does not create a solicitor-client, lawyer-client, or
-              consultant-client relationship between you and Global Visa Guide Hub or any of its contributors.
+              consultant-client relationship between you and VisaProcessInfo or any of its contributors.
             </p>
             <p className="text-gray-700 leading-relaxed">
               Immigration law is complex and changes frequently. Individual circumstances vary significantly.
@@ -68,7 +70,7 @@ export default function DisclaimerPage() {
               application will be approved. Visa and immigration decisions are made solely and exclusively by
               the relevant government authority — such as an embassy, high commission, consulate, or national
               immigration department — based on their assessment of your individual application and circumstances.
-              Global Visa Guide Hub has no affiliation with, and no influence over, any government immigration
+              VisaProcessInfo has no affiliation with, and no influence over, any government immigration
               authority, embassy, or consulate. We cannot intervene in, expedite, or influence any visa
               decision on your behalf.
             </p>
@@ -97,7 +99,7 @@ export default function DisclaimerPage() {
               portals, embassy websites, and related resources. These links are provided solely for your
               convenience. We have no control over the content, availability, accuracy, or security of those
               external sites. The inclusion of any link does not imply endorsement, recommendation, or
-              approval by Global Visa Guide Hub of the linked site or any information, products, or services
+              approval by VisaProcessInfo of the linked site or any information, products, or services
               it provides. We accept no responsibility or liability for any loss or damage arising from your
               use of, or reliance on, any external linked website.
             </p>
@@ -106,7 +108,7 @@ export default function DisclaimerPage() {
           <section>
             <h2 className="text-xl font-bold text-gray-900 mb-3">6. Limitation of Liability</h2>
             <p className="text-gray-700 leading-relaxed">
-              To the fullest extent permitted by applicable law, Global Visa Guide Hub and its owners,
+              To the fullest extent permitted by applicable law, VisaProcessInfo and its owners,
               contributors, editors, and affiliates shall not be liable for any direct, indirect, incidental,
               special, consequential, or punitive damages arising out of or related to your use of this
               website or reliance on any information provided herein, including but not limited to visa
@@ -120,7 +122,7 @@ export default function DisclaimerPage() {
           <section>
             <h2 className="text-xl font-bold text-gray-900 mb-3">7. No Affiliation with Government Bodies</h2>
             <p className="text-gray-700 leading-relaxed">
-              Global Visa Guide Hub is an independent, privately operated information website. We are not
+              VisaProcessInfo is an independent, privately operated information website. We are not
               affiliated with, endorsed by, or in any way connected to any government, embassy, consulate,
               high commission, or official immigration authority — including but not limited to USCIS
               (USA), UK Home Office (UK), IRCC (Canada), Department of Home Affairs (Australia), BAMF
