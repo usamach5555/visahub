@@ -2,9 +2,24 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  CheckCircle2,
+  Calculator,
+  Landmark,
+  Globe,
+  ChevronDown,
+  ArrowRight,
+  MapPin,
+  Clock,
+  DollarSign,
+  BarChart3,
+  ExternalLink,
+  FileText,
+} from "lucide-react";
 import { parseSlug, generateAllProgrammaticSlugs } from "@/lib/slug-parser";
 import { generatePageContent } from "@/lib/page-content";
 import { getCountryBySlug } from "@/data/countries-extended";
+import { getCountryImageUrl } from "@/lib/images";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -21,6 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const country = getCountryBySlug(parsed.countrySlug);
   if (!country) return { title: "Page Not Found" };
   const content = generatePageContent(country, parsed.visaType, parsed.pageType);
+  const imageUrl = getCountryImageUrl(country.slug, country.region);
   return {
     title: content.metaTitle,
     description: content.metaDescription,
@@ -31,53 +47,72 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://www.visaprocessinfo.com/${slug}`,
       type: "article",
       siteName: "VisaProcessInfo",
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: content.heroTitle }],
     },
     twitter: {
       card: "summary_large_image",
       title: content.metaTitle,
       description: content.metaDescription,
+      images: [imageUrl],
     },
   };
 }
 
 const PAGE_TYPE_BADGE: Record<string, string> = {
-  "country-hub": "Country Hub",
-  "embassy": "Embassy Guide",
-  "apply": "Apply Guide",
-  "how-to": "How-To Guide",
-  "details": "Full Details",
-  "requirements": "Requirements",
-  "fees": "Fees Guide",
-  "documents": "Documents",
-  "processing-time": "Processing Time",
-  "rejection": "Avoid Refusal",
-  "interview": "Interview Tips",
-  "success-tips": "Success Tips",
-  "checklist": "Checklist",
-  "extension": "Extension Guide",
-  "faq": "FAQ",
-  "financial": "Financial Guide",
-  "language": "Language Guide",
+  "country-hub":    "Country Hub",
+  "embassy":        "Embassy Guide",
+  "apply":          "Apply Guide",
+  "how-to":         "How-To Guide",
+  "details":        "Full Details",
+  "requirements":   "Requirements",
+  "fees":           "Fees Guide",
+  "documents":      "Documents",
+  "processing-time":"Processing Time",
+  "rejection":      "Avoid Refusal",
+  "interview":      "Interview Tips",
+  "success-tips":   "Success Tips",
+  "checklist":      "Checklist",
+  "extension":      "Extension Guide",
+  "faq":            "FAQ",
+  "financial":      "Financial Guide",
+  "language":       "Language Guide",
 };
 
-const PAGE_TYPE_COLOR: Record<string, string> = {
-  "country-hub": "from-primary-900 via-primary-800 to-primary-700",
-  "embassy": "from-slate-900 via-slate-800 to-slate-700",
-  "apply": "from-primary-900 via-primary-800 to-primary-700",
-  "how-to": "from-indigo-900 via-indigo-800 to-indigo-700",
-  "details": "from-primary-900 via-primary-800 to-primary-700",
-  "requirements": "from-violet-900 via-violet-800 to-violet-700",
-  "fees": "from-emerald-900 via-emerald-800 to-emerald-700",
-  "documents": "from-blue-900 via-blue-800 to-blue-700",
-  "processing-time": "from-amber-900 via-amber-800 to-amber-700",
-  "rejection": "from-red-900 via-red-800 to-red-700",
-  "interview": "from-purple-900 via-purple-800 to-purple-700",
-  "success-tips": "from-teal-900 via-teal-800 to-teal-700",
-  "checklist": "from-cyan-900 via-cyan-800 to-cyan-700",
-  "extension": "from-orange-900 via-orange-800 to-orange-700",
-  "faq": "from-primary-900 via-primary-800 to-primary-700",
-  "financial": "from-green-900 via-green-800 to-green-700",
-  "language": "from-pink-900 via-pink-800 to-pink-700",
+// Overlay gradient per page type (applied ON TOP of the photo)
+const PAGE_OVERLAY_COLOR: Record<string, string> = {
+  "country-hub":    "from-primary-900/80 via-primary-800/65 to-primary-700/50",
+  "embassy":        "from-slate-900/80 via-slate-800/65 to-slate-700/50",
+  "apply":          "from-primary-900/80 via-primary-800/65 to-primary-700/50",
+  "how-to":         "from-indigo-900/80 via-indigo-800/65 to-indigo-700/50",
+  "details":        "from-primary-900/80 via-primary-800/65 to-primary-700/50",
+  "requirements":   "from-violet-900/80 via-violet-800/65 to-violet-700/50",
+  "fees":           "from-emerald-900/80 via-emerald-800/65 to-emerald-700/50",
+  "documents":      "from-blue-900/80 via-blue-800/65 to-blue-700/50",
+  "processing-time":"from-amber-900/80 via-amber-800/65 to-amber-700/50",
+  "rejection":      "from-red-900/80 via-red-800/65 to-red-700/50",
+  "interview":      "from-purple-900/80 via-purple-800/65 to-purple-700/50",
+  "success-tips":   "from-teal-900/80 via-teal-800/65 to-teal-700/50",
+  "checklist":      "from-cyan-900/80 via-cyan-800/65 to-cyan-700/50",
+  "extension":      "from-orange-900/80 via-orange-800/65 to-orange-700/50",
+  "faq":            "from-primary-900/80 via-primary-800/65 to-primary-700/50",
+  "financial":      "from-green-900/80 via-green-800/65 to-green-700/50",
+  "language":       "from-pink-900/80 via-pink-800/65 to-pink-700/50",
+};
+
+// Accent color for sidebar CTA + badges per page type
+const PAGE_ACCENT: Record<string, string> = {
+  "country-hub":    "bg-primary-800",
+  "fees":           "bg-emerald-700",
+  "rejection":      "bg-red-700",
+  "processing-time":"bg-amber-700",
+  "financial":      "bg-green-700",
+  "language":       "bg-pink-700",
+};
+
+const difficultyColor: Record<string, string> = {
+  Easy:     "bg-emerald-100 text-emerald-700 border border-emerald-200",
+  Moderate: "bg-amber-100  text-amber-700  border border-amber-200",
+  Complex:  "bg-red-100    text-red-700    border border-red-200",
 };
 
 export default async function ProgrammaticPage({ params }: Props) {
@@ -92,28 +127,31 @@ export default async function ProgrammaticPage({ params }: Props) {
   const visaLabel = parsed.visaType.charAt(0).toUpperCase() + parsed.visaType.slice(1);
   const diff = country.difficulty[parsed.visaType];
   const pt = parsed.pageType ?? "details";
+  const isCountryLevel = pt === "country-hub" || pt === "embassy";
 
-  const difficultyColor: Record<string, string> = {
-    Easy: "bg-emerald-100 text-emerald-700 border border-emerald-200",
-    Moderate: "bg-amber-100 text-amber-700 border border-amber-200",
-    Complex: "bg-red-100 text-red-700 border border-red-200",
-  };
+  const overlayGradient = PAGE_OVERLAY_COLOR[pt] ?? PAGE_OVERLAY_COLOR["country-hub"];
+  const countryImageUrl = getCountryImageUrl(country.slug, country.region);
 
-  const heroGradient = PAGE_TYPE_COLOR[pt] ?? "from-primary-900 via-primary-800 to-primary-700";
-
+  // ── JSON-LD schemas ───────────────────────────────────────────────────────
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: content.heroTitle,
     description: content.metaDescription,
+    image: countryImageUrl,
     author: { "@type": "Organization", name: "VisaProcessInfo", url: "https://www.visaprocessinfo.com" },
-    publisher: { "@type": "Organization", name: "VisaProcessInfo", url: "https://www.visaprocessinfo.com", logo: { "@type": "ImageObject", url: "https://www.visaprocessinfo.com/favicon.ico" } },
+    publisher: {
+      "@type": "Organization",
+      name: "VisaProcessInfo",
+      url: "https://www.visaprocessinfo.com",
+      logo: { "@type": "ImageObject", url: "https://www.visaprocessinfo.com/favicon.ico" },
+    },
     url: `https://www.visaprocessinfo.com/${slug}`,
     mainEntityOfPage: `https://www.visaprocessinfo.com/${slug}`,
     dateModified: new Date().toISOString(),
   };
 
-  const faqSchema = {
+  const faqSchemaData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: content.faqs.map((faq) => ({
@@ -123,30 +161,47 @@ export default async function ProgrammaticPage({ params }: Props) {
     })),
   };
 
-  const breadcrumbSchema = {
+  const breadcrumbSchemaData = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: "https://www.visaprocessinfo.com" },
       { "@type": "ListItem", position: 2, name: country.name, item: `https://www.visaprocessinfo.com/${country.slug}-visa-info` },
-      { "@type": "ListItem", position: 3, name: content.heroTitle, item: `https://www.visaprocessinfo.com/${slug}` },
+      ...(isCountryLevel ? [] : [
+        { "@type": "ListItem", position: 3, name: content.heroTitle, item: `https://www.visaprocessinfo.com/${slug}` },
+      ]),
     ],
   };
-
-  const isCountryLevel = pt === "country-hub" || pt === "embassy";
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaData) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }} />
 
-      {/* ── Hero ── */}
-      <div className={`bg-gradient-to-br ${heroGradient} text-white pt-24 pb-16`}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ── HERO with photo background ─────────────────────────────────────── */}
+      <div className="relative text-white overflow-hidden" style={{ minHeight: "480px" }}>
+
+        {/* Background photo */}
+        <Image
+          src={countryImageUrl}
+          alt={`${country.name} — visa and immigration information`}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+
+        {/* Color gradient overlay (tints + darkens the photo) */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${overlayGradient}`} />
+        {/* Bottom darkening for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
 
           {/* Breadcrumb */}
-          <nav className="text-sm text-white/60 mb-6 flex flex-wrap items-center gap-1.5">
+          <nav aria-label="Breadcrumb" className="text-sm text-white/60 mb-5 flex flex-wrap items-center gap-1.5">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
             <Link href={`/${country.slug}-visa-info`} className="hover:text-white transition-colors">{country.name}</Link>
@@ -160,8 +215,9 @@ export default async function ProgrammaticPage({ params }: Props) {
             )}
           </nav>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-6">
-            <div className="w-20 h-14 rounded-xl overflow-hidden shadow-lg border-2 border-white/20 flex-shrink-0">
+          {/* Flag + Title row */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-5">
+            <div className="w-20 h-14 rounded-xl overflow-hidden shadow-xl border-2 border-white/30 flex-shrink-0">
               <Image
                 src={`https://flagcdn.com/w160/${country.code}.png`}
                 alt={`${country.name} flag`}
@@ -172,31 +228,33 @@ export default async function ProgrammaticPage({ params }: Props) {
               />
             </div>
             <div>
+              {/* Badge pills */}
               <div className="flex flex-wrap gap-2 mb-3">
-                <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full border border-white/30">
+                <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full border border-white/30 backdrop-blur-sm">
                   {PAGE_TYPE_BADGE[pt]}
                 </span>
                 {!isCountryLevel && (
                   <>
-                    <span className={`text-xs font-bold px-3 py-1 rounded-full ${difficultyColor[diff] ?? "bg-gray-100 text-gray-700"}`}>
+                    <span className={`text-xs font-semibold px-3 py-1 rounded-full ${difficultyColor[diff] ?? "bg-gray-100 text-gray-700"}`}>
                       {diff} Difficulty
                     </span>
-                    <span className="text-xs font-bold bg-white/15 text-white/90 px-3 py-1 rounded-full border border-white/25">
+                    <span className="text-xs font-bold bg-white/15 text-white/90 px-3 py-1 rounded-full border border-white/25 backdrop-blur-sm capitalize">
                       {visaLabel} Visa
                     </span>
                   </>
                 )}
-                <span className="text-xs font-bold bg-white/15 text-white/90 px-3 py-1 rounded-full border border-white/25">
+                <span className="text-xs font-bold bg-white/15 text-white/90 px-3 py-1 rounded-full border border-white/25 backdrop-blur-sm">
                   {country.region}
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight text-white">
+
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight text-white drop-shadow-sm">
                 {content.heroTitle}
               </h1>
             </div>
           </div>
 
-          <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-3xl mb-6">
+          <p className="text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl mb-7 drop-shadow-sm">
             {content.heroSubtitle}
           </p>
 
@@ -204,14 +262,17 @@ export default async function ProgrammaticPage({ params }: Props) {
           {!isCountryLevel && (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { label: "Government Fee", value: `${country.currency} ${country.visaFees[parsed.visaType]}` },
-                { label: "Processing Time", value: country.processingDays[parsed.visaType] },
-                { label: "Difficulty", value: diff },
-                { label: "Capital", value: country.capital },
+                { Icon: DollarSign, label: "Government Fee",   value: `${country.currency} ${country.visaFees[parsed.visaType]}` },
+                { Icon: Clock,      label: "Processing Time",  value: country.processingDays[parsed.visaType] },
+                { Icon: BarChart3,  label: "Difficulty",       value: diff },
+                { Icon: MapPin,     label: "Capital",          value: country.capital },
               ].map((stat) => (
-                <div key={stat.label} className="bg-white/10 backdrop-blur rounded-xl p-3 border border-white/20">
-                  <div className="text-xs text-white/60 mb-1">{stat.label}</div>
-                  <div className="font-bold text-white text-sm">{stat.value}</div>
+                <div key={stat.label} className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 flex gap-2.5 items-start">
+                  <stat.Icon className="w-4 h-4 text-white/60 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <div className="text-xs text-white/60 leading-tight">{stat.label}</div>
+                    <div className="font-bold text-white text-sm leading-snug mt-0.5">{stat.value}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -219,38 +280,39 @@ export default async function ProgrammaticPage({ params }: Props) {
         </div>
       </div>
 
-      {/* ── Main Content ── */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* ── Main Content ─────────────────────────────────────────────────────── */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
           {/* ── Left Content Column ── */}
           <div className="lg:col-span-2 space-y-10">
 
-            {/* Quick Facts Box */}
-            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6">
-              <h2 className="font-bold text-blue-900 text-lg mb-4">
+            {/* Quick Facts */}
+            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5 sm:p-6">
+              <h2 className="font-bold text-blue-900 text-lg mb-4 flex items-center gap-2">
+                <FileText className="w-5 h-5 text-blue-600" />
                 Quick Facts: {country.name} {!isCountryLevel ? `${visaLabel} Visa` : "Visa Overview"}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
-                  { label: "Capital", value: country.capital },
-                  { label: "Currency", value: country.currency },
-                  { label: "Language Requirement", value: country.languageRequirement },
-                  { label: "Region", value: country.region },
+                  { label: "Capital",                value: country.capital },
+                  { label: "Currency",               value: country.currency },
+                  { label: "Language Requirement",   value: country.languageRequirement },
+                  { label: "Region",                 value: country.region },
                   ...(!isCountryLevel ? [
-                    { label: "Visa Fee", value: `${country.currency} ${country.visaFees[parsed.visaType]}` },
-                    { label: "Processing Time", value: country.processingDays[parsed.visaType] },
-                    { label: "Difficulty", value: diff },
-                    { label: "Official Portal", value: country.officialImmigrationUrl.replace("https://", "").replace("www.", "") },
+                    { label: "Visa Fee",             value: `${country.currency} ${country.visaFees[parsed.visaType]}` },
+                    { label: "Processing Time",      value: country.processingDays[parsed.visaType] },
+                    { label: "Difficulty",           value: diff },
+                    { label: "Official Portal",      value: country.officialImmigrationUrl.replace("https://", "").replace("www.", "") },
                   ] : [
-                    { label: "Study Visa Fee", value: `${country.currency} ${country.visaFees.study}` },
-                    { label: "Work Visa Fee", value: `${country.currency} ${country.visaFees.work}` },
-                    { label: "Visit Visa Fee", value: `${country.currency} ${country.visaFees.visit}` },
-                    { label: "Official Portal", value: country.officialImmigrationUrl.replace("https://", "").replace("www.", "") },
+                    { label: "Study Visa Fee",       value: `${country.currency} ${country.visaFees.study}` },
+                    { label: "Work Visa Fee",        value: `${country.currency} ${country.visaFees.work}` },
+                    { label: "Visit Visa Fee",       value: `${country.currency} ${country.visaFees.visit}` },
+                    { label: "Official Portal",      value: country.officialImmigrationUrl.replace("https://", "").replace("www.", "") },
                   ]),
                 ].map((item) => (
                   <div key={item.label} className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-0.5 flex-shrink-0">&#x2713;</span>
+                    <CheckCircle2 className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <span className="font-semibold text-blue-800 text-sm">{item.label}:</span>{" "}
                       <span className="text-blue-700 text-sm">{item.value}</span>
@@ -260,17 +322,17 @@ export default async function ProgrammaticPage({ params }: Props) {
               </div>
             </div>
 
-            {/* Main Content Sections */}
+            {/* Content Sections */}
             {content.sections.map((section, i) => (
-              <section key={i}>
+              <section key={i} className="scroll-mt-20">
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
                   {section.heading}
                 </h2>
-                <div className="text-gray-700 leading-relaxed space-y-3 text-[15px]">
+                <div className="text-gray-700 leading-relaxed space-y-4 text-[15px]">
                   {section.body.split("\n\n").map((para, j) => (
                     <p
                       key={j}
-                      className="text-gray-700 leading-relaxed"
+                      className="text-gray-700 leading-[1.8]"
                       dangerouslySetInnerHTML={{
                         __html: para
                           .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
@@ -283,16 +345,16 @@ export default async function ProgrammaticPage({ params }: Props) {
               </section>
             ))}
 
-            {/* Application Steps (apply / how-to pages) */}
+            {/* Application Steps (apply / how-to / checklist pages) */}
             {(pt === "apply" || pt === "how-to" || pt === "checklist") && (
               <section>
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-100">
                   Application Steps Overview
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {content.steps.map((step, i) => (
-                    <div key={i} className="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
-                      <div className="w-9 h-9 bg-primary-800 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+                    <div key={i} className="flex gap-4 p-4 sm:p-5 bg-gray-50 rounded-xl border border-gray-100 hover:border-primary-200 transition-colors">
+                      <div className="w-9 h-9 bg-primary-800 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-sm">
                         {i + 1}
                       </div>
                       <div>
@@ -308,14 +370,14 @@ export default async function ProgrammaticPage({ params }: Props) {
             {/* Documents Checklist */}
             {(pt === "apply" || pt === "details" || pt === "documents" || pt === "requirements" || pt === "checklist") && (
               <section>
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-5 pb-2 border-b border-gray-100">
                   Required Documents Checklist
                 </h2>
                 <div className="space-y-2">
                   {content.requirements.map((req, i) => (
-                    <div key={i} className="flex items-start gap-3 p-3 bg-white rounded-lg border border-gray-100 hover:border-primary-200 transition-colors">
-                      <div className="w-5 h-5 rounded border-2 border-gray-300 flex-shrink-0 mt-0.5"></div>
-                      <span className="text-sm text-gray-700">{req}</span>
+                    <div key={i} className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-gray-100 hover:border-primary-200 hover:bg-primary-50/30 transition-all">
+                      <div className="w-5 h-5 rounded-md border-2 border-gray-300 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-700 leading-relaxed">{req}</span>
                     </div>
                   ))}
                 </div>
@@ -327,14 +389,14 @@ export default async function ProgrammaticPage({ params }: Props) {
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-100">
                 Frequently Asked Questions
               </h2>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {content.faqs.map((faq, i) => (
                   <details key={i} className="group border border-gray-200 rounded-xl overflow-hidden">
-                    <summary className="flex items-center justify-between p-4 cursor-pointer bg-gray-50 hover:bg-primary-50 transition-colors font-semibold text-gray-900 text-sm gap-3">
-                      <span>{faq.question}</span>
-                      <span className="text-gray-400 group-open:rotate-180 transition-transform duration-200 text-lg flex-shrink-0">&#x25BE;</span>
+                    <summary className="flex items-center justify-between p-4 sm:p-5 cursor-pointer bg-gray-50 hover:bg-primary-50 transition-colors font-semibold text-gray-900 text-sm gap-3 list-none">
+                      <span className="leading-snug">{faq.question}</span>
+                      <ChevronDown className="w-4 h-4 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0" />
                     </summary>
-                    <div className="p-4 text-sm text-gray-700 leading-relaxed border-t border-gray-100 bg-white">
+                    <div className="p-4 sm:p-5 text-sm text-gray-700 leading-relaxed border-t border-gray-100 bg-white">
                       {faq.answer}
                     </div>
                   </details>
@@ -343,76 +405,96 @@ export default async function ProgrammaticPage({ params }: Props) {
             </section>
           </div>
 
-          {/* ── Sidebar ── */}
-          <div className="space-y-6">
+          {/* ── Sidebar ─────────────────────────────────────────────────────── */}
+          <aside className="space-y-5">
 
             {/* Eligibility Checker CTA */}
             <div className="bg-gradient-to-br from-primary-800 to-primary-700 text-white rounded-2xl p-5 shadow-lg">
-              <div className="text-2xl mb-2">✅</div>
-              <h3 className="font-bold text-lg mb-1">Check Your Eligibility</h3>
-              <p className="text-white/70 text-sm mb-4">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <CheckCircle2 className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="font-bold text-base leading-tight">Check Your Eligibility</h3>
+              </div>
+              <p className="text-white/75 text-sm mb-4 leading-relaxed">
                 Find out your chances of getting a {country.name} visa in under 2 minutes.
               </p>
               <Link
                 href="/tools/eligibility-checker"
-                className="block w-full bg-white text-primary-800 font-semibold text-sm py-2.5 rounded-xl text-center hover:bg-primary-50 transition-colors"
+                className="flex items-center justify-center gap-2 w-full bg-white text-primary-800 font-semibold text-sm py-2.5 rounded-xl hover:bg-primary-50 transition-colors"
               >
-                Free Eligibility Check →
+                Free Eligibility Check
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 
             {/* Cost Calculator CTA */}
-            <div className="bg-accent-500 text-white rounded-2xl p-5 shadow-lg">
-              <div className="text-2xl mb-2">💰</div>
-              <h3 className="font-bold text-lg mb-1">Calculate Visa Cost</h3>
-              <p className="text-white/80 text-sm mb-4">
-                Get a full fee breakdown for your {country.name} {!isCountryLevel ? `${visaLabel}` : ""} visa.
+            <div className="bg-gradient-to-br from-accent-600 to-accent-500 text-white rounded-2xl p-5 shadow-lg">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Calculator className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="font-bold text-base leading-tight">Calculate Visa Cost</h3>
+              </div>
+              <p className="text-white/80 text-sm mb-4 leading-relaxed">
+                Get a full fee breakdown for your {country.name} {!isCountryLevel ? visaLabel : ""} visa.
               </p>
               <Link
                 href="/tools/cost-calculator"
-                className="block w-full bg-white text-accent-700 font-semibold text-sm py-2.5 rounded-xl text-center hover:bg-accent-50 transition-colors"
+                className="flex items-center justify-center gap-2 w-full bg-white text-accent-700 font-semibold text-sm py-2.5 rounded-xl hover:bg-accent-50 transition-colors"
               >
-                Cost Calculator →
+                Cost Calculator
+                <ArrowRight className="w-4 h-4" />
               </Link>
+            </div>
+
+            {/* Why This Country */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-5">
+              <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wide flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-primary-600" />
+                Why {country.name}?
+              </h3>
+              <ul className="space-y-2.5">
+                {country.popularFor.map((fact, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                    {fact}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* Key Facts */}
             <div className="bg-white border border-gray-200 rounded-2xl p-5">
-              <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wide">Why {country.name}?</h3>
-              <ul className="space-y-2">
-                {country.popularFor.map((fact, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                    <span className="text-emerald-500 mt-0.5 flex-shrink-0">&#x2713;</span>
-                    {fact}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Country Key Facts */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-5">
-              <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wide">Key Facts</h3>
+              <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wide flex items-center gap-2">
+                <FileText className="w-4 h-4 text-primary-600" />
+                Key Facts
+              </h3>
               <ul className="space-y-2">
                 {country.keyFacts.map((fact, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                    <span className="text-primary-600 mt-0.5 flex-shrink-0">&#x25CF;</span>
+                    <span className="w-1.5 h-1.5 bg-primary-400 rounded-full mt-2 flex-shrink-0" />
                     {fact}
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Internal Links */}
+            {/* Related Guides */}
             <div className="bg-white border border-gray-200 rounded-2xl p-5">
-              <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wide">Related Guides</h3>
-              <ul className="space-y-1.5">
+              <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wide flex items-center gap-2">
+                <Globe className="w-4 h-4 text-primary-600" />
+                Related Guides
+              </h3>
+              <ul className="space-y-1">
                 {content.internalLinks.slice(0, 10).map((link, i) => (
                   <li key={i}>
                     <Link
                       href={link.href}
-                      className="text-sm text-primary-700 hover:text-primary-900 hover:underline transition-colors block py-0.5"
+                      className="flex items-center gap-1.5 text-sm text-primary-700 hover:text-primary-900 py-1 hover:underline transition-colors"
                     >
-                      → {link.label}
+                      <ArrowRight className="w-3 h-3 flex-shrink-0" />
+                      {link.label}
                     </Link>
                   </li>
                 ))}
@@ -420,35 +502,54 @@ export default async function ProgrammaticPage({ params }: Props) {
             </div>
 
             {/* Official Resources */}
-            <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5">
-              <h3 className="font-bold text-amber-900 mb-3 text-sm">Official Resources</h3>
-              <ul className="space-y-2">
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+              <h3 className="font-bold text-amber-900 mb-3 text-sm flex items-center gap-2">
+                <Landmark className="w-4 h-4 text-amber-600" />
+                Official Resources
+              </h3>
+              <ul className="space-y-2.5">
                 <li>
-                  <a href={country.officialImmigrationUrl} target="_blank" rel="noopener noreferrer"
-                    className="text-sm text-amber-700 hover:text-amber-900 hover:underline">
-                    🏛 Official Immigration Portal
+                  <a
+                    href={country.officialImmigrationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-amber-700 hover:text-amber-900 transition-colors group"
+                  >
+                    <Landmark className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span className="group-hover:underline">Official Immigration Portal</span>
+                    <ExternalLink className="w-3 h-3 ml-auto flex-shrink-0 opacity-60" />
                   </a>
                 </li>
                 <li>
-                  <a href={country.embassyUrl} target="_blank" rel="noopener noreferrer"
-                    className="text-sm text-amber-700 hover:text-amber-900 hover:underline">
-                    🌐 Embassy & Consulate Finder
+                  <a
+                    href={country.embassyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-amber-700 hover:text-amber-900 transition-colors group"
+                  >
+                    <Globe className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span className="group-hover:underline">Embassy &amp; Consulate Finder</span>
+                    <ExternalLink className="w-3 h-3 ml-auto flex-shrink-0 opacity-60" />
                   </a>
                 </li>
               </ul>
-              <p className="text-xs text-amber-600 mt-3 leading-relaxed">
-                Always verify current requirements at official sources before submitting your application.
+              <p className="text-xs text-amber-600 mt-3 leading-relaxed border-t border-amber-200 pt-3">
+                Always verify current requirements at official government sources before submitting your application.
               </p>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
 
-      {/* ── Bottom Internal Links Bar ── */}
-      <div className="bg-gray-50 border-t border-gray-200 py-10">
+      {/* ── Bottom Internal Links Bar ─────────────────────────────────────────── */}
+      <div className="bg-gray-50 border-t border-gray-200 py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-2">Explore More {country.name} Visa Guides</h2>
-          <p className="text-sm text-gray-500 mb-5">Complete guides for every aspect of your {country.name} visa journey.</p>
+          <h2 className="text-lg font-bold text-gray-900 mb-1">
+            Explore More {country.name} Visa Guides
+          </h2>
+          <p className="text-sm text-gray-500 mb-6">
+            Complete guides for every aspect of your {country.name} visa journey — requirements, fees, documents, and more.
+          </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
             {content.internalLinks.map((link, i) => (
               <Link

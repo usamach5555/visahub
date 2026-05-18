@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -11,8 +11,12 @@
   --color-foreground: #0F172A;
 }
 
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+
 html {
   scroll-behavior: smooth;
+  /* Prevent horizontal overflow on mobile */
+  overflow-x: hidden;
 }
 
 body {
@@ -21,27 +25,30 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 450;
+  font-weight: 400;
   font-size: 15px;
   line-height: 1.7;
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
+  /* Better text rendering */
+  text-rendering: optimizeSpeed;
 }
 
-/* Slightly bolder body text for readability */
 p {
-  font-weight: 450;
   color: #1e293b;
+  line-height: 1.8;
 }
 
-/* Make small text more legible */
-.text-sm {
-  font-weight: 450;
+/* ── Typography scale ───────────────────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: #0f172a;
 }
 
-.text-xs {
-  font-weight: 500;
-}
+/* ── Prose styles for article content ───────────────────────────────────────── */
 
-/* Prose styles for article content */
 .prose-article {
   @apply leading-relaxed;
   color: #1e293b;
@@ -56,9 +63,9 @@ p {
 }
 
 .prose-article p {
-  @apply mb-4 leading-relaxed;
+  @apply mb-4;
   color: #1e293b;
-  font-weight: 450;
+  line-height: 1.8;
 }
 
 .prose-article ul {
@@ -71,19 +78,21 @@ p {
 
 .prose-article li {
   color: #1e293b;
-  font-weight: 450;
 }
 
 .prose-article a {
   @apply text-primary-700 underline hover:text-primary-900 transition-colors;
 }
 
+/* ── Component utilities ────────────────────────────────────────────────────── */
+
 /* Card hover effect */
 .card-hover {
   @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5;
 }
 
-/* Line clamp utilities */
+/* ── Line clamp ─────────────────────────────────────────────────────────────── */
+
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -98,44 +107,104 @@ p {
   overflow: hidden;
 }
 
-/* Smooth details/summary toggle */
-details > summary::-webkit-details-marker { display: none; }
+/* ── Details/summary ────────────────────────────────────────────────────────── */
 
-/* Scrollbar styling */
+details > summary::-webkit-details-marker { display: none; }
+details > summary { list-style: none; }
+details > summary::marker { display: none; }
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #f1f5f9; }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-/* Mobile tap highlight */
-* { -webkit-tap-highlight-color: transparent; }
+/* ── Mobile touch ───────────────────────────────────────────────────────────── */
 
-/* Focus visible styles */
+* { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+
+/* Touch-friendly tap targets */
+@media (max-width: 640px) {
+  button, [role="button"] {
+    min-height: 44px;
+  }
+  /* Ensure external links have large tap area */
+  a {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* ── Focus ──────────────────────────────────────────────────────────────────── */
+
 :focus-visible {
   outline: 2px solid #1E40AF;
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* Animations */
+/* ── Animations ─────────────────────────────────────────────────────────────── */
+
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(-6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in { animation: fade-in 0.15s ease-out; }
 
-/* Responsive images */
-img { max-width: 100%; height: auto; }
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+.animate-pulse { animation: pulse-soft 2s cubic-bezier(0.4,0,0.6,1) infinite; }
 
-/* Better button touch targets on mobile */
-@media (max-width: 640px) {
-  button, a {
-    min-height: 40px;
-  }
+/* ── Images ─────────────────────────────────────────────────────────────────── */
+
+img {
+  max-width: 100%;
+  height: auto;
+  /* Prevent layout shift */
+  display: block;
 }
 
-/* Print styles */
+/* Prevent image overflow in small containers */
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ── Print ──────────────────────────────────────────────────────────────────── */
+
 @media print {
   header, footer, aside, .no-print { display: none !important; }
-  body { font-size: 12pt; color: #000; }
+  body { font-size: 12pt; color: #000; overflow-x: visible; }
+}
+
+/* ── Mobile-specific layout fixes ────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  /* Prevent tables from breaking layout */
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Better paragraph spacing on mobile */
+  p { margin-bottom: 1rem; }
+
+  /* Hero stats bar — tighter on mobile */
+  .stats-grid { gap: 0.5rem; }
+}
+
+/* ── Utility: Section spacing ────────────────────────────────────────────────── */
+
+.section-gap { @apply py-16 sm:py-20; }
+.section-gap-sm { @apply py-10 sm:py-14; }
+
+/* ── Background pattern ─────────────────────────────────────────────────────── */
+
+.bg-grid-subtle {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
