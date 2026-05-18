@@ -78,25 +78,27 @@ const PAGE_TYPE_BADGE: Record<string, string> = {
   "language":       "Language Guide",
 };
 
-// Overlay gradient per page type (applied ON TOP of the photo)
+// Overlay gradient per page type (applied ON TOP of the hero photo)
+// Opacity reduced significantly so the HD photo shines through more clearly:
+//   /75 → /55 (top), /60 → /40 (mid), /50 → /25 (bottom-edge)
 const PAGE_OVERLAY_COLOR: Record<string, string> = {
-  "country-hub":    "from-primary-900/80 via-primary-800/65 to-primary-700/50",
-  "embassy":        "from-slate-900/80 via-slate-800/65 to-slate-700/50",
-  "apply":          "from-primary-900/80 via-primary-800/65 to-primary-700/50",
-  "how-to":         "from-indigo-900/80 via-indigo-800/65 to-indigo-700/50",
-  "details":        "from-primary-900/80 via-primary-800/65 to-primary-700/50",
-  "requirements":   "from-violet-900/80 via-violet-800/65 to-violet-700/50",
-  "fees":           "from-emerald-900/80 via-emerald-800/65 to-emerald-700/50",
-  "documents":      "from-blue-900/80 via-blue-800/65 to-blue-700/50",
-  "processing-time":"from-amber-900/80 via-amber-800/65 to-amber-700/50",
-  "rejection":      "from-red-900/80 via-red-800/65 to-red-700/50",
-  "interview":      "from-purple-900/80 via-purple-800/65 to-purple-700/50",
-  "success-tips":   "from-teal-900/80 via-teal-800/65 to-teal-700/50",
-  "checklist":      "from-cyan-900/80 via-cyan-800/65 to-cyan-700/50",
-  "extension":      "from-orange-900/80 via-orange-800/65 to-orange-700/50",
-  "faq":            "from-primary-900/80 via-primary-800/65 to-primary-700/50",
-  "financial":      "from-green-900/80 via-green-800/65 to-green-700/50",
-  "language":       "from-pink-900/80 via-pink-800/65 to-pink-700/50",
+  "country-hub":    "from-primary-900/70 via-primary-800/50 to-primary-700/30",
+  "embassy":        "from-slate-900/70 via-slate-800/50 to-slate-700/30",
+  "apply":          "from-primary-900/70 via-primary-800/50 to-primary-700/30",
+  "how-to":         "from-indigo-900/70 via-indigo-800/50 to-indigo-700/30",
+  "details":        "from-primary-900/70 via-primary-800/50 to-primary-700/30",
+  "requirements":   "from-violet-900/70 via-violet-800/50 to-violet-700/30",
+  "fees":           "from-emerald-900/70 via-emerald-800/50 to-emerald-700/30",
+  "documents":      "from-blue-900/70 via-blue-800/50 to-blue-700/30",
+  "processing-time":"from-amber-900/70 via-amber-800/50 to-amber-700/30",
+  "rejection":      "from-red-900/70 via-red-800/50 to-red-700/30",
+  "interview":      "from-purple-900/70 via-purple-800/50 to-purple-700/30",
+  "success-tips":   "from-teal-900/70 via-teal-800/50 to-teal-700/30",
+  "checklist":      "from-cyan-900/70 via-cyan-800/50 to-cyan-700/30",
+  "extension":      "from-orange-900/70 via-orange-800/50 to-orange-700/30",
+  "faq":            "from-primary-900/70 via-primary-800/50 to-primary-700/30",
+  "financial":      "from-green-900/70 via-green-800/50 to-green-700/30",
+  "language":       "from-pink-900/70 via-pink-800/50 to-pink-700/30",
 };
 
 // Accent color for sidebar CTA + badges per page type
@@ -192,10 +194,10 @@ export default async function ProgrammaticPage({ params }: Props) {
           className="object-cover object-center"
         />
 
-        {/* Color gradient overlay (tints + darkens the photo) */}
+        {/* Subtle brand color tint — light enough to let the HD photo show clearly */}
         <div className={`absolute inset-0 bg-gradient-to-br ${overlayGradient}`} />
-        {/* Bottom darkening for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+        {/* Bottom darkening gradient for text readability (lighter than before) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
 
         {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
@@ -325,7 +327,7 @@ export default async function ProgrammaticPage({ params }: Props) {
             {/* Content Sections */}
             {content.sections.map((section, i) => (
               <section key={i} className="scroll-mt-20">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
+                <h2 className="text-xl sm:text-2xl font-bold text-primary-800 mb-4 pb-2 border-b border-primary-100">
                   {section.heading}
                 </h2>
                 <div className="text-gray-700 leading-relaxed space-y-4 text-[15px]">
@@ -348,7 +350,7 @@ export default async function ProgrammaticPage({ params }: Props) {
             {/* Application Steps (apply / how-to / checklist pages) */}
             {(pt === "apply" || pt === "how-to" || pt === "checklist") && (
               <section>
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-100">
+                <h2 className="text-xl sm:text-2xl font-bold text-primary-800 mb-6 pb-2 border-b border-primary-100">
                   Application Steps Overview
                 </h2>
                 <div className="space-y-3">
@@ -370,7 +372,7 @@ export default async function ProgrammaticPage({ params }: Props) {
             {/* Documents Checklist */}
             {(pt === "apply" || pt === "details" || pt === "documents" || pt === "requirements" || pt === "checklist") && (
               <section>
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-5 pb-2 border-b border-gray-100">
+                <h2 className="text-xl sm:text-2xl font-bold text-primary-800 mb-5 pb-2 border-b border-primary-100">
                   Required Documents Checklist
                 </h2>
                 <div className="space-y-2">
@@ -386,7 +388,7 @@ export default async function ProgrammaticPage({ params }: Props) {
 
             {/* FAQ Accordion */}
             <section>
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-100">
+              <h2 className="text-xl sm:text-2xl font-bold text-primary-800 mb-6 pb-2 border-b border-primary-100">
                 Frequently Asked Questions
               </h2>
               <div className="space-y-2">

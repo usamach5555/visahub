@@ -116,7 +116,7 @@ export default async function BlogPostPage({ params }: Props) {
                   })}
                 </span>
               </div>
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-primary-800 leading-tight mb-4">
                 {article.title}
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed">{article.metaDescription}</p>
@@ -234,7 +234,7 @@ export default async function BlogPostPage({ params }: Props) {
 
             {/* Internal links */}
             <div className="mt-10 p-5 bg-white rounded-2xl border border-gray-200">
-              <h3 className="font-bold text-gray-900 mb-4">Useful Links</h3>
+              <h3 className="font-bold text-primary-800 mb-4">Useful Links</h3>
               <div className="flex flex-wrap gap-2">
                 {country && (
                   <Link
@@ -268,7 +268,7 @@ export default async function BlogPostPage({ params }: Props) {
           {/* Sidebar */}
           <aside className="space-y-6">
             <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 sticky top-20">
-              <h3 className="font-bold text-gray-900 mb-4">Article Info</h3>
+              <h3 className="font-bold text-primary-800 mb-4">Article Info</h3>
               <dl className="space-y-3 text-sm">
                 <div>
                   <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Country</dt>

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { PROCESSES, getProcessBySlug, getAllProcessSlugs } from "@/data/processes";
 import { faqSchema, breadcrumbSchema, howToSchema } from "@/lib/jsonld";
 import FAQSection from "@/components/FAQSection";
 import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
 import { PROCESS_KEYWORDS } from "@/lib/seo-keywords";
+import { getProcessImageUrl } from "@/lib/images";
 
 interface Props {
   params: Promise<{ type: string }>;
@@ -37,6 +39,9 @@ export default async function ProcessPage({ params }: Props) {
     process.relatedProcesses.includes(p.slug)
   );
 
+  // Pick the best hero image for this process page
+  const heroImageUrl = getProcessImageUrl(type);
+
   const faqLd = faqSchema(process.faqs);
   const breadcrumbLd = breadcrumbSchema([
     { name: "Home", url: "https://www.visaprocessinfo.com" },
@@ -55,35 +60,52 @@ export default async function ProcessPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }} />
 
-      {/* Hero */}
-      <div className="bg-gradient-to-br from-primary-900 to-primary-700 text-white pt-24 pb-14">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ── Hero with background photo ─────────────────────────────────────── */}
+      <div className="relative text-white overflow-hidden" style={{ minHeight: "380px" }}>
+        {/* Background photo */}
+        <Image
+          src={heroImageUrl}
+          alt={process.title}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Brand color overlay — light enough to let photo show through */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-900/75 via-primary-800/55 to-primary-700/35" />
+        {/* Bottom darkening for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-14">
           <Breadcrumb
             items={[
               { label: "Apply Process", href: "/process/study-visa-application" },
               { label: process.title },
             ]}
           />
-          <div className="flex items-center gap-4 mb-4 mt-2">
-            <span className="text-5xl">{process.icon}</span>
+          <div className="flex items-center gap-4 mb-4 mt-4">
+            <div className="w-14 h-14 rounded-2xl bg-white/15 border border-white/30 flex items-center justify-center shrink-0 text-3xl backdrop-blur-sm">
+              {process.icon}
+            </div>
             <div>
-              <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight">{process.title}</h1>
+              <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight drop-shadow-sm">{process.title}</h1>
             </div>
           </div>
 
           {/* Quick meta strip */}
           <div className="flex flex-wrap gap-4 mt-6">
-            <div className="bg-white/10 rounded-xl px-4 py-2 text-sm">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2.5 text-sm border border-white/20">
               <span className="text-blue-300 text-xs font-semibold uppercase tracking-wide block mb-0.5">Time Required</span>
-              <span className="text-white font-medium">{process.timeRequired}</span>
+              <span className="text-white font-semibold">{process.timeRequired}</span>
             </div>
-            <div className="bg-white/10 rounded-xl px-4 py-2 text-sm">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2.5 text-sm border border-white/20">
               <span className="text-blue-300 text-xs font-semibold uppercase tracking-wide block mb-0.5">Cost Estimate</span>
-              <span className="text-white font-medium">{process.costEstimate}</span>
+              <span className="text-white font-semibold">{process.costEstimate}</span>
             </div>
-            <div className="bg-white/10 rounded-xl px-4 py-2 text-sm">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2.5 text-sm border border-white/20">
               <span className="text-blue-300 text-xs font-semibold uppercase tracking-wide block mb-0.5">Who It&apos;s For</span>
-              <span className="text-white font-medium">{process.targetAudience.split(",")[0]}</span>
+              <span className="text-white font-semibold">{process.targetAudience.split(",")[0]}</span>
             </div>
           </div>
         </div>
@@ -105,7 +127,7 @@ export default async function ProcessPage({ params }: Props) {
 
             {/* Step-by-step */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl font-bold text-primary-800 mb-6">
                 Step-by-Step Process ({process.steps.length} Steps)
               </h2>
               <ol className="space-y-6">
@@ -147,7 +169,7 @@ export default async function ProcessPage({ params }: Props) {
 
             {/* Required Documents */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-5">Required Documents Checklist</h2>
+              <h2 className="text-2xl font-bold text-primary-800 mb-5">Required Documents Checklist</h2>
               <div className="bg-white rounded-2xl border border-gray-200 p-6">
                 <ul className="space-y-3">
                   {process.requiredDocuments.map((doc, i) => (
@@ -169,7 +191,7 @@ export default async function ProcessPage({ params }: Props) {
 
             {/* Common Mistakes */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-5">Common Mistakes to Avoid</h2>
+              <h2 className="text-2xl font-bold text-primary-800 mb-5">Common Mistakes to Avoid</h2>
               <div className="bg-red-50 border border-red-100 rounded-2xl p-6">
                 <ul className="space-y-3">
                   {process.commonMistakes.map((mistake, i) => (
@@ -184,7 +206,7 @@ export default async function ProcessPage({ params }: Props) {
 
             {/* FAQ */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-5">Frequently Asked Questions</h2>
+              <h2 className="text-2xl font-bold text-primary-800 mb-5">Frequently Asked Questions</h2>
               <FAQSection faqs={process.faqs} />
             </section>
 
@@ -197,7 +219,7 @@ export default async function ProcessPage({ params }: Props) {
             {/* Related processes */}
             {related.length > 0 && (
               <section>
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Related Guides</h2>
+                <h2 className="text-xl font-bold text-primary-800 mb-4">Related Guides</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {related.map((r) => (
                     <Link

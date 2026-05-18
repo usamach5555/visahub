@@ -38,11 +38,11 @@ const VISA_LUCIDE: Record<string, React.ElementType> = {
 };
 
 const VISA_HERO_GRADIENT: Record<string, string> = {
-  study:       "from-blue-900/85 via-blue-800/70 to-blue-700/55",
-  work:        "from-violet-900/85 via-violet-800/70 to-violet-700/55",
-  tourist:     "from-sky-900/85 via-sky-800/70 to-sky-700/55",
-  immigration: "from-emerald-900/85 via-emerald-800/70 to-emerald-700/55",
-  business:    "from-amber-900/85 via-amber-800/70 to-amber-700/55",
+  study:       "from-blue-900/70 via-blue-800/50 to-blue-700/30",
+  work:        "from-violet-900/70 via-violet-800/50 to-violet-700/30",
+  tourist:     "from-sky-900/70 via-sky-800/50 to-sky-700/30",
+  immigration: "from-emerald-900/70 via-emerald-800/50 to-emerald-700/30",
+  business:    "from-amber-900/70 via-amber-800/50 to-amber-700/30",
 };
 
 export function generateStaticParams() {
@@ -146,7 +146,7 @@ export default async function VisaTypePage({ params }: Props) {
 
             {/* Common Requirements */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-5">Common {visa.name} Requirements</h2>
+              <h2 className="text-2xl font-bold text-primary-800 mb-5">Common {visa.name} Requirements</h2>
               <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-3">
                 {visa.commonRequirements.map((req, i) => (
                   <div key={i} className="flex items-start gap-3 text-sm text-gray-700">
@@ -159,7 +159,7 @@ export default async function VisaTypePage({ params }: Props) {
 
             {/* Step-by-step */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-5">
+              <h2 className="text-2xl font-bold text-primary-800 mb-5">
                 How to Apply: Step-by-Step Process
               </h2>
               <ol className="space-y-3">
@@ -182,7 +182,7 @@ export default async function VisaTypePage({ params }: Props) {
 
             {/* Countries Offering */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-5">
+              <h2 className="text-2xl font-bold text-primary-800 mb-5">
                 Countries Offering {visa.name}
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -223,7 +223,7 @@ export default async function VisaTypePage({ params }: Props) {
 
             {/* Other Visa Types */}
             <section>
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Explore Other Visa Types</h2>
+              <h2 className="text-xl font-bold text-primary-800 mb-4">Explore Other Visa Types</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {VISA_TYPES.filter((v) => v.slug !== visa.slug).map((v) => {
                   const OtherIcon = VISA_LUCIDE[v.slug] ?? Globe;
@@ -247,7 +247,7 @@ export default async function VisaTypePage({ params }: Props) {
             {/* Long-form content */}
             {visa.longFormContent && visa.longFormContent.length > 0 && (
               <section className="space-y-10">
-                <h2 className="text-2xl font-bold text-gray-900">Complete {visa.name} Guide {new Date().getFullYear()}</h2>
+                <h2 className="text-2xl font-bold text-primary-800">Complete {visa.name} Guide {new Date().getFullYear()}</h2>
                 {visa.longFormContent.map((section, i) => (
                   <div key={i} className="border-t border-gray-100 pt-8 first:border-0 first:pt-0">
                     <h3 className="text-xl font-bold text-primary-800 mb-4">{section.heading}</h3>
@@ -272,7 +272,7 @@ export default async function VisaTypePage({ params }: Props) {
 
             {/* FAQ */}
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-5">
+              <h2 className="text-2xl font-bold text-primary-800 mb-5">
                 Frequently Asked Questions — {visa.name}
               </h2>
               <FAQSection faqs={visa.faqs} />
@@ -281,7 +281,7 @@ export default async function VisaTypePage({ params }: Props) {
             {/* Related articles */}
             {relatedArticles.length > 0 && (
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 mb-5">{visa.name} Articles &amp; Guides</h2>
+                <h2 className="text-2xl font-bold text-primary-800 mb-5">{visa.name} Articles &amp; Guides</h2>
                 <div className="grid gap-3">
                   {relatedArticles.map((a) => (
                     <Link
@@ -311,7 +311,7 @@ export default async function VisaTypePage({ params }: Props) {
           {/* ── Sidebar ── */}
           <aside className="space-y-6">
             <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
-              <h3 className="font-bold text-gray-900 mb-4">Quick Reference</h3>
+              <h3 className="font-bold text-primary-800 mb-4">Quick Reference</h3>
               <dl className="space-y-4 text-sm">
                 <div>
                   <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Target Audience</dt>

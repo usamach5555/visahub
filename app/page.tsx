@@ -214,7 +214,7 @@ export default function HomePage() {
             <span className="inline-block bg-primary-50 text-primary-700 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3">
               Visa Categories
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-800 mb-4">
               Find the Right Visa for Your Goal
             </h2>
             <p className="text-gray-500 max-w-xl mx-auto text-base">
@@ -283,7 +283,7 @@ export default function HomePage() {
             <span className="inline-block bg-accent-50 text-accent-700 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3">
               131 Destinations
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-800 mb-4">
               Find Visa Information by Country
             </h2>
             <p className="text-gray-500 max-w-xl mx-auto text-base">
@@ -301,7 +301,7 @@ export default function HomePage() {
             <span className="inline-block bg-primary-50 text-primary-700 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3">
               How It Works
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-800 mb-4">
               Apply for Any Visa in 4 Steps
             </h2>
           </div>
@@ -354,7 +354,7 @@ export default function HomePage() {
             <span className="inline-block bg-gray-100 text-gray-600 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3">
               In-Depth Resource
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-800 mb-4">
               Complete Visa &amp; Immigration Guide 2026
             </h2>
             <p className="text-gray-500 max-w-xl mx-auto">
@@ -452,7 +452,7 @@ export default function HomePage() {
 
             {/* 2026 Visa Landscape */}
             <div className="space-y-5">
-              <h2 className="text-2xl font-bold text-gray-900">The 2026 International Visa Landscape</h2>
+              <h2 className="text-2xl font-bold text-primary-800">The 2026 International Visa Landscape</h2>
               <div className="space-y-4 text-gray-600 leading-relaxed text-sm">
                 <p>
                   International migration and visa applications are at an all-time high in 2026. Post-pandemic
@@ -492,7 +492,7 @@ export default function HomePage() {
 
             {/* Country Difficulty Rankings */}
             <div className="space-y-5">
-              <h2 className="text-2xl font-bold text-gray-900">Visa Difficulty — Which Countries Are Easiest and Hardest?</h2>
+              <h2 className="text-2xl font-bold text-primary-800">Visa Difficulty — Which Countries Are Easiest and Hardest?</h2>
               <div className="space-y-4 text-gray-600 leading-relaxed text-sm">
                 <p>
                   One of the most common questions from visa applicants is: which country is easiest to get
@@ -536,7 +536,7 @@ export default function HomePage() {
 
             {/* Study vs Work comparison */}
             <div className="space-y-5">
-              <h2 className="text-2xl font-bold text-gray-900">Study Visa vs Work Visa — Choosing the Right Pathway</h2>
+              <h2 className="text-2xl font-bold text-primary-800">Study Visa vs Work Visa — Choosing the Right Pathway</h2>
               <div className="space-y-4 text-gray-600 leading-relaxed text-sm">
                 <p>
                   For many internationally mobile professionals, the choice between a study visa pathway and
@@ -579,7 +579,7 @@ export default function HomePage() {
 
             {/* Top 10 documents guide */}
             <div className="space-y-5">
-              <h2 className="text-2xl font-bold text-gray-900">The 10 Documents That Determine Most Visa Outcomes</h2>
+              <h2 className="text-2xl font-bold text-primary-800">The 10 Documents That Determine Most Visa Outcomes</h2>
               <div className="space-y-4 text-gray-600 leading-relaxed text-sm">
                 <p>
                   After analysing thousands of visa application outcomes, immigration officers consistently
@@ -615,7 +615,7 @@ export default function HomePage() {
 
       <section className="py-16 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Understanding the Global Immigration System in 2026</h2>
+          <h2 className="text-2xl font-bold text-primary-800 mb-8 text-center">Understanding the Global Immigration System in 2026</h2>
           <div className="grid lg:grid-cols-3 gap-8 text-sm text-gray-600 leading-relaxed">
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-gray-900">Points-Based Systems</h3>
@@ -694,7 +694,7 @@ export default function HomePage() {
       {/* ─── POPULAR COUNTRIES STRIP ────────────────────────────────────────── */}
       <section className="py-14 bg-gray-50 border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-2">
+          <h2 className="text-2xl font-bold text-primary-800 text-center mb-2">
             Featured Destinations
           </h2>
           <p className="text-center text-gray-500 text-sm mb-8">131 countries covered — click any to explore visa guides</p>

@@ -5,8 +5,9 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #1E40AF;
-  --color-accent: #22C55E;
+  --color-primary:    #1E40AF;
+  --color-primary-dk: #1E3A8A;
+  --color-accent:     #22C55E;
   --color-background: #F8FAFC;
   --color-foreground: #0F172A;
 }
@@ -15,7 +16,6 @@
 
 html {
   scroll-behavior: smooth;
-  /* Prevent horizontal overflow on mobile */
   overflow-x: hidden;
 }
 
@@ -28,9 +28,7 @@ body {
   font-weight: 400;
   font-size: 15px;
   line-height: 1.7;
-  /* Prevent horizontal scroll */
   overflow-x: hidden;
-  /* Better text rendering */
   text-rendering: optimizeSpeed;
 }
 
@@ -41,11 +39,40 @@ p {
 
 /* ── Typography scale ───────────────────────────────────────────────────────── */
 
-h1, h2, h3, h4, h5, h6 {
+/*
+  NOTE: Element selectors have lower CSS specificity than Tailwind class selectors.
+  These defaults apply only when no explicit color class is used on the element.
+  They replace the previous #0f172a (near-black) default with brand blue hierarchy.
+*/
+h1 {
+  font-weight: 800;
+  line-height: 1.15;
+  color: #1E3A8A;    /* brand dark — premium, not plain black */
+}
+
+h2 {
   font-weight: 700;
   line-height: 1.25;
-  color: #0f172a;
+  color: #1E40AF;    /* brand primary blue */
 }
+
+h3 {
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1D4ED8;    /* brand mid-blue */
+}
+
+h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.35;
+  color: #1e293b;    /* slate-800 — readable, not pure black */
+}
+
+/* ── Premium heading utilities ──────────────────────────────────────────────── */
+
+.heading-hero    { @apply font-extrabold leading-tight tracking-tight; color: #1E3A8A; }
+.heading-section { @apply font-extrabold; color: #1E40AF; }
+.heading-sub     { @apply font-bold;     color: #1D4ED8; }
 
 /* ── Prose styles for article content ───────────────────────────────────────── */
 
@@ -55,11 +82,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .prose-article h2 {
-  @apply text-2xl font-bold text-primary-800 mt-8 mb-4;
+  @apply text-2xl font-bold mt-8 mb-4;
+  color: #1E40AF;
 }
 
 .prose-article h3 {
-  @apply text-xl font-semibold text-primary-700 mt-6 mb-3;
+  @apply text-xl font-semibold mt-6 mb-3;
+  color: #1D4ED8;
 }
 
 .prose-article p {
@@ -81,14 +110,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .prose-article a {
-  @apply text-primary-700 underline hover:text-primary-900 transition-colors;
+  color: #1E40AF;
+  text-decoration: underline;
+  text-decoration-color: #93c5fd;
+  text-underline-offset: 3px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+
+.prose-article a:hover {
+  color: #1E3A8A;
+  text-decoration-color: #1E40AF;
 }
 
 /* ── Component utilities ────────────────────────────────────────────────────── */
 
-/* Card hover effect */
 .card-hover {
   @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5;
+}
+
+.card-premium {
+  @apply bg-white rounded-2xl border border-gray-100 shadow-sm
+         hover:shadow-xl hover:border-primary-200 transition-all duration-300;
 }
 
 /* ── Line clamp ─────────────────────────────────────────────────────────────── */
@@ -120,19 +162,19 @@ details > summary::marker { display: none; }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-/* ── Mobile touch ───────────────────────────────────────────────────────────── */
+/* ── Touch ──────────────────────────────────────────────────────────────────── */
 
 * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
 
-/* Touch-friendly tap targets */
+/*
+  IMPORTANT: Do NOT add `display: flex/inline-flex` to global `a` selectors —
+  it overrides Tailwind's `.block` / `.flex` utilities on Next.js Link components
+  and causes card layout breaks on mobile.
+  Touch target sizing is handled per-component with min-h-[44px] / p-3 etc.
+*/
 @media (max-width: 640px) {
   button, [role="button"] {
     min-height: 44px;
-  }
-  /* Ensure external links have large tap area */
-  a {
-    display: inline-flex;
-    align-items: center;
   }
 }
 
@@ -163,11 +205,9 @@ details > summary::marker { display: none; }
 img {
   max-width: 100%;
   height: auto;
-  /* Prevent layout shift */
   display: block;
 }
 
-/* Prevent image overflow in small containers */
 .img-cover {
   width: 100%;
   height: 100%;
@@ -182,22 +222,17 @@ img {
   body { font-size: 12pt; color: #000; overflow-x: visible; }
 }
 
-/* ── Mobile-specific layout fixes ────────────────────────────────────────────── */
+/* ── Mobile layout fixes ────────────────────────────────────────────────────── */
 
 @media (max-width: 640px) {
-  /* Prevent tables from breaking layout */
   table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-  /* Better paragraph spacing on mobile */
   p { margin-bottom: 1rem; }
-
-  /* Hero stats bar — tighter on mobile */
   .stats-grid { gap: 0.5rem; }
 }
 
 /* ── Utility: Section spacing ────────────────────────────────────────────────── */
 
-.section-gap { @apply py-16 sm:py-20; }
+.section-gap    { @apply py-16 sm:py-20; }
 .section-gap-sm { @apply py-10 sm:py-14; }
 
 /* ── Background pattern ─────────────────────────────────────────────────────── */
@@ -207,4 +242,13 @@ img {
     linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
   background-size: 60px 60px;
+}
+
+/* ── Gradient text utility ──────────────────────────────────────────────────── */
+
+.gradient-text {
+  background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 60%, #22C55E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
