@@ -1,6 +1,24 @@
 import { COUNTRIES_EXTENDED, VISA_TYPES_EXTENDED, type VisaTypeExtended } from "@/data/countries-extended";
 
-export type PageType = "country-hub" | "apply" | "how-to" | "details" | null;
+export type PageType =
+  | "country-hub"
+  | "apply"
+  | "how-to"
+  | "details"
+  | "requirements"
+  | "fees"
+  | "documents"
+  | "processing-time"
+  | "rejection"
+  | "interview"
+  | "success-tips"
+  | "checklist"
+  | "extension"
+  | "faq"
+  | "financial"
+  | "language"
+  | "embassy"
+  | null;
 
 export interface ParsedSlug {
   pageType: PageType;
@@ -9,81 +27,94 @@ export interface ParsedSlug {
   countryName: string;
 }
 
-const COUNTRY_SLUGS = COUNTRIES_EXTENDED.map((c) => c.slug);
+const COUNTRY_SLUGS = new Set(COUNTRIES_EXTENDED.map((c) => c.slug));
 
-function findCountryInSlug(parts: string[], visaType: string): string | null {
-  // Try longest match first
-  for (let len = 3; len >= 1; len--) {
-    for (let i = 0; i <= parts.length - len; i++) {
-      const candidate = parts.slice(i, i + len).join("-");
-      if (COUNTRY_SLUGS.includes(candidate)) {
-        return candidate;
-      }
-    }
-  }
-  return null;
-}
+/**
+ * Visa-type-specific suffix patterns → pageType
+ * All match the form: {country}-{visatype}-visa-{suffix}
+ */
+const VISA_SUFFIX_MAP: Record<string, PageType> = {
+  "details": "details",
+  "requirements": "requirements",
+  "fees": "fees",
+  "documents": "documents",
+  "processing-time": "processing-time",
+  "rejection-reasons": "rejection",
+  "interview-tips": "interview",
+  "success-tips": "success-tips",
+  "checklist": "checklist",
+  "extension": "extension",
+  "faq": "faq",
+  "financial-requirements": "financial",
+  "language-requirements": "language",
+};
 
-function findVisaType(slug: string): VisaTypeExtended | null {
+/** Try to extract {country} and {visaType} from a segment like "usa-study" */
+function parseCountryVisa(inner: string): { countrySlug: string; visaType: VisaTypeExtended } | null {
   for (const vt of VISA_TYPES_EXTENDED) {
-    if (slug.includes(`-${vt}-`) || slug.endsWith(`-${vt}`) || slug.startsWith(`${vt}-`)) {
-      return vt;
+    // visaType appears at the END: "usa-study" → country="usa", vt="study"
+    if (inner.endsWith(`-${vt}`)) {
+      const candidate = inner.slice(0, -(`-${vt}`.length));
+      if (COUNTRY_SLUGS.has(candidate)) return { countrySlug: candidate, visaType: vt };
+    }
+    // visaType appears at the START: "study-usa" → unlikely but guard
+    if (inner.startsWith(`${vt}-`)) {
+      const candidate = inner.slice(`${vt}-`.length);
+      if (COUNTRY_SLUGS.has(candidate)) return { countrySlug: candidate, visaType: vt };
     }
   }
   return null;
 }
 
 export function parseSlug(slug: string): ParsedSlug | null {
-  // Pattern 1: {country}-visa-info  (e.g., usa-visa-info)
+  // ── Pattern 1: {country}-visa-info → country-hub ──────────────────────────
   if (slug.endsWith("-visa-info")) {
     const countryPart = slug.slice(0, -"-visa-info".length);
-    if (COUNTRY_SLUGS.includes(countryPart)) {
+    if (COUNTRY_SLUGS.has(countryPart)) {
       const country = COUNTRIES_EXTENDED.find((c) => c.slug === countryPart)!;
+      // visaType="visit" is just a default; country-hub content ignores it
       return { pageType: "country-hub", countrySlug: countryPart, visaType: "visit", countryName: country.name };
     }
   }
 
-  // Pattern 2: apply-{country}-{visatype}-visa (e.g., apply-usa-study-visa)
-  if (slug.startsWith("apply-") && slug.endsWith("-visa")) {
-    const inner = slug.slice("apply-".length, -"-visa".length); // e.g., usa-study
-    const visaType = findVisaType(inner + "-x") || findVisaType("x-" + inner);
-    if (visaType) {
-      const countryPart = inner.replace(`-${visaType}`, "").replace(`${visaType}-`, "");
-      if (COUNTRY_SLUGS.includes(countryPart)) {
-        const country = COUNTRIES_EXTENDED.find((c) => c.slug === countryPart)!;
-        return { pageType: "apply", countrySlug: countryPart, visaType, countryName: country.name };
-      }
-    }
-    // Try each visa type explicitly
-    for (const vt of VISA_TYPES_EXTENDED) {
-      const withoutType = inner.replace(`-${vt}`, "").replace(`${vt}-`, "");
-      if (COUNTRY_SLUGS.includes(withoutType)) {
-        const country = COUNTRIES_EXTENDED.find((c) => c.slug === withoutType)!;
-        return { pageType: "apply", countrySlug: withoutType, visaType: vt, countryName: country.name };
-      }
+  // ── Pattern 17: {country}-embassy-guide → embassy ─────────────────────────
+  if (slug.endsWith("-embassy-guide")) {
+    const countryPart = slug.slice(0, -"-embassy-guide".length);
+    if (COUNTRY_SLUGS.has(countryPart)) {
+      const country = COUNTRIES_EXTENDED.find((c) => c.slug === countryPart)!;
+      return { pageType: "embassy", countrySlug: countryPart, visaType: "visit", countryName: country.name };
     }
   }
 
-  // Pattern 3: how-to-apply-{country}-{visatype}-visa (e.g., how-to-apply-usa-study-visa)
+  // ── Pattern 2: apply-{country}-{visatype}-visa → apply ────────────────────
+  if (slug.startsWith("apply-") && slug.endsWith("-visa")) {
+    const inner = slug.slice("apply-".length, -"-visa".length);
+    const parsed = parseCountryVisa(inner);
+    if (parsed) {
+      const country = COUNTRIES_EXTENDED.find((c) => c.slug === parsed.countrySlug)!;
+      return { pageType: "apply", ...parsed, countryName: country.name };
+    }
+  }
+
+  // ── Pattern 3: how-to-apply-{country}-{visatype}-visa → how-to ───────────
   if (slug.startsWith("how-to-apply-") && slug.endsWith("-visa")) {
     const inner = slug.slice("how-to-apply-".length, -"-visa".length);
-    for (const vt of VISA_TYPES_EXTENDED) {
-      const withoutType = inner.replace(`-${vt}`, "").replace(`${vt}-`, "");
-      if (COUNTRY_SLUGS.includes(withoutType)) {
-        const country = COUNTRIES_EXTENDED.find((c) => c.slug === withoutType)!;
-        return { pageType: "how-to", countrySlug: withoutType, visaType: vt, countryName: country.name };
-      }
+    const parsed = parseCountryVisa(inner);
+    if (parsed) {
+      const country = COUNTRIES_EXTENDED.find((c) => c.slug === parsed.countrySlug)!;
+      return { pageType: "how-to", ...parsed, countryName: country.name };
     }
   }
 
-  // Pattern 4: {country}-{visatype}-visa-details (e.g., usa-study-visa-details)
-  if (slug.endsWith("-visa-details")) {
-    const inner = slug.slice(0, -"-visa-details".length);
-    for (const vt of VISA_TYPES_EXTENDED) {
-      const withoutType = inner.replace(`-${vt}`, "").replace(`${vt}-`, "");
-      if (COUNTRY_SLUGS.includes(withoutType)) {
-        const country = COUNTRIES_EXTENDED.find((c) => c.slug === withoutType)!;
-        return { pageType: "details", countrySlug: withoutType, visaType: vt, countryName: country.name };
+  // ── Patterns 4–16: {country}-{visatype}-visa-{suffix} ────────────────────
+  for (const [suffix, pageType] of Object.entries(VISA_SUFFIX_MAP)) {
+    const tail = `-visa-${suffix}`;
+    if (slug.endsWith(tail)) {
+      const inner = slug.slice(0, -tail.length); // e.g. "usa-study"
+      const parsed = parseCountryVisa(inner);
+      if (parsed) {
+        const country = COUNTRIES_EXTENDED.find((c) => c.slug === parsed.countrySlug)!;
+        return { pageType, ...parsed, countryName: country.name };
       }
     }
   }
@@ -91,18 +122,36 @@ export function parseSlug(slug: string): ParsedSlug | null {
   return null;
 }
 
-/** Generate all valid slugs for static generation */
+/** Generate every valid slug for static generation */
 export function generateAllProgrammaticSlugs(): string[] {
   const slugs: string[] = [];
+
   for (const country of COUNTRIES_EXTENDED) {
-    // Pattern 1: country hub
-    slugs.push(`${country.slug}-visa-info`);
-    // Patterns 2-4: per visa type
+    const c = country.slug;
+
+    // Country-level pages (2 per country)
+    slugs.push(`${c}-visa-info`);
+    slugs.push(`${c}-embassy-guide`);
+
+    // Per-visa-type pages (15 per visa type × 5 types = 75 per country)
     for (const vt of VISA_TYPES_EXTENDED) {
-      slugs.push(`apply-${country.slug}-${vt}-visa`);
-      slugs.push(`how-to-apply-${country.slug}-${vt}-visa`);
-      slugs.push(`${country.slug}-${vt}-visa-details`);
+      slugs.push(`apply-${c}-${vt}-visa`);             // apply
+      slugs.push(`how-to-apply-${c}-${vt}-visa`);      // how-to
+      slugs.push(`${c}-${vt}-visa-details`);            // details
+      slugs.push(`${c}-${vt}-visa-requirements`);       // requirements
+      slugs.push(`${c}-${vt}-visa-fees`);               // fees
+      slugs.push(`${c}-${vt}-visa-documents`);          // documents
+      slugs.push(`${c}-${vt}-visa-processing-time`);   // processing-time
+      slugs.push(`${c}-${vt}-visa-rejection-reasons`); // rejection
+      slugs.push(`${c}-${vt}-visa-interview-tips`);    // interview
+      slugs.push(`${c}-${vt}-visa-success-tips`);      // success-tips
+      slugs.push(`${c}-${vt}-visa-checklist`);          // checklist
+      slugs.push(`${c}-${vt}-visa-extension`);          // extension
+      slugs.push(`${c}-${vt}-visa-faq`);               // faq
+      slugs.push(`${c}-${vt}-visa-financial-requirements`); // financial
+      slugs.push(`${c}-${vt}-visa-language-requirements`);  // language
     }
   }
+
   return slugs;
 }
