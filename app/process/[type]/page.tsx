@@ -8,7 +8,7 @@ import FAQSection from "@/components/FAQSection";
 import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
 import { PROCESS_KEYWORDS } from "@/lib/seo-keywords";
-import { getProcessImageUrl } from "@/lib/images";
+import { getProcessImageUrl, HERO_BLUR_PLACEHOLDER } from "@/lib/images";
 import { ShieldCheck, CalendarDays, Users } from "lucide-react";
 
 interface Props {
@@ -71,6 +71,8 @@ export default async function ProcessPage({ params }: Props) {
           priority
           quality={90}
           sizes="100vw"
+          placeholder="blur"
+          blurDataURL={HERO_BLUR_PLACEHOLDER}
           className="object-cover object-center"
         />
         {/* Layer 1: Subtle diagonal brand tint — lets HD photo show clearly */}

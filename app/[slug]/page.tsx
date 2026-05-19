@@ -22,7 +22,7 @@ import {
 import { parseSlug, generateAllProgrammaticSlugs } from "@/lib/slug-parser";
 import { generatePageContent } from "@/lib/page-content";
 import { getCountryBySlug } from "@/data/countries-extended";
-import { getCountryImageUrl } from "@/lib/images";
+import { getCountryImageUrl, HERO_BLUR_PLACEHOLDER } from "@/lib/images";
 import AdSlot from "@/components/ads/AdSlot";
 
 interface Props {
@@ -207,6 +207,8 @@ export default async function ProgrammaticPage({ params }: Props) {
           priority
           quality={90}
           sizes="100vw"
+          placeholder="blur"
+          blurDataURL={HERO_BLUR_PLACEHOLDER}
           className="object-cover object-center"
         />
 

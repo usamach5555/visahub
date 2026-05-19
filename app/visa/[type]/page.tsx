@@ -23,7 +23,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
 import Button from "@/components/ui/Button";
 import { VISA_TYPE_KEYWORDS, HOMEPAGE_KEYWORDS, mergeKeywords } from "@/lib/seo-keywords";
-import { getVisaTypeImageUrl } from "@/lib/images";
+import { getVisaTypeImageUrl, HERO_BLUR_PLACEHOLDER } from "@/lib/images";
 import { ShieldCheck, CalendarDays, Users } from "lucide-react";
 
 interface Props {
@@ -108,6 +108,8 @@ export default async function VisaTypePage({ params }: Props) {
           priority
           quality={90}
           sizes="100vw"
+          placeholder="blur"
+          blurDataURL={HERO_BLUR_PLACEHOLDER}
           className="object-cover object-center"
         />
         {/* Layer 1: Brand diagonal tint — lighter to let photo shine clearly */}
