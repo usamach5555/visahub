@@ -18,6 +18,8 @@ const nextConfig = {
     ],
     // Prefer AVIF (smallest), fallback to WebP — both are modern lossless-equivalent formats
     formats: ["image/avif", "image/webp"],
+    // Default quality 85 (Next.js default is 75 which double-compresses Unsplash q=85 sources)
+    quality: 85,
     // Responsive breakpoints matching common device widths
     deviceSizes: [390, 640, 750, 828, 1080, 1200, 1920, 2560],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],

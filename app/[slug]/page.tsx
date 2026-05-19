@@ -36,7 +36,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const country = getCountryBySlug(parsed.countrySlug);
   if (!country) return { title: "Page Not Found" };
   const content = generatePageContent(country, parsed.visaType, parsed.pageType);
-  const imageUrl = getCountryImageUrl(country.slug, country.region);
+  // OG images should be 1200×630 for social media (hero images use default 1920×1080)
+  const imageUrl = getCountryImageUrl(country.slug, country.region, 1200, 630);
   return {
     title: content.metaTitle,
     description: content.metaDescription,
@@ -189,6 +190,7 @@ export default async function ProgrammaticPage({ params }: Props) {
           alt={`${country.name} — visa and immigration information`}
           fill
           priority
+          quality={90}
           sizes="100vw"
           className="object-cover object-center"
         />

@@ -68,6 +68,7 @@ export default async function ProcessPage({ params }: Props) {
           alt={process.title}
           fill
           priority
+          quality={90}
           sizes="100vw"
           className="object-cover object-center"
         />

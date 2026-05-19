@@ -145,11 +145,16 @@ const PROCESS_PHOTO_IDS: Record<string, string> = {
 
 /**
  * Build Unsplash CDN URL with HD quality.
- * q=85 (crisp HD); fm=webp (smaller file, sharper rendering); crop=entropy auto-selects
- * the most visually interesting region for better focal composition.
+ *
+ * KEY DECISIONS:
+ * - Default width 1920 (was 1200) — hero images span 100vw, so source must be
+ *   large enough to avoid browser upscale blur on 1440px+ screens.
+ * - auto=format lets Unsplash serve AVIF/WebP automatically — do NOT also set fm=webp
+ *   as that forces WebP even when AVIF would be smaller/sharper.
+ * - q=85 for crisp detail; crop=entropy auto-selects the most interesting region.
  */
-function buildUrl(photoId: string, width = 1200, height = 630): string {
-  return `https://images.unsplash.com/photo-${photoId}?w=${width}&h=${height}&auto=format&fm=webp&q=85&fit=crop&crop=entropy&cs=tinysrgb`;
+function buildUrl(photoId: string, width = 1920, height = 1080): string {
+  return `https://images.unsplash.com/photo-${photoId}?w=${width}&h=${height}&auto=format&q=85&fit=crop&crop=entropy`;
 }
 
 // ── Public API ────────────────────────────────────────────────────────────────
@@ -157,16 +162,18 @@ function buildUrl(photoId: string, width = 1200, height = 630): string {
 /**
  * Return the best Unsplash image URL for a country slug.
  * Falls back: country → region → default travel image.
+ * Default 1920×1080 for full-width hero images (avoids upscale blur on 1440px+ screens).
  */
-export function getCountryImageUrl(slug: string, region: string, width = 1200, height = 630): string {
+export function getCountryImageUrl(slug: string, region: string, width = 1920, height = 1080): string {
   const id = COUNTRY_PHOTO_IDS[slug] ?? REGION_PHOTO_IDS[region] ?? DEFAULT_PHOTO_ID;
   return buildUrl(id, width, height);
 }
 
 /**
  * Return a themed image for a given visa type.
+ * Default 1920×1080 for full-width hero backgrounds.
  */
-export function getVisaTypeImageUrl(visaType: string, width = 1200, height = 630): string {
+export function getVisaTypeImageUrl(visaType: string, width = 1920, height = 1080): string {
   const id = VISA_TYPE_PHOTO_IDS[visaType] ?? DEFAULT_PHOTO_ID;
   return buildUrl(id, width, height);
 }
@@ -174,8 +181,9 @@ export function getVisaTypeImageUrl(visaType: string, width = 1200, height = 630
 /**
  * Return a process-page hero image based on topic key.
  * Accepts strings like "study-visa-application", "embassy-interview-guide", etc.
+ * Default 1920×1080 for full-width hero backgrounds.
  */
-export function getProcessImageUrl(topic: string, width = 1200, height = 630): string {
+export function getProcessImageUrl(topic: string, width = 1920, height = 1080): string {
   for (const [key, id] of Object.entries(PROCESS_PHOTO_IDS)) {
     if (topic.includes(key)) return buildUrl(id, width, height);
   }

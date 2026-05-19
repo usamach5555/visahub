@@ -53,7 +53,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { type } = await params;
   const visa = getVisaTypeBySlug(type);
   if (!visa) return {};
-  const imageUrl = getVisaTypeImageUrl(visa.slug);
+  // OG images at 1200×630 for social media (hero images use default 1920×1080)
+  const imageUrl = getVisaTypeImageUrl(visa.slug, 1200, 630);
   return {
     title: `${visa.name} Guide ${new Date().getFullYear()} — Requirements, Process & Countries`,
     description: `Complete ${visa.name.toLowerCase()} guide for ${new Date().getFullYear()}. Requirements, step-by-step process, fees, and country-specific information for 131 destinations worldwide.`,
@@ -104,6 +105,7 @@ export default async function VisaTypePage({ params }: Props) {
           alt={`${visa.name} — visa guide`}
           fill
           priority
+          quality={90}
           sizes="100vw"
           className="object-cover object-center"
         />
