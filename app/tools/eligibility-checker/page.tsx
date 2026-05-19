@@ -16,7 +16,7 @@ export default function EligibilityCheckerPage() {
           <div className="inline-flex items-center gap-2 bg-white/15 border border-white/25 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
             <span>Free Tool</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4 leading-tight">
             Visa Eligibility Checker
           </h1>
           <p className="text-white/80 text-lg leading-relaxed max-w-2xl mx-auto">

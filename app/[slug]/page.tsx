@@ -23,6 +23,7 @@ import { parseSlug, generateAllProgrammaticSlugs } from "@/lib/slug-parser";
 import { generatePageContent } from "@/lib/page-content";
 import { getCountryBySlug } from "@/data/countries-extended";
 import { getCountryImageUrl } from "@/lib/images";
+import AdSlot from "@/components/ads/AdSlot";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -419,6 +420,9 @@ export default async function ProgrammaticPage({ params }: Props) {
               </section>
             )}
 
+            {/* In-content ad */}
+            <AdSlot slot="in-content" />
+
             {/* FAQ Accordion */}
             <section>
               <h2 className="text-xl sm:text-2xl font-bold text-primary-800 mb-6 pb-2 border-b border-primary-100">
@@ -596,6 +600,8 @@ export default async function ProgrammaticPage({ params }: Props) {
                 Always verify current requirements at official government sources before submitting your application.
               </p>
             </div>
+
+            <AdSlot slot="sidebar" />
           </aside>
         </div>
       </div>

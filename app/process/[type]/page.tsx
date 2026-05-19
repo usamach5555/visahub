@@ -73,12 +73,12 @@ export default async function ProcessPage({ params }: Props) {
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Layer 1: Subtle diagonal brand tint — lets photo show through */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-900/65 via-primary-800/40 to-transparent" />
-        {/* Layer 2: Strong bottom-up gradient — ensures text is always readable */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
-        {/* Layer 3: Left vignette — visual depth and cinematic feel */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
+        {/* Layer 1: Subtle diagonal brand tint — lets HD photo show clearly */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-950/55 via-primary-900/35 to-primary-800/15" />
+        {/* Layer 2: Bottom-up gradient — ensures title/stats always readable */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
+        {/* Layer 3: Left vignette — cinematic depth */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-transparent" />
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-14">
