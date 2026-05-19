@@ -157,6 +157,7 @@ export default function ContactPage() {
                   <div>
                     <p className="font-medium text-gray-900">Email</p>
                     <p className="text-gray-600">contact@visaprocessinfo.com</p>
+                    <p className="text-gray-600">support@visaprocessinfo.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">

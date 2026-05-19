@@ -376,7 +376,7 @@ export default async function ProgrammaticPage({ params }: Props) {
                       className="w-full h-48 sm:h-56 object-cover group-hover:scale-[1.02] transition-transform duration-500"
                       sizes="(max-width: 768px) 100vw, 660px"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/5 to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4">
                       <p className="text-white text-sm font-semibold drop-shadow-lg">
                         {country.name} — Your complete visa guide
@@ -675,7 +675,7 @@ export default async function ProgrammaticPage({ params }: Props) {
       <div className="bg-gradient-to-b from-gray-50 to-gray-100 border-t border-gray-200 py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+            <h2 className="text-xl sm:text-2xl font-bold text-primary-800 mb-2">
               Explore More {country.name} Visa Guides
             </h2>
             <p className="text-sm text-gray-500 max-w-2xl mx-auto">

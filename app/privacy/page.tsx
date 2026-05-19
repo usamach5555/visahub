@@ -201,7 +201,7 @@ export default function PrivacyPage() {
               If you have questions, concerns, or requests regarding this Privacy Policy or your
               personal data, please contact us at:{" "}
               <Link href="/contact" className="text-primary-700 underline">Contact page</Link> or
-              via email at privacy@www.visaprocessinfo.com.
+              via email at privacy@visaprocessinfo.com.
             </p>
           </section>
 

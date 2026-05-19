@@ -28,7 +28,7 @@ export default function EligibilityCheckerPage() {
       {/* Tool */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Enter Your Details</h2>
+          <h2 className="text-xl font-bold text-primary-800 mb-6">Enter Your Details</h2>
           <EligibilityChecker />
         </div>
 

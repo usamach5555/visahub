@@ -147,6 +147,12 @@ export default function Footer() {
               <li><Link href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors">Country Guides Blog</Link></li>
               <li><Link href="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">Contact &amp; Feedback</Link></li>
             </ul>
+
+            <h3 className="text-white font-semibold mb-3 mt-5 text-xs uppercase tracking-wider">Contact</h3>
+            <ul className="space-y-1.5 text-sm text-gray-400">
+              <li>support@visaprocessinfo.com</li>
+              <li>contact@visaprocessinfo.com</li>
+            </ul>
           </div>
 
           {/* Processes */}

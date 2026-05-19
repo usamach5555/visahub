@@ -212,7 +212,7 @@ export default async function VisaTypePage({ params }: Props) {
                 className="w-full h-48 sm:h-56 object-cover group-hover:scale-[1.02] transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw, 660px"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/5 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
                 <p className="text-white text-sm font-bold drop-shadow-lg">
                   {visa.name} — Available in 131+ countries worldwide

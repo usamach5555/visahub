@@ -221,8 +221,8 @@ const PROCESS_PHOTO_IDS: Record<string, string> = {
   "business-visa":   "1507679799987-c73779587ccf", // business meeting
   "pr-immigration":  "1553697388-94e804e2f0f6", // passport documents
   "interview":       "1573497620053-ea5300f94f21",    // visa interview
-  "appeal":          "1589829545856-d10d557cf95f", // formal document / legal
-  "rejection":       "1589829545856-d10d557cf95f", // formal document
+  "appeal":          "1603057190473-f3b6422b6320", // formal document / legal
+  "rejection":       "1603057190473-f3b6422b6320", // formal document
   "biometrics":      "1585079374502-415f8516dcc3",    // fingerprint / identity
   "embassy":         "1555848962-6e79363ec58f", // embassy / govt building
   "immigration":     "1553697388-94e804e2f0f6", // passport & documents
@@ -251,8 +251,8 @@ const SECTION_PHOTO_IDS: Record<string, string> = {
   "interview":       "1573497019940-1c28c88b4f3e",    // professional conversation
   "embassy":         "1555848962-6e79363ec58f",    // government / embassy building
   "application":     "1434030216411-0b793f4b4173",    // person filling form
-  "rejection":       "1589829545856-d10d557cf95f",    // formal legal document
-  "appeal":          "1589829545856-d10d557cf95f",    // legal process
+  "rejection":       "1603057190473-f3b6422b6320",    // formal legal document
+  "appeal":          "1603057190473-f3b6422b6320",    // legal process
   "biometric":       "1585079374502-415f8516dcc3",       // fingerprint / identity tech
   "immigration":     "1434030216411-0b793f4b4173",    // person completing immigration forms
   "pr-":             "1642522029686-5485ea7e6042",    // permanent residency checklist
@@ -261,7 +261,7 @@ const SECTION_PHOTO_IDS: Record<string, string> = {
   "work":            "1497366216548-37526070297c",    // modern office space
   "travel":          "1488646953014-85cb44e25828",    // airport / journey
   "education":       "1562774053-701939374585",    // university campus
-  "legal":           "1589829545856-d10d557cf95f",    // legal documents / scales
+  "legal":           "1603057190473-f3b6422b6320",    // legal documents / scales
   "success":         "1522202176988-66273c2fd55f",    // celebration / achievement
   "family":          "1511895426328-dc8714191300",    // family / togetherness
   "health":          "1576091160399-112ba8d25d1d",    // medical / health check

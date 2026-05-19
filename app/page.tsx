@@ -315,11 +315,42 @@ export default function HomePage() {
                     <item.Icon className="w-7 h-7 text-primary-700" />
                   </div>
                   <div className="text-xs font-bold text-primary-400 mb-1 tracking-widest">STEP {item.step}</div>
-                  <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <h3 className="font-bold text-primary-800 mb-2">{item.title}</h3>
                   <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PREMIUM VISUAL BREAK — HD Travel Scene ─────────────────────────── */}
+      <section className="relative overflow-hidden" style={{ minHeight: "clamp(280px, 35vw, 420px)" }}>
+        <Image
+          src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=1920&h=800&auto=format&q=85&fit=crop&crop=entropy"
+          alt="International travel — airport departure terminal"
+          fill
+          unoptimized
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-900/70 via-primary-800/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <div className="relative z-10 flex items-center h-full min-h-[inherit] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="max-w-lg">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4 drop-shadow-lg leading-tight">
+              Your Journey Starts<br />With the Right Visa
+            </h2>
+            <p className="text-blue-100/90 text-base sm:text-lg leading-relaxed mb-6 drop-shadow">
+              Whether you&apos;re heading to your dream university, starting a new career, or exploring the world — we&apos;ve got the guide for every step.
+            </p>
+            <Link
+              href="#countries"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-accent-500 hover:bg-accent-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
+            >
+              Explore Countries
+              <ChevronRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -370,7 +401,7 @@ export default function HomePage() {
             ].map((item) => (
               <div key={item.title} className="bg-white rounded-2xl border border-gray-100 p-5 text-center shadow-sm">
                 <div className="text-3xl mb-3">{item.icon}</div>
-                <h3 className="font-bold text-gray-900 text-sm mb-1.5">{item.title}</h3>
+                <h3 className="font-bold text-primary-800 text-sm mb-1.5">{item.title}</h3>
                 <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
               </div>
             ))}
