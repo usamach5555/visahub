@@ -15,7 +15,12 @@
 /* ── Base ──────────────────────────────────────────────────────────────────── */
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth REMOVED — caused "movement continues" bug
+     when clicking anchor links in the dropdown (e.g. /#countries).
+     Smooth scroll would animate the viewport while the fixed header
+     stayed in place, making the UX feel like the dropdown never stopped.
+     Use programmatic scrollIntoView({ behavior: 'smooth' }) selectively
+     instead of a global CSS rule if needed. */
   overflow-x: hidden;
 }
 

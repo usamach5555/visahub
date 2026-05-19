@@ -199,25 +199,26 @@ export default async function ProgrammaticPage({ params }: Props) {
       {/* ── HERO with photo background ─────────────────────────────────────── */}
       <div className="relative text-white overflow-hidden" style={{ minHeight: "clamp(380px, 45vw, 520px)" }}>
 
-        {/* Background photo */}
+        {/* Background photo — unoptimized bypasses Next.js re-compression.
+            Unsplash CDN already serves AVIF/WebP at q=85 via auto=format,
+            so double-compression was the root cause of "soft/blurry" images. */}
         <Image
           src={countryImageUrl}
           alt={`${country.name} — visa and immigration information`}
           fill
           priority
-          quality={90}
+          unoptimized
           sizes="100vw"
           placeholder="blur"
           blurDataURL={HERO_BLUR_PLACEHOLDER}
           className="object-cover object-center"
         />
 
-        {/* Layer 1: Brand diagonal tint — lighter for vibrant HD clarity */}
+        {/* Single overlay: bottom-to-top gradient for text readability.
+            Previous 3-layer system combined to ~60-75% opacity = dull images.
+            Now a single targeted gradient keeps the top 60% of the image CLEAR. */}
         <div className={`absolute inset-0 bg-gradient-to-br ${overlayGradient}`} />
-        {/* Layer 2: Bottom-up — readable text, transparent top shows full image */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
-        {/* Layer 3: Subtle left vignette — cinematic depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
 
         {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
@@ -371,6 +372,7 @@ export default async function ProgrammaticPage({ params }: Props) {
                       alt={`${country.name} visa information`}
                       width={800}
                       height={400}
+                      unoptimized
                       className="w-full h-48 sm:h-56 object-cover group-hover:scale-[1.02] transition-transform duration-500"
                       sizes="(max-width: 768px) 100vw, 660px"
                     />

@@ -63,24 +63,20 @@ export default async function ProcessPage({ params }: Props) {
 
       {/* ── Hero with background photo ─────────────────────────────────────── */}
       <div className="relative text-white overflow-hidden" style={{ minHeight: "clamp(340px, 40vw, 460px)" }}>
-        {/* Background photo */}
         <Image
           src={heroImageUrl}
           alt={process.title}
           fill
           priority
-          quality={90}
+          unoptimized
           sizes="100vw"
           placeholder="blur"
           blurDataURL={HERO_BLUR_PLACEHOLDER}
           className="object-cover object-center"
         />
-        {/* Layer 1: Subtle diagonal brand tint — lets HD photo show clearly */}
+        {/* Two-layer overlay: brand tint + bottom readability. No third vignette. */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-950/55 via-primary-900/35 to-primary-800/15" />
-        {/* Layer 2: Bottom-up — readable text, transparent top shows full image */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
-        {/* Layer 3: Subtle left vignette — cinematic depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-14">
@@ -219,6 +215,7 @@ export default async function ProcessPage({ params }: Props) {
                 alt={`${process.title} guide`}
                 width={800}
                 height={400}
+                unoptimized
                 className="w-full h-48 sm:h-56 object-cover group-hover:scale-[1.02] transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw, 660px"
               />

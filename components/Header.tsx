@@ -68,7 +68,34 @@ interface DropdownProps {
 function Dropdown({ label, scrolled, children }: DropdownProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Close on outside click
   useOutsideClick(ref, () => setOpen(false));
+
+  // Close dropdown on any route change (Next.js client navigation)
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // If a link inside the dropdown was clicked, close immediately
+      if (ref.current?.contains(target) && target.closest("a")) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
+
+  // Debounced close prevents flicker when mouse crosses the button→panel gap
+  const startCloseTimer = () => {
+    closeTimer.current = setTimeout(() => setOpen(false), 80);
+  };
+  const cancelCloseTimer = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
 
   const linkColor = scrolled
     ? "text-gray-700 hover:text-primary-800 hover:bg-primary-50"
@@ -77,8 +104,8 @@ function Dropdown({ label, scrolled, children }: DropdownProps) {
   return (
     <div ref={ref} className="relative">
       <button
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
+        onMouseEnter={() => { cancelCloseTimer(); setOpen(true); }}
+        onMouseLeave={startCloseTimer}
         onClick={() => setOpen(!open)}
         className={`flex items-center gap-1 px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${linkColor}`}
       >
@@ -88,11 +115,13 @@ function Dropdown({ label, scrolled, children }: DropdownProps) {
 
       {open && (
         <div
-          onMouseEnter={() => setOpen(true)}
-          onMouseLeave={() => setOpen(false)}
-          className="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-white rounded-2xl shadow-2xl shadow-black/10 border border-gray-100/80 z-50 min-w-[240px] overflow-hidden animate-fade-in backdrop-blur-sm"
+          onMouseEnter={cancelCloseTimer}
+          onMouseLeave={startCloseTimer}
+          className="absolute top-full left-1/2 -translate-x-1/2 pt-1 z-50 min-w-[240px]"
         >
-          {children}
+          <div className="bg-white rounded-2xl shadow-2xl shadow-black/10 border border-gray-100/80 overflow-hidden animate-fade-in">
+            {children}
+          </div>
         </div>
       )}
     </div>

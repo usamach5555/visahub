@@ -106,18 +106,16 @@ export default async function VisaTypePage({ params }: Props) {
           alt={`${visa.name} — visa guide`}
           fill
           priority
-          quality={90}
+          unoptimized
           sizes="100vw"
           placeholder="blur"
           blurDataURL={HERO_BLUR_PLACEHOLDER}
           className="object-cover object-center"
         />
-        {/* Layer 1: Brand diagonal tint — lighter for vibrant HD clarity */}
+        {/* Two-layer overlay: brand tint + bottom readability gradient.
+            Removed third vignette layer — 3 layers was the root cause of dull images. */}
         <div className={`absolute inset-0 bg-gradient-to-br ${heroGradient}`} />
-        {/* Layer 2: Bottom-up — readable text, transparent top shows full image */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
-        {/* Layer 3: Subtle left vignette — cinematic depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
           <Breadcrumb variant="light" items={[{ label: "Visa Types", href: "/#visa-types" }, { label: visa.name }]} />
@@ -210,6 +208,7 @@ export default async function VisaTypePage({ params }: Props) {
                 alt={`${visa.name} guide`}
                 width={800}
                 height={400}
+                unoptimized
                 className="w-full h-48 sm:h-56 object-cover group-hover:scale-[1.02] transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw, 660px"
               />
