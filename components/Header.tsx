@@ -90,7 +90,7 @@ function Dropdown({ label, scrolled, children }: DropdownProps) {
         <div
           onMouseEnter={() => setOpen(true)}
           onMouseLeave={() => setOpen(false)}
-          className="absolute top-full left-0 mt-1 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 min-w-[220px] overflow-hidden animate-fade-in"
+          className="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-white rounded-2xl shadow-2xl shadow-black/10 border border-gray-100/80 z-50 min-w-[240px] overflow-hidden animate-fade-in backdrop-blur-sm"
         >
           {children}
         </div>
@@ -137,36 +137,36 @@ export default function Header() {
           {/* ── Desktop Nav ── */}
           <nav className="hidden lg:flex items-center gap-0.5">
 
-            {/* Countries dropdown */}
+            {/* Countries mega-menu dropdown */}
             <Dropdown label="Countries" scrolled={scrolled}>
-              <div className="p-2">
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-3 pt-1 pb-2">Top Destinations</p>
-                <div className="grid grid-cols-2 gap-0.5">
+              <div className="p-3 w-[520px]">
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-2 pt-0.5 pb-3">Top Destinations</p>
+                <div className="grid grid-cols-3 gap-1">
                   {headerCountries.map((c) => (
                     <Link
                       key={c.slug}
                       href={`/${c.slug}-visa-info`}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-800 transition-colors"
+                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-800 transition-colors whitespace-nowrap"
                     >
                       <Image
                         src={`https://flagcdn.com/w40/${c.code}.png`}
                         alt={`${c.name} flag`}
-                        width={20}
-                        height={15}
-                        className="rounded-sm object-cover shadow-sm"
+                        width={22}
+                        height={16}
+                        className="rounded-sm object-cover shadow-sm flex-shrink-0"
                         unoptimized
                       />
-                      <span className="font-medium">{c.name}</span>
+                      <span className="font-medium truncate">{c.name}</span>
                     </Link>
                   ))}
                 </div>
-                <div className="border-t border-gray-100 mt-2 pt-2 px-2">
+                <div className="border-t border-gray-100 mt-2.5 pt-2.5 px-1">
                   <Link
                     href="/#countries"
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-accent-700 hover:bg-accent-50 font-semibold transition-colors"
+                    className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm text-accent-700 hover:bg-accent-50 font-semibold transition-colors bg-gray-50"
                   >
-                    <Globe className="w-3.5 h-3.5" />
-                    View all 131 countries
+                    <Globe className="w-4 h-4" />
+                    View all 131 countries →
                   </Link>
                 </div>
               </div>
@@ -304,17 +304,17 @@ export default function Header() {
                       key={c.slug}
                       href={`/${c.slug}-visa-info`}
                       onClick={() => setMenuOpen(false)}
-                      className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors"
+                      className="flex items-center gap-2 py-2.5 px-2.5 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors"
                     >
                       <Image
                         src={`https://flagcdn.com/w40/${c.code}.png`}
                         alt={`${c.name} flag`}
                         width={20}
                         height={15}
-                        className="rounded-sm object-cover shadow-sm"
+                        className="rounded-sm object-cover shadow-sm flex-shrink-0"
                         unoptimized
                       />
-                      <span className="truncate">{c.name}</span>
+                      <span className="truncate text-[13px]">{c.name}</span>
                     </Link>
                   ))}
                   <Link

@@ -229,6 +229,25 @@ const PROCESS_PHOTO_IDS: Record<string, string> = {
   "default":         "1436491865332-7a369c3f4d69", // passport & documents
 };
 
+// ── Section / body-content images (visual breaks between text sections) ──────
+
+const SECTION_PHOTO_IDS: Record<string, string> = {
+  "requirements":    "1450101499163-c8848e968ad7",    // checklist / documents on desk
+  "documents":       "1568667256549-094345857637",    // passport & official papers
+  "fees":            "1554224155-6726b3ff858f",       // currency / financial planning
+  "interview":       "1573497019940-1c28c88b4f3e",    // professional conversation
+  "embassy":         "1555952517-2e8e729e0959",       // government building
+  "application":     "1434030216411-0b793f4b4173",    // person filling form
+  "timeline":        "1506784983877-45594efa4cbe",    // calendar / clock concept
+  "travel":          "1488646953014-85cb44e25828",    // airport / journey
+  "education":       "1523050854058-8df90110c9f1",    // university campus
+  "work":            "1497366216548-37526070297c",    // modern office space
+  "legal":           "1589829545856-d10d557cf95f",    // legal documents / scales
+  "success":         "1522202176988-66273c2fd55f",    // celebration / achievement
+  "family":          "1511895426328-dc8714191300",    // family / togetherness
+  "health":          "1576091160399-112ba8d25d1d",    // medical / health check
+};
+
 // ── Core builder ─────────────────────────────────────────────────────────────
 
 /**
@@ -276,6 +295,19 @@ export function getProcessImageUrl(topic: string, width = 1920, height = 1080): 
     if (topic.includes(key)) return buildUrl(id, width, height);
   }
   return buildUrl(PROCESS_PHOTO_IDS.default, width, height);
+}
+
+/**
+ * Return a section / body-content image based on topic keywords.
+ * Used for visual breaks between text-heavy content sections.
+ * Default 800×450 for in-content imagery (responsive, not full-width).
+ */
+export function getSectionImageUrl(topic: string, width = 800, height = 450): string {
+  for (const [key, id] of Object.entries(SECTION_PHOTO_IDS)) {
+    if (topic.toLowerCase().includes(key)) return buildUrl(id, width, height);
+  }
+  // Fallback to travel theme
+  return buildUrl(SECTION_PHOTO_IDS.travel, width, height);
 }
 
 /**

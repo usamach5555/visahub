@@ -22,7 +22,7 @@ import {
 import { parseSlug, generateAllProgrammaticSlugs } from "@/lib/slug-parser";
 import { generatePageContent } from "@/lib/page-content";
 import { getCountryBySlug } from "@/data/countries-extended";
-import { getCountryImageUrl, HERO_BLUR_PLACEHOLDER } from "@/lib/images";
+import { getCountryImageUrl, getSectionImageUrl, HERO_BLUR_PLACEHOLDER } from "@/lib/images";
 import AdSlot from "@/components/ads/AdSlot";
 
 interface Props {
@@ -360,9 +360,28 @@ export default async function ProgrammaticPage({ params }: Props) {
               </div>
             </div>
 
-            {/* Content Sections */}
+            {/* Content Sections with visual breaks */}
             {content.sections.map((section, i) => (
               <section key={i} className="scroll-mt-20">
+                {/* Section-break image after 2nd section for visual depth */}
+                {i === 2 && (
+                  <div className="relative rounded-2xl overflow-hidden mb-8 shadow-md">
+                    <Image
+                      src={getSectionImageUrl(pt)}
+                      alt={`${country.name} visa information`}
+                      width={800}
+                      height={400}
+                      className="w-full h-48 sm:h-56 object-cover"
+                      sizes="(max-width: 768px) 100vw, 660px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <div className="absolute bottom-3 left-4 right-4">
+                      <p className="text-white text-xs font-medium drop-shadow-md">
+                        {country.name} — Your complete visa guide
+                      </p>
+                    </div>
+                  </div>
+                )}
                 <h2 className="text-xl sm:text-2xl font-bold text-primary-800 mb-4 pb-2 border-b border-primary-100">
                   {section.heading}
                 </h2>
@@ -426,18 +445,21 @@ export default async function ProgrammaticPage({ params }: Props) {
             <AdSlot slot="in-content" />
 
             {/* FAQ Accordion */}
-            <section>
-              <h2 className="text-xl sm:text-2xl font-bold text-primary-800 mb-6 pb-2 border-b border-primary-100">
+            <section className="bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 p-5 sm:p-7">
+              <h2 className="text-xl sm:text-2xl font-bold text-primary-800 mb-6 flex items-center gap-2.5">
+                <span className="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
+                  <ChevronDown className="w-4 h-4 text-primary-700" />
+                </span>
                 Frequently Asked Questions
               </h2>
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 {content.faqs.map((faq, i) => (
-                  <details key={i} className="group border border-gray-200 rounded-xl overflow-hidden">
-                    <summary className="flex items-center justify-between p-4 sm:p-5 cursor-pointer bg-gray-50 hover:bg-primary-50 transition-colors font-semibold text-gray-900 text-sm gap-3 list-none">
+                  <details key={i} className="group border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                    <summary className="flex items-center justify-between p-4 sm:p-5 cursor-pointer hover:bg-primary-50/50 transition-colors font-semibold text-gray-900 text-sm gap-3 list-none">
                       <span className="leading-snug">{faq.question}</span>
                       <ChevronDown className="w-4 h-4 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0" />
                     </summary>
-                    <div className="p-4 sm:p-5 text-sm text-gray-700 leading-relaxed border-t border-gray-100 bg-white">
+                    <div className="p-4 sm:p-5 text-sm text-gray-700 leading-relaxed border-t border-gray-100">
                       {faq.answer}
                     </div>
                   </details>
@@ -511,6 +533,23 @@ export default async function ProgrammaticPage({ params }: Props) {
                 Cost Calculator
                 <ArrowRight className="w-4 h-4" />
               </Link>
+            </div>
+
+            {/* Country image card */}
+            <div className="relative rounded-2xl overflow-hidden shadow-md">
+              <Image
+                src={getCountryImageUrl(country.slug, country.region, 640, 400)}
+                alt={`${country.name} destination`}
+                width={640}
+                height={400}
+                className="w-full h-44 object-cover"
+                sizes="(max-width: 1024px) 100vw, 320px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-4 right-4">
+                <p className="text-white font-bold text-sm drop-shadow-lg">{country.name}</p>
+                <p className="text-white/80 text-xs">{country.region} · {country.capital}</p>
+              </div>
             </div>
 
             {/* Why This Country */}
@@ -609,22 +648,24 @@ export default async function ProgrammaticPage({ params }: Props) {
       </div>
 
       {/* ── Bottom Internal Links Bar ─────────────────────────────────────────── */}
-      <div className="bg-gray-50 border-t border-gray-200 py-12">
+      <div className="bg-gradient-to-b from-gray-50 to-gray-100 border-t border-gray-200 py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-1">
-            Explore More {country.name} Visa Guides
-          </h2>
-          <p className="text-sm text-gray-500 mb-6">
-            Complete guides for every aspect of your {country.name} visa journey — requirements, fees, documents, and more.
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
+          <div className="text-center mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+              Explore More {country.name} Visa Guides
+            </h2>
+            <p className="text-sm text-gray-500 max-w-2xl mx-auto">
+              Complete guides for every aspect of your {country.name} visa journey — requirements, fees, documents, and more.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {content.internalLinks.map((link, i) => (
               <Link
                 key={i}
                 href={link.href}
-                className="bg-white border border-gray-200 rounded-xl px-3 py-2.5 text-sm text-gray-700 hover:border-primary-300 hover:text-primary-800 hover:bg-primary-50 transition-all text-center font-medium leading-tight"
+                className="group bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 hover:border-primary-300 hover:text-primary-800 hover:bg-primary-50 hover:shadow-sm transition-all text-center font-medium leading-tight"
               >
-                {link.label}
+                <span className="group-hover:underline">{link.label}</span>
               </Link>
             ))}
           </div>

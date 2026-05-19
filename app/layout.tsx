@@ -62,6 +62,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
         <link rel="preconnect" href="https://flagcdn.com" />
         <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
         {/* Viewport — prevent horizontal scroll on mobile */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         {/* AdSense script — replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID */}

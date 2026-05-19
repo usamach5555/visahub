@@ -23,7 +23,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
 import Button from "@/components/ui/Button";
 import { VISA_TYPE_KEYWORDS, HOMEPAGE_KEYWORDS, mergeKeywords } from "@/lib/seo-keywords";
-import { getVisaTypeImageUrl, HERO_BLUR_PLACEHOLDER } from "@/lib/images";
+import { getVisaTypeImageUrl, getSectionImageUrl, HERO_BLUR_PLACEHOLDER } from "@/lib/images";
 import { ShieldCheck, CalendarDays, Users } from "lucide-react";
 
 interface Props {
@@ -202,6 +202,24 @@ export default async function VisaTypePage({ params }: Props) {
                 ))}
               </ol>
             </section>
+
+            {/* Visual section break */}
+            <div className="relative rounded-2xl overflow-hidden shadow-md">
+              <Image
+                src={getSectionImageUrl(visa.slug)}
+                alt={`${visa.name} guide`}
+                width={800}
+                height={400}
+                className="w-full h-48 sm:h-56 object-cover"
+                sizes="(max-width: 768px) 100vw, 660px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute bottom-3 left-4 right-4">
+                <p className="text-white text-sm font-semibold drop-shadow-md">
+                  {visa.name} — Available in 131+ countries worldwide
+                </p>
+              </div>
+            </div>
 
             {/* In-content ad */}
             <AdSlot slot="in-content" />
