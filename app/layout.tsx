@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1436491865332-7a369c3f4d69?w=1200&h=630&auto=format&q=85&fit=crop",
+        url: "https://images.unsplash.com/photo-1553697388-94e804e2f0f6?w=1200&h=630&auto=format&q=85&fit=crop",
         width: 1200,
         height: 630,
         alt: "VisaProcessInfo — Visa & Immigration Guides",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@visaprocessinfo",
-    images: ["https://images.unsplash.com/photo-1436491865332-7a369c3f4d69?w=1200&h=630&auto=format&q=85&fit=crop"],
+    images: ["https://images.unsplash.com/photo-1553697388-94e804e2f0f6?w=1200&h=630&auto=format&q=85&fit=crop"],
   },
   robots: {
     index: true,

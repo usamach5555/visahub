@@ -560,10 +560,11 @@ export default async function ProgrammaticPage({ params }: Props) {
                 alt={`${country.name} destination`}
                 width={640}
                 height={400}
+                unoptimized
                 className="w-full h-48 object-cover group-hover:scale-[1.03] transition-transform duration-500"
                 sizes="(max-width: 1024px) 100vw, 320px"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
                 <p className="text-white font-bold text-base drop-shadow-lg">{country.name}</p>
                 <p className="text-white/75 text-xs mt-0.5">{country.region} · {country.capital}</p>
