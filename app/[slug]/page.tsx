@@ -212,12 +212,12 @@ export default async function ProgrammaticPage({ params }: Props) {
           className="object-cover object-center"
         />
 
-        {/* Layer 1: Brand diagonal tint — lets HD photo show clearly */}
+        {/* Layer 1: Brand diagonal tint — lighter for vibrant HD clarity */}
         <div className={`absolute inset-0 bg-gradient-to-br ${overlayGradient}`} />
-        {/* Layer 2: Strong bottom-up — ensures title/stats always readable */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
-        {/* Layer 3: Left vignette — cinematic depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-transparent" />
+        {/* Layer 2: Bottom-up — readable text, transparent top shows full image */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
+        {/* Layer 3: Subtle left vignette — cinematic depth */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent" />
 
         {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
@@ -365,20 +365,36 @@ export default async function ProgrammaticPage({ params }: Props) {
               <section key={i} className="scroll-mt-20">
                 {/* Section-break image after 2nd section for visual depth */}
                 {i === 2 && (
-                  <div className="relative rounded-2xl overflow-hidden mb-8 shadow-md">
+                  <div className="relative rounded-2xl overflow-hidden mb-8 shadow-md group">
                     <Image
                       src={getSectionImageUrl(pt)}
                       alt={`${country.name} visa information`}
                       width={800}
                       height={400}
-                      className="w-full h-48 sm:h-56 object-cover"
+                      className="w-full h-48 sm:h-56 object-cover group-hover:scale-[1.02] transition-transform duration-500"
                       sizes="(max-width: 768px) 100vw, 660px"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4">
-                      <p className="text-white text-xs font-medium drop-shadow-md">
+                      <p className="text-white text-sm font-semibold drop-shadow-lg">
                         {country.name} — Your complete visa guide
                       </p>
+                    </div>
+                  </div>
+                )}
+                {/* Informational callout card at section 5 */}
+                {i === 5 && content.sections.length > 5 && (
+                  <div className="bg-gradient-to-r from-primary-50 to-blue-50 border border-primary-100 rounded-2xl p-5 mb-8">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <ShieldCheck className="w-5 h-5 text-primary-700" />
+                      </div>
+                      <div>
+                        <p className="font-bold text-primary-900 text-sm mb-1">Expert Tip</p>
+                        <p className="text-sm text-primary-700 leading-relaxed">
+                          Always cross-reference requirements with the official {country.name} immigration portal. Rules can change with little notice, especially regarding processing times and fee structures.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -535,20 +551,25 @@ export default async function ProgrammaticPage({ params }: Props) {
               </Link>
             </div>
 
-            {/* Country image card */}
-            <div className="relative rounded-2xl overflow-hidden shadow-md">
+            {/* Country destination card */}
+            <div className="relative rounded-2xl overflow-hidden shadow-lg group">
               <Image
                 src={getCountryImageUrl(country.slug, country.region, 640, 400)}
                 alt={`${country.name} destination`}
                 width={640}
                 height={400}
-                className="w-full h-44 object-cover"
+                className="w-full h-48 object-cover group-hover:scale-[1.03] transition-transform duration-500"
                 sizes="(max-width: 1024px) 100vw, 320px"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-4 right-4">
-                <p className="text-white font-bold text-sm drop-shadow-lg">{country.name}</p>
-                <p className="text-white/80 text-xs">{country.region} · {country.capital}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <p className="text-white font-bold text-base drop-shadow-lg">{country.name}</p>
+                <p className="text-white/75 text-xs mt-0.5">{country.region} · {country.capital}</p>
+              </div>
+              <div className="absolute top-3 right-3">
+                <span className="bg-white/90 backdrop-blur-sm text-primary-800 text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">
+                  {country.region}
+                </span>
               </div>
             </div>
 

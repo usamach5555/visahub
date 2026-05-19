@@ -77,10 +77,10 @@ export default async function ProcessPage({ params }: Props) {
         />
         {/* Layer 1: Subtle diagonal brand tint — lets HD photo show clearly */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-950/55 via-primary-900/35 to-primary-800/15" />
-        {/* Layer 2: Bottom-up gradient — ensures title/stats always readable */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
-        {/* Layer 3: Left vignette — cinematic depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-transparent" />
+        {/* Layer 2: Bottom-up — readable text, transparent top shows full image */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
+        {/* Layer 3: Subtle left vignette — cinematic depth */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent" />
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-14">
@@ -213,18 +213,18 @@ export default async function ProcessPage({ params }: Props) {
             </section>
 
             {/* Visual section break */}
-            <div className="relative rounded-2xl overflow-hidden shadow-md">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg group">
               <Image
                 src={getSectionImageUrl(type)}
                 alt={`${process.title} guide`}
                 width={800}
                 height={400}
-                className="w-full h-48 sm:h-56 object-cover"
+                className="w-full h-48 sm:h-56 object-cover group-hover:scale-[1.02] transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw, 660px"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="absolute bottom-3 left-4 right-4">
-                <p className="text-white text-sm font-semibold drop-shadow-md">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <p className="text-white text-sm font-bold drop-shadow-lg">
                   {process.title}
                 </p>
               </div>

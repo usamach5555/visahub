@@ -206,9 +206,9 @@ const VISA_TYPE_PHOTO_IDS: Record<string, string> = {
   study:       "1523240795612-9a054b0db644", // student in university library
   work:        "1521737604893-d14cc237f11d", // professional in modern office
   business:    "1507679799987-c73779587ccf", // business meeting / handshake
-  visit:       "1476514525405-8329922b25f5", // airplane window / travel
-  tourist:     "1476514525405-8329922b25f5", // travel / tourism
-  immigration: "1436491865332-7a369c3f4d69", // passport and travel documents
+  visit:       "1488646953014-85cb44e25828", // vibrant airport departure hall
+  tourist:     "1507525428034-b723cf961d3e", // stunning beach destination sunset
+  immigration: "1521791136064-7986c2920216", // professional handshake / new beginnings
 };
 
 // ── Process / how-to page images ─────────────────────────────────────────────
@@ -224,7 +224,7 @@ const PROCESS_PHOTO_IDS: Record<string, string> = {
   "appeal":          "1589829545856-d10d557cf95f", // formal document / legal
   "rejection":       "1589829545856-d10d557cf95f", // formal document
   "biometrics":      "1555952517-2e8e729e0959",    // fingerprint / identity
-  "embassy":         "1541339907198-e08756dedf3f", // embassy / govt building
+  "embassy":         "1555848962-6e79363ec58f", // embassy / govt building
   "immigration":     "1436491865332-7a369c3f4d69", // passport & documents
   "default":         "1436491865332-7a369c3f4d69", // passport & documents
 };
@@ -232,16 +232,35 @@ const PROCESS_PHOTO_IDS: Record<string, string> = {
 // ── Section / body-content images (visual breaks between text sections) ──────
 
 const SECTION_PHOTO_IDS: Record<string, string> = {
+  // Page-type matches (from [slug] template pt values)
+  "country-hub":     "1436491865332-7a369c3f4d69",    // passport & world map
+  "details":         "1450101499163-c8848e968ad7",    // documents on professional desk
+  "apply":           "1434030216411-0b793f4b4173",    // person filling application form
+  "how-to":          "1506784983877-45594efa4cbe",    // step-by-step process / planning
+  "checklist":       "1484480974693-6ca0a78fb36b",    // organized checklist / planner
+  "extension":       "1506784983877-45594efa4cbe",    // calendar / timeline
+  "faq":             "1573497019940-1c28c88b4f3e",    // professional Q&A conversation
+  "financial":       "1554224155-6726b3ff858f",       // currency / financial planning
+  "language":        "1523050854058-8df90110c9f1",    // education / learning
+  "success-tips":    "1522202176988-66273c2fd55f",    // achievement / celebration
+  "processing-time": "1506784983877-45594efa4cbe",    // clock / timeline concept
+  // Keyword matches (from process slugs and visa types)
   "requirements":    "1450101499163-c8848e968ad7",    // checklist / documents on desk
-  "documents":       "1568667256549-094345857637",    // passport & official papers
+  "documents":       "1544377193-33dcf4d68fb5",        // official documents & planner
   "fees":            "1554224155-6726b3ff858f",       // currency / financial planning
   "interview":       "1573497019940-1c28c88b4f3e",    // professional conversation
-  "embassy":         "1555952517-2e8e729e0959",       // government building
+  "embassy":         "1555848962-6e79363ec58f",    // government / embassy building
   "application":     "1434030216411-0b793f4b4173",    // person filling form
-  "timeline":        "1506784983877-45594efa4cbe",    // calendar / clock concept
+  "rejection":       "1589829545856-d10d557cf95f",    // formal legal document
+  "appeal":          "1589829545856-d10d557cf95f",    // legal process
+  "biometric":       "1555952517-2e8e729e0959",       // fingerprint / identity tech
+  "immigration":     "1434030216411-0b793f4b4173",    // person completing immigration forms
+  "pr-":             "1450101499163-c8848e968ad7",    // permanent residency checklist
+  "tourist":         "1488646953014-85cb44e25828",    // airport / travel journey
+  "study":           "1523050854058-8df90110c9f1",    // university campus
+  "work":            "1497366216548-37526070297c",    // modern office space
   "travel":          "1488646953014-85cb44e25828",    // airport / journey
   "education":       "1523050854058-8df90110c9f1",    // university campus
-  "work":            "1497366216548-37526070297c",    // modern office space
   "legal":           "1589829545856-d10d557cf95f",    // legal documents / scales
   "success":         "1522202176988-66273c2fd55f",    // celebration / achievement
   "family":          "1511895426328-dc8714191300",    // family / togetherness
@@ -301,12 +320,18 @@ export function getProcessImageUrl(topic: string, width = 1920, height = 1080): 
  * Return a section / body-content image based on topic keywords.
  * Used for visual breaks between text-heavy content sections.
  * Default 800×450 for in-content imagery (responsive, not full-width).
+ *
+ * Lookup priority: exact match → keyword includes → travel fallback
  */
 export function getSectionImageUrl(topic: string, width = 800, height = 450): string {
+  const lower = topic.toLowerCase();
+  // 1. Exact match (for page types like "country-hub", "details", "apply")
+  if (SECTION_PHOTO_IDS[lower]) return buildUrl(SECTION_PHOTO_IDS[lower], width, height);
+  // 2. Keyword includes (for process slugs like "visa-interview-preparation")
   for (const [key, id] of Object.entries(SECTION_PHOTO_IDS)) {
-    if (topic.toLowerCase().includes(key)) return buildUrl(id, width, height);
+    if (lower.includes(key)) return buildUrl(id, width, height);
   }
-  // Fallback to travel theme
+  // 3. Fallback to travel theme
   return buildUrl(SECTION_PHOTO_IDS.travel, width, height);
 }
 
