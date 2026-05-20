@@ -91,10 +91,10 @@ export default function Footer() {
           {/* Countries */}
           <div>
             <h3 className="text-white font-semibold mb-4 text-xs uppercase tracking-wider">Top Countries</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               {footerCountries.map((c) => (
                 <li key={c.slug}>
-                  <Link href={`/${c.slug}-visa-info`} className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                  <Link href={`/${c.slug}-visa-info`} className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2 py-1.5 min-h-[36px]">
                     <span className="w-5 h-3.5 rounded-sm overflow-hidden inline-block shrink-0 border border-gray-700">
                       <Image
                         src={`https://flagcdn.com/w40/${c.code}.png`}
@@ -121,12 +121,12 @@ export default function Footer() {
           {/* Visa Types + Resources */}
           <div>
             <h3 className="text-white font-semibold mb-4 text-xs uppercase tracking-wider">Visa Types</h3>
-            <ul className="space-y-2 mb-6">
+            <ul className="space-y-1 mb-6">
               {VISA_TYPES.map((v) => {
                 const IconComp = VISA_ICONS[v.slug] ?? Globe;
                 return (
                   <li key={v.slug}>
-                    <Link href={`/visa/${v.slug}`} className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1.5">
+                    <Link href={`/visa/${v.slug}`} className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 py-1.5">
                       <IconComp className="w-3.5 h-3.5 shrink-0" />
                       {v.name}
                     </Link>
@@ -134,7 +134,7 @@ export default function Footer() {
                 );
               })}
               <li>
-                <Link href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1.5">
+                <Link href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 py-1.5">
                   <Newspaper className="w-3.5 h-3.5 shrink-0" />
                   Visa Blog
                 </Link>
@@ -142,10 +142,10 @@ export default function Footer() {
             </ul>
 
             <h3 className="text-white font-semibold mb-3 text-xs uppercase tracking-wider">Resources</h3>
-            <ul className="space-y-2">
-              <li><Link href="/about" className="text-sm text-gray-400 hover:text-white transition-colors">About Us &amp; Team</Link></li>
-              <li><Link href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors">Country Guides Blog</Link></li>
-              <li><Link href="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">Contact &amp; Feedback</Link></li>
+            <ul className="space-y-1">
+              <li><Link href="/about" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">About Us &amp; Team</Link></li>
+              <li><Link href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">Country Guides Blog</Link></li>
+              <li><Link href="/contact" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">Contact &amp; Feedback</Link></li>
             </ul>
 
             <h3 className="text-white font-semibold mb-3 mt-5 text-xs uppercase tracking-wider">Contact</h3>
@@ -158,10 +158,10 @@ export default function Footer() {
           {/* Processes + Tools */}
           <div>
             <h3 className="text-white font-semibold mb-4 text-xs uppercase tracking-wider">Apply Process</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               {PROCESS_LINKS.map((p) => (
                 <li key={p.href}>
-                  <Link href={p.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                  <Link href={p.href} className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">
                     {p.label}
                   </Link>
                 </li>
@@ -169,7 +169,7 @@ export default function Footer() {
             </ul>
 
             <h3 className="text-white font-semibold mb-3 mt-5 text-xs uppercase tracking-wider">Free Tools</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               {[
                 { label: "Eligibility Checker", href: "/tools/eligibility-checker" },
                 { label: "Cost Calculator", href: "/tools/cost-calculator" },
@@ -179,13 +179,13 @@ export default function Footer() {
                 { label: "Rejection Risk", href: "/tools/rejection-risk" },
               ].map((t) => (
                 <li key={t.href}>
-                  <Link href={t.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                  <Link href={t.href} className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">
                     {t.label}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/tools" className="text-sm text-accent-400 hover:text-accent-300 transition-colors">
+                <Link href="/tools" className="text-sm text-accent-400 hover:text-accent-300 transition-colors py-1.5 block">
                   All Tools →
                 </Link>
               </li>
@@ -204,12 +204,12 @@ export default function Footer() {
               Independent &middot; Free &middot; No agency affiliations
             </p>
           </div>
-          <div className="flex flex-wrap gap-4 text-xs text-gray-500">
-            <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
-            <Link href="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link>
-            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+          <div className="flex flex-wrap gap-3 sm:gap-4 text-sm sm:text-xs text-gray-500">
+            <Link href="/about" className="hover:text-white transition-colors py-1">About Us</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors py-1">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors py-1">Terms of Use</Link>
+            <Link href="/disclaimer" className="hover:text-white transition-colors py-1">Disclaimer</Link>
+            <Link href="/contact" className="hover:text-white transition-colors py-1">Contact</Link>
           </div>
         </div>
       </div>

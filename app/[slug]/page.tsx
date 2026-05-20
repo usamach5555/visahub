@@ -553,6 +553,24 @@ export default async function ProgrammaticPage({ params }: Props) {
               </Link>
             </div>
 
+            {/* More Tools */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-4">
+              <h3 className="font-bold text-sm text-gray-900 mb-3">More Free Tools</h3>
+              <div className="space-y-2">
+                {[
+                  { href: "/tools/processing-time", label: "Processing Time Estimator" },
+                  { href: "/tools/document-checklist", label: "Document Checklist" },
+                  { href: "/tools/country-comparison", label: "Country Comparison" },
+                  { href: "/tools/rejection-risk", label: "Rejection Risk Analyzer" },
+                ].map((t) => (
+                  <Link key={t.href} href={t.href} className="flex items-center gap-2 text-sm text-primary-700 hover:text-primary-900 font-medium transition-colors">
+                    <ArrowRight className="w-3.5 h-3.5" />
+                    {t.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {/* Country destination card */}
             <div className="relative rounded-2xl overflow-hidden shadow-lg group">
               <Image

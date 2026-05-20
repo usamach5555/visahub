@@ -345,7 +345,7 @@ export default function Header() {
                       key={c.slug}
                       href={`/${c.slug}-visa-info`}
                       onClick={() => setMenuOpen(false)}
-                      className="flex items-center gap-2 py-2.5 px-2.5 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors"
+                      className="flex items-center gap-2 py-3 px-2.5 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors min-h-[44px]"
                     >
                       <Image
                         src={`https://flagcdn.com/w40/${c.code}.png`}
@@ -385,7 +385,7 @@ export default function Header() {
                     const IconComp = VISA_LUCIDE[v.slug] ?? Globe;
                     return (
                       <Link key={v.slug} href={`/visa/${v.slug}`} onClick={() => setMenuOpen(false)}
-                        className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors">
+                        className="flex items-center gap-2 py-2.5 px-2 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors min-h-[44px]">
                         <IconComp className="w-4 h-4 text-primary-600" />
                         <span>{v.name}</span>
                       </Link>
@@ -408,7 +408,7 @@ export default function Header() {
                 <div className="space-y-1 px-3 pb-2">
                   {PROCESSES.map((p) => (
                     <Link key={p.href} href={p.href} onClick={() => setMenuOpen(false)}
-                      className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors">
+                      className="flex items-center gap-2 py-2.5 px-2 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors min-h-[44px]">
                       <p.Icon className="w-4 h-4 text-primary-600" />
                       <span>{p.label}</span>
                     </Link>
@@ -437,7 +437,7 @@ export default function Header() {
                     { href: "/tools/rejection-risk", Icon: ShieldAlert, label: "Rejection Risk" },
                   ].map((t) => (
                     <Link key={t.href} href={t.href} onClick={() => setMenuOpen(false)}
-                      className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors">
+                      className="flex items-center gap-2 py-2.5 px-2 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors min-h-[44px]">
                       <t.Icon className="w-4 h-4 text-primary-600" />
                       <span>{t.label}</span>
                     </Link>

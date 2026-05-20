@@ -247,8 +247,9 @@ export default function CountryComparisonTool() {
       {/* Comparison Table */}
       {selectedCountries.length >= 2 && analysis && (
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-8">
+          <div className="overflow-x-auto -mx-px">
           {/* Country Headers */}
-          <div className="grid border-b border-gray-100" style={{ gridTemplateColumns: `200px repeat(${selectedCountries.length}, 1fr)` }}>
+          <div className="grid border-b border-gray-100 min-w-[480px]" style={{ gridTemplateColumns: `140px repeat(${selectedCountries.length}, 1fr)` }}>
             <div className="p-4 md:p-6 bg-gray-50 flex items-end">
               <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Category</span>
             </div>
@@ -371,16 +372,17 @@ export default function CountryComparisonTool() {
             <div
               key={ri}
               className={`grid ${ri % 2 === 0 ? "bg-white" : "bg-gray-50/50"} border-b border-gray-100 last:border-b-0`}
-              style={{ gridTemplateColumns: `200px repeat(${selectedCountries.length}, 1fr)` }}
+              style={{ gridTemplateColumns: `140px repeat(${selectedCountries.length}, 1fr)` }}
             >
-              <div className="p-4 md:p-6 flex items-center bg-gray-50">
-                <span className="text-sm font-semibold text-gray-600">{row.label}</span>
+              <div className="p-3 md:p-6 flex items-center bg-gray-50">
+                <span className="text-xs sm:text-sm font-semibold text-gray-600">{row.label}</span>
               </div>
               {selectedCountries.map((c, idx) => (
                 <div key={c.slug}>{row.render(c, idx)}</div>
               ))}
             </div>
           ))}
+          </div>{/* close overflow-x-auto */}
         </div>
       )}
 
