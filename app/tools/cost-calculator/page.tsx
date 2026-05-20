@@ -28,13 +28,13 @@ export default function CostCalculatorPage() {
       {/* Tool */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Select Country and Visa Type</h2>
+          <h2 className="text-xl font-bold text-primary-800 mb-6">Select Country and Visa Type</h2>
           <VisaCostCalculator />
         </div>
 
         {/* What is included */}
         <div className="mt-10 bg-white rounded-2xl border border-gray-200 p-6">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">What is Included in the Cost Estimate?</h2>
+          <h2 className="text-lg font-bold text-primary-800 mb-4">What is Included in the Cost Estimate?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
               { title: "Government Application Fee", desc: "The official fee charged by the destination country's immigration authority. Non-refundable." },

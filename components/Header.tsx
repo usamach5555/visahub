@@ -22,6 +22,10 @@ import {
   ChevronDown,
   Menu,
   X,
+  Clock,
+  FileCheck,
+  BarChart3,
+  ShieldAlert,
 } from "lucide-react";
 import { COUNTRIES_EXTENDED } from "@/data/countries-extended";
 import { VISA_TYPES } from "@/data/visa-types";
@@ -243,28 +247,36 @@ export default function Header() {
 
             {/* Tools dropdown */}
             <Dropdown label="Free Tools" scrolled={scrolled}>
-              <div className="p-2 w-64">
+              <div className="p-2 w-72">
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-3 pt-1 pb-2">Visa Tools</p>
-                <Link
-                  href="/tools/eligibility-checker"
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-800 transition-colors"
-                >
-                  <CheckSquare className="w-5 h-5 text-primary-600" />
-                  <div>
-                    <div className="font-semibold">Eligibility Checker</div>
-                    <div className="text-xs text-gray-400">Check your visa approval chances</div>
-                  </div>
-                </Link>
-                <Link
-                  href="/tools/cost-calculator"
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-800 transition-colors"
-                >
-                  <Calculator className="w-5 h-5 text-primary-600" />
-                  <div>
-                    <div className="font-semibold">Cost Calculator</div>
-                    <div className="text-xs text-gray-400">Estimate total visa fees</div>
-                  </div>
-                </Link>
+                {[
+                  { href: "/tools/eligibility-checker", Icon: CheckSquare, label: "Eligibility Checker", desc: "Check your visa approval chances" },
+                  { href: "/tools/cost-calculator", Icon: Calculator, label: "Cost Calculator", desc: "Estimate total visa fees" },
+                  { href: "/tools/processing-time", Icon: Clock, label: "Processing Time Estimator", desc: "How long will your visa take?" },
+                  { href: "/tools/document-checklist", Icon: FileCheck, label: "Document Checklist", desc: "Generate your document list" },
+                  { href: "/tools/country-comparison", Icon: BarChart3, label: "Country Comparison", desc: "Compare countries side by side" },
+                  { href: "/tools/rejection-risk", Icon: ShieldAlert, label: "Rejection Risk Analyzer", desc: "Assess your application risk" },
+                ].map((t) => (
+                  <Link
+                    key={t.href}
+                    href={t.href}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-800 transition-colors"
+                  >
+                    <t.Icon className="w-5 h-5 text-primary-600 shrink-0" />
+                    <div>
+                      <div className="font-semibold">{t.label}</div>
+                      <div className="text-xs text-gray-400">{t.desc}</div>
+                    </div>
+                  </Link>
+                ))}
+                <div className="border-t border-gray-100 mt-1.5 pt-1.5 px-1">
+                  <Link
+                    href="/tools"
+                    className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm text-accent-700 hover:bg-accent-50 font-semibold transition-colors bg-gray-50"
+                  >
+                    View All Tools →
+                  </Link>
+                </div>
               </div>
             </Dropdown>
 
@@ -416,15 +428,23 @@ export default function Header() {
               </button>
               {mobileSection === "tools" && (
                 <div className="space-y-1 px-3 pb-2">
-                  <Link href="/tools/eligibility-checker" onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors">
-                    <CheckSquare className="w-4 h-4 text-primary-600" />
-                    <span>Eligibility Checker</span>
-                  </Link>
-                  <Link href="/tools/cost-calculator" onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors">
-                    <Calculator className="w-4 h-4 text-primary-600" />
-                    <span>Cost Calculator</span>
+                  {[
+                    { href: "/tools/eligibility-checker", Icon: CheckSquare, label: "Eligibility Checker" },
+                    { href: "/tools/cost-calculator", Icon: Calculator, label: "Cost Calculator" },
+                    { href: "/tools/processing-time", Icon: Clock, label: "Processing Time" },
+                    { href: "/tools/document-checklist", Icon: FileCheck, label: "Document Checklist" },
+                    { href: "/tools/country-comparison", Icon: BarChart3, label: "Country Comparison" },
+                    { href: "/tools/rejection-risk", Icon: ShieldAlert, label: "Rejection Risk" },
+                  ].map((t) => (
+                    <Link key={t.href} href={t.href} onClick={() => setMenuOpen(false)}
+                      className="flex items-center gap-2 py-2 px-2 text-sm text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-colors">
+                      <t.Icon className="w-4 h-4 text-primary-600" />
+                      <span>{t.label}</span>
+                    </Link>
+                  ))}
+                  <Link href="/tools" onClick={() => setMenuOpen(false)}
+                    className="flex items-center gap-1.5 py-2 px-2 text-sm text-accent-700 font-semibold hover:bg-accent-50 rounded-lg transition-colors">
+                    All Tools →
                   </Link>
                 </div>
               )}

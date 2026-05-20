@@ -415,6 +415,49 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── FREE TOOLS ──────────────────────────────────────────────────────── */}
+      <section className="py-16 bg-white border-b border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="inline-block bg-accent-50 text-accent-700 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3">
+              Free Visa Tools
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-800 mb-3">
+              Prepare Your Application With Our Free Tools
+            </h2>
+            <p className="text-gray-500 max-w-xl mx-auto text-sm">
+              Six powerful tools to help you calculate costs, check eligibility, compare countries, and assess your visa approval chances.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {[
+              { title: "Eligibility Checker", desc: "Check your visa approval chances", href: "/tools/eligibility-checker", emoji: "✓" },
+              { title: "Cost Calculator", desc: "Estimate total visa fees", href: "/tools/cost-calculator", emoji: "$" },
+              { title: "Processing Time", desc: "How long will your visa take?", href: "/tools/processing-time", emoji: "⏱" },
+              { title: "Document Checklist", desc: "Generate your document list", href: "/tools/document-checklist", emoji: "📋" },
+              { title: "Country Comparison", desc: "Compare countries side by side", href: "/tools/country-comparison", emoji: "⚖" },
+              { title: "Rejection Risk", desc: "Assess your application risk", href: "/tools/rejection-risk", emoji: "⚠" },
+            ].map((tool) => (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="group bg-gray-50 hover:bg-primary-50 rounded-2xl border border-gray-100 hover:border-primary-200 p-5 text-center transition-all duration-200"
+              >
+                <div className="text-2xl mb-2">{tool.emoji}</div>
+                <h3 className="font-bold text-sm text-gray-900 group-hover:text-primary-800 mb-1 transition-colors">{tool.title}</h3>
+                <p className="text-xs text-gray-500">{tool.desc}</p>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-6">
+            <Link href="/tools" className="inline-flex items-center gap-1.5 text-sm text-accent-700 font-semibold hover:text-accent-900 transition-colors">
+              View All Free Tools
+              <ChevronRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ─── SEO CONTENT ────────────────────────────────────────────────────── */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -33,8 +33,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${BASE}/blog`, lastModified: now, changeFrequency: "daily", priority: 0.9 },
+    { url: `${BASE}/tools`, lastModified: now, changeFrequency: "monthly", priority: 0.88 },
     { url: `${BASE}/tools/eligibility-checker`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${BASE}/tools/cost-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/processing-time`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/document-checklist`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/country-comparison`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/rejection-risk`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${BASE}/about`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
     { url: `${BASE}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
     { url: `${BASE}/disclaimer`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },

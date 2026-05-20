@@ -155,7 +155,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Processes */}
+          {/* Processes + Tools */}
           <div>
             <h3 className="text-white font-semibold mb-4 text-xs uppercase tracking-wider">Apply Process</h3>
             <ul className="space-y-2">
@@ -166,6 +166,29 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+            </ul>
+
+            <h3 className="text-white font-semibold mb-3 mt-5 text-xs uppercase tracking-wider">Free Tools</h3>
+            <ul className="space-y-2">
+              {[
+                { label: "Eligibility Checker", href: "/tools/eligibility-checker" },
+                { label: "Cost Calculator", href: "/tools/cost-calculator" },
+                { label: "Processing Time", href: "/tools/processing-time" },
+                { label: "Document Checklist", href: "/tools/document-checklist" },
+                { label: "Country Comparison", href: "/tools/country-comparison" },
+                { label: "Rejection Risk", href: "/tools/rejection-risk" },
+              ].map((t) => (
+                <li key={t.href}>
+                  <Link href={t.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                    {t.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/tools" className="text-sm text-accent-400 hover:text-accent-300 transition-colors">
+                  All Tools →
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
