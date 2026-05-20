@@ -519,7 +519,7 @@ export default async function ProgrammaticPage({ params }: Props) {
                 <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
                   <CheckCircle2 className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="font-bold text-base leading-tight">Check Your Eligibility</h3>
+                <h3 className="font-bold text-base leading-tight text-white">Check Your Eligibility</h3>
               </div>
               <p className="text-white/75 text-sm mb-4 leading-relaxed">
                 Find out your chances of getting a {country.name} visa in under 2 minutes.
@@ -539,7 +539,7 @@ export default async function ProgrammaticPage({ params }: Props) {
                 <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Calculator className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="font-bold text-base leading-tight">Calculate Visa Cost</h3>
+                <h3 className="font-bold text-base leading-tight text-white">Calculate Visa Cost</h3>
               </div>
               <p className="text-white/80 text-sm mb-4 leading-relaxed">
                 Get a full fee breakdown for your {country.name} {!isCountryLevel ? visaLabel : ""} visa.

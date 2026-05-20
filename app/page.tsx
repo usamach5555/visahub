@@ -362,7 +362,7 @@ export default function HomePage() {
           <div className="flex justify-center mb-4">
             <BookOpen className="w-12 h-12 text-accent-400" />
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold mb-4">
+          <h2 className="text-2xl sm:text-3xl font-extrabold mb-4 text-white">
             10,000+ Free Visa Guides — Updated for 2026
           </h2>
           <p className="text-blue-200 text-base mb-8 max-w-xl mx-auto">

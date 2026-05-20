@@ -476,7 +476,7 @@ export default function AboutPage() {
 
         {/* CTA */}
         <section className="text-center bg-gradient-to-br from-primary-900 to-primary-700 text-white rounded-2xl p-10">
-          <h2 className="text-2xl font-bold mb-4">Start Exploring Visa Guides</h2>
+          <h2 className="text-2xl font-bold mb-4 text-white">Start Exploring Visa Guides</h2>
           <p className="text-blue-100 mb-6 max-w-xl mx-auto">
             Browse 10,000+ free visa and immigration guides covering study, work,
             tourist, and business visas for 131+ countries.

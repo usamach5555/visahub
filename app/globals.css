@@ -92,30 +92,30 @@ h5, h6 {
 /* ── Global link styles ────────────────────────────────────────────────────── */
 
 /*
-  Branded link defaults — apply ONLY when no explicit Tailwind color class
-  is set on the link. Dark-bg links use explicit text-white/text-gray-400
-  which overrides these element selectors.
+  IMPORTANT: Do NOT set color on global `a` — it overrides INHERITED color
+  (e.g. text-white from a parent) because element selectors beat inheritance.
+  This breaks navbars, footers, buttons, and any link inside a dark container.
+
+  Instead, apply branded link colors ONLY inside content areas (.prose-article,
+  main article content) where links should look like links.
 */
 a {
-  color: #1E40AF;
   transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
-a:hover {
+/* Branded link colors only in article/content areas */
+.prose-article a {
+  color: #1E40AF;
+  text-decoration: underline;
+  text-decoration-color: #93c5fd;
+  text-underline-offset: 3px;
+}
+.prose-article a:hover {
   color: #1E3A8A;
+  text-decoration-color: #1E40AF;
 }
-
-a:visited {
-  color: #3730A3;          /* indigo-700 — subtle visited variation */
-}
-
-/* Prevent visited color from applying in dark backgrounds, navs, buttons */
-nav a:visited,
-footer a:visited,
-button a:visited,
-[role="button"] a:visited,
-.no-visited a:visited {
-  color: inherit;
+.prose-article a:visited {
+  color: #3730A3;
 }
 
 /* ── Premium heading utilities ──────────────────────────────────────────────── */
