@@ -5,6 +5,17 @@ import { generateAllProgrammaticSlugs } from "@/lib/slug-parser";
 
 const BASE = "https://www.visaprocessinfo.com";
 
+/**
+ * SITEMAP INDEX — splits 10,000+ URLs into multiple smaller sitemaps.
+ *
+ * Google recommends ≤ 5,000 URLs per sitemap for efficient crawling.
+ * Next.js App Router calls generateSitemaps() first to get an array of { id },
+ * then calls sitemap({ id }) for each to produce individual sitemap XML files.
+ * It automatically creates a /sitemap.xml index pointing to each sub-sitemap.
+ */
+
+const URLS_PER_SITEMAP = 2500;
+
 /** Priority by slug suffix / prefix pattern */
 function slugPriority(slug: string): number {
   if (slug.endsWith("-visa-info")) return 0.95;          // country hub
@@ -27,7 +38,8 @@ function slugPriority(slug: string): number {
   return 0.65;
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+/** Build the complete list of all sitemap entries, ordered by priority */
+function getAllEntries(): MetadataRoute.Sitemap {
   const now = new Date();
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -60,18 +72,40 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // 10,087 programmatic SEO pages
-  const programmaticPages: MetadataRoute.Sitemap = generateAllProgrammaticSlugs().map((slug) => ({
-    url: `${BASE}/${slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: slugPriority(slug),
-  }));
+  // 10,000+ programmatic SEO pages — sorted by priority (highest first)
+  const programmaticPages: MetadataRoute.Sitemap = generateAllProgrammaticSlugs()
+    .map((slug) => ({
+      url: `${BASE}/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: slugPriority(slug),
+    }))
+    .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
 
+  // Static + process + articles first (high value), then programmatic pages by priority
   return [
     ...staticPages,
-    ...programmaticPages,
     ...processPages,
     ...articlePages,
+    ...programmaticPages,
   ];
+}
+
+/**
+ * Generate sitemap index — Next.js creates /sitemap/0.xml, /sitemap/1.xml, etc.
+ * and a /sitemap.xml index file linking to all of them.
+ */
+export async function generateSitemaps() {
+  const totalEntries = getAllEntries().length;
+  const numSitemaps = Math.ceil(totalEntries / URLS_PER_SITEMAP);
+
+  return Array.from({ length: numSitemaps }, (_, i) => ({ id: i }));
+}
+
+export default function sitemap({ id }: { id: number }): MetadataRoute.Sitemap {
+  const allEntries = getAllEntries();
+  const start = id * URLS_PER_SITEMAP;
+  const end = start + URLS_PER_SITEMAP;
+
+  return allEntries.slice(start, end);
 }
