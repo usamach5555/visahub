@@ -7,7 +7,7 @@ interface AdSlotProps {
 
 /**
  * AdSense-ready slot. To activate:
- * 1. Add <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossOrigin="anonymous" /> to app/layout.tsx <head>.
+ * 1. Add <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4441490689171176" crossOrigin="anonymous" /> to app/layout.tsx <head>.
  * 2. Replace data-ad-client and data-ad-slot below with your publisher/slot IDs.
  * 3. Uncomment the <ins> element.
  */
@@ -30,7 +30,7 @@ export default function AdSlot({ slot, className = "" }: AdSlotProps) {
       <ins
         className="adsbygoogle"
         style={{ display: "block" }}
-        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+        data-ad-client="ca-pub-4441490689171176"
         data-ad-slot="XXXXXXXXXX"
         data-ad-format="auto"
         data-full-width-responsive="true"

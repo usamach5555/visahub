@@ -65,8 +65,8 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         {/* Viewport — prevent horizontal scroll on mobile */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        {/* AdSense script — replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID */}
-        {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossOrigin="anonymous" /> */}
+        {/* Google AdSense auto ads */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4441490689171176" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
