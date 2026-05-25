@@ -12,16 +12,24 @@ const BASE = "https://www.visaprocessinfo.com";
  * Next.js App Router calls generateSitemaps() first to get an array of { id },
  * then calls sitemap({ id }) for each to produce individual sitemap XML files.
  * It automatically creates a /sitemap.xml index pointing to each sub-sitemap.
+ *
+ * Performance: getAllEntries() is memoized at module level — it runs once per
+ * serverless function cold-start instead of N+1 times, preventing timeouts.
  */
+
+// Force static generation — sitemaps are pre-built at deploy time and cached.
+// Revalidate every 24 hours so new content appears without full redeploy.
+export const dynamic = "force-static";
+export const revalidate = 86400;
 
 const URLS_PER_SITEMAP = 2500;
 
 /** Priority by slug suffix / prefix pattern */
 function slugPriority(slug: string): number {
-  if (slug.endsWith("-visa-info")) return 0.95;          // country hub
-  if (slug.endsWith("-embassy-guide")) return 0.85;      // embassy guide
-  if (slug.startsWith("apply-")) return 0.9;             // apply page
-  if (slug.startsWith("how-to-apply-")) return 0.88;    // how-to page
+  if (slug.endsWith("-visa-info")) return 0.95;
+  if (slug.endsWith("-embassy-guide")) return 0.85;
+  if (slug.startsWith("apply-")) return 0.9;
+  if (slug.startsWith("how-to-apply-")) return 0.88;
   if (slug.endsWith("-visa-requirements")) return 0.82;
   if (slug.endsWith("-visa-documents")) return 0.82;
   if (slug.endsWith("-visa-fees")) return 0.80;
@@ -38,24 +46,32 @@ function slugPriority(slug: string): number {
   return 0.65;
 }
 
-/** Build the complete list of all sitemap entries, ordered by priority */
+/**
+ * Module-level cache — populated once per cold start.
+ * Prevents re-computing 10,000+ slugs on every sitemap request.
+ */
+let _cachedEntries: MetadataRoute.Sitemap | null = null;
+
+/** Build (and memoize) the complete ordered list of all sitemap entries */
 function getAllEntries(): MetadataRoute.Sitemap {
+  if (_cachedEntries) return _cachedEntries;
+
   const now = new Date();
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
-    { url: `${BASE}/blog`, lastModified: now, changeFrequency: "daily", priority: 0.9 },
-    { url: `${BASE}/tools`, lastModified: now, changeFrequency: "monthly", priority: 0.88 },
-    { url: `${BASE}/tools/eligibility-checker`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/tools/cost-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/tools/processing-time`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/tools/document-checklist`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/tools/country-comparison`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/tools/rejection-risk`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/about`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
-    { url: `${BASE}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${BASE}/disclaimer`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${BASE}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: BASE,                                     lastModified: now, changeFrequency: "weekly",  priority: 1.0  },
+    { url: `${BASE}/blog`,                           lastModified: now, changeFrequency: "daily",   priority: 0.9  },
+    { url: `${BASE}/tools`,                          lastModified: now, changeFrequency: "monthly", priority: 0.88 },
+    { url: `${BASE}/tools/eligibility-checker`,      lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/cost-calculator`,          lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/processing-time`,          lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/document-checklist`,       lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/country-comparison`,       lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/rejection-risk`,           lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/about`,                          lastModified: now, changeFrequency: "yearly",  priority: 0.4  },
+    { url: `${BASE}/privacy`,                        lastModified: now, changeFrequency: "yearly",  priority: 0.2  },
+    { url: `${BASE}/disclaimer`,                     lastModified: now, changeFrequency: "yearly",  priority: 0.2  },
+    { url: `${BASE}/contact`,                        lastModified: now, changeFrequency: "yearly",  priority: 0.3  },
   ];
 
   const processPages: MetadataRoute.Sitemap = getAllProcessSlugs().map((slug) => ({
@@ -83,12 +99,14 @@ function getAllEntries(): MetadataRoute.Sitemap {
     .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
 
   // Static + process + articles first (high value), then programmatic pages by priority
-  return [
+  _cachedEntries = [
     ...staticPages,
     ...processPages,
     ...articlePages,
     ...programmaticPages,
   ];
+
+  return _cachedEntries;
 }
 
 /**
@@ -98,14 +116,12 @@ function getAllEntries(): MetadataRoute.Sitemap {
 export async function generateSitemaps() {
   const totalEntries = getAllEntries().length;
   const numSitemaps = Math.ceil(totalEntries / URLS_PER_SITEMAP);
-
   return Array.from({ length: numSitemaps }, (_, i) => ({ id: i }));
 }
 
 export default function sitemap({ id }: { id: number }): MetadataRoute.Sitemap {
-  const allEntries = getAllEntries();
+  const allEntries = getAllEntries(); // returns cached result — no recomputation
   const start = id * URLS_PER_SITEMAP;
-  const end = start + URLS_PER_SITEMAP;
-
+  const end   = start + URLS_PER_SITEMAP;
   return allEntries.slice(start, end);
 }
