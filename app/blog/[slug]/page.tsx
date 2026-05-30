@@ -146,7 +146,19 @@ export default async function BlogPostPage({ params }: Props) {
                     return (
                       <section key={i}>
                         <h2 className="text-2xl font-bold text-primary-800 mb-4">Introduction</h2>
-                        <p className="text-gray-700 leading-relaxed">{section.content as string}</p>
+                        {(section.content as string).split("\n\n").map((para, pi) => (
+                          <p key={pi} className="text-gray-700 leading-relaxed mb-3">{para}</p>
+                        ))}
+                      </section>
+                    );
+
+                  case "eligibility":
+                    return (
+                      <section key={i}>
+                        <h2 className="text-2xl font-bold text-primary-800 mb-4">Eligibility Requirements</h2>
+                        <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
+                          <p className="text-sm text-gray-700 leading-relaxed">{section.content as string}</p>
+                        </div>
                       </section>
                     );
 
@@ -191,12 +203,49 @@ export default async function BlogPostPage({ params }: Props) {
                       </section>
                     );
 
+                  case "financial":
+                    return (
+                      <section key={i}>
+                        <h2 className="text-2xl font-bold text-primary-800 mb-4">Financial Requirements</h2>
+                        <div className="bg-green-50 border border-green-200 rounded-xl p-5">
+                          <p className="text-sm text-gray-700 leading-relaxed">{section.content as string}</p>
+                        </div>
+                      </section>
+                    );
+
+                  case "processing":
+                    return (
+                      <section key={i}>
+                        <h2 className="text-2xl font-bold text-primary-800 mb-4">Processing Times</h2>
+                        <div className="bg-purple-50 border border-purple-200 rounded-xl p-5">
+                          <p className="text-sm text-gray-700 leading-relaxed">{section.content as string}</p>
+                        </div>
+                      </section>
+                    );
+
                   case "fees":
                     return (
                       <section key={i}>
                         <h2 className="text-2xl font-bold text-primary-800 mb-4">Fees and Costs</h2>
                         <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-5">
                           <p className="text-sm text-gray-700 leading-relaxed">{section.content as string}</p>
+                        </div>
+                      </section>
+                    );
+
+                  case "tips":
+                    return (
+                      <section key={i}>
+                        <h2 className="text-2xl font-bold text-primary-800 mb-4">Tips for a Successful Application</h2>
+                        <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-5">
+                          <ul className="space-y-3">
+                            {(section.content as string[]).map((tip, j) => (
+                              <li key={j} className="flex items-start gap-3 text-sm text-gray-700">
+                                <span className="text-emerald-600 mt-0.5 shrink-0 text-base">★</span>
+                                {tip}
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       </section>
                     );
@@ -238,7 +287,9 @@ export default async function BlogPostPage({ params }: Props) {
                     return (
                       <section key={i} className="bg-primary-50 border border-primary-100 rounded-2xl p-6">
                         <h2 className="text-xl font-bold text-primary-800 mb-3">Conclusion</h2>
-                        <p className="text-gray-700 leading-relaxed">{section.content as string}</p>
+                        {(section.content as string).split("\n\n").map((para, pi) => (
+                          <p key={pi} className="text-gray-700 leading-relaxed mb-3 last:mb-0">{para}</p>
+                        ))}
                       </section>
                     );
 
