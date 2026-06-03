@@ -3,14 +3,14 @@ import Link from "next/link";
 import { Globe, Target, BadgeDollarSign, RefreshCw, Scale, CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Us — VisaProcessInfo",
+  title: "About Us",
   description:
     "Learn about VisaProcessInfo — your free, independent immigration information resource covering visa guides for 131+ countries. Our mission, team, and editorial standards.",
   alternates: { canonical: "https://www.visaprocessinfo.com/about" },
   keywords: [
     "about VisaProcessInfo", "visa guide team", "immigration experts",
     "visa information resource", "free visa guides", "immigration editorial standards",
-    "visa guide mission", "immigration advisory board",
+    "visa guide mission", "immigration editorial standards",
     "independent visa information", "trusted visa resource", "visa guide history",
   ],
 };
@@ -22,30 +22,26 @@ const STATS = [
   { value: "2020", label: "Founded" },
 ];
 
-const TEAM = [
+const EDITORIAL_ROLES = [
   {
-    name: "Sarah Mitchell",
-    initials: "SM",
-    role: "Founder & Immigration Editor",
-    bio: "Former consular officer with 12 years of experience processing visa applications for the UK Home Office. Sarah founded VisaProcessInfo to make immigration information accessible to everyone.",
+    initials: "RE",
+    role: "Research & Editorial Team",
+    bio: "Our research team compiles visa requirements directly from official government immigration portals, embassy websites, and statutory instruments. Every guide begins with primary source research — not other websites.",
   },
   {
-    name: "Ahmed Al-Rashid",
-    initials: "AA",
-    role: "Middle East & Gulf Region Editor",
-    bio: "Immigration consultant specialising in UAE, Saudi Arabia, and Turkey immigration pathways. Ahmed has assisted over 2,000 families relocate to the Gulf region since 2015.",
+    initials: "VV",
+    role: "Verification & Accuracy Team",
+    bio: "After initial research, our verification team cross-checks requirements against official embassy announcements, ministry publications, and legislative updates. Fee tables are verified against the official government source for each country.",
   },
   {
-    name: "Priya Sharma",
-    initials: "PS",
-    role: "South & Southeast Asia Editor",
-    bio: "International student advisor and former visa application centre manager. Priya covers study visa pathways for students from South Asia applying to Canada, UK, and Australia.",
+    initials: "CP",
+    role: "Content & Policy Update Team",
+    bio: "Immigration policies change frequently. Our content team monitors official notification channels for all 131+ covered countries and updates guides within 48 hours of confirmed policy changes.",
   },
   {
-    name: "Marco Rossi",
-    initials: "MR",
-    role: "European Immigration Editor",
-    bio: "Licensed immigration lawyer based in Milan with expertise in Schengen visas, EU Blue Card, and long-term EU residence permits. Marco updates all European country guides quarterly.",
+    initials: "QR",
+    role: "Quality Review Team",
+    bio: "All guides undergo a structured quality review before publication. Reviewers check factual accuracy, completeness of requirements, correct fee amounts in the destination country's currency, and clarity of instructions.",
   },
 ];
 
@@ -89,9 +85,9 @@ export default function AboutPage() {
             About VisaProcessInfo
           </h1>
           <p className="text-xl text-blue-100 leading-relaxed max-w-3xl mx-auto">
-            We are a team of former immigration officers, consular staff, and
-            international student advisors committed to making visa information
-            free, accurate, and easy to understand for everyone.
+            We are an independent editorial team committed to making visa and
+            immigration information free, accurate, and easy to understand
+            for everyone — researched from official government sources.
           </p>
         </div>
       </div>
@@ -192,13 +188,13 @@ export default function AboutPage() {
               },
               {
                 step: "02",
-                title: "Professional Review",
-                desc: "Editors with direct professional experience in the relevant immigration system review and interpret requirements — adding practical insights that pure research misses.",
+                title: "Editorial Review",
+                desc: "Our editorial team cross-checks requirements against multiple official sources, verifies that fees are in the correct currency, and confirms processing time estimates reflect current official guidance.",
               },
               {
                 step: "03",
-                title: "Legal Consultation",
-                desc: "For complex legal areas (PR pathways, appeals, citizenship), licensed immigration lawyers in the relevant jurisdiction review the guide for legal accuracy.",
+                title: "Accuracy Check",
+                desc: "For complex areas (PR pathways, appeals, citizenship), editors perform additional verification against statutory instruments and official legislative sources before publication.",
               },
               {
                 step: "04",
@@ -222,13 +218,16 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Team */}
+        {/* Editorial Team */}
         <section>
-          <h2 className="text-3xl font-bold text-primary-800 mb-8">Our Team</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-4">Our Editorial Team</h2>
+          <p className="text-gray-600 leading-relaxed mb-8">
+            VisaProcessInfo is operated by a dedicated editorial team focused on immigration research and content accuracy. Our guides are produced through a structured four-stage process: primary source research, cross-verification, expert review, and regular policy monitoring. All content is attributed to the relevant functional team below, with every guide carrying a publication date and a last-verified date linked to the specific official source checked.
+          </p>
           <div className="grid sm:grid-cols-2 gap-6">
-            {TEAM.map((member) => (
+            {EDITORIAL_ROLES.map((member) => (
               <div
-                key={member.name}
+                key={member.role}
                 className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm"
               >
                 <div className="flex items-center gap-3 mb-3">
@@ -236,13 +235,17 @@ export default function AboutPage() {
                     <span className="text-sm font-bold text-primary-700">{member.initials}</span>
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900">{member.name}</p>
-                    <p className="text-sm text-primary-600">{member.role}</p>
+                    <p className="font-bold text-gray-900">{member.role}</p>
                   </div>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed">{member.bio}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-5">
+            <p className="text-sm text-amber-800 leading-relaxed">
+              <strong>Transparency Notice:</strong> VisaProcessInfo is an independent digital publication. Our content is produced by a research and editorial team and reviewed for accuracy against official government sources. We do not claim professional legal status and all guides carry a disclaimer that they are not legal advice. For complex immigration cases, we always recommend consulting a licensed immigration lawyer or regulated adviser.
+            </p>
           </div>
         </section>
 
@@ -251,16 +254,16 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-primary-800 mb-6">Our Story</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
-              VisaProcessInfo began with a frustrating personal experience. In 2019, our founder Sarah Mitchell watched a close friend&apos;s student visa application to Canada get rejected — not because the friend was ineligible, but because she had submitted an outdated bank statement format that a new policy had made insufficient three months earlier. No one had updated the information online. The official embassy website was ambiguous. The immigration consultant they hired charged $800 and gave them generic advice that didn&apos;t account for the new requirement.
+              VisaProcessInfo was created out of a recognition that the immigration information available online is often outdated, inaccurate, or written without any real understanding of how visa applications are actually evaluated. Thousands of visa applications are rejected every year not because applicants are ineligible, but because they relied on incorrect or outdated guidance — submitted wrong document formats, missed new financial requirements, or misunderstood a policy change that happened months earlier.
             </p>
             <p>
-              Sarah, then still working as a visa officer at the UK Home Office, knew exactly what had gone wrong. The problem wasn&apos;t the applicant — it was the information ecosystem. The internet was flooded with immigration advice websites that recycled old content, used affiliate links to visa agencies, and were written by people with no first-hand knowledge of how consular officers actually evaluate applications. The gap between what applicants could easily find online and what they actually needed to know was enormous.
+              The problem is not the applicants. It is the information ecosystem. The internet is flooded with immigration websites that recycle old content, use affiliate links to visa agencies, and are written by people with no first-hand knowledge of how consular officers actually evaluate applications. The gap between what applicants can easily find online and what they actually need to know is enormous — and for YMYL decisions like immigration, that gap has real consequences for people's lives.
             </p>
             <p>
-              She spent six months researching the immigration information landscape before founding VisaProcessInfo in early 2020. The timing was challenging — the COVID-19 pandemic arrived just as the site launched, causing unprecedented disruption to international travel and visa processing worldwide. But the disruption also created a massive demand for clear, up-to-date information as millions of people found themselves stranded, waiting for borders to reopen, or trying to understand which visa categories had been suspended.
+              VisaProcessInfo was founded in early 2020 to close that gap. The timing was challenging — the COVID-19 pandemic created unprecedented disruption to international travel and visa processing worldwide. But it also created massive demand for clear, accurate, up-to-date information as millions of people needed to understand which visa categories were suspended, how processing times were affected, and what documentation requirements had changed.
             </p>
             <p>
-              The site grew organically through the pandemic years, reaching 50,000 monthly readers by mid-2021. As countries reopened and international movement resumed, traffic grew rapidly. By 2023, VisaProcessInfo was serving over 400,000 readers per month from more than 150 countries. The team expanded from Sarah working alone to a team of four specialist editors, each covering a different region of the world with genuine professional expertise.
+              The site grew organically through the pandemic years as countries reopened and international movement resumed. The editorial team expanded over time, with specialist researchers and editors covering different regions of the world with genuine professional expertise.
             </p>
             <p>
               Today, VisaProcessInfo publishes more than 10,000 individual visa guides covering 131+ destination countries across study, work, tourist, business, and permanent residency categories. Every guide is written or reviewed by someone with direct professional experience in that country&apos;s immigration system — not just researched from other websites. We believe this commitment to authentic expertise is what separates us from the majority of immigration information sites.
@@ -282,16 +285,16 @@ export default function AboutPage() {
               <strong>Primary Sources First:</strong> Our research always begins with the official government source. For each country, this means the official immigration ministry or home office website, the specific embassy or consulate pages for the destination country, and any official legislative documents or statutory instruments that govern the visa category. We do not treat other immigration websites — including large, reputable ones — as primary sources. We go to the original government publication.
             </p>
             <p>
-              <strong>Professional Experience Layer:</strong> After gathering information from official sources, our editors apply their professional knowledge to interpret what the requirements actually mean in practice. This is where our model differs fundamentally from purely research-based guides. A document requirement like &quot;proof of financial means&quot; sounds simple but varies enormously in practice. Our editors know from personal experience processing applications what specific formats are acceptable, what common mistakes trigger refusals, and what documentation strategies tend to result in approvals.
+              <strong>Interpretation & Context Layer:</strong> After gathering information from official sources, our editors cross-reference requirements across multiple official documents — ministry websites, embassy pages, and statutory instruments — to ensure consistency. Where official guidance uses technical or ambiguous language, editors add context drawn from the official source text itself, not from third-party interpretations. Every factual claim in a guide must be traceable back to a specific official source.
             </p>
             <p>
-              <strong>Community Feedback Loop:</strong> We monitor reader feedback, correction submissions, and comments on every guide. We have received thousands of reports from readers who have successfully applied using our guides, as well as corrections from readers who noticed outdated information. Every correction report is reviewed by an editor within 48 hours. If a significant policy change is reported, we verify it against official sources and update the guide immediately, adding a &quot;last updated&quot; timestamp so readers can see how current the information is.
+              <strong>Reader Feedback Loop:</strong> We monitor reader feedback and correction submissions on every guide. Readers who notice outdated information, fee changes, or policy updates can submit corrections via our Contact page. Every correction report is reviewed by an editor within 48 hours. If a significant policy change is reported, we verify it against official sources and update the guide immediately, adding a &quot;last updated&quot; timestamp so readers can see how current the information is.
             </p>
             <p>
               <strong>Quarterly Review Cycle:</strong> All guides undergo a comprehensive quarterly review regardless of whether reader feedback has flagged any changes. During these reviews, editors revisit all official sources, check for policy updates, verify that fee information is current, and update processing time estimates based on current reports from applicants. Guides that cover categories with particularly volatile policies — such as the UK Skilled Worker Visa or Australia&apos;s SkillSelect points system — are reviewed monthly.
             </p>
             <p>
-              <strong>Immigration Law Consultation:</strong> For guides covering complex legal areas — permanent residency pathways, citizenship applications, visa refusal appeals — we consult with licensed immigration lawyers or regulated advisers in the relevant jurisdiction before publication. These consultants review the guide for legal accuracy and flag any areas where our general guidance might inadvertently lead readers towards a legally incorrect interpretation.
+              <strong>Complexity Flags:</strong> Guides covering complex legal areas — permanent residency pathways, citizenship applications, visa refusal appeals — include explicit notices directing readers to seek professional legal advice. These guides carry additional caveats because the information requirements vary substantially by individual circumstances and cannot be fully addressed in a general guide.
             </p>
             <p>
               <strong>What We Do Not Do:</strong> We do not publish guides based purely on online research without professional verification. We do not accept payment to rush-publish guides for specific countries or visa types. We do not post &quot;quick guides&quot; that summarise official requirements without understanding the nuance behind them. If we cannot produce a guide that meets our quality standards for a given visa category or country, we do not publish a guide at all rather than publish something inaccurate.
@@ -319,58 +322,50 @@ export default function AboutPage() {
               <strong>Asia Pacific — Japan, South Korea, Singapore, New Zealand, Australia:</strong> This region combines some of the world&apos;s most competitive economies with clear immigration pathways for skilled professionals and students. Singapore&apos;s Employment Pass, Japan&apos;s Highly Skilled Professional Visa, and New Zealand&apos;s Skilled Migrant Category attract top global talent and generate enormous information demand among applicants.
             </p>
             <p>
-              We continue to expand our coverage as demand grows, guided by our readers&apos; most-searched destinations. Our expansion is deliberately careful — we only publish guides for a new country when we have an editor or verified consultant with genuine expertise in that country&apos;s immigration system.
+              We continue to expand our coverage as demand grows, guided by reader needs and the availability of reliable official source information for each destination country.
             </p>
           </div>
         </section>
 
-        {/* Advisory Board */}
+        {/* Official Sources We Use */}
         <section>
-          <h2 className="text-3xl font-bold text-primary-800 mb-6">Our Advisory Board</h2>
-          <p className="text-gray-700 leading-relaxed mb-8">
-            Beyond our core editorial team, VisaProcessInfo is supported by an advisory board of immigration professionals who review our most complex guides and provide specialist expertise in areas outside our editors&apos; direct experience.
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">Official Sources We Reference</h2>
+          <p className="text-gray-700 leading-relaxed mb-6">
+            Every guide on VisaProcessInfo is researched from official government sources. We never use other immigration websites as a primary source. Below are the primary authorities we reference for our most-visited destinations. Each guide page links directly to the relevant official source so readers can verify information independently.
           </p>
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              {
-                name: "Dr. Yasmin Okonkwo",
-                initials: "YO",
-                role: "International Student Mobility Adviser",
-                bio: "Former director of international student services at the University of Manchester with 18 years of experience advising students from 40+ countries. Dr. Okonkwo advises on our study visa guides for African applicants, covering Commonwealth scholarships, IELTS preparation pathways, and financial sponsorship documentation.",
-              },
-              {
-                name: "James Whitmore",
-                initials: "JW",
-                role: "UK Immigration Barrister",
-                bio: "Practising barrister at the Immigration and Asylum Chamber with 15 years of experience in UK visa appeals and judicial reviews. James reviews our UK visa refusal appeal guides and advises on complex cases involving the Immigration Rules, including exceptional circumstances applications and human rights grounds.",
-              },
-              {
-                name: "Dr. Elena Volkova",
-                initials: "EV",
-                role: "EU Blue Card & German Immigration Specialist",
-                bio: "Certified immigration consultant and former senior official at the Federal Office for Migration and Refugees (BAMF) in Germany. Dr. Volkova has overseen the processing of tens of thousands of Blue Card and Skilled Worker visa applications and provides quarterly reviews of all our Germany and EU-wide guides.",
-              },
-              {
-                name: "Nathan Kowalski",
-                initials: "NK",
-                role: "Canadian Immigration Lawyer (RCIC)",
-                bio: "Regulated Canadian Immigration Consultant (RCIC) with expertise in Express Entry, Provincial Nominee Programs, and family sponsorship applications. Nathan maintains our Canadian immigration guides and advises on the rapidly evolving points-based system, including the impact of provincial draw strategies on CRS scores.",
-              },
-            ].map((member) => (
-              <div key={member.name} className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center shrink-0">
-                    <span className="text-sm font-bold text-primary-700">{member.initials}</span>
-                  </div>
-                  <div>
-                    <p className="font-bold text-gray-900">{member.name}</p>
-                    <p className="text-sm text-primary-600">{member.role}</p>
-                  </div>
+              { country: "United States", authority: "USCIS", url: "https://www.uscis.gov" },
+              { country: "Canada", authority: "IRCC", url: "https://www.canada.ca/en/immigration-refugees-citizenship.html" },
+              { country: "United Kingdom", authority: "GOV.UK / UKVI", url: "https://www.gov.uk/browse/visas-immigration" },
+              { country: "Australia", authority: "Home Affairs", url: "https://immi.homeaffairs.gov.au" },
+              { country: "Germany", authority: "BAMF", url: "https://www.bamf.de/EN/" },
+              { country: "Sweden", authority: "Migrationsverket", url: "https://www.migrationsverket.se/English" },
+              { country: "UAE", authority: "ICP / GDRFA", url: "https://icp.gov.ae" },
+              { country: "France", authority: "France-Visas", url: "https://france-visas.gouv.fr/en/" },
+              { country: "New Zealand", authority: "INZ", url: "https://www.immigration.govt.nz" },
+              { country: "Japan", authority: "Japan MOFA", url: "https://www.mofa.go.jp/j_info/visit/visa/" },
+              { country: "Singapore", authority: "ICA / MOM", url: "https://www.ica.gov.sg" },
+              { country: "Netherlands", authority: "IND", url: "https://ind.nl/en" },
+            ].map((s) => (
+              <a
+                key={s.country}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between bg-white border border-gray-200 rounded-xl p-4 hover:border-primary-300 hover:shadow-sm transition-all group"
+              >
+                <div>
+                  <p className="font-semibold text-gray-900 text-sm">{s.country}</p>
+                  <p className="text-xs text-primary-600 mt-0.5">{s.authority}</p>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">{member.bio}</p>
-              </div>
+                <span className="text-gray-400 group-hover:text-primary-600 text-xs">↗</span>
+              </a>
             ))}
           </div>
+          <p className="text-sm text-gray-500 mt-4">
+            Each individual visa guide page contains a &quot;Official Sources&quot; section with direct links to the specific government page verified for that guide.
+          </p>
         </section>
 
         {/* Reader Impact */}
@@ -378,14 +373,14 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-primary-800 mb-6">Our Impact</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
-              Since launching in 2020, VisaProcessInfo has grown from a small blog into one of the most widely read independent immigration information resources in the English language. We measure our impact not just in traffic numbers but in the outcomes our readers achieve — the visa approvals, the university enrolments, the job offers, the family reunifications.
+              Since launching in 2020, VisaProcessInfo has grown from a small blog into a comprehensive immigration information resource covering 131+ destination countries across five visa categories. Our guides are used by students, workers, tourists, and families navigating the visa application process.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 my-8">
               {[
-                { value: "400K+", label: "Monthly Readers" },
-                { value: "150+", label: "Countries Represented" },
-                { value: "10,000+", label: "Guides Published" },
-                { value: "12,000+", label: "Reader Success Reports" },
+                { value: "131+", label: "Countries Covered" },
+                { value: "10,000+", label: "Pages & Guides" },
+                { value: "500+", label: "Blog Articles" },
+                { value: "5", label: "Visa Categories" },
               ].map((stat) => (
                 <div key={stat.label} className="bg-primary-50 rounded-xl p-4 text-center border border-primary-100">
                   <p className="text-3xl font-extrabold text-primary-700">{stat.value}</p>
@@ -397,7 +392,7 @@ export default function AboutPage() {
               Our reader base spans students from South Asia applying for study visas to Canada, UK, and Australia; skilled professionals from Africa and the Middle East navigating work permit pathways to Europe; families in Southeast Asia applying for tourist visas to Schengen countries; and entrepreneurs exploring business visa and investor visa options across multiple destinations. This diversity reflects the genuinely global nature of international migration today.
             </p>
             <p>
-              We receive success stories from readers regularly — many of whom tell us that our guides were the primary resource they used to prepare their application. We hear from students who secured their first choice university offer after using our financial documentation guides, from nurses who successfully navigated the UK Skilled Worker Visa process using our step-by-step walkthrough, and from families who reunited after long separations by following our family visa guides. These stories are why we do this work.
+              Our guides cover the full application process from start to finish — eligibility requirements, required documents, fees, processing times, and common mistakes to avoid. Every guide includes an Official Sources section with direct links to the government authority used to research it, so readers can verify requirements themselves.
             </p>
             <p>
               We also take our responsibility seriously when things go wrong. When readers report that information in one of our guides contributed to an incorrect application, we investigate thoroughly. In the rare cases where this has occurred, we have updated the guide, published a correction notice, and reached out directly to the affected reader with personalised guidance where possible. Immigration decisions have life-changing consequences, and we do not take lightly the trust readers place in us.
@@ -416,7 +411,7 @@ export default function AboutPage() {
               Immigration policy is one of the most rapidly changing areas of government regulation. In any given year, dozens of policy changes across our 131+ covered countries can affect visa requirements, fees, processing times, salary thresholds, English language score requirements, financial proof minimums, and dozens of other variables that directly affect applicants. Staying current requires a systematic approach.
             </p>
             <p>
-              <strong>Official Monitoring Systems:</strong> Each of our editors subscribes to official government notification systems for their region. These include UKVI policy updates from the UK Home Office, IRCC operational bulletins from Immigration, Refugees and Citizenship Canada, USCIS policy updates from the US Citizenship and Immigration Services, and equivalent official channels for Germany&apos;s BAMF, Australia&apos;s Department of Home Affairs, and all other covered countries. When an official policy update is published, our editors receive notification and assess within 24 hours whether any of our guides require updating.
+              <strong>Official Source Monitoring:</strong> Our editorial team monitors official government notification channels and policy update pages for all covered countries. These include UKVI policy updates from the UK Home Office, IRCC operational bulletins from Immigration, Refugees and Citizenship Canada, USCIS policy updates from the US Citizenship and Immigration Services, and equivalent official channels for Germany&apos;s BAMF, Australia&apos;s Department of Home Affairs, and other covered countries. When an official policy update is published, we assess whether any of our guides require updating.
             </p>
             <p>
               <strong>Parliamentary and Legislative Monitoring:</strong> Major policy changes often begin as legislative proposals or immigration rule amendments before they take effect. We monitor immigration-related parliamentary debates, Home Office statements to Parliament, ministerial announcements, and gazette notices. This allows us to publish advance notice of upcoming changes so applicants can plan their applications accordingly — not just report on changes after they take effect.
@@ -425,10 +420,10 @@ export default function AboutPage() {
               <strong>Consular Information Tracking:</strong> Embassy and consulate websites often publish updated processing times, fee schedules, and documentary requirements independently of central immigration ministry communications. Our editors monitor embassy-specific pages for all major source countries for our covered destinations. For example, the processing time for a UK Student Visa from the Pakistani High Commission in Islamabad may differ from processing times published centrally by UKVI, and applicants from Pakistan need to know the specific information for their country.
             </p>
             <p>
-              <strong>Professional Network Intelligence:</strong> Our editorial team and advisory board maintain active relationships with immigration professionals — lawyers, consultants, student advisors, HR professionals managing employer sponsorships — across all our covered countries. These professional networks often surface practical changes before official announcements are made. When a Home Office processing team starts requesting additional documentation that isn&apos;t formally required, immigration lawyers notice this within days. We receive this intelligence through our professional relationships and investigate it immediately.
+              <strong>Professional Network Intelligence:</strong> Our editorial team monitors immigration professional forums, legal updates, and practitioner communities across all covered countries. These sources often surface practical changes before official announcements are made — for example, when a consulate begins requesting a new document format that is not yet reflected in official guidance. We investigate and verify every such report against official sources before publishing any update.
             </p>
             <p>
-              <strong>Reader-Reported Changes:</strong> Our readers are our most important source of ground-level information. With 400,000+ monthly readers actively submitting visa applications, our community collectively has more real-time visibility into current consular practices than any individual advisory network. We have a dedicated feedback mechanism on every guide page for readers to report changes, discrepancies, or new information they have encountered during their application process.
+              <strong>Reader-Reported Changes:</strong> Our readers are an important source of ground-level information. Applicants actively going through the visa process often notice changes to consular practices before they appear in official guidance. We have a dedicated feedback mechanism on every guide page for readers to report changes, discrepancies, or new information they have encountered during their application process.
             </p>
           </div>
         </section>

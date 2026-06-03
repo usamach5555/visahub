@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import VisaCostCalculator from "@/components/VisaCostCalculator";
 
 export const metadata: Metadata = {
-  title: "Visa Cost Calculator — Estimate Your Total Visa Fees | VisaProcessInfo",
+  title: "Visa Cost Calculator — Estimate Your Total Visa Fees",
   description: "Calculate the total cost of your visa application including government fees, biometric fees, medical examination, translation costs, and consultant fees. Free and accurate estimates for 50+ countries.",
   alternates: { canonical: "https://www.visaprocessinfo.com/tools/cost-calculator" },
 };

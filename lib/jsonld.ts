@@ -24,6 +24,7 @@ export interface ArticleSchemaInput {
   url: string;
   publishedAt: string;
   authorName?: string;
+  image?: string;
 }
 
 export function articleSchema(input: ArticleSchemaInput) {
@@ -34,14 +35,27 @@ export function articleSchema(input: ArticleSchemaInput) {
     description: input.description,
     url: input.url,
     datePublished: input.publishedAt,
+    dateModified: input.publishedAt,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": input.url,
+    },
+    image: input.image ?? "https://images.unsplash.com/photo-1553697388-94e804e2f0f6?w=1200&h=630&auto=format&q=85&fit=crop",
     author: {
       "@type": "Organization",
-      name: input.authorName ?? "VisaProcessInfo",
+      name: "VisaProcessInfo Editorial Team",
+      url: "https://www.visaprocessinfo.com/about",
     },
     publisher: {
       "@type": "Organization",
       name: "VisaProcessInfo",
       url: "https://www.visaprocessinfo.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.visaprocessinfo.com/icon.svg",
+        width: 60,
+        height: 60,
+      },
     },
   };
 }
@@ -84,11 +98,6 @@ export function organizationSchema() {
     description:
       "Free visa and immigration guides for 131+ countries — study, work, tourist, and PR pathways.",
     foundingDate: "2020",
-    founder: {
-      "@type": "Person",
-      name: "Sarah Mitchell",
-      jobTitle: "Founder & Immigration Editor",
-    },
     numberOfEmployees: {
       "@type": "QuantitativeValue",
       value: 4,

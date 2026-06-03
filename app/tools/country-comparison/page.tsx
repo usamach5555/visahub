@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import CountryComparisonTool from "@/components/CountryComparisonTool";
 
 export const metadata: Metadata = {
-  title: "Country Comparison Tool — Compare Visa Requirements Side by Side | VisaProcessInfo",
+  title: "Country Comparison Tool — Compare Visa Requirements Side by Side",
   description: "Compare visa fees, processing times, difficulty levels, and requirements across 2-3 countries side by side. Make informed decisions about where to apply with our free comparison tool.",
   alternates: { canonical: "https://www.visaprocessinfo.com/tools/country-comparison" },
 };

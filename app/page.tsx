@@ -24,7 +24,7 @@ import { faqSchema } from "@/lib/jsonld";
 import { HOMEPAGE_KEYWORDS } from "@/lib/seo-keywords";
 
 export const metadata: Metadata = {
-  title: "VisaProcessInfo — Visa & Immigration Guides for 131 Countries",
+  title: { absolute: "VisaProcessInfo — Visa & Immigration Guides for 131 Countries" },
   description:
     "Your complete resource for study visas, work visas, tourist visas, and immigration guides for 131 countries worldwide. Step-by-step guides, fee breakdowns, and processing times — updated for 2026.",
   alternates: { canonical: "https://www.visaprocessinfo.com" },
@@ -386,16 +386,16 @@ export default function HomePage() {
               Why Trust VisaProcessInfo
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-primary-800 mb-3">
-              Built by Immigration Professionals
+              Built on Official Government Sources
             </h2>
             <p className="text-gray-500 max-w-xl mx-auto text-sm">
-              Our guides are written and reviewed by former visa officers, consular staff, and licensed immigration consultants — not just researchers.
+              Every guide is researched directly from official government immigration portals, embassy websites, and legislative sources — not from other immigration sites.
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
               { icon: "🛡️", title: "Official Sources", desc: "Every guide researched from government portals and embassy websites" },
-              { icon: "👨‍⚖️", title: "Expert Reviewed", desc: "Reviewed by former visa officers and licensed immigration lawyers" },
+              { icon: "📋", title: "Editorially Reviewed", desc: "Reviewed by our editorial team for accuracy before every publication" },
               { icon: "🔄", title: "Updated Quarterly", desc: "All guides reviewed every quarter with urgent updates within 48 hours" },
               { icon: "💰", title: "100% Free", desc: "No paywalls, no agency affiliations, no hidden costs — always free" },
             ].map((item) => (

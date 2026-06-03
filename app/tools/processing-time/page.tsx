@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ProcessingTimeEstimator from "@/components/ProcessingTimeEstimator";
 
 export const metadata: Metadata = {
-  title: "Visa Processing Time Estimator — How Long Will Your Visa Take? | VisaProcessInfo",
+  title: "Visa Processing Time Estimator — How Long Will Your Visa Take?",
   description: "Estimate your visa processing time for any country. See a full timeline from document preparation to decision, including embassy processing times for study, work, tourist, and business visas.",
   alternates: { canonical: "https://www.visaprocessinfo.com/tools/processing-time" },
 };

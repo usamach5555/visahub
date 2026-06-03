@@ -35,11 +35,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
-  // Rewrite /sitemap.xml → /api/sitemap-index
-  // This runs BEFORE Next.js routing, bypassing the [slug] catch-all that
-  // was intercepting /sitemap.xml and returning 404.
+  // Rewrites run BEFORE Next.js routing.
   async rewrites() {
     return [
+      // /sitemap.xml → sitemap index (lists all sub-sitemaps at /api/sitemap/[id])
       {
         source: "/sitemap.xml",
         destination: "/api/sitemap-index",

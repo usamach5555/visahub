@@ -3,7 +3,7 @@ import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Terms of Use | VisaProcessInfo",
+  title: "Terms of Use",
   description:
     "Terms of Use for VisaProcessInfo. By using this website you agree to these terms governing access, content use, intellectual property, disclaimers, and limitation of liability.",
   alternates: { canonical: "https://www.visaprocessinfo.com/terms" },

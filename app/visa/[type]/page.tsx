@@ -356,7 +356,7 @@ export default async function VisaTypePage({ params }: Props) {
                 <div>
                   <h3 className="font-bold text-gray-900 text-sm mb-1.5">About This Guide</h3>
                   <p className="text-xs text-gray-600 leading-relaxed">
-                    This guide was researched from official government immigration portals and reviewed by our editorial team of former visa officers and immigration consultants. We update all guides quarterly. Always verify current requirements at official government sources before submitting your application.
+                    This guide was researched directly from official government immigration portals. Our editorial team reviews all guides quarterly. Always verify current requirements at official government sources before submitting your application.
                   </p>
                   <div className="flex flex-wrap gap-2 mt-3">
                     <Link href="/about" className="text-xs text-primary-700 font-medium hover:underline">

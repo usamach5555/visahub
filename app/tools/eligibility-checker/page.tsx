@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import EligibilityChecker from "@/components/EligibilityChecker";
 
 export const metadata: Metadata = {
-  title: "Free Visa Eligibility Checker — Check Your Visa Chances | VisaProcessInfo",
+  title: "Free Visa Eligibility Checker — Check Your Visa Chances",
   description: "Check your visa eligibility instantly. Our free visa eligibility checker analyzes your age, education, income, bank balance, English level, and travel history to estimate your chances of visa approval.",
   alternates: { canonical: "https://www.visaprocessinfo.com/tools/eligibility-checker" },
 };

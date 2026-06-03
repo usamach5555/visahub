@@ -1,5 +1,6 @@
 import { CountryExtended, VISA_TYPE_LABELS, type VisaTypeExtended } from "@/data/countries-extended";
 import type { PageType } from "@/lib/slug-parser";
+import { COUNTRY_OVERRIDES } from "@/lib/country-specific-content";
 
 export interface PageContent {
   heroTitle: string;
@@ -1189,9 +1190,9 @@ Priority processing is not a substitute for planning ahead. It is designed for g
   ];
 }
 
-function sectionsRejection(country: CountryExtended, visaType: VisaTypeExtended): { heading: string; body: string }[] {
+function sectionsRejection(country: CountryExtended, visaType: VisaTypeExtended, overrideReasons?: string[]): { heading: string; body: string }[] {
   const label = VISA_TYPE_LABELS[visaType];
-  const reasons = REJECTION_REASONS[visaType];
+  const reasons = overrideReasons ?? REJECTION_REASONS[visaType];
 
   return [
     {
@@ -2083,6 +2084,20 @@ export function generatePageContent(
   const faqs = buildFAQs(country, visaType);
   const internalLinks = buildInternalLinks(country, visaType, pageType);
 
+  // ── Country-specific overrides ──────────────────────────────────────────────
+  const overrideKey = pageType === "country-hub"
+    ? `${country.slug}-hub`
+    : `${country.slug}-${visaType}`;
+  const override = COUNTRY_OVERRIDES[overrideKey];
+
+  // Merge FAQs: specific ones first, then generic ones (cap total at 12)
+  const mergedFaqs = override?.faqs
+    ? [...override.faqs, ...faqs].slice(0, 12)
+    : faqs;
+
+  // Merge rejection reasons: specific ones override generic
+  const mergedRejectionReasons = override?.rejectionReasons ?? REJECTION_REASONS[visaType];
+
   let sections: { heading: string; body: string }[] = [];
   let heroTitle = "";
   let heroSubtitle = "";
@@ -2163,7 +2178,7 @@ export function generatePageContent(
       break;
 
     case "rejection":
-      sections = sectionsRejection(country, visaType);
+      sections = sectionsRejection(country, visaType, override?.rejectionReasons);
       heroTitle = `${country.name} ${label} Rejection Reasons ${yr} — Avoid Refusal`;
       heroSubtitle = `Top ${REJECTION_REASONS[visaType].length} reasons applications are refused — and how to avoid them`;
       metaTitle = `${country.name} ${label} Rejection Reasons ${yr} — How to Avoid Refusal | VisaProcessInfo`;
@@ -2233,13 +2248,29 @@ export function generatePageContent(
       metaDescription = `${country.name} visa information and guides for ${yr}.`;
   }
 
+  // Append extra sections and official sources section if override provides them
+  if (override?.extraSections?.length) {
+    sections = [...sections, ...override.extraSections];
+  }
+  if (override?.officialSources?.length) {
+    sections = [
+      ...sections,
+      {
+        heading: "Official Government Sources & Resources",
+        body: override.officialSources
+          .map((s) => `**${s.label}**\n${s.url}`)
+          .join("\n\n"),
+      },
+    ];
+  }
+
   return {
     heroTitle,
     heroSubtitle,
     metaTitle,
     metaDescription,
     sections,
-    faqs,
+    faqs: mergedFaqs,
     internalLinks: internalLinks.slice(0, 12),
     requirements: docs,
     steps: [

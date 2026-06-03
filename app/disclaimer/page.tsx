@@ -4,7 +4,7 @@ import { AlertTriangle } from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Disclaimer | VisaProcessInfo",
+  title: "Disclaimer",
   description:
     "Full disclaimer for VisaProcessInfo. Our content is for general informational purposes only and does not constitute legal or immigration advice. Read before using this website.",
   alternates: { canonical: "https://www.visaprocessinfo.com/disclaimer" },

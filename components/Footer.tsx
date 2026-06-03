@@ -144,6 +144,8 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-3 text-xs uppercase tracking-wider">Resources</h3>
             <ul className="space-y-1">
               <li><Link href="/about" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">About Us &amp; Team</Link></li>
+              <li><Link href="/editorial-policy" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">Editorial Policy</Link></li>
+              <li><Link href="/guides" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">Expert Visa Guides</Link></li>
               <li><Link href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">Country Guides Blog</Link></li>
               <li><Link href="/contact" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">Contact &amp; Feedback</Link></li>
             </ul>
@@ -206,6 +208,7 @@ export default function Footer() {
           </div>
           <div className="flex flex-wrap gap-3 sm:gap-4 text-sm sm:text-xs text-gray-500">
             <Link href="/about" className="hover:text-white transition-colors py-1">About Us</Link>
+            <Link href="/editorial-policy" className="hover:text-white transition-colors py-1">Editorial Policy</Link>
             <Link href="/privacy" className="hover:text-white transition-colors py-1">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors py-1">Terms of Use</Link>
             <Link href="/disclaimer" className="hover:text-white transition-colors py-1">Disclaimer</Link>

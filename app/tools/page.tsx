@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Free Visa Tools — Calculator, Eligibility Checker, Document Checklist & More | VisaProcessInfo",
+  title: "Free Visa Tools — Calculator, Eligibility Checker, Document Checklist & More",
   description: "Free visa application tools: cost calculator, eligibility checker, processing time estimator, document checklist generator, country comparison tool, and rejection risk analyzer. Everything you need to prepare your visa application.",
   alternates: { canonical: "https://www.visaprocessinfo.com/tools" },
 };

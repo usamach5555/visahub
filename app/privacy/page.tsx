@@ -3,7 +3,7 @@ import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | VisaProcessInfo",
+  title: "Privacy Policy",
   description:
     "Privacy Policy for VisaProcessInfo. Learn how we collect, use, and protect your personal data in accordance with GDPR and applicable privacy law.",
   alternates: { canonical: "https://www.visaprocessinfo.com/privacy" },

@@ -8,6 +8,9 @@ const BASE = "https://www.visaprocessinfo.com";
  * IMPORTANT: Do NOT disallow /_next/ — Googlebot needs access to Next.js JS
  * bundles to render the page (required for full JavaScript rendering).
  * Blocking /_next/ causes "Indexed, though blocked by robots.txt" warnings.
+ *
+ * Do NOT disallow /api/ — /api/sitemap-index is rewritten from /sitemap.xml
+ * and must be accessible for Google to crawl the sitemap index.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -15,9 +18,8 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // Only block genuinely private/internal paths
-        // /_next/ intentionally NOT blocked — Googlebot needs it for rendering
-        disallow: ["/api/", "/admin/", "/studio/"],
+        // Only block genuinely private/internal paths — NOT /api/ (sitemap needs it)
+        disallow: ["/admin/", "/studio/"],
       },
     ],
     sitemap: `${BASE}/sitemap.xml`,

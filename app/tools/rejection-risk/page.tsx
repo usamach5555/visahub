@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import RejectionRiskAnalyzer from "@/components/RejectionRiskAnalyzer";
 
 export const metadata: Metadata = {
-  title: "Visa Rejection Risk Analyzer — Assess Your Application Risk | VisaProcessInfo",
+  title: "Visa Rejection Risk Analyzer — Assess Your Application Risk",
   description: "Analyze your visa rejection risk before applying. Our tool identifies weak points in your application and provides specific strategies to reduce your chances of refusal.",
   alternates: { canonical: "https://www.visaprocessinfo.com/tools/rejection-risk" },
 };

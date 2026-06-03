@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ALL_ARTICLES, getArticleBySlug, getAllSlugs } from "@/lib/articles";
 import { buildArticleBody } from "@/lib/article-body";
+import type { OfficialSource } from "@/lib/official-sources";
 import { getRelatedArticles } from "@/lib/related";
 import { faqSchema, articleSchema, breadcrumbSchema } from "@/lib/jsonld";
 import FAQSection from "@/components/FAQSection";
@@ -293,6 +294,40 @@ export default async function BlogPostPage({ params }: Props) {
                       </section>
                     );
 
+                  case "sources":
+                    return (
+                      <section key={i} className="bg-white border-2 border-primary-200 rounded-2xl p-6">
+                        <div className="flex items-center gap-2 mb-4">
+                          <span className="text-lg">🏛️</span>
+                          <h2 className="text-xl font-bold text-primary-800">Official Sources</h2>
+                        </div>
+                        <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                          This guide was researched using the following official government immigration authorities. Always verify requirements directly with these sources before submitting your application.
+                        </p>
+                        <ul className="space-y-3">
+                          {(section.content as OfficialSource[]).map((src, j) => (
+                            <li key={j} className="flex items-start gap-3">
+                              <span className="text-primary-600 mt-0.5 shrink-0 text-sm">✓</span>
+                              <div>
+                                <a
+                                  href={src.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer nofollow"
+                                  className="text-sm font-medium text-primary-700 hover:text-primary-900 hover:underline"
+                                >
+                                  {src.authority}
+                                </a>
+                                <p className="text-xs text-gray-500 mt-0.5">{src.label} — {src.url}</p>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                        <p className="text-xs text-gray-400 mt-4 border-t border-gray-100 pt-3">
+                          Last verified: {new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })} · <a href="/editorial-policy" className="text-primary-600 hover:underline">Our editorial policy →</a>
+                        </p>
+                      </section>
+                    );
+
                   default:
                     return null;
                 }
@@ -393,7 +428,22 @@ export default async function BlogPostPage({ params }: Props) {
                     })}
                   </dd>
                 </div>
+                <div>
+                  <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Last Verified</dt>
+                  <dd className="text-emerald-700 font-medium text-xs">
+                    {new Date().toLocaleDateString("en-US", { month: "short", year: "numeric" })} ✓
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Sources</dt>
+                  <dd className="text-gray-900 text-xs">Official government portals</dd>
+                </div>
               </dl>
+              <div className="mt-4 pt-4 border-t border-gray-100">
+                <Link href="/editorial-policy" className="text-xs text-primary-600 hover:underline font-medium">
+                  📋 Our editorial standards →
+                </Link>
+              </div>
 
               <div className="mt-5 pt-5 border-t border-gray-100 space-y-2">
                 <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Tags</h4>

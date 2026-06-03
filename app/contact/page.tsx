@@ -17,7 +17,7 @@ import {
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Contact Us | VisaProcessInfo",
+  title: "Contact Us",
   description:
     "Contact the VisaProcessInfo team for content corrections, partnership inquiries, advertising, or general questions about our visa and immigration guides.",
   alternates: { canonical: "https://www.visaprocessinfo.com/contact" },

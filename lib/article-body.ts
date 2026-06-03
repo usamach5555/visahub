@@ -1,4 +1,5 @@
 import { ArticleMeta, simpleHash } from "./articles";
+import { getOfficialSources, OfficialSource } from "./official-sources";
 
 // ─── Variant pools ────────────────────────────────────────────────────────────
 // Picked deterministically by hash(slug) so each article gets consistent,
@@ -271,12 +272,14 @@ export interface ArticleSection {
     | "tips"
     | "mistakes"
     | "faq"
-    | "conclusion";
+    | "conclusion"
+    | "sources";
   content:
     | string
     | string[]
     | { question: string; answer: string }[]
-    | { title: string; description: string }[];
+    | { title: string; description: string }[]
+    | OfficialSource[];
 }
 
 // ─── Main builder ─────────────────────────────────────────────────────────────
@@ -355,6 +358,12 @@ export function buildArticleBody(article: ArticleMeta): ArticleSection[] {
         pick(conclusionP1Variants, h + 11)(article),
         pick(conclusionP2Variants, h + 12)(article),
       ].join("\n\n"),
+    },
+
+    // ── Official Sources ────────────────────────────────────────────────────
+    {
+      type: "sources",
+      content: getOfficialSources(article.country),
     },
   ];
 }

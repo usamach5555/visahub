@@ -491,7 +491,7 @@ export default async function ProgrammaticPage({ params }: Props) {
                 <div>
                   <h3 className="font-bold text-gray-900 text-sm mb-1.5">About This Guide</h3>
                   <p className="text-xs text-gray-600 leading-relaxed">
-                    This guide was researched from official government immigration portals and reviewed by our editorial team of former visa officers and immigration consultants. We update all guides quarterly. For the most current requirements, always verify with the{" "}
+                    This guide was researched directly from official government immigration portals. Our editorial team reviews all guides quarterly. For the most current requirements, always verify with the{" "}
                     <a href={country.officialImmigrationUrl} target="_blank" rel="noopener noreferrer" className="text-primary-700 underline hover:text-primary-900">
                       official immigration authority
                     </a>.
