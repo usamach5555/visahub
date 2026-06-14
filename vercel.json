@@ -9,6 +9,9 @@
   "functions": {
     "app/sitemap.ts": {
       "maxDuration": 60
+    },
+    "app/api/sitemap-index/route.ts": {
+      "maxDuration": 60
     }
   },
   "headers": [
@@ -24,16 +27,14 @@
       "source": "/sitemap.xml",
       "headers": [
         { "key": "Content-Type",  "value": "application/xml; charset=utf-8" },
-        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800" },
-        { "key": "X-Robots-Tag", "value": "noindex" }
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800" }
       ]
     },
     {
       "source": "/sitemap/:id.xml",
       "headers": [
         { "key": "Content-Type",  "value": "application/xml; charset=utf-8" },
-        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800" },
-        { "key": "X-Robots-Tag", "value": "noindex" }
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800" }
       ]
     },
     {
