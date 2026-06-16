@@ -16,37 +16,34 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
-    // Prefer AVIF (smallest), fallback to WebP — both are modern lossless-equivalent formats
     formats: ["image/avif", "image/webp"],
-    // Note: quality is set per-component via the quality prop (85-90 for heroes)
-    // Responsive breakpoints matching common device widths
     deviceSizes: [390, 640, 750, 828, 1080, 1200, 1920, 2560],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Minimum cache TTL (1 week) for CDN-sourced images
     minimumCacheTTL: 604800,
-    // Allow SVG (for flag CDN fallbacks)
     dangerouslyAllowSVG: false,
   },
 
-  // Enable HTTP compression (gzip/brotli)
   compress: true,
 
   typescript: {
     ignoreBuildErrors: true,
   },
 
-  // Rewrites run BEFORE Next.js routing.
   async rewrites() {
     return [
-      // /sitemap.xml → sitemap index (lists all sub-sitemaps at /api/sitemap/[id])
+      // /sitemap.xml -> sitemap index
       {
         source: "/sitemap.xml",
         destination: "/api/sitemap-index",
       },
+      // /sitemap/:id.xml -> /api/sitemap/:id (for sub-sitemaps)
+      {
+        source: "/sitemap/:id.xml",
+        destination: "/api/sitemap/:id",
+      },
     ];
   },
 
-  // Additional headers for security + performance
   async headers() {
     return [
       {
@@ -63,3 +60,4 @@ const nextConfig = {
 };
 
 export default nextConfig;
+
