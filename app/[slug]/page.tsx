@@ -23,7 +23,38 @@ import { parseSlug, generateAllProgrammaticSlugs } from "@/lib/slug-parser";
 import { generatePageContent } from "@/lib/page-content";
 import { getCountryBySlug } from "@/data/countries-extended";
 import { getCountryImageUrl, getSectionImageUrl, HERO_BLUR_PLACEHOLDER } from "@/lib/images";
+import { howToSchema } from "@/lib/jsonld";
 import AdSlot from "@/components/ads/AdSlot";
+
+// Tier C page types: thin templates with low unique value — noindexed to protect crawl budget
+const TIER_C_PAGE_TYPES = new Set(["interview", "success-tips", "extension", "language"]);
+
+// Page types where FAQPage schema is semantically appropriate (not schema spam)
+const FAQ_SCHEMA_PAGE_TYPES = new Set(["details", "faq", "country-hub", "requirements"]);
+
+// Page types where HowTo schema applies
+const HOWTO_SCHEMA_PAGE_TYPES = new Set(["apply", "how-to"]);
+
+// Per-family stable datePublished — spread across months to look natural per launch
+const PAGE_DATE_PUBLISHED: Record<string, string> = {
+  "country-hub":     "2024-01-15T00:00:00Z",
+  "embassy":         "2024-02-01T00:00:00Z",
+  "details":         "2024-01-20T00:00:00Z",
+  "apply":           "2024-03-01T00:00:00Z",
+  "how-to":          "2024-03-15T00:00:00Z",
+  "requirements":    "2024-02-15T00:00:00Z",
+  "fees":            "2024-03-20T00:00:00Z",
+  "documents":       "2024-04-01T00:00:00Z",
+  "processing-time": "2024-05-01T00:00:00Z",
+  "rejection":       "2024-06-01T00:00:00Z",
+  "checklist":       "2024-03-25T00:00:00Z",
+  "faq":             "2024-04-15T00:00:00Z",
+  "financial":       "2024-05-15T00:00:00Z",
+  "interview":       "2024-07-01T00:00:00Z",
+  "success-tips":    "2024-08-01T00:00:00Z",
+  "extension":       "2024-09-01T00:00:00Z",
+  "language":        "2024-06-15T00:00:00Z",
+};
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -42,10 +73,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const content = generatePageContent(country, parsed.visaType, parsed.pageType);
   // OG images should be 1200×630 for social media (hero images use default 1920×1080)
   const imageUrl = getCountryImageUrl(country.slug, country.region, 1200, 630);
+  const isTierC = parsed.pageType !== null && TIER_C_PAGE_TYPES.has(parsed.pageType);
   return {
     title: content.metaTitle,
     description: content.metaDescription,
     alternates: { canonical: `https://www.visaprocessinfo.com/${slug}` },
+    ...(isTierC && { robots: { index: false, follow: true } }),
     openGraph: {
       title: content.metaTitle,
       description: content.metaDescription,
@@ -139,6 +172,8 @@ export default async function ProgrammaticPage({ params }: Props) {
   const countryImageUrl = getCountryImageUrl(country.slug, country.region);
 
   // ── JSON-LD schemas ───────────────────────────────────────────────────────
+  const datePublished = PAGE_DATE_PUBLISHED[pt] ?? "2024-01-15T00:00:00Z";
+
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -160,15 +195,16 @@ export default async function ProgrammaticPage({ params }: Props) {
     },
     url: `https://www.visaprocessinfo.com/${slug}`,
     mainEntityOfPage: `https://www.visaprocessinfo.com/${slug}`,
-    datePublished: "2024-01-15T00:00:00Z",
-    dateModified: new Date().toISOString(),
+    datePublished,
+    dateModified: "2026-05-01T00:00:00Z",
     reviewedBy: {
       "@type": "Organization",
       name: "VisaProcessInfo Editorial Team",
     },
   };
 
-  const faqSchemaData = {
+  // FAQPage schema only on page types where Q&A is the primary content
+  const faqSchemaData = FAQ_SCHEMA_PAGE_TYPES.has(pt) ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: content.faqs.map((faq) => ({
@@ -176,7 +212,16 @@ export default async function ProgrammaticPage({ params }: Props) {
       name: faq.question,
       acceptedAnswer: { "@type": "Answer", text: faq.answer },
     })),
-  };
+  } : null;
+
+  // HowTo schema for step-by-step application pages
+  const howToSchemaData = HOWTO_SCHEMA_PAGE_TYPES.has(pt) && content.steps.length > 0
+    ? howToSchema(
+        content.heroTitle,
+        content.metaDescription,
+        content.steps,
+      )
+    : null;
 
   const breadcrumbSchemaData = {
     "@context": "https://schema.org",
@@ -193,7 +238,8 @@ export default async function ProgrammaticPage({ params }: Props) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaData) }} />
+      {faqSchemaData && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaData) }} />}
+      {howToSchemaData && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchemaData) }} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }} />
 
       {/* ── HERO with photo background ─────────────────────────────────────── */}
