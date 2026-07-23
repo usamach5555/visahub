@@ -323,7 +323,7 @@ export default async function BlogPostPage({ params }: Props) {
                           ))}
                         </ul>
                         <p className="text-xs text-gray-400 mt-4 border-t border-gray-100 pt-3">
-                          Last verified: {new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })} · <a href="/editorial-policy" className="text-primary-600 hover:underline">Our editorial policy →</a>
+                          Published: {new Date(article.publishedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })} · <a href="/editorial-policy" className="text-primary-600 hover:underline">Our editorial policy →</a>
                         </p>
                       </section>
                     );
@@ -426,12 +426,6 @@ export default async function BlogPostPage({ params }: Props) {
                       month: "short",
                       day: "numeric",
                     })}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Last Verified</dt>
-                  <dd className="text-emerald-700 font-medium text-xs">
-                    {new Date().toLocaleDateString("en-US", { month: "short", year: "numeric" })} ✓
                   </dd>
                 </div>
                 <div>

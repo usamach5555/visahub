@@ -12,59 +12,52 @@ const sections = [
   {
     id: "research",
     title: "1. Research Standards",
-    content: `Every guide published on VisaProcessInfo begins with primary source research. We do not use other immigration websites as a source — we go directly to official government portals, embassy websites, ministry publications, and statutory instruments.
+    content: `VisaProcessInfo's country and visa-type guides are built from a structured dataset compiled per destination country — covering visa fees, processing times, document requirements, application steps, and official contact points. This dataset is compiled directly from official sources:
 
-Primary sources we consult include:
 • Official immigration ministry or home office websites for the destination country
 • Embassy and consulate websites for specific source country requirements
-• Official legislative documents, statutory instruments, and government gazettes
 • Fee schedules published directly by immigration authorities
 • Official processing time tools and dashboards (e.g. USCIS processing times, IRCC tools)
 
-We do not publish a guide for a visa category until we have located and reviewed the official government source for that category. If official information is ambiguous or contradictory across government pages, we note this explicitly in the guide and link to both sources.`,
+Because each country's data is stored once and reused across every visa type and guide format for that country, a single sourcing pass covers all of the pages generated from it — rather than researching each individual page from scratch. Our long-form blog articles and editorial guides are separately researched and written as standalone pieces, each citing the official sources used.`,
   },
   {
     id: "verification",
     title: "2. Verification Process",
-    content: `After initial research, all guides go through a structured verification step before publication. Verification involves:
+    content: `Because country-level guides are generated from a shared per-country dataset, verification happens at the data level rather than page-by-page. When we compile or update a country's data, we check:
 
-• Cross-checking requirements against at least two official sources where available
-• Confirming that fee amounts are quoted in the correct currency for the destination country (e.g. SEK for Sweden, GBP for the UK, AED for the UAE — not converted to USD unless USD is the official fee currency)
-• Verifying that processing time estimates reflect current official guidance, not historical averages
-• Checking that any referenced application portal URLs are live and correct
-• Reviewing the guide against any known recent policy changes in that country
+• That fee amounts are quoted in the correct currency for the destination country (e.g. SEK for Sweden, GBP for the UK, AED for the UAE — not converted to USD unless USD is the official fee currency)
+• That processing time estimates reflect current official guidance, not historical averages
+• That referenced application portal and embassy URLs are correct
+• Internal consistency across the visa types and guide formats generated from that data
 
-Guides that do not pass verification are returned for revision before publication. We do not publish guides with known inaccuracies even if this means delaying publication.`,
+A correction to a country's underlying data is reflected across every page that references it, which is why we prioritize getting the source data right over reviewing each generated page individually. Long-form blog and editorial articles are individually fact-checked against the official sources they cite before publication.`,
   },
   {
     id: "citations",
     title: "3. Source Citation Policy",
-    content: `Every guide on VisaProcessInfo includes an "Official Sources" section at the bottom of the page with direct hyperlinks to the government sources used to research the guide. This is non-negotiable — guides without outbound citations to official sources are not published.
+    content: `Every guide on VisaProcessInfo links to the destination country's official immigration portal and embassy resources in an "Official Resources" section. Guides without a path to an official source are not published.
 
-We cite sources at the point of use within the guide text where space permits, and always in the dedicated sources section at the article end. Our citation standard is:
+Our citation standard is:
 
 • Name of the government authority (e.g. "U.S. Citizenship and Immigration Services (USCIS)")
-• Direct URL to the specific page referenced (not just the homepage)
-• Date last verified
+• A direct link to the relevant official immigration portal or embassy site
 
-We update citations when official URLs change. If a government portal is restructured and links break, we update our guides within 5 business days of identifying the broken link.`,
+If you notice a broken or outdated official link, please report it via the Contact page — we prioritize fixing broken outbound links once we're made aware of them.`,
   },
   {
     id: "updates",
     title: "4. Update & Review Policy",
-    content: `Immigration policies change frequently. Our update policy is:
+    content: `Immigration policies change frequently, and our update model is built around the shared per-country dataset described above rather than a fixed page-by-page review calendar:
 
-URGENT UPDATES (within 48 hours):
-Policy changes that directly affect application requirements, fees, or processing procedures are updated within 48 hours of confirmation from official sources. We verify the change against the official source before publishing any update.
+DATA-LEVEL UPDATES:
+When we identify a policy, fee, or processing-time change for a country, we update that country's entry in our dataset. Because every guide for that country and visa type is generated from the same data, the correction propagates automatically to every affected page — country hub, application guide, fee guide, FAQ, and so on — in a single update rather than requiring us to edit each page individually.
 
-QUARTERLY REVIEWS:
-All guides undergo a comprehensive quarterly review regardless of whether policy changes have been reported. During quarterly reviews, editors check all official sources, verify current fees, update processing times, and review reader-submitted corrections.
+WHY WE DON'T PUBLISH A "LAST VERIFIED" DATE PER PAGE:
+We previously displayed a "last verified" date on individual pages that updated automatically regardless of whether the underlying information had actually changed. We removed it because it did not reflect a real per-page review and could mislead readers about how current a specific page's content was. What we can accurately state is when our page-generation system and underlying data were last substantively updated — see the dates in our sitemap.
 
-HIGH-VOLATILITY GUIDES (monthly review):
-Guides covering rapidly changing immigration systems — including UK Skilled Worker Visa salary thresholds, Canada Express Entry CRS scores, Australia SkillSelect — are reviewed monthly or more frequently.
-
-LAST VERIFIED DATE:
-Every guide displays a "Last Verified" date and the specific official source verified at that date. This date is updated whenever the guide is reviewed and confirmed accurate, not only when content changes.`,
+REPORTED CHANGES:
+We prioritize verifying and updating our dataset when readers or our own monitoring surface a specific policy change, rather than promising a fixed review interval we cannot reliably guarantee across 127 countries and thousands of generated pages.`,
   },
   {
     id: "corrections",
@@ -75,10 +68,10 @@ HOW TO REPORT AN ERROR:
 Use the correction form on the Contact page, or email contact@visaprocessinfo.com with the subject line "Content Correction." Please include the guide URL, the specific information you believe is incorrect, and — where possible — a link to the official source showing the correct information.
 
 OUR RESPONSE PROCESS:
-All correction reports are reviewed within 48 hours. We verify the reported error against the official source before making any change. If the correction is confirmed, we update the guide, add a note to the guide's edit history, and respond to the reporter. If we determine the existing information is correct, we explain our reasoning.
+We verify reported errors against the official source before making any change. Because most of our guides are generated from a shared per-country dataset, a confirmed correction is typically applied once to that country's data and takes effect across every page that references it. We respond to the reporter once we've reviewed the report.
 
 CORRECTION TRANSPARENCY:
-Significant corrections (where previously published information was materially inaccurate) are noted at the top of the guide with a brief explanation of what changed and when. We do not silently edit guides when significant errors are corrected.`,
+We aim to be straightforward about corrections: if you report an error and we confirm it, we fix the underlying data and let you know. We do not have a page-level edit-history feature at this time.`,
   },
   {
     id: "independence",
@@ -106,7 +99,7 @@ For complex immigration cases — including those involving previous visa refusa
   {
     id: "scope",
     title: "8. Scope of Our Coverage",
-    content: `VisaProcessInfo publishes visa and immigration guides covering 131+ destination countries across study, work, tourist, business, and permanent residency categories. Our coverage prioritises countries with significant application volumes from international applicants.
+    content: `VisaProcessInfo publishes visa and immigration guides covering 127 destination countries across study, work, tourist, business, and permanent residency categories. Our coverage prioritises countries with significant application volumes from international applicants.
 
 We publish guides only where we can produce content that meets our research and verification standards. This means we do not publish guides for obscure or low-demand categories where we cannot locate sufficient official source information to produce an accurate, complete guide.
 
@@ -127,7 +120,7 @@ export default function EditorialPolicyPage() {
             Editorial Policy
           </h1>
           <p className="text-blue-100 text-lg leading-relaxed">
-            How VisaProcessInfo researches, verifies, updates, and corrects its visa and immigration guides. Last reviewed: June 2026.
+            How VisaProcessInfo researches, verifies, updates, and corrects its visa and immigration guides. Last reviewed: July 2026.
           </p>
         </div>
       </div>

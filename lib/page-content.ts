@@ -1,4 +1,4 @@
-import { CountryExtended, VISA_TYPE_LABELS, type VisaTypeExtended } from "@/data/countries-extended";
+import { CountryExtended, VISA_TYPE_LABELS, VISA_TYPES_EXTENDED, type VisaTypeExtended } from "@/data/countries-extended";
 import type { PageType } from "@/lib/slug-parser";
 import { COUNTRY_OVERRIDES } from "@/lib/country-specific-content";
 
@@ -188,27 +188,65 @@ const REJECTION_REASONS: Record<VisaTypeExtended, string[]> = {
 function buildInternalLinks(country: CountryExtended, visaType: VisaTypeExtended, pageType: PageType) {
   const c = country.slug;
   const label = VISA_TYPE_LABELS[visaType];
-  const links = [
+  const isHubLevel = pageType === "country-hub" || pageType === "embassy";
+
+  const links: { label: string; href: string }[] = [
     { label: `${country.name} Visa Information Hub`, href: `/${c}-visa-info` },
     { label: `${country.name} Embassy Guide`, href: `/${c}-embassy-guide` },
-    { label: `Apply for ${country.name} ${label}`, href: `/apply-${c}-${visaType}-visa` },
-    { label: `How to Apply for ${country.name} ${label}`, href: `/how-to-apply-${c}-${visaType}-visa` },
-    { label: `${country.name} ${label} Details`, href: `/${c}-${visaType}-visa-details` },
-    { label: `${country.name} ${label} Requirements`, href: `/${c}-${visaType}-visa-requirements` },
-    { label: `${country.name} ${label} Fees`, href: `/${c}-${visaType}-visa-fees` },
-    { label: `${country.name} ${label} Documents`, href: `/${c}-${visaType}-visa-documents` },
-    { label: `${country.name} ${label} Processing Time`, href: `/${c}-${visaType}-visa-processing-time` },
-    { label: `${country.name} ${label} Rejection Reasons`, href: `/${c}-${visaType}-visa-rejection-reasons` },
-    { label: `${country.name} ${label} Interview Tips`, href: `/${c}-${visaType}-visa-interview-tips` },
-    { label: `${country.name} ${label} Success Tips`, href: `/${c}-${visaType}-visa-success-tips` },
-    { label: `${country.name} ${label} Checklist`, href: `/${c}-${visaType}-visa-checklist` },
-    { label: `${country.name} ${label} Extension`, href: `/${c}-${visaType}-visa-extension` },
-    { label: `${country.name} ${label} FAQ`, href: `/${c}-${visaType}-visa-faq` },
-    { label: `${country.name} ${label} Financial Requirements`, href: `/${c}-${visaType}-visa-financial-requirements` },
-    { label: `${country.name} ${label} Language Requirements`, href: `/${c}-${visaType}-visa-language-requirements` },
+  ];
+
+  if (isHubLevel) {
+    // The country hub and embassy pages sit at the top of the cluster: they
+    // must link out to all 5 visa-type branches (not just one), otherwise the
+    // hub can't pass authority down to — or receive it back from — every
+    // branch, and a crawler landing on the hub has no path to Work/Business/
+    // Immigration/Visit pages at all.
+    for (const vt of VISA_TYPES_EXTENDED) {
+      const vtLabel = VISA_TYPE_LABELS[vt];
+      links.push(
+        { label: `Apply for ${country.name} ${vtLabel}`, href: `/apply-${c}-${vt}-visa` },
+        { label: `${country.name} ${vtLabel} — Full Details`, href: `/${c}-${vt}-visa-details` },
+        { label: `${country.name} ${vtLabel} — Fees`, href: `/${c}-${vt}-visa-fees` },
+      );
+    }
+  } else {
+    // Same-visa-type siblings — every page type within this visa type,
+    // so a reader on any one page can reach every other stage of the
+    // same application journey.
+    links.push(
+      { label: `Apply for ${country.name} ${label}`, href: `/apply-${c}-${visaType}-visa` },
+      { label: `How to Apply for ${country.name} ${label}`, href: `/how-to-apply-${c}-${visaType}-visa` },
+      { label: `${country.name} ${label} Details`, href: `/${c}-${visaType}-visa-details` },
+      { label: `${country.name} ${label} Requirements`, href: `/${c}-${visaType}-visa-requirements` },
+      { label: `${country.name} ${label} Fees`, href: `/${c}-${visaType}-visa-fees` },
+      { label: `${country.name} ${label} Documents`, href: `/${c}-${visaType}-visa-documents` },
+      { label: `${country.name} ${label} Processing Time`, href: `/${c}-${visaType}-visa-processing-time` },
+      { label: `${country.name} ${label} Rejection Reasons`, href: `/${c}-${visaType}-visa-rejection-reasons` },
+      { label: `${country.name} ${label} Interview Tips`, href: `/${c}-${visaType}-visa-interview-tips` },
+      { label: `${country.name} ${label} Success Tips`, href: `/${c}-${visaType}-visa-success-tips` },
+      { label: `${country.name} ${label} Checklist`, href: `/${c}-${visaType}-visa-checklist` },
+      { label: `${country.name} ${label} Extension`, href: `/${c}-${visaType}-visa-extension` },
+      { label: `${country.name} ${label} FAQ`, href: `/${c}-${visaType}-visa-faq` },
+      { label: `${country.name} ${label} Financial Requirements`, href: `/${c}-${visaType}-visa-financial-requirements` },
+      { label: `${country.name} ${label} Language Requirements`, href: `/${c}-${visaType}-visa-language-requirements` },
+    );
+
+    // Cross-visa-type links — connect this visa type's branch to every other
+    // visa type's branch for the same country via their "Details" page (the
+    // natural equivalent entry point), so the cluster is a real mesh rather
+    // than 5 disconnected branches that only meet at the hub.
+    for (const vt of VISA_TYPES_EXTENDED) {
+      if (vt === visaType) continue;
+      const vtLabel = VISA_TYPE_LABELS[vt];
+      links.push({ label: `${country.name} ${vtLabel} Details`, href: `/${c}-${vt}-visa-details` });
+    }
+  }
+
+  links.push(
     { label: `Visa Eligibility Checker`, href: `/tools/eligibility-checker` },
     { label: `Visa Cost Calculator`, href: `/tools/cost-calculator` },
-  ];
+  );
+
   // Remove current page link
   const currentPath = currentSlug(c, visaType, pageType);
   return links.filter((l) => l.href !== currentPath);
@@ -249,7 +287,7 @@ function buildFAQs(country: CountryExtended, visaType: VisaTypeExtended): { ques
   return [
     {
       question: `How much does a ${country.name} ${label} cost in ${yr}?`,
-      answer: `The government application fee for a ${country.name} ${label} is ${currency} ${fee}. Including biometric enrollment (${currency} ${Math.round(fee * 0.15)}), medical examination (${currency} ${Math.round(fee * 0.45)}), document translation, courier fees, and visa facilitation service, the total estimated cost is ${currency} ${Math.round(fee * 2.2)}–${Math.round(fee * 2.8)}. Immigration consultant fees (optional) can add ${currency} ${Math.round(fee * 2)}–${Math.round(fee * 4)} more. All government fees are non-refundable.`,
+      answer: `The official government application fee for a ${country.name} ${label} is ${currency} ${fee}, payable directly to the immigration authority and non-refundable regardless of outcome. Beyond this, most applicants also pay for items such as biometric enrollment, a medical examination, document translation, and courier or visa-facilitation-center handling — but the exact amounts for these depend on your local VAC/embassy and change over time, so we don't publish estimated figures for them here. Check ${country.officialImmigrationUrl} and your nearest ${country.name} embassy or VAC for their current fee schedule.`,
     },
     {
       question: `How long does ${country.name} ${label} processing take?`,
@@ -281,7 +319,7 @@ function buildFAQs(country: CountryExtended, visaType: VisaTypeExtended): { ques
     },
     {
       question: `What is the minimum bank balance required for ${country.name} ${label}?`,
-      answer: `${country.name} does not publish a fixed minimum bank balance, but officers assess whether you have sufficient funds for your entire stay. A general guideline is ${currency} ${Math.round(fee * 4)}–${currency} ${Math.round(fee * 10)} for a short-term visa, or significantly more for long-term stays. Bank statements must cover the last 3–6 months and show consistent balances — not sudden large deposits. Salary slips, fixed deposits, property documents, and savings accounts all strengthen your financial profile.`,
+      answer: `${country.name} does not publish one fixed minimum bank balance figure for this category — officers assess whether you have sufficient funds for your entire stay, and the amount considered "sufficient" depends on your visa type, intended length of stay, and individual circumstances. Rather than estimate a number we can't verify, we'd point you to the official guidance at ${country.officialImmigrationUrl}. What we can tell you: bank statements should cover the last 3–6 months and show consistent balances — not sudden large deposits — and salary slips, fixed deposits, property documents, and savings accounts all strengthen your financial profile.`,
     },
     {
       question: `How many times can I reapply if refused for a ${country.name} ${label}?`,
@@ -289,7 +327,7 @@ function buildFAQs(country: CountryExtended, visaType: VisaTypeExtended): { ques
     },
     {
       question: `Do I need travel insurance for a ${country.name} ${label}?`,
-      answer: `Travel insurance is strongly recommended and in many visa categories mandatory for ${country.name}. Required minimum coverage is typically ${currency} ${Math.round(fee * 15)} for emergency medical treatment and repatriation. For longer stays, comprehensive health insurance covering hospitalization, surgery, and evacuation is essential. Keep your insurance policy document with your travel documents as border officers may request proof of coverage.`,
+      answer: `Travel insurance is strongly recommended and, for some visa categories, mandatory for ${country.name}. Minimum required coverage amounts (where a minimum is specified) are set by the immigration authority and vary by visa category, so check the current figure at ${country.officialImmigrationUrl} rather than relying on a generic number. For longer stays, comprehensive health insurance covering hospitalization, surgery, and evacuation is essential. Keep your insurance policy document with your travel documents as border officers may request proof of coverage.`,
     },
     {
       question: `Can I extend my ${country.name} ${label} from within ${country.name}?`,
@@ -417,7 +455,7 @@ Understanding the country you are applying to visit — its culture, legal syste
 
 **After approval:**
 • Collect your passport and verify all visa stamp details (name, dates, conditions)
-• Purchase travel insurance (minimum ${country.currency} ${Math.round(country.visaFees.visit * 12)} medical coverage)
+• Purchase travel insurance meeting the current official minimum coverage for your visa category (check ${country.officialImmigrationUrl})
 • Keep all original supporting documents to present upon entry to ${country.name}`,
     },
     ...sharedExtraSections(country, "visit"),
@@ -458,7 +496,7 @@ Arrive at least 15 minutes early with your appointment confirmation, all origina
     },
     {
       heading: `VFS Global and Third-Party Application Centers`,
-      body: `${country.name} uses VFS Global and similar operators in many countries to manage the initial stages of visa applications. VFS Global charges a separate service fee on top of the government application fee — this fee is typically ${country.currency} ${Math.round(country.visaFees.visit * 0.3)}–${Math.round(country.visaFees.visit * 0.6)} and is also non-refundable.
+      body: `Many countries, including in some cases ${country.name}, use VFS Global or similar third-party operators to manage the initial stages of visa applications. Where a VAC operator is used, it typically charges its own service fee on top of the government application fee, set independently by the operator and not published by the ${country.name} immigration authority — confirm whether a VAC is used for your application, and its current fee, at ${country.officialImmigrationUrl} or ${country.embassyUrl}.
 
 Services offered at VFS centers include:
 • Document verification and checklist review
@@ -518,7 +556,7 @@ Hold a valid passport with at least 6 months' validity beyond your intended stay
 You must demonstrate a clear, genuine intent to ${VISA_PURPOSE[visaType]}. This is assessed through your application form, supporting documents, and interview (if applicable). Officers look for specificity, consistency, and credibility in your purpose statement.
 
 **Financial Capacity**
-Demonstrate that you have sufficient funds to cover all costs of your stay in ${country.name} without working illegally or relying on public funds. Bank statements covering the last 6 months are the primary financial evidence. The minimum expected balance for a ${label} application to ${country.name} is approximately ${country.currency} ${Math.round(fee * 5)}–${Math.round(fee * 10)}.
+Demonstrate that you have sufficient funds to cover all costs of your stay in ${country.name} without working illegally or relying on public funds. Bank statements covering the last 6 months are the primary financial evidence. ${country.name} does not publish one fixed minimum balance for every applicant — the amount officers consider sufficient depends on your visa category and length of stay, so check the current guidance at ${country.officialImmigrationUrl} rather than a generic figure.
 
 **Character Requirements**
 All applicants must pass a character assessment. Police clearance certificates from all countries of residence in the past 5–10 years are required. Certain criminal convictions may make you ineligible, though each case is assessed individually.
@@ -555,7 +593,7 @@ A previous refusal is not a permanent bar to re-entry. However, you must directl
 When you collect your passport, check every detail on the visa stamp: your full name, date of birth, passport number, visa validity dates, permitted duration of stay, and number of entries. Report any errors to the embassy immediately — corrections become more difficult once you have left the country.
 
 **Purchase Travel Insurance**
-Comprehensive travel and health insurance is essential for your stay in ${country.name}. For short visits, ensure minimum medical coverage of ${country.currency} ${Math.round(fee * 15)} including emergency evacuation. For longer stays, comprehensive health insurance covering hospitalization, surgery, and specialist consultations is critical. Carry the insurance policy document and emergency helpline number with you at all times.
+Comprehensive travel and health insurance is essential for your stay in ${country.name}, and required minimum coverage levels (where specified) are set by the immigration authority and vary by visa category — check ${country.officialImmigrationUrl} for the current figure rather than a generic estimate. For longer stays, comprehensive health insurance covering hospitalization, surgery, and specialist consultations is critical. Carry the insurance policy document and emergency helpline number with you at all times.
 
 **Pre-Departure Document Pack**
 Carry the following in your hand luggage — not checked baggage — when travelling to ${country.name}:
@@ -574,22 +612,11 @@ Your ${label} comes with specific conditions — work restrictions, study requir
 If your purpose of visit changes materially after arrival — you get a job offer while on a tourist visa, or your study program changes — consult the ${country.name} immigration authority at ${country.officialImmigrationUrl} immediately. Acting without authorization is an immigration violation regardless of intention.`,
     },
     {
-      heading: `${country.name} ${label} Fees — Complete Breakdown`,
+      heading: `${country.name} ${label} Fees — What's Confirmed`,
       body: `**Government Application Fee:** ${country.currency} ${fee}
 This is the mandatory fee paid to the ${country.name} immigration authority. It is non-refundable regardless of the outcome.
 
-**Additional Costs (Estimated):**
-| Item | Estimated Cost (${country.currency}) |
-|---|---|
-| Biometric Enrollment | ${Math.round(fee * 0.15)} |
-| Medical Examination | ${Math.round(fee * 0.5)} |
-| Document Translation (per doc) | ${Math.round(fee * 0.25)} |
-| Courier / Postal Service | ${Math.round(fee * 0.1)} |
-| VFS / Facilitation Fee | ${Math.round(fee * 0.2)} |
-| Immigration Consultant (optional) | ${Math.round(fee * 2.5)}–${Math.round(fee * 5)} |
-| **Estimated Total (without consultant)** | **${Math.round(fee * 2.2)}** |
-
-All fees are approximate and subject to change without notice. Verify current fees at ${country.officialImmigrationUrl} before submitting.`,
+Most applicants also budget for items such as biometric enrollment, a medical examination, document translation, courier or visa-facilitation-center handling, and — if you choose to use one — an immigration consultant. We don't publish estimated amounts for these here, because they're set by third parties (translators, clinics, VACs, consultants) rather than the ${country.name} immigration authority, vary significantly by location, and change independently of the government fee. The one number we can confirm is the official fee above; for everything else, ${country.officialImmigrationUrl} and your nearest ${country.name} embassy or VAC are the sources that will have current, accurate figures.`,
     },
     ...sharedExtraSections(country, visaType),
   ];
@@ -636,7 +663,7 @@ Use the official tracking system to monitor your application status. Processing 
 You will receive a decision via the tracking system, email, or notification from the VAC. If approved, your visa will be stamped in your passport or issued as an e-visa document.
 
 **Step 9 — Pre-Departure Preparation**
-After approval, confirm travel arrangements, purchase travel insurance (minimum coverage: ${country.currency} ${Math.round(fee * 15)}), complete any pre-registration requirements (such as student enrollment confirmation or employer onboarding), and carry all original supporting documents when travelling to ${country.name}.`,
+After approval, confirm travel arrangements, purchase travel insurance meeting the current official minimum coverage (check ${country.officialImmigrationUrl} for the figure that applies to your visa category), complete any pre-registration requirements (such as student enrollment confirmation or employer onboarding), and carry all original supporting documents when travelling to ${country.name}.`,
     },
     {
       heading: `Timeline Planning for ${country.name} ${label}`,
@@ -752,23 +779,10 @@ ${docs.slice(8).map((d, i) => `${i + 9}. ${d}`).join("\n")}
       heading: `Fees, Financial Requirements, and Payment`,
       body: `**Government Application Fee:** ${country.currency} ${fee} (non-refundable)
 
-**Estimated Total Cost Breakdown:**
-• Government fee: ${country.currency} ${fee}
-• Biometric enrollment: ~${country.currency} ${Math.round(fee * 0.15)}
-• Medical examination: ~${country.currency} ${Math.round(fee * 0.5)}
-• Translation services: ~${country.currency} ${Math.round(fee * 0.3)} per document
-• VFS / facilitation fee: ~${country.currency} ${Math.round(fee * 0.2)}
-• Courier service: ~${country.currency} ${Math.round(fee * 0.1)}
-• **Without consultant:** ~${country.currency} ${Math.round(fee * 2.2)}–${Math.round(fee * 2.8)}
-• **With immigration consultant:** add ~${country.currency} ${Math.round(fee * 2.5)}–${Math.round(fee * 5)}
+Beyond this official fee, applicants typically also pay for biometric enrollment, a medical examination, document translation, courier/VAC handling, and — optionally — an immigration consultant. These are set by third parties rather than the ${country.name} immigration authority and vary too much by location to publish a reliable estimate here; see the dedicated Fees guide for this visa type, or check ${country.officialImmigrationUrl} directly.
 
 **Financial Sufficiency (Proof of Funds):**
-${country.name} requires applicants to demonstrate sufficient funds for their entire stay beyond the visa application fee:
-• Short stay (1–3 months): ${country.currency} ${Math.round(fee * 4)}–${Math.round(fee * 8)}
-• Medium stay (3–12 months): ${country.currency} ${Math.round(fee * 8)}–${Math.round(fee * 20)}
-• Long stay / immigration: significantly higher; consult official requirements
-
-Bank statements must cover 3–6 months and show consistently maintained balances — not recent large deposits.`,
+${country.name} requires applicants to demonstrate sufficient funds for their entire stay beyond the visa application fee. There isn't one published minimum that applies to every applicant — the expected amount depends on your visa category and length of stay — so check current guidance at ${country.officialImmigrationUrl} rather than a generic figure. Bank statements must cover 3–6 months and show consistently maintained balances — not recent large deposits.`,
     },
     {
       heading: `Processing Times, Tracking, and Decision`,
@@ -840,7 +854,7 @@ A valid passport with at least 6 months' validity beyond your intended stay in $
 You must have a genuine and specific intention to ${VISA_PURPOSE[visaType]}. Officers assess this through your application form, purpose statement, and supporting documents. Generic or vague applications are rejected. Your stated purpose must be supported by concrete evidence (enrollment letter, job offer, business invitation, hotel booking, etc.).
 
 **3. Financial Capacity**
-You must demonstrate that you can financially support yourself during your entire stay in ${country.name}. Expected minimum: ${country.currency} ${Math.round(fee * 5)} for short stays; significantly more for long-term or immigration visas. Financial evidence must show consistent maintenance of funds — not recent large deposits.
+You must demonstrate that you can financially support yourself during your entire stay in ${country.name}. ${country.name} does not publish one fixed minimum figure that applies to every applicant — the amount considered sufficient depends on your visa category and length of stay, so check ${country.officialImmigrationUrl} for current guidance. Financial evidence must show consistent maintenance of funds — not recent large deposits.
 
 **4. Health Requirements**
 Applicants from certain countries or those applying for stays exceeding 6 months must pass a medical examination at an approved facility. Conditions that may affect eligibility include active tuberculosis, certain infectious diseases, and conditions requiring significant public health resources. The examination is confidential and results are valid for 12 months.
@@ -909,50 +923,50 @@ function sectionsFees(country: CountryExtended, visaType: VisaTypeExtended): { h
   const label = VISA_TYPE_LABELS[visaType];
   const fee = country.visaFees[visaType];
   const yr = new Date().getFullYear();
+  const verified = country.verifiedAncillaryCosts?.[visaType];
+
+  // Real, sourced comparison across this country's own visa categories —
+  // genuine per-country variance, not a formula applied to every country.
+  const otherFees = VISA_TYPES_EXTENDED
+    .filter((vt) => vt !== visaType)
+    .map((vt) => `${VISA_TYPE_LABELS[vt]}: ${country.currency} ${country.visaFees[vt]}`)
+    .join(" · ");
+
+  const ancillaryRows = verified
+    ? Object.entries(verified)
+        .filter((entry): entry is [string, { amount: number; source: string }] => Boolean(entry[1]))
+        .map(([item, data]) => `| ${item === "vac" ? "VAC / Facilitation Fee" : item === "biometric" ? "Biometric Enrollment" : "Medical Examination"} | ${country.currency} ${data.amount} | ${data.source} |`)
+        .join("\n")
+    : null;
 
   return [
     {
-      heading: `${country.name} ${label} — Complete Fees Guide (${yr})`,
-      body: `Understanding all costs associated with a ${country.name} ${label} application is essential before you begin. Applicants frequently underestimate total costs by focusing only on the government fee and neglecting ancillary expenses like medical examinations, document translations, courier services, and visa facilitation fees.
+      heading: `${country.name} ${label} — Fees (${yr})`,
+      body: `**Official Government Application Fee:** ${country.currency} ${fee}
+This is the mandatory fee paid directly to the ${country.name} immigration authority. It is non-refundable regardless of the outcome of your application, even if you withdraw before a decision is made. This figure comes directly from our country dataset and is the one number on this page we're confident in without a live source check — always confirm it hasn't changed at ${country.officialImmigrationUrl} before you pay.
 
-**Government Application Fee:** ${country.currency} ${fee}
-This is the mandatory fee paid directly to the ${country.name} immigration authority. It is 100% non-refundable regardless of the outcome of your application, even if you withdraw before a decision is made.`,
+**How this compares to ${country.name}'s other visa categories:** ${otherFees}. Fee levels within a country are set by the same immigration authority, so a category priced noticeably higher or lower than the others is often a signal about the complexity or scrutiny level of that pathway.`,
     },
-    {
-      heading: `Itemized Cost Breakdown`,
-      body: `**Mandatory Costs:**
-| Cost Component | Estimated Amount (${country.currency}) | Notes |
+    ancillaryRows
+      ? {
+          heading: `Verified Ancillary Costs`,
+          body: `Beyond the government fee, applicants typically also pay for biometric enrollment, a medical examination, and/or a visa application center (VAC) handling fee. For ${country.name} ${label} applications, we've verified the following from the sources cited:
+
+| Cost Component | Amount (${country.currency}) | Source |
 |---|---|---|
-| Government Application Fee | ${fee} | Non-refundable |
-| Biometric Enrollment | ${Math.round(fee * 0.15)} | Fingerprints & photograph |
-| Medical Examination | ${Math.round(fee * 0.5)} | Approved facility |
-| VFS / Application Center Fee | ${Math.round(fee * 0.2)} | If applicable |
-| **Mandatory Subtotal** | **~${Math.round(fee * 1.85)}** | |
+${ancillaryRows}
 
-**Optional but Common Costs:**
-| Cost Component | Estimated Amount (${country.currency}) | Notes |
-|---|---|---|
-| Document Translation | ${Math.round(fee * 0.25)} per doc | Certified translators |
-| Courier / Postal Service | ${Math.round(fee * 0.1)} | Secure document delivery |
-| Police Clearance Certificate | ${Math.round(fee * 0.1)}–${Math.round(fee * 0.3)} | Varies by country |
-| Passport Photos | ${Math.round(fee * 0.05)} | Professional photography |
-| Immigration Consultant | ${Math.round(fee * 2.5)}–${Math.round(fee * 5)} | Optional but helpful |
+Any cost not listed above (e.g. document translation, courier, immigration consultants) is set by third parties, not the ${country.name} immigration authority, and varies too much by location and provider for us to publish a reliable figure — check current rates locally.`,
+        }
+      : {
+          heading: `Costs Beyond the Government Fee`,
+          body: `Most applicants also budget for biometric enrollment, a medical examination, document translation, courier or visa-facilitation-center (VAC) handling, and — optionally — an immigration consultant. We don't publish estimated amounts for these here: they're set by third parties (clinics, translators, VAC operators, consultants) rather than the ${country.name} immigration authority, vary significantly by your location and provider, and change independently of the government fee shown above. Rather than guess, we'd rather point you to sources that will actually have the current figure: ${country.officialImmigrationUrl} for anything the immigration authority itself charges, and your nearest ${country.name} embassy or VAC (${country.embassyUrl}) for facilitation and biometric fees specific to your region.
 
-**Estimated Totals:**
-• Without immigration consultant: ${country.currency} ${Math.round(fee * 2.2)}–${Math.round(fee * 2.8)}
-• With immigration consultant: ${country.currency} ${Math.round(fee * 4.7)}–${Math.round(fee * 7.8)}`,
-    },
+*Note for readers: if you have a recent, verifiable receipt or an official fee schedule for any of these ancillary costs in ${country.name}, we'd welcome it via the Contact page — we'd rather add a real, sourced figure later than publish an estimate now.*`,
+        },
     {
-      heading: `Proof of Financial Sufficiency Requirements`,
-      body: `Beyond the application fees, ${country.name} requires you to prove that you have enough money to support yourself during your stay. This is separate from the application fees.
-
-**Minimum Recommended Funds (in addition to fees):**
-• Short stay (1–3 months): ${country.currency} ${Math.round(fee * 4)}–${Math.round(fee * 8)}
-• Medium stay (3–6 months): ${country.currency} ${Math.round(fee * 8)}–${Math.round(fee * 15)}
-• Long stay / study (1+ year): ${country.currency} ${Math.round(fee * 15)}–${Math.round(fee * 30)}
-• Immigration / PR: ${country.currency} ${Math.round(fee * 30)}+ (settlement funds required)
-
-These are guidelines based on typical ${country.name} requirements. Official minimums vary by visa category and are updated periodically. Always verify current requirements at ${country.officialImmigrationUrl}.
+      heading: `Proof of Financial Sufficiency`,
+      body: `Beyond the application fees, ${country.name} requires you to prove that you have enough money to support yourself during your stay. This is separate from the application fees, and ${country.name} does not publish one fixed minimum figure that applies to every applicant and every length of stay — the amount considered sufficient depends on your visa category, intended duration, and individual circumstances. Check ${country.officialImmigrationUrl} for current guidance rather than relying on a generic number.
 
 **How to Present Financial Evidence:**
 Bank statements must be from the last 3–6 months and show consistent balance maintenance. Recent large deposits are viewed suspiciously. Strengthen your financial profile with:
@@ -973,40 +987,13 @@ Payment methods vary by embassy and VAC location. Common options include:
 • Bank transfer to official embassy account
 
 **Currency Considerations:**
-All ${country.name} visa fees are set in ${country.currency}. When paying from another currency, exchange rates on the day of payment apply. Check the current exchange rate at a reliable source before calculating your total budget. Allow a 5–10% buffer for exchange rate fluctuations between planning and payment.
+${country.name}'s visa fees are set in ${country.currency}. When paying from another currency, exchange rates on the day of payment apply. Check the current exchange rate at a reliable source before calculating your total budget, and allow a buffer for fluctuations between planning and payment.
 
 **Fee Changes:**
-${country.name} visa fees are reviewed periodically and can increase without advance notice. Always check the current fee at ${country.officialImmigrationUrl} on the day you submit your application. The fees stated in this guide are current as of ${yr} but should be independently verified.
+${country.name} visa fees are reviewed periodically and can change without advance notice. Always check the current fee at ${country.officialImmigrationUrl} on the day you submit your application — the ${country.currency} ${fee} figure in this guide reflects our dataset as of ${yr} but should be independently verified before you pay.
 
 **Refund Policy:**
-The government application fee (${country.currency} ${fee}) is strictly non-refundable. VFS and facilitation fees may be partially refundable if you withdraw before biometric enrollment — check with your specific VAC for their refund policy.`,
-    },
-    {
-      heading: `Smart Budgeting for Your ${country.name} ${label} — Total Cost Planning`,
-      body: `The government application fee is just one part of the total cost of obtaining a ${country.name} ${label}. Experienced applicants budget holistically across all phases of the process to avoid financial surprises.
-
-**Phase 1 — Pre-Application Costs**
-These costs occur before you submit a single form and are easy to underestimate:
-• Language test fee: varies by test and country (IELTS: ~USD 200–260; TOEFL: ~USD 185–260)
-• Language test preparation course (optional but recommended): USD 100–500
-• Medical examination: ${country.currency} ${Math.round(fee * 0.5)}–${Math.round(fee * 1)} depending on the approved facility
-• Police clearance certificate: ${country.currency} ${Math.round(fee * 0.1)}–${Math.round(fee * 0.3)} per country
-• Document translation: ${country.currency} ${Math.round(fee * 0.25)} per document (varies by length and translator)
-• Notarization: varies by document type
-
-**Phase 2 — Application Costs**
-• Government fee: ${country.currency} ${fee} (non-refundable)
-• VFS / facilitation center fee: ${country.currency} ${Math.round(fee * 0.2)}–${Math.round(fee * 0.4)}
-• Biometric enrollment: often included in VAC fee
-• Courier / postal service: ${country.currency} ${Math.round(fee * 0.1)}–${Math.round(fee * 0.2)}
-
-**Phase 3 — Settlement Costs (After Visa Approval)**
-• Travel insurance: ${country.currency} ${Math.round(fee * 0.8)}–${Math.round(fee * 2)} for comprehensive coverage
-• Flights to ${country.name}: varies significantly by origin
-• Initial accommodation (first month): varies by city and type
-• Initial living expenses: ${country.currency} ${Math.round(fee * 3)}–${Math.round(fee * 8)} per month in ${country.capital}
-
-**Total Cost Estimate:** Without immigration consultant, a complete ${country.name} ${label} process from document gathering to arrival typically costs ${country.currency} ${Math.round(fee * 4)}–${Math.round(fee * 8)} in total fees and preparation costs, plus travel and living expenses. With an immigration consultant, add ${country.currency} ${Math.round(fee * 2)}–${Math.round(fee * 5)}.`,
+The government application fee (${country.currency} ${fee}) is non-refundable in almost all cases. VFS/VAC and facilitation fees may be partially refundable if you withdraw before biometric enrollment — check with your specific VAC for their refund policy, as this is set by the VAC operator, not the immigration authority.`,
     },
     ...sharedExtraSections(country, visaType),
   ];
@@ -1089,7 +1076,7 @@ function getDocTip(doc: string, country: CountryExtended): string {
     "application form": `Complete the form in block capitals in English. All dates must be in the DD/MM/YYYY format (or as specified). Never leave fields blank — write "N/A" if a field doesn't apply to you.`,
     "photograph": `Use a professional photographer familiar with ${country.name} embassy specifications. Poor-quality photos are a common reason for application rejection at document submission stage.`,
     "bank statement": `Obtain officially certified statements directly from your bank — not internet printouts. Cover the last 6 months minimum. Ensure the statements show your account holder name, account number, and bank's official stamp.`,
-    "insurance": `Purchase comprehensive travel/health insurance with at least ${country.currency} ${Math.round(country.visaFees.visit * 15)} emergency coverage. Keep the insurance policy document and emergency contact numbers accessible during your stay.`,
+    "insurance": `Purchase comprehensive travel/health insurance meeting the current official minimum coverage for your visa category (check ${country.officialImmigrationUrl}). Keep the insurance policy document and emergency contact numbers accessible during your stay.`,
   };
   const key = Object.keys(tips).find((k) => doc.toLowerCase().includes(k)) ?? "";
   return tips[key] ?? `Ensure this document is current, authentic, and meets ${country.name} immigration standards. Original documents or certified true copies are required.`;
@@ -1170,7 +1157,7 @@ If your application significantly exceeds the published processing time (${time}
       body: `In genuine time-sensitive situations, some ${country.name} embassies offer priority or expedited processing services. Understanding these options and when they apply can help you manage urgent visa needs.
 
 **Standard Priority Processing**
-Some ${country.name} embassies and VACs offer a priority processing service that reduces the processing time by approximately 30–50% for an additional fee. The additional fee is typically 50–100% of the standard government fee. For example, if the standard government fee is ${country.currency} ${country.visaFees[visaType as VisaTypeExtended]}, the priority service adds approximately ${country.currency} ${Math.round(country.visaFees[visaType as VisaTypeExtended] * 0.75)}.
+Some ${country.name} embassies and VACs offer a priority or expedited processing service for an additional fee, on top of the standard government fee of ${country.currency} ${country.visaFees[visaType as VisaTypeExtended]}. Whether this service is available, how much faster it is, and what it costs varies by embassy/VAC location and isn't something the government fee schedule covers — check directly with your local ${country.name} embassy or VAC (${country.embassyUrl}) for availability and current pricing.
 
 Priority processing does not guarantee approval — it only speeds up the assessment timeline. If your application has documentation issues, priority processing will not overcome them.
 
@@ -1579,7 +1566,7 @@ ${docs.map((d) => `☐ ${d}`).join("\n")}
 **After Approval:**
 ☐ Passport collected with visa stamp / e-visa document received
 ☐ Visa stamp details verified (name, passport number, validity dates, conditions)
-☐ Travel insurance purchased (minimum ${country.currency} ${Math.round(fee * 15)} medical coverage)
+☐ Travel insurance purchased (check ${country.officialImmigrationUrl} for the current minimum coverage required for your category)
 ☐ All original supporting documents organized to carry on travel
 ☐ Emergency contact numbers (${country.name} embassy, immigration authority) saved
 ☐ Compliance conditions of your visa reviewed and understood`,
@@ -1761,28 +1748,26 @@ This guide explains exactly what financial evidence ${country.name} requires for
 This must be paid as part of your application regardless of outcome.
 
 **Proof of Funds (Separate from Application Fee):**
-You must demonstrate sufficient funds to cover all expenses during your stay in ${country.name}:
+You must demonstrate sufficient funds to cover all expenses during your stay in ${country.name}. ${country.name} does not publish one fixed figure that applies to every applicant — the amount considered sufficient depends on your specific circumstances — so treat the categories below as what officers look at, not as a number to target, and confirm current guidance at ${country.officialImmigrationUrl}:
 
 ${visaType === "study"
-        ? `• Tuition fees: Varies by institution and course
-• Living expenses: Approximately ${country.currency} ${Math.round(fee * 12)} per year
-• Accommodation: ${country.currency} ${Math.round(fee * 6)}–${Math.round(fee * 15)} per year
-• Books, materials, personal expenses: ${country.currency} ${Math.round(fee * 3)} per year
-• **Minimum recommended in bank:** ${country.currency} ${Math.round(fee * 20)}–${Math.round(fee * 30)} for a full year of study`
+        ? `• Tuition fees: varies by institution and course — your acceptance letter should state the exact amount
+• Living expenses for the duration of your course, scaled to the city and cost of living where you'll study
+• Accommodation costs, whether pre-paid or ongoing
+• Books, materials, and personal expenses
+Officers generally want to see evidence you can fund a full year of study and living costs at once, not month-to-month.`
         : visaType === "work"
-          ? `• Relocation costs: ${country.currency} ${Math.round(fee * 3)}–${Math.round(fee * 8)}
-• Initial settlement: ${country.currency} ${Math.round(fee * 4)}–${Math.round(fee * 10)} (before first paycheck)
-• Emergency fund: ${country.currency} ${Math.round(fee * 5)}+
-• **Minimum recommended:** ${country.currency} ${Math.round(fee * 8)}–${Math.round(fee * 15)} (the employer's salary letter helps significantly)`
+          ? `• Relocation costs to get yourself (and any dependents) to ${country.name}
+• Initial settlement funds to cover the gap before your first paycheck
+• An emergency buffer beyond your immediate costs
+A strong employer salary letter or contract substantially reduces how much personal savings you need to separately demonstrate.`
           : visaType === "immigration"
-            ? `• Settlement funds: ${country.currency} ${Math.round(fee * 30)}–${Math.round(fee * 50)} minimum
-• This must be available in liquid assets (bank accounts, fixed deposits)
-• Property and investments may be considered but carry less weight than liquid funds
+            ? `• Settlement funds sufficient to support yourself (and dependents) while establishing residency, without relying on public funds
+• Funds should be in liquid assets (bank accounts, fixed deposits) — property and investments are considered but carry less weight
 • Funds must be accessible immediately upon arrival in ${country.name}`
-            : `• Daily living expenses: ${country.currency} ${Math.round(fee * 0.5)} per day
-• Accommodation: Fully confirmed and paid bookings help significantly
-• Emergency funds: ${country.currency} ${Math.round(fee * 3)}+
-• **Minimum recommended in bank:** ${country.currency} ${Math.round(fee * 4)}–${Math.round(fee * 10)} depending on duration`}`,
+            : `• Daily living expenses for the length of your planned stay
+• Accommodation — confirmed, paid bookings strengthen your application
+• An emergency buffer beyond your planned itinerary costs`}`,
     },
     {
       heading: `Accepted Financial Documents`,
@@ -2155,10 +2140,10 @@ export function generatePageContent(
 
     case "fees":
       sections = sectionsFees(country, visaType);
-      heroTitle = `${country.name} ${label} Fees ${yr} — Complete Cost Breakdown`;
-      heroSubtitle = `Government fee: ${country.currency} ${fee} | Total estimated: ${country.currency} ${Math.round(fee * 2.2)}–${Math.round(fee * 2.8)}`;
-      metaTitle = `${country.name} ${label} Fees ${yr} — All Costs & Financial Requirements | VisaProcessInfo`;
-      metaDescription = `Complete ${country.name} ${label} fee breakdown for ${yr}. Government fee ${country.currency} ${fee} plus all ancillary costs, financial requirements, and payment methods.`;
+      heroTitle = `${country.name} ${label} Fees ${yr} — Official Cost Guide`;
+      heroSubtitle = `Official government fee: ${country.currency} ${fee} | Processing time: ${time}`;
+      metaTitle = `${country.name} ${label} Fees ${yr} — Official Fee & Financial Requirements | VisaProcessInfo`;
+      metaDescription = `${country.name} ${label} fees for ${yr}. Official government fee ${country.currency} ${fee}, financial requirements, and payment methods.`;
       break;
 
     case "documents":

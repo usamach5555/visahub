@@ -35,26 +35,15 @@ const FAQ_SCHEMA_PAGE_TYPES = new Set(["details", "faq", "country-hub", "require
 // Page types where HowTo schema applies
 const HOWTO_SCHEMA_PAGE_TYPES = new Set(["apply", "how-to"]);
 
-// Per-family stable datePublished — spread across months to look natural per launch
-const PAGE_DATE_PUBLISHED: Record<string, string> = {
-  "country-hub":     "2024-01-15T00:00:00Z",
-  "embassy":         "2024-02-01T00:00:00Z",
-  "details":         "2024-01-20T00:00:00Z",
-  "apply":           "2024-03-01T00:00:00Z",
-  "how-to":          "2024-03-15T00:00:00Z",
-  "requirements":    "2024-02-15T00:00:00Z",
-  "fees":            "2024-03-20T00:00:00Z",
-  "documents":       "2024-04-01T00:00:00Z",
-  "processing-time": "2024-05-01T00:00:00Z",
-  "rejection":       "2024-06-01T00:00:00Z",
-  "checklist":       "2024-03-25T00:00:00Z",
-  "faq":             "2024-04-15T00:00:00Z",
-  "financial":       "2024-05-15T00:00:00Z",
-  "interview":       "2024-07-01T00:00:00Z",
-  "success-tips":    "2024-08-01T00:00:00Z",
-  "extension":       "2024-09-01T00:00:00Z",
-  "language":        "2024-06-15T00:00:00Z",
-};
+// Single, honest content date used for both datePublished and dateModified
+// across all programmatic pages. This reflects the date this content
+// pipeline was last actually verified/changed — update it when the
+// underlying page-content generation logic (lib/page-content.ts) is next
+// substantively revised. Do not fabricate per-page-type or per-request
+// variation: Google's spam guidance treats invented freshness signals as
+// a red flag, and a single accurate date is more trustworthy than a fake
+// spread designed to "look natural."
+const CONTENT_LAST_VERIFIED = "2026-07-22T00:00:00Z";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -75,7 +64,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const imageUrl = getCountryImageUrl(country.slug, country.region, 1200, 630);
   const isTierC = parsed.pageType !== null && TIER_C_PAGE_TYPES.has(parsed.pageType);
   return {
-    title: content.metaTitle,
+    // content.metaTitle already ends with "| VisaProcessInfo" (see lib/page-content.ts).
+    // Using { absolute: ... } bypasses layout.tsx's "%s | VisaProcessInfo" title
+    // template so the suffix isn't appended twice.
+    title: { absolute: content.metaTitle },
     description: content.metaDescription,
     alternates: { canonical: `https://www.visaprocessinfo.com/${slug}` },
     ...(isTierC && { robots: { index: false, follow: true } }),
@@ -172,8 +164,6 @@ export default async function ProgrammaticPage({ params }: Props) {
   const countryImageUrl = getCountryImageUrl(country.slug, country.region);
 
   // ── JSON-LD schemas ───────────────────────────────────────────────────────
-  const datePublished = PAGE_DATE_PUBLISHED[pt] ?? "2024-01-15T00:00:00Z";
-
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -195,8 +185,8 @@ export default async function ProgrammaticPage({ params }: Props) {
     },
     url: `https://www.visaprocessinfo.com/${slug}`,
     mainEntityOfPage: `https://www.visaprocessinfo.com/${slug}`,
-    datePublished,
-    dateModified: "2026-05-01T00:00:00Z",
+    datePublished: CONTENT_LAST_VERIFIED,
+    dateModified: CONTENT_LAST_VERIFIED,
     reviewedBy: {
       "@type": "Organization",
       name: "VisaProcessInfo Editorial Team",
@@ -395,7 +385,7 @@ export default async function ProgrammaticPage({ params }: Props) {
             <div className="flex flex-wrap items-center gap-3 text-xs">
               <div className="flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-3 py-1.5 font-medium">
                 <CalendarDays className="w-3.5 h-3.5" />
-                Last updated: May 2026
+                Last updated: July 2026
               </div>
               <div className="flex items-center gap-1.5 bg-primary-50 text-primary-700 border border-primary-200 rounded-full px-3 py-1.5 font-medium">
                 <ShieldCheck className="w-3.5 h-3.5" />

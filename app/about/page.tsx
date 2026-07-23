@@ -5,7 +5,7 @@ import { Globe, Target, BadgeDollarSign, RefreshCw, Scale, CheckCircle2 } from "
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about VisaProcessInfo — your free, independent immigration information resource covering visa guides for 131+ countries. Our mission, team, and editorial standards.",
+    "Learn about VisaProcessInfo — your free, independent immigration information resource covering visa guides for 127 countries. Our mission, team, and editorial standards.",
   alternates: { canonical: "https://www.visaprocessinfo.com/about" },
   keywords: [
     "about VisaProcessInfo", "visa guide team", "immigration experts",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 const STATS = [
-  { value: "131+", label: "Countries Covered" },
+  { value: "127", label: "Countries Covered" },
   { value: "10,000+", label: "Free Visa Guides" },
   { value: "5", label: "Visa Categories" },
   { value: "2020", label: "Founded" },
@@ -25,23 +25,23 @@ const STATS = [
 const EDITORIAL_ROLES = [
   {
     initials: "RE",
-    role: "Research & Editorial Team",
-    bio: "Our research team compiles visa requirements directly from official government immigration portals, embassy websites, and statutory instruments. Every guide begins with primary source research — not other websites.",
+    role: "Research & Data Team",
+    bio: "Our research team compiles visa fees, processing times, requirements, and application steps for each country directly from official government immigration portals and embassy websites, into a structured dataset that powers every guide for that country.",
   },
   {
     initials: "VV",
     role: "Verification & Accuracy Team",
-    bio: "After initial research, our verification team cross-checks requirements against official embassy announcements, ministry publications, and legislative updates. Fee tables are verified against the official government source for each country.",
+    bio: "Each country's data is checked against the official government source before it goes live — correct currency for fees, current processing-time guidance, and working links to the official immigration portal and embassy.",
   },
   {
     initials: "CP",
     role: "Content & Policy Update Team",
-    bio: "Immigration policies change frequently. Our content team monitors official notification channels for all 131+ covered countries and updates guides within 48 hours of confirmed policy changes.",
+    bio: "When we identify a policy or fee change for a country, we update that country's data. Because guides are generated from shared per-country data, the correction is reflected across every guide for that country and visa type.",
   },
   {
     initials: "QR",
     role: "Quality Review Team",
-    bio: "All guides undergo a structured quality review before publication. Reviewers check factual accuracy, completeness of requirements, correct fee amounts in the destination country's currency, and clarity of instructions.",
+    bio: "Our page templates and long-form editorial articles are reviewed for factual accuracy, completeness, correct fee currency, and clarity before publication and whenever the underlying data changes.",
   },
 ];
 
@@ -50,7 +50,7 @@ const VALUES = [
     Icon: Target,
     title: "Accuracy First",
     description:
-      "Every guide is researched from official government sources — embassy websites, immigration authority portals, and official legislation. We cite our sources and update guides when policies change.",
+      "Our guides are built from a per-country dataset researched from official government sources — embassy websites, immigration authority portals, and official fee schedules. We link to our sources and update the data when policies change.",
   },
   {
     Icon: BadgeDollarSign,
@@ -62,7 +62,7 @@ const VALUES = [
     Icon: RefreshCw,
     title: "Regularly Updated",
     description:
-      "Immigration policies change frequently. Our editorial team reviews all guides quarterly and publishes urgent updates whenever a country announces a policy change that affects applicants.",
+      "Immigration policies change frequently. Because our guides are generated from a shared per-country dataset, updating a country's data propagates the change across every guide for that country and visa type in a single update.",
   },
   {
     Icon: Scale,
@@ -138,7 +138,7 @@ export default function AboutPage() {
               <h3 className="font-bold text-primary-900 mb-4 text-lg">What We Cover</h3>
               <ul className="space-y-3 text-sm text-primary-800">
                 {[
-                  "Study visa guides for 131+ destination countries",
+                  "Study visa guides for 127 destination countries",
                   "Work permit applications and employer sponsorship",
                   "Tourist and visitor visa requirements",
                   "Permanent residency and citizenship pathways",
@@ -184,22 +184,22 @@ export default function AboutPage() {
               {
                 step: "01",
                 title: "Official Source Research",
-                desc: "Every guide begins with research from the official government immigration portal, embassy websites, and legislative documents for the relevant country and visa category.",
+                desc: "For each country, we research the official government immigration portal, embassy websites, and fee schedules, and compile the findings into a structured, per-country dataset.",
               },
               {
                 step: "02",
-                title: "Editorial Review",
-                desc: "Our editorial team cross-checks requirements against multiple official sources, verifies that fees are in the correct currency, and confirms processing time estimates reflect current official guidance.",
+                title: "Data Verification",
+                desc: "That dataset is checked against the official sources for correct fee currency, current processing-time guidance, and working links to the official immigration portal and embassy.",
               },
               {
                 step: "03",
-                title: "Accuracy Check",
-                desc: "For complex areas (PR pathways, appeals, citizenship), editors perform additional verification against statutory instruments and official legislative sources before publication.",
+                title: "Guide Generation",
+                desc: "Verified country data is applied consistently across every visa type and guide format for that country, so every generated page reflects the same checked source data.",
               },
               {
                 step: "04",
-                title: "Publication & Monitoring",
-                desc: "Published guides are monitored continuously via official government notification systems, reader feedback, and our professional network — updates are made within 48 hours of confirmed policy changes.",
+                title: "Monitoring & Corrections",
+                desc: "We rely on reader reports and our own spot-checks to catch policy changes. A confirmed update to a country's data propagates automatically across every guide generated from it.",
               },
             ].map((item, i) => (
               <div key={item.step} className="flex gap-5 mb-6 last:mb-0">
@@ -222,7 +222,7 @@ export default function AboutPage() {
         <section>
           <h2 className="text-3xl font-bold text-primary-800 mb-4">Our Editorial Team</h2>
           <p className="text-gray-600 leading-relaxed mb-8">
-            VisaProcessInfo is operated by a dedicated editorial team focused on immigration research and content accuracy. Our guides are produced through a structured four-stage process: primary source research, cross-verification, expert review, and regular policy monitoring. All content is attributed to the relevant functional team below, with every guide carrying a publication date and a last-verified date linked to the specific official source checked.
+            VisaProcessInfo is operated by a small editorial team focused on immigration research and content accuracy. Our country and visa-type guides are produced through a structured pipeline: primary source research, data verification, and template-based guide generation, described below. Our long-form blog and editorial articles are separately researched and written as standalone pieces, each carrying its own publication date.
           </p>
           <div className="grid sm:grid-cols-2 gap-6">
             {EDITORIAL_ROLES.map((member) => (
@@ -263,10 +263,10 @@ export default function AboutPage() {
               VisaProcessInfo was founded in early 2020 to close that gap. The timing was challenging — the COVID-19 pandemic created unprecedented disruption to international travel and visa processing worldwide. But it also created massive demand for clear, accurate, up-to-date information as millions of people needed to understand which visa categories were suspended, how processing times were affected, and what documentation requirements had changed.
             </p>
             <p>
-              The site grew organically through the pandemic years as countries reopened and international movement resumed. The editorial team expanded over time, with specialist researchers and editors covering different regions of the world with genuine professional expertise.
+              The site grew through the pandemic years as countries reopened and international movement resumed, expanding coverage country by country as we built out the underlying research for each destination.
             </p>
             <p>
-              Today, VisaProcessInfo publishes more than 10,000 individual visa guides covering 131+ destination countries across study, work, tourist, business, and permanent residency categories. Every guide is written or reviewed by someone with direct professional experience in that country&apos;s immigration system — not just researched from other websites. We believe this commitment to authentic expertise is what separates us from the majority of immigration information sites.
+              Today, VisaProcessInfo publishes guides covering 127 destination countries across study, work, tourist, business, and permanent residency categories. Our country and visa-type guides are generated from a structured dataset researched from official government sources for each country, applied consistently across every visa type and guide format — rather than each of the thousands of resulting pages being individually authored from scratch. Our long-form blog and editorial articles are separately researched and written as standalone pieces. We believe this combination — verified source data at scale, plus original long-form writing where it adds the most value — is a more honest description of how information sites at this scale actually work.
             </p>
             <p>
               Our funding model has also been carefully considered. We accept display advertising but do not sell sponsored content, do not accept payment from visa agencies or immigration lawyers for favourable mentions, and do not earn commissions from referrals to any service providers. This independence is non-negotiable for us. It means our readers can trust that every recommendation we make is based on what we believe is genuinely best for applicants — not what generates revenue for us.
@@ -279,35 +279,35 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-primary-800 mb-6">How We Research and Verify Our Guides</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
-              Every guide published on VisaProcessInfo follows a strict research and verification process before it goes live. We are aware that immigration guides exist across the internet in various states of accuracy and currency, and we have deliberately built our editorial process to be as rigorous as possible given our team size and resources.
+              Our country and visa-type guides follow a data-first process: rather than researching and writing each of the thousands of resulting pages individually, we research and verify information once per country and reuse it consistently across every visa type and guide format for that country.
             </p>
             <p>
-              <strong>Primary Sources First:</strong> Our research always begins with the official government source. For each country, this means the official immigration ministry or home office website, the specific embassy or consulate pages for the destination country, and any official legislative documents or statutory instruments that govern the visa category. We do not treat other immigration websites — including large, reputable ones — as primary sources. We go to the original government publication.
+              <strong>Primary Sources First:</strong> Our research begins with the official government source. For each country, this means the official immigration ministry or home office website, the specific embassy or consulate pages for the destination country, and published fee schedules. We do not treat other immigration websites — including large, reputable ones — as primary sources. We go to the original government publication.
             </p>
             <p>
-              <strong>Interpretation & Context Layer:</strong> After gathering information from official sources, our editors cross-reference requirements across multiple official documents — ministry websites, embassy pages, and statutory instruments — to ensure consistency. Where official guidance uses technical or ambiguous language, editors add context drawn from the official source text itself, not from third-party interpretations. Every factual claim in a guide must be traceable back to a specific official source.
+              <strong>Structured Data, Not Page-by-Page Rewriting:</strong> The requirements, fees, processing times, and application steps we gather for a country are stored as structured data and applied consistently across that country's guides. This means a correction or update only needs to be made once to take effect everywhere it's relevant, instead of being repeated — and potentially inconsistently applied — across dozens of individual pages.
             </p>
             <p>
-              <strong>Reader Feedback Loop:</strong> We monitor reader feedback and correction submissions on every guide. Readers who notice outdated information, fee changes, or policy updates can submit corrections via our Contact page. Every correction report is reviewed by an editor within 48 hours. If a significant policy change is reported, we verify it against official sources and update the guide immediately, adding a &quot;last updated&quot; timestamp so readers can see how current the information is.
+              <strong>Reader Feedback Loop:</strong> We monitor reader feedback and correction submissions on every guide. Readers who notice outdated information, fee changes, or policy updates can submit corrections via our Contact page. We verify reported changes against official sources before updating our data.
             </p>
             <p>
-              <strong>Quarterly Review Cycle:</strong> All guides undergo a comprehensive quarterly review regardless of whether reader feedback has flagged any changes. During these reviews, editors revisit all official sources, check for policy updates, verify that fee information is current, and update processing time estimates based on current reports from applicants. Guides that cover categories with particularly volatile policies — such as the UK Skilled Worker Visa or Australia&apos;s SkillSelect points system — are reviewed monthly.
+              <strong>Ongoing Data Updates:</strong> We update a country's data when we identify that a policy, fee, or processing time has changed — through reader reports or our own periodic checks — rather than committing to a fixed review calendar across 127 countries and thousands of generated pages, which we don't think we could honestly guarantee.
             </p>
             <p>
               <strong>Complexity Flags:</strong> Guides covering complex legal areas — permanent residency pathways, citizenship applications, visa refusal appeals — include explicit notices directing readers to seek professional legal advice. These guides carry additional caveats because the information requirements vary substantially by individual circumstances and cannot be fully addressed in a general guide.
             </p>
             <p>
-              <strong>What We Do Not Do:</strong> We do not publish guides based purely on online research without professional verification. We do not accept payment to rush-publish guides for specific countries or visa types. We do not post &quot;quick guides&quot; that summarise official requirements without understanding the nuance behind them. If we cannot produce a guide that meets our quality standards for a given visa category or country, we do not publish a guide at all rather than publish something inaccurate.
+              <strong>What We Do Not Do:</strong> We do not accept payment to rush-publish guides for specific countries or visa types. We do not publish a guide for a country or visa category until we have located and verified the relevant official source information for it.
             </p>
           </div>
         </section>
 
         {/* Countries We Cover */}
         <section>
-          <h2 className="text-3xl font-bold text-primary-800 mb-6">Why We Cover 131+ Countries</h2>
+          <h2 className="text-3xl font-bold text-primary-800 mb-6">Why We Cover 127 Countries</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
-              Our coverage of 131+ destination countries was not chosen arbitrarily. Each country on our platform represents a meaningful immigration destination that receives a significant volume of applications from international students, workers, tourists, and permanent residency seekers. Our selection criteria balance global application volume, the complexity and importance of the immigration pathways available, and our editorial team&apos;s genuine expertise.
+              Our coverage of 127 destination countries was not chosen arbitrarily. Each country on our platform represents a meaningful immigration destination that receives a significant volume of applications from international students, workers, tourists, and permanent residency seekers. Our selection criteria balance global application volume and the complexity and importance of the immigration pathways available.
             </p>
             <p>
               <strong>English-speaking destinations — USA, UK, Canada, Australia:</strong> These four countries collectively receive millions of visa applications each year across all categories. They are the primary destinations for international students, skilled workers, and prospective permanent residents from South Asia, Southeast Asia, the Middle East, and Africa. The complexity and high stakes of their immigration systems — particularly points-based systems like Canada&apos;s Express Entry and Australia&apos;s SkillSelect — mean that applicants have the most to gain from expert, accurate guidance.
@@ -373,11 +373,11 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-primary-800 mb-6">Our Impact</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
-              Since launching in 2020, VisaProcessInfo has grown from a small blog into a comprehensive immigration information resource covering 131+ destination countries across five visa categories. Our guides are used by students, workers, tourists, and families navigating the visa application process.
+              Since launching in 2020, VisaProcessInfo has grown from a small blog into a comprehensive immigration information resource covering 127 destination countries across five visa categories. Our guides are used by students, workers, tourists, and families navigating the visa application process.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 my-8">
               {[
-                { value: "131+", label: "Countries Covered" },
+                { value: "127", label: "Countries Covered" },
                 { value: "10,000+", label: "Pages & Guides" },
                 { value: "500+", label: "Blog Articles" },
                 { value: "5", label: "Visa Categories" },
@@ -395,7 +395,7 @@ export default function AboutPage() {
               Our guides cover the full application process from start to finish — eligibility requirements, required documents, fees, processing times, and common mistakes to avoid. Every guide includes an Official Sources section with direct links to the government authority used to research it, so readers can verify requirements themselves.
             </p>
             <p>
-              We also take our responsibility seriously when things go wrong. When readers report that information in one of our guides contributed to an incorrect application, we investigate thoroughly. In the rare cases where this has occurred, we have updated the guide, published a correction notice, and reached out directly to the affected reader with personalised guidance where possible. Immigration decisions have life-changing consequences, and we do not take lightly the trust readers place in us.
+              We also take our responsibility seriously when things go wrong. If a reader reports that information in one of our guides was inaccurate, we verify the report against the official source and correct the underlying data if the error is confirmed. Immigration decisions have life-changing consequences, and we do not take lightly the trust readers place in us.
             </p>
             <p>
               Looking ahead, our goals for the next three years include expanding to 150+ destination countries, launching guides in French and Spanish to serve non-English-speaking applicants, building an interactive visa eligibility checker tool, and establishing formal partnerships with official immigration authorities to receive direct policy update notifications. We are committed to remaining free, independent, and comprehensive — no paywalls, no subscription fees, no charges for information that should be publicly available to everyone.
@@ -408,22 +408,19 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-primary-800 mb-6">How We Stay Current with Immigration Policy Changes</h2>
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>
-              Immigration policy is one of the most rapidly changing areas of government regulation. In any given year, dozens of policy changes across our 131+ covered countries can affect visa requirements, fees, processing times, salary thresholds, English language score requirements, financial proof minimums, and dozens of other variables that directly affect applicants. Staying current requires a systematic approach.
+              Immigration policy is one of the most rapidly changing areas of government regulation. In any given year, policy changes across our 127 covered countries can affect visa requirements, fees, processing times, and other variables that directly affect applicants. Because our guides are generated from a shared per-country dataset rather than written individually, staying current is primarily a data-maintenance problem, not a page-by-page one.
             </p>
             <p>
-              <strong>Official Source Monitoring:</strong> Our editorial team monitors official government notification channels and policy update pages for all covered countries. These include UKVI policy updates from the UK Home Office, IRCC operational bulletins from Immigration, Refugees and Citizenship Canada, USCIS policy updates from the US Citizenship and Immigration Services, and equivalent official channels for Germany&apos;s BAMF, Australia&apos;s Department of Home Affairs, and other covered countries. When an official policy update is published, we assess whether any of our guides require updating.
+              <strong>Official Source Checks:</strong> When we compile or revisit a country's data, we check it against that country's official immigration portal and embassy pages — for example UKVI/GOV.UK for the UK, IRCC for Canada, USCIS for the US, or BAMF for Germany.
             </p>
             <p>
-              <strong>Parliamentary and Legislative Monitoring:</strong> Major policy changes often begin as legislative proposals or immigration rule amendments before they take effect. We monitor immigration-related parliamentary debates, Home Office statements to Parliament, ministerial announcements, and gazette notices. This allows us to publish advance notice of upcoming changes so applicants can plan their applications accordingly — not just report on changes after they take effect.
+              <strong>Single-Point Updates:</strong> Because every guide for a country and visa type draws from the same underlying data, a confirmed change only needs to be corrected once. It then applies automatically across the country hub, application guide, fee guide, and every other page generated for that country — rather than requiring us to manually edit each page.
             </p>
             <p>
-              <strong>Consular Information Tracking:</strong> Embassy and consulate websites often publish updated processing times, fee schedules, and documentary requirements independently of central immigration ministry communications. Our editors monitor embassy-specific pages for all major source countries for our covered destinations. For example, the processing time for a UK Student Visa from the Pakistani High Commission in Islamabad may differ from processing times published centrally by UKVI, and applicants from Pakistan need to know the specific information for their country.
+              <strong>Reader-Reported Changes:</strong> Our readers are an important source of ground-level information. Applicants actively going through the visa process may notice changes to requirements or processing times before we do. Readers can report changes, discrepancies, or new information via our Contact page, and we verify reported changes against the official source before updating our data.
             </p>
             <p>
-              <strong>Professional Network Intelligence:</strong> Our editorial team monitors immigration professional forums, legal updates, and practitioner communities across all covered countries. These sources often surface practical changes before official announcements are made — for example, when a consulate begins requesting a new document format that is not yet reflected in official guidance. We investigate and verify every such report against official sources before publishing any update.
-            </p>
-            <p>
-              <strong>Reader-Reported Changes:</strong> Our readers are an important source of ground-level information. Applicants actively going through the visa process often notice changes to consular practices before they appear in official guidance. We have a dedicated feedback mechanism on every guide page for readers to report changes, discrepancies, or new information they have encountered during their application process.
+              We do not claim to monitor every legislative proposal or consular practice change in real time across 127 countries — we think it's more honest to describe our process accurately: a maintained dataset, checked against official sources, corrected when we or our readers identify a change.
             </p>
           </div>
         </section>
@@ -474,7 +471,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-bold mb-4 text-white">Start Exploring Visa Guides</h2>
           <p className="text-blue-100 mb-6 max-w-xl mx-auto">
             Browse 10,000+ free visa and immigration guides covering study, work,
-            tourist, and business visas for 131+ countries.
+            tourist, and business visas for 127 countries.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link

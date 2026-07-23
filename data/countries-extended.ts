@@ -13,6 +13,22 @@ export interface CountryExtended {
   languageRequirement: string;
   popularFor: string[];
   keyFacts: string[];
+  /**
+   * Extension point for verified ancillary-cost research (biometric fee,
+   * medical exam fee, VAC/facilitation fee, etc.), sourced per-country from
+   * the official immigration authority or VAC operator — NOT derived from
+   * the government visa fee. Intentionally left undefined for every country
+   * until real, citable figures are researched and added; content generation
+   * must never fabricate these numbers from visaFees. See lib/page-content.ts
+   * sectionsFees() for how this is (optionally) rendered when present.
+   */
+  verifiedAncillaryCosts?: {
+    study?: Partial<Record<"biometric" | "medical" | "vac", { amount: number; source: string }>>;
+    work?: Partial<Record<"biometric" | "medical" | "vac", { amount: number; source: string }>>;
+    business?: Partial<Record<"biometric" | "medical" | "vac", { amount: number; source: string }>>;
+    visit?: Partial<Record<"biometric" | "medical" | "vac", { amount: number; source: string }>>;
+    immigration?: Partial<Record<"biometric" | "medical" | "vac", { amount: number; source: string }>>;
+  };
 }
 
 export const COUNTRIES_EXTENDED: CountryExtended[] = [
@@ -1241,46 +1257,6 @@ export const COUNTRIES_EXTENDED: CountryExtended[] = [
     keyFacts: ["CA-4 Agreement with Guatemala, El Salvador, Nicaragua", "Temporary residence permit", "Work permit via migration", "Retiree pensioner visa"],
     visaFees: { study: 50, work: 100, business: 50, visit: 0, immigration: 200 },
     processingDays: { study: "2-6 weeks", work: "3-8 weeks", business: "2-4 weeks", visit: "Visa-free for most", immigration: "3-12 months" },
-    difficulty: { study: "Easy", work: "Moderate", business: "Easy", visit: "Easy", immigration: "Moderate" },
-  },
-  {
-    slug: "bahrain", name: "Bahrain", code: "bh", region: "Middle East", capital: "Manama",
-    currency: "BHD", embassyUrl: "https://www.mofa.gov.bh", officialImmigrationUrl: "https://www.npra.gov.bh",
-    languageRequirement: "Arabic / English",
-    popularFor: ["Financial hub", "Formula 1 Grand Prix", "Bahrain Fort", "Liberal social policies"],
-    keyFacts: ["e-Visa available on arrival", "Free Trade Agreement with USA", "LMRA oversees work permits", "GCC residency holders visa-free"],
-    visaFees: { study: 100, work: 150, business: 100, visit: 25, immigration: 400 },
-    processingDays: { study: "3-6 weeks", work: "2-6 weeks", business: "2-4 weeks", visit: "On arrival / online", immigration: "3-12 months" },
-    difficulty: { study: "Moderate", work: "Moderate", business: "Easy", visit: "Easy", immigration: "Moderate" },
-  },
-  {
-    slug: "cyprus", name: "Cyprus", code: "cy", region: "Europe", capital: "Nicosia",
-    currency: "EUR", embassyUrl: "https://www.mfa.gov.cy", officialImmigrationUrl: "https://www.moi.gov.cy",
-    languageRequirement: "Greek / Turkish / English",
-    popularFor: ["EU membership", "Mediterranean beaches", "Historic ruins", "Retirement destination"],
-    keyFacts: ["EU member state — Schengen visa for non-EU", "Fast-Track Business Activation mechanism", "Pink Slip for long-stay residents", "Student visa for EU-accredited universities"],
-    visaFees: { study: 80, work: 130, business: 80, visit: 80, immigration: 500 },
-    processingDays: { study: "3-8 weeks", work: "4-10 weeks", business: "3-6 weeks", visit: "2-4 weeks", immigration: "6-18 months" },
-    difficulty: { study: "Moderate", work: "Moderate", business: "Moderate", visit: "Moderate", immigration: "Moderate" },
-  },
-  {
-    slug: "malta", name: "Malta", code: "mt", region: "Europe", capital: "Valletta",
-    currency: "EUR", embassyUrl: "https://foreignaffairs.gov.mt", officialImmigrationUrl: "https://identitymalta.com",
-    languageRequirement: "Maltese / English",
-    popularFor: ["Schengen area access", "iGaming industry", "Mediterranean climate", "English-speaking EU state"],
-    keyFacts: ["Schengen member — unified visa for travel", "Malta Startup Residence Programme", "Global Residence Programme for retirees", "Key Employee Initiative for skilled workers"],
-    visaFees: { study: 80, work: 120, business: 80, visit: 80, immigration: 600 },
-    processingDays: { study: "4-8 weeks", work: "4-10 weeks", business: "3-6 weeks", visit: "2-4 weeks", immigration: "6-18 months" },
-    difficulty: { study: "Moderate", work: "Moderate", business: "Moderate", visit: "Moderate", immigration: "Moderate" },
-  },
-  {
-    slug: "sri-lanka", name: "Sri Lanka", code: "lk", region: "South Asia", capital: "Sri Jayawardenepura Kotte",
-    currency: "LKR", embassyUrl: "https://www.mfa.gov.lk", officialImmigrationUrl: "https://www.immigration.gov.lk",
-    languageRequirement: "Sinhala / Tamil / English",
-    popularFor: ["Ancient temples", "Tea country", "Surfing beaches", "Wildlife safaris"],
-    keyFacts: ["Electronic Travel Authorization (ETA) for most countries", "Resident Guest visa for retirees", "Work permit via BOI or Ministry of Labour", "Student visa for registered institutes"],
-    visaFees: { study: 50, work: 100, business: 50, visit: 20, immigration: 300 },
-    processingDays: { study: "2-6 weeks", work: "3-8 weeks", business: "2-4 weeks", visit: "24-72 hours (ETA)", immigration: "3-12 months" },
     difficulty: { study: "Easy", work: "Moderate", business: "Easy", visit: "Easy", immigration: "Moderate" },
   },
   {

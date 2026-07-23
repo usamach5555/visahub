@@ -7,20 +7,25 @@
  */
 
 import { NextResponse } from "next/server";
-import { getSitemapCount } from "@/lib/sitemap-data";
-
-export const dynamic = "force-dynamic";
+import { getSitemapCount, CONTENT_LAST_VERIFIED } from "@/lib/sitemap-data";
 
 const BASE = "https://www.visaprocessinfo.com";
 
 export async function GET() {
   const numSitemaps = getSitemapCount();
-  const now = new Date().toISOString();
+  // Honest, static lastmod — matches CONTENT_LAST_VERIFIED in lib/sitemap-data.ts.
+  // Previously this used new Date().toISOString(), which made every sub-sitemap
+  // look freshly modified on every single crawl regardless of whether anything
+  // actually changed — an invented freshness signal search engines discount or
+  // penalize. getSitemapCount() is a pure function of static data, so this
+  // route has no runtime dependency requiring force-dynamic; removing it lets
+  // Next.js serve this route statically.
+  const lastmod = `${CONTENT_LAST_VERIFIED}T00:00:00Z`;
 
   const sitemapEntries = Array.from({ length: numSitemaps }, (_, i) => `
   <sitemap>
     <loc>${BASE}/sitemap/${i}.xml</loc>
-    <lastmod>${now}</lastmod>
+    <lastmod>${lastmod}</lastmod>
   </sitemap>`).join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

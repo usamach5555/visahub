@@ -11,10 +11,10 @@
  * special-file generateSitemaps() convention.
  */
 
-import { getAllSlugs } from "@/lib/articles";
+import { ALL_ARTICLES } from "@/lib/articles";
 import { getAllProcessSlugs } from "@/data/processes";
 import { generateAllProgrammaticSlugs } from "@/lib/slug-parser";
-import { getAllEditorialSlugs } from "@/data/editorial-articles";
+import { EDITORIAL_ARTICLES } from "@/data/editorial-articles";
 
 export const BASE = "https://www.visaprocessinfo.com";
 export const URLS_PER_SITEMAP = 2500;
@@ -59,60 +59,69 @@ function isTierCSlug(slug: string): boolean {
   return TIER_C_SUFFIXES.some((s) => slug.endsWith(s));
 }
 
+// Single honest date for content that has no real per-item modification
+// tracking (static pages, process guides, programmatic pages, and the
+// sitemap index itself). Must match CONTENT_LAST_VERIFIED in
+// app/[slug]/page.tsx. Update it when this content is next substantively
+// changed — do not fabricate per-family variation or regenerate it on every
+// request to simulate freshness; Google's spam guidance treats invented
+// freshness signals as a red flag, and an honest static date is standard
+// practice.
+export const CONTENT_LAST_VERIFIED = "2026-07-22";
+
 /** Build the complete ordered list of all sitemap entries (called fresh per request). */
 export function getAllSitemapEntries(): SitemapEntry[] {
-  // Stable per-family dates — no dynamic "today" noise that wastes crawl budget signals
-  const D_STATIC   = "2026-06-01";
-  const D_EDITORIAL = "2026-05-15";
-  const D_ARTICLE   = "2025-09-01";
-  const D_PROCESS   = "2025-10-15";
-  const D_TIER_A    = "2025-11-01"; // hub, apply, how-to, details, requirements
-  const D_TIER_B    = "2025-10-01"; // fees, documents, processing-time, rejection, checklist, faq, financial
-
-  const editorialSlugs = getAllEditorialSlugs();
+  // Blog and guides articles carry a real, per-article publishedAt date —
+  // use it directly instead of a single fabricated blanket date.
+  const mostRecentEditorialDate = EDITORIAL_ARTICLES.reduce(
+    (latest, a) => (a.publishedAt > latest ? a.publishedAt : latest),
+    EDITORIAL_ARTICLES[0]?.publishedAt ?? CONTENT_LAST_VERIFIED,
+  );
   const editorialPages: SitemapEntry[] = [
-    { url: `${BASE}/guides`, lastModified: D_EDITORIAL, changeFrequency: "monthly", priority: 0.88 },
-    ...editorialSlugs.map((slug) => ({
-      url: `${BASE}/guides/${slug}`,
-      lastModified: D_EDITORIAL,
+    { url: `${BASE}/guides`, lastModified: mostRecentEditorialDate, changeFrequency: "monthly", priority: 0.88 },
+    ...EDITORIAL_ARTICLES.map((article) => ({
+      url: `${BASE}/guides/${article.slug}`,
+      lastModified: article.publishedAt,
       changeFrequency: "monthly",
       priority: 0.85,
     })),
   ];
 
   const staticPages: SitemapEntry[] = [
-    { url: BASE,                                     lastModified: D_STATIC, changeFrequency: "weekly",  priority: 1.00 },
-    { url: `${BASE}/blog`,                           lastModified: D_STATIC, changeFrequency: "daily",   priority: 0.90 },
-    { url: `${BASE}/tools`,                          lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.88 },
-    { url: `${BASE}/tools/eligibility-checker`,      lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/tools/cost-calculator`,          lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/tools/processing-time`,          lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/tools/document-checklist`,       lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/tools/country-comparison`,       lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/tools/rejection-risk`,           lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${BASE}/visa/study`,                     lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.75 },
-    { url: `${BASE}/visa/work`,                      lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.75 },
-    { url: `${BASE}/visa/tourist`,                   lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.75 },
-    { url: `${BASE}/visa/immigration`,               lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.75 },
-    { url: `${BASE}/visa/business`,                  lastModified: D_STATIC, changeFrequency: "monthly", priority: 0.75 },
-    { url: `${BASE}/about`,                          lastModified: D_STATIC, changeFrequency: "yearly",  priority: 0.40 },
-    { url: `${BASE}/editorial-policy`,               lastModified: D_STATIC, changeFrequency: "yearly",  priority: 0.40 },
-    { url: `${BASE}/privacy`,                        lastModified: D_STATIC, changeFrequency: "yearly",  priority: 0.20 },
-    { url: `${BASE}/terms`,                          lastModified: D_STATIC, changeFrequency: "yearly",  priority: 0.20 },
-    { url: `${BASE}/disclaimer`,                     lastModified: D_STATIC, changeFrequency: "yearly",  priority: 0.20 },
-    { url: `${BASE}/contact`,                        lastModified: D_STATIC, changeFrequency: "yearly",  priority: 0.30 },
+    { url: BASE,                                     lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "weekly",  priority: 1.00 },
+    { url: `${BASE}/blog`,                           lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "daily",   priority: 0.90 },
+    { url: `${BASE}/tools`,                          lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.88 },
+    { url: `${BASE}/tools/eligibility-checker`,      lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/cost-calculator`,          lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/processing-time`,          lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/document-checklist`,       lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/country-comparison`,       lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/tools/rejection-risk`,           lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${BASE}/visa/study`,                     lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${BASE}/visa/work`,                      lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${BASE}/visa/tourist`,                   lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${BASE}/visa/immigration`,               lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${BASE}/visa/business`,                  lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${BASE}/about`,                          lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "yearly",  priority: 0.40 },
+    { url: `${BASE}/editorial-policy`,               lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "yearly",  priority: 0.40 },
+    { url: `${BASE}/privacy`,                        lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "yearly",  priority: 0.20 },
+    { url: `${BASE}/terms`,                          lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "yearly",  priority: 0.20 },
+    { url: `${BASE}/disclaimer`,                     lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "yearly",  priority: 0.20 },
+    { url: `${BASE}/contact`,                        lastModified: CONTENT_LAST_VERIFIED, changeFrequency: "yearly",  priority: 0.30 },
   ];
 
   const processPages: SitemapEntry[] = getAllProcessSlugs().map((slug) => ({
     url: `${BASE}/process/${slug}`,
-    lastModified: D_PROCESS,
+    lastModified: CONTENT_LAST_VERIFIED,
     changeFrequency: "monthly",
     priority: 0.75,
   }));
 
-  const articlePages: SitemapEntry[] = getAllSlugs().map((slug) => ({
-    url: `${BASE}/blog/${slug}`,
-    lastModified: D_ARTICLE,
+  // Blog articles carry a real, per-article publishedAt date — use it
+  // directly instead of a single fabricated blanket date.
+  const articlePages: SitemapEntry[] = ALL_ARTICLES.map((article) => ({
+    url: `${BASE}/blog/${article.slug}`,
+    lastModified: article.publishedAt,
     changeFrequency: "monthly",
     priority: 0.60,
   }));
@@ -120,17 +129,12 @@ export function getAllSitemapEntries(): SitemapEntry[] {
   // 10,000+ programmatic SEO pages — Tier C excluded (noindexed), sorted highest priority first
   const programmaticPages: SitemapEntry[] = generateAllProgrammaticSlugs()
     .filter((slug) => !isTierCSlug(slug))
-    .map((slug) => {
-      const priority = slugPriority(slug);
-      // Tier A: high-intent pages (hub, apply, how-to, details, requirements, embassy)
-      const isTimerA = priority >= 0.82;
-      return {
-        url: `${BASE}/${slug}`,
-        lastModified: isTimerA ? D_TIER_A : D_TIER_B,
-        changeFrequency: "monthly",
-        priority,
-      };
-    })
+    .map((slug) => ({
+      url: `${BASE}/${slug}`,
+      lastModified: CONTENT_LAST_VERIFIED,
+      changeFrequency: "monthly",
+      priority: slugPriority(slug),
+    }))
     .sort((a, b) => b.priority - a.priority);
 
   return [

@@ -283,12 +283,6 @@ export default async function EditorialGuidePage({ params }: Props) {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Last Verified</dt>
-                  <dd className="text-emerald-700 font-medium text-xs">
-                    {new Date().toLocaleDateString("en-US", { month: "short", year: "numeric" })} ✓
-                  </dd>
-                </div>
-                <div>
                   <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Content Type</dt>
                   <dd className="text-gray-900 text-xs">Expert editorial guide</dd>
                 </div>
