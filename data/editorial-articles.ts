@@ -1,15 +1,20 @@
+import { COUNTRY_GUIDES } from "./country-guides";
 export interface EditorialArticle {
   slug: string;
   title: string;
   metaDescription: string;
-  category: "problem-solving" | "rejection" | "comparison";
+  category: "problem-solving" | "rejection" | "comparison" | "country-guide";
   publishedAt: string;
   readingTimeMinutes: number;
   tags: string[];
+  /** Date the figures were last checked against the official sources. */
+  lastVerified?: string;
+  sources?: { label: string; url: string }[];
   sections: { heading: string; body: string }[];
 }
 
 export const EDITORIAL_ARTICLES: EditorialArticle[] = [
+  ...COUNTRY_GUIDES,
   // ── PROBLEM-SOLVING (10) ─────────────────────────────────────────────────────
   {
     slug: "what-to-do-after-visa-rejection",

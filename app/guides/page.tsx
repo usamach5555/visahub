@@ -13,21 +13,24 @@ const CATEGORY_LABELS: Record<string, string> = {
   "problem-solving": "Problem Solving",
   rejection: "Rejection Analysis",
   comparison: "Visa Comparison",
+  "country-guide": "Country Guides",
 };
 
 const CATEGORY_COLORS: Record<string, string> = {
   "problem-solving": "bg-blue-100 text-blue-800 border-blue-200",
   rejection: "bg-red-100 text-red-800 border-red-200",
   comparison: "bg-violet-100 text-violet-800 border-violet-200",
+  "country-guide": "bg-emerald-100 text-emerald-800 border-emerald-200",
 };
 
 const CATEGORY_ICONS: Record<string, string> = {
   "problem-solving": "🔧",
   rejection: "📋",
   comparison: "⚖️",
+  "country-guide": "🌍",
 };
 
-const categories = ["problem-solving", "rejection", "comparison"] as const;
+const categories = ["country-guide", "problem-solving", "rejection", "comparison"] as const;
 
 export default function GuidesIndexPage() {
   return (

@@ -23,6 +23,7 @@ export interface ArticleSchemaInput {
   description: string;
   url: string;
   publishedAt: string;
+  modifiedAt?: string;
   authorName?: string;
   image?: string;
 }
@@ -35,7 +36,7 @@ export function articleSchema(input: ArticleSchemaInput) {
     description: input.description,
     url: input.url,
     datePublished: input.publishedAt,
-    dateModified: input.publishedAt,
+    dateModified: input.modifiedAt ?? input.publishedAt,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": input.url,

@@ -41,14 +41,14 @@ export function getAllSitemapEntries(): SitemapEntry[] {
   // Blog and guides articles carry a real, per-article publishedAt date —
   // use it directly instead of a single fabricated blanket date.
   const mostRecentEditorialDate = EDITORIAL_ARTICLES.reduce(
-    (latest, a) => (a.publishedAt > latest ? a.publishedAt : latest),
+    (latest, a) => ((a.lastVerified ?? a.publishedAt) > latest ? (a.lastVerified ?? a.publishedAt) : latest),
     EDITORIAL_ARTICLES[0]?.publishedAt ?? CONTENT_LAST_VERIFIED,
   );
   const editorialPages: SitemapEntry[] = [
     { url: `${BASE}/guides`, lastModified: mostRecentEditorialDate, changeFrequency: "monthly", priority: 0.88 },
     ...EDITORIAL_ARTICLES.map((article) => ({
       url: `${BASE}/guides/${article.slug}`,
-      lastModified: article.publishedAt,
+      lastModified: article.lastVerified ?? article.publishedAt,
       changeFrequency: "monthly",
       priority: 0.85,
     })),

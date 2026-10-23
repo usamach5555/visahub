@@ -38,12 +38,14 @@ const CATEGORY_LABELS: Record<string, string> = {
   "problem-solving": "Problem Solving",
   rejection: "Rejection Analysis",
   comparison: "Visa Comparison",
+  "country-guide": "Country Guide",
 };
 
 const CATEGORY_COLORS: Record<string, string> = {
   "problem-solving": "bg-blue-100 text-blue-800 border-blue-200",
   rejection: "bg-red-100 text-red-800 border-red-200",
   comparison: "bg-violet-100 text-violet-800 border-violet-200",
+  "country-guide": "bg-emerald-100 text-emerald-800 border-emerald-200",
 };
 
 export default async function EditorialGuidePage({ params }: Props) {
@@ -60,6 +62,7 @@ export default async function EditorialGuidePage({ params }: Props) {
     description: article.metaDescription,
     url: `https://visaprocessinfo.com/guides/${article.slug}`,
     publishedAt: article.publishedAt,
+    modifiedAt: article.lastVerified,
   });
 
   const breadcrumbLd = breadcrumbSchema([
@@ -199,6 +202,28 @@ export default async function EditorialGuidePage({ params }: Props) {
                 </section>
               ))}
             </div>
+
+            {/* Official sources */}
+            {article.sources && article.sources.length > 0 && (
+              <div className="mt-10 bg-primary-50 border border-primary-100 rounded-2xl p-5">
+                <h3 className="font-bold text-primary-800 text-sm mb-2">Official sources</h3>
+                {article.lastVerified && (
+                  <p className="text-xs text-gray-600 mb-3">
+                    Figures last checked against these sources on{" "}
+                    {new Date(article.lastVerified).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}.
+                  </p>
+                )}
+                <ul className="space-y-1.5">
+                  {article.sources.map((src) => (
+                    <li key={src.url}>
+                      <a href={src.url} target="_blank" rel="noopener noreferrer" className="text-xs text-primary-700 underline hover:text-primary-900">
+                        {src.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Tags */}
             <div className="mt-10 flex flex-wrap gap-2">
