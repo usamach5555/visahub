@@ -227,4 +227,208 @@ export const COUNTRY_GUIDES: EditorialArticle[] = [
       },
     ],
   },
+
+  {
+    slug: "canada-visitor-visa-fee-documents",
+    title: "Canada Visitor Visa: Fees, Documents and How to Apply (2026)",
+    metaDescription:
+      "Canada's visitor visa costs CAD $100 plus $85 for biometrics. What IRCC asks for — passport validity, six months of bank statements, itinerary, invitation letter — and how to apply online.",
+    category: "country-guide",
+    publishedAt: "2026-10-23",
+    lastVerified: "2026-10-23",
+    readingTimeMinutes: 6,
+    tags: ["canada visitor visa", "TRV", "biometrics fee", "IRCC", "tourist visa"],
+    sources: [
+      { label: "Apply for a visitor visa — IRCC", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/apply-visitor-visa.html" },
+    ],
+    sections: [
+      {
+        heading: "Visitor visa or eTA?",
+        body: `Canada has two kinds of entry document for short visits. Travellers from visa-exempt countries need an **eTA**, while travellers from other countries need a **visitor visa**. Which one you need depends on your passport, and IRCC has a separate "who needs a visitor visa" tool to check it. This guide covers the visitor visa.`,
+      },
+      {
+        heading: "What it costs",
+        body: `IRCC lists these fees, paid at the end of the online application by credit or debit card:\n\n| Fee | Amount (CAD) |\n|---|---|\n| Visitor visa processing fee | $100 per person, or $500 for a family of 5 or more |\n| Biometrics fee | $85 per person, or up to $170 for a family, if you are eligible |\n\nSome applicants are exempt from some or all fees. If you are applying online for the first time you generally pay the biometrics fee together with the application.`,
+      },
+      {
+        heading: "Documents everyone needs",
+        body: `- A digital copy of a **valid passport or travel document**, including the biographical page and any pages with stamps or visas. IRCC says your passport should be valid for at least **six months beyond your travel date**.\n- Documents that match your purpose of travel, which your online checklist will list.\n\nFor a tourism visit IRCC recommends a travel history, an itinerary, **bank statements covering at least six months**, and a letter from your employer. If you are visiting because of a business purpose you may need an invitation letter from a Canadian company.`,
+      },
+      {
+        heading: "Extra documents in some cases",
+        body: `- If you are travelling with a minor child, a **consent letter** from the parent or parents who are not travelling, plus any other documents that apply.\n- If a family member or friend in Canada is inviting you, a letter of invitation and proof of your relationship.\n- Some visa offices ask for additional documents, so check the instructions for your local office.`,
+      },
+      {
+        heading: "How to apply",
+        body: `1. Gather your documents and scan them clearly.\n2. Create your IRCC application through the IRCC Portal, or the new version of the portal if you are 18 or older, applying alone, have never applied to IRCC before and are not using a representative.\n3. Answer the checklist questions and upload your documents.\n4. Pay the fees at the end.\n5. If biometrics are needed, wait for your instruction letter and book your appointment promptly.\n\nPaper applications are allowed only in specific cases, such as if a disability stops you applying online.`,
+      },
+      {
+        heading: "Making your application clearer",
+        body: `Officers decide whether you will leave Canada at the end of your stay, so the application should answer that directly. Describe what you will do, for how long and where you will stay. Bank statements should show regular income and a balance that covers the trip. Evidence of ties at home such as work, study, family or property helps.\n\nEvery document should agree with the answers you typed into the form.`,
+      },
+      {
+        heading: "Avoid imitation sites",
+        body: `Apply only through the IRCC website. Third-party sites that look official may charge extra for what is a government application you can submit yourself.`,
+      },
+    ],
+  },
+
+  {
+    slug: "uk-eta-electronic-travel-authorisation",
+    title: "UK ETA (Electronic Travel Authorisation): Who Needs It, Cost and How to Apply",
+    metaDescription:
+      "The UK ETA costs £20 and lets eligible visitors stay up to six months. Who needs one, who does not, why children need their own, and how to avoid sites that charge more.",
+    category: "country-guide",
+    publishedAt: "2026-10-23",
+    lastVerified: "2026-10-23",
+    readingTimeMinutes: 4,
+    tags: ["uk eta", "electronic travel authorisation", "uk visit", "gov.uk", "travel to uk"],
+    sources: [
+      { label: "Electronic Travel Authorisation (ETA) — GOV.UK", url: "https://www.gov.uk/guidance/electronic-travel-authorisation-eta" },
+    ],
+    sections: [
+      {
+        heading: "What an ETA is",
+        body: `An Electronic Travel Authorisation (ETA) is a digital permission to travel to the UK for short visits. It is linked to your passport. It is **not a visa**, and GOV.UK states that an ETA does not guarantee entry: border officers can still refuse you at the airport.`,
+      },
+      {
+        heading: "Who needs one",
+        body: `Most visitors need either an ETA or a visa, depending on nationality and the reason for travel. ETAs are generally for visitors from Europe, the USA, Australia, Canada and certain other countries. Travellers who need a visa for a UK visit apply for a visa instead, see our guide to the Standard Visitor visa.\n\nEveryone travelling needs their own ETA, **including babies and children**.\n\nYou do **not** need an ETA if you have a British or Irish passport, or permission to live, work or study in the UK. You do need one if you only pass through border control at a UK airport on the way to somewhere else.`,
+      },
+      {
+        heading: "Cost and validity",
+        body: `The fee is **£20** per person. An ETA lets you travel to the UK, Jersey, Guernsey or the Isle of Man for up to **six months** at a time. GOV.UK lets you check when your ETA expires after you apply.\n\nIt can be used for tourism, visiting family and certain other short-stay reasons.`,
+      },
+      {
+        heading: "How to apply",
+        body: `Use the "Apply for an ETA" service on GOV.UK. You can apply for other people, for example for your children or a travelling companion. Make sure the passport you use for the application is the one you travel with, since the ETA is tied to it.`,
+      },
+      {
+        heading: "Avoid look-alike websites",
+        body: `GOV.UK warns that other websites may charge more than £20 and that some imitate government services. Start from the GOV.UK address and check you are on a gov.uk page before you enter your passport details or pay.`,
+      },
+      {
+        heading: "Allow time before you travel",
+        body: `GOV.UK's guidance page does not state a processing time, so do not leave the application to the day before your flight. Apply well ahead and check the status of your ETA before you book non-refundable travel.`,
+      },
+    ],
+  },
+
+  {
+    slug: "umrah-visa-nusuk-apply-directly",
+    title: "Umrah Visa: Applying Directly on Nusuk or Through an Accredited Agent",
+    metaDescription:
+      "Pilgrims outside Saudi Arabia can apply for an Umrah visa directly on the Nusuk Umrah platform, or use an accredited agent. How it works, what the platform offers, and what to confirm yourself.",
+    category: "country-guide",
+    publishedAt: "2026-10-23",
+    lastVerified: "2026-10-23",
+    readingTimeMinutes: 4,
+    tags: ["umrah visa", "nusuk", "saudi arabia visa", "umrah permit", "pilgrimage"],
+    sources: [
+      { label: "Ministry of Hajj and Umrah launches Nusuk Umrah service — Ministry of Hajj and Umrah", url: "https://haj.gov.sa/en/Media-Center/Ministry-News/Ministry-of-Hajj-and-Umrah-launches-Nusuk-Umrah-service-to-enable-pilgrims-from-outside-the-Kingdom" },
+      { label: "Nusuk Umrah platform", url: "https://umrah.nusuk.sa/" },
+      { label: "Ministry of Hajj and Umrah — FAQ", url: "https://haj.gov.sa/en/FAQ" },
+    ],
+    sections: [
+      {
+        heading: "Two official ways to apply",
+        body: `Saudi Arabia's Ministry of Hajj and Umrah announced the **Nusuk Umrah** service on 19 August 2025. It lets pilgrims from outside the Kingdom **apply directly for an Umrah visa** at umrah.nusuk.sa, without an intermediary, and complete the process electronically from application to obtaining the entry visa.\n\nIt is one option among others. The platform also lists **accredited agents** in the pilgrim's own country, so you can still book through an agent if you prefer a package arranged for you.`,
+      },
+      {
+        heading: "What the platform offers",
+        body: `According to the Ministry:\n\n- You can choose **integrated packages** or **individual services** such as the visa, accommodation, transportation, enrichment tours and support services.\n- Packages can be customised.\n- The interface supports seven languages.\n- Several payment options are available.\n\nThat means you can buy only the visa and arrange the rest yourself, or buy a full package in one place.`,
+      },
+      {
+        heading: "Steps to follow",
+        body: `1. Go to umrah.nusuk.sa by typing the address yourself, not through an advertisement or message link.\n2. Create your account and enter your passport details exactly as printed.\n3. Choose the services you want: visa only, or a package.\n4. Pay on the platform and keep the confirmation.\n5. Follow the instructions on the platform to receive your visa and plan your travel dates.`,
+      },
+      {
+        heading: "Choosing an agent safely",
+        body: `If you go through an agent, use one listed as accredited on the official platform rather than one found through social media. Ask for the booking reference and check that the visa appears in your own Nusuk account or on your visa document before you pay the full balance.`,
+      },
+      {
+        heading: "What you should confirm yourself",
+        body: `Visa fees, how long you may stay, age and accompanying-person rules, and health requirements are set by the Saudi authorities and can change. The Ministry's FAQ page lists these questions but its answers on those points were not available when we checked, so we do not print numbers for them. Read the requirements on the Nusuk platform for your nationality on the day you apply.`,
+      },
+    ],
+  },
+
+  {
+    slug: "uae-tourist-entry-visa-on-arrival-or-apply",
+    title: "UAE Tourist Entry: Visa on Arrival or Apply in Advance? (2026)",
+    metaDescription:
+      "How tourists enter the UAE: visa-free for GCC citizens, 30- and 90-day visas on arrival for some nationalities, advance application through ICP for the rest. The six-month passport rule and how to avoid fake sites.",
+    category: "country-guide",
+    publishedAt: "2026-10-23",
+    lastVerified: "2026-10-23",
+    readingTimeMinutes: 5,
+    tags: ["uae visa", "dubai tourist visa", "visa on arrival", "ICP", "passport validity"],
+    sources: [
+      { label: "Do you need an entry permit or a visa to enter the UAE? — UAE Government portal (u.ae)", url: "https://u.ae/en/information-and-services/visa-and-emirates-id/do-you-need-an-entry-permit-or-a-visa-to-enter-the-uae" },
+      { label: "Federal Authority for Identity, Citizenship, Customs & Port Security (ICP)", url: "https://icp.gov.ae/en/" },
+    ],
+    sections: [
+      {
+        heading: "The four ways tourists enter",
+        body: `The UAE government's portal describes these main routes for visitors:\n\n- **Visa-free entry for GCC citizens.** No visa, permit or sponsorship is needed. You show a GCC passport or national ID card.\n- **30-day visa on arrival,** issued at the border, with a 10-day grace period for extension.\n- **90-day visa on arrival,** issued at the border.\n- **Special case for Indian citizens:** a 14-day visa on arrival for holders of a normal passport who also hold a valid US visit visa, US green card, UK residence visa or EU residence visa, valid for at least six months from arrival.\n\nEveryone else must **apply for a visa in advance**.`,
+      },
+      {
+        heading: "Which one applies to you",
+        body: `The UAE portal does not list on that page which nationalities qualify for which visa on arrival, and the eligibility lists change over time. Check your own nationality with the **UAE embassy in your country** or your airline before you book, and do not assume a friend's experience applies to your passport.`,
+      },
+      {
+        heading: "Passport rule",
+        body: `Your passport must be valid for at least **six months from the date you enter the UAE**. Renew before you travel rather than hoping it is accepted.`,
+      },
+      {
+        heading: "Applying in advance through ICP",
+        body: `For the visa-in-advance route, ICP says to open the **Issuance of a Visa** service and click Start Service, which takes you to the Smart Services Platform login. ICP also offers the **UAEICP smart app**. The service issues an entry permit for a set period for tourism, a visit or treatment.\n\nFor eligibility and the document list, ICP directs applicants to its FAQ page at icp.gov.ae/en/faq/, its customer centres, the virtual assistant on the site, or the call centre on 600522222 inside the UAE and +971 600 522222 from outside.`,
+      },
+      {
+        heading: "Fake calls and counterfeit websites",
+        body: `ICP warns that fake calls and counterfeit websites use its name. Use only the Smart Services Platform or the UAEICP smart app, and type the web address yourself. A travel agent can apply for you, but you should still receive a visa document with your own details that you can check against your passport.`,
+      },
+      {
+        heading: "Before you fly",
+        body: `- Carry the visa or permit confirmation, your return or onward ticket and proof of where you are staying.\n- Confirm the visa length covers your whole trip, including any day you may travel onward.\n- Read the airline's own entry check requirements, since airlines may refuse boarding if documents are incomplete.\n\nNo visa fees are listed on the UAE government pages we checked, so we do not quote any. Confirm the fee on ICP's platform before you pay.`,
+      },
+    ],
+  },
+
+  {
+    slug: "us-visa-application-fees-by-category",
+    title: "US Visa Application Fees by Category: B-1/B-2, Student, Work and More",
+    metaDescription:
+      "The State Department's visa application (MRV) fees: $185 for B-1/B-2 and student visas, $205 for H, L, O, P, Q and R, $315 for E, $265 for K. Plus what to check about additional fees before you pay.",
+    category: "country-guide",
+    publishedAt: "2026-10-23",
+    lastVerified: "2026-10-23",
+    readingTimeMinutes: 4,
+    tags: ["us visa fee", "MRV fee", "B1/B2", "F-1 visa", "H-1B visa fee"],
+    sources: [
+      { label: "Fees for Visa Services — US Department of State", url: "https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/fees/fees-visa-services.html" },
+    ],
+    sections: [
+      {
+        heading: "The application fee depends on the visa category",
+        body: `Everyone who applies for a US nonimmigrant visa pays the visa application fee (often called the MRV fee) before the interview. The US Department of State lists these amounts. The fee is **non-refundable**, even if the visa is refused.\n\n| Visa category | Application fee |\n|---|---|\n| B-1/B-2 visitor | $185 |\n| F (student) and M (vocational) | $185 |\n| H, L, O, P, Q, R (petition-based work visas) | $205 |\n| E (treaty trader/investor, Australian professional specialty) | $315 |\n| TN/TD | $185 |\n| K (fiancé(e) or spouse of a US citizen) | $265 |`,
+      },
+      {
+        heading: "Other charges that can apply",
+        body: `The State Department fee page also lists:\n\n- A **$500 fraud prevention and detection fee** for L visas, charged to the principal applicant only.\n- A **$4,500 fee** for certain blanket L-1 petitioners.\n- **Visa issuance fees** (reciprocity fees) that vary by country and visa type. Check the State Department's Visa Reciprocity Tables for your nationality.\n\nStudents also pay the SEVIS I-901 fee separately, and employers pay petition fees to USCIS for work visas. Those are different from the application fee.`,
+      },
+      {
+        heading: "A note on the visa integrity fee",
+        body: `A US law passed in 2025 provides for an additional "visa integrity fee" on nonimmigrant visas. The State Department fee page we checked on 23 October 2026 does not mention it, so we cannot confirm from that page when it is collected or how much applies to each category. Before you pay anything, read the current fee page and your embassy's instructions, and budget for the possibility of an additional charge.`,
+      },
+      {
+        heading: "How to pay safely",
+        body: `Pay only through the payment method that the embassy or its official appointment site tells you to use. Keep the payment receipt, since you may need to show it. Do not pay anyone who contacts you offering to speed up an interview slot, because the State Department does not sell priority appointments.`,
+      },
+      {
+        heading: "Does the fee include the interview?",
+        body: `The fee covers the application and the interview slot, but not the visa itself being granted. If the visa is refused you must pay the fee again to reapply. Prepare carefully before you book so you only pay once.`,
+      },
+    ],
+  },
 ];
