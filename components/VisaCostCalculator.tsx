@@ -93,7 +93,7 @@ export default function VisaCostCalculator() {
         </label>
       </div>
 
-      <button onClick={calculate} className="w-full bg-accent-500 text-white font-bold py-4 rounded-2xl text-lg hover:bg-accent-600 transition-colors">
+      <button onClick={calculate} className="w-full bg-accent-700 text-white font-bold py-4 rounded-2xl text-lg hover:bg-accent-800 transition-colors">
         Calculate Total Cost
       </button>
 
@@ -119,7 +119,7 @@ export default function VisaCostCalculator() {
                 ].map((row) => (
                   <tr key={row.label} className="hover:bg-gray-50">
                     <td className="py-2.5 text-gray-700">{row.label}</td>
-                    <td className="py-2.5 text-xs text-gray-400 hidden sm:table-cell">{row.note}</td>
+                    <td className="py-2.5 text-xs text-gray-500 hidden sm:table-cell">{row.note}</td>
                     <td className="py-2.5 text-right font-semibold text-gray-900">{result.currency} {row.amount.toLocaleString()}</td>
                   </tr>
                 ))}

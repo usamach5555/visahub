@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Visa Guides — Expert Immigration Advice",
   description:
     "In-depth visa guides covering rejection analysis, problem-solving, and country comparisons. Expert immigration editorial content to help you apply with confidence.",
-  alternates: { canonical: "https://www.visaprocessinfo.com/guides" },
+  alternates: { canonical: "https://visaprocessinfo.com/guides" },
 };
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -75,7 +75,7 @@ export default function GuidesIndexPage() {
                     <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">
                       {article.metaDescription}
                     </p>
-                    <div className="mt-3 flex items-center justify-between text-xs text-gray-400">
+                    <div className="mt-3 flex items-center justify-between text-xs text-gray-500">
                       <span>{article.readingTimeMinutes} min read</span>
                       <span className="text-primary-600 font-medium group-hover:underline">Read guide →</span>
                     </div>

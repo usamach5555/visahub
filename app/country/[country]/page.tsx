@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import { COUNTRIES_EXTENDED } from "@/data/countries-extended";
 
 interface Props {
@@ -13,5 +13,5 @@ export function generateStaticParams() {
 export default async function CountryRedirectPage({ params }: Props) {
   const { country } = await params;
   // Permanent redirect to new programmatic SEO URL
-  redirect(`/${country}-visa-info`);
+  permanentRedirect(`/${country}-visa-info`);
 }

@@ -234,7 +234,7 @@ function RiskGauge({ score, level }: { score: number; level: string }) {
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className={`text-4xl font-extrabold ${colors.text}`}>{score}</span>
-          <span className="text-xs font-semibold text-gray-400">/ 100</span>
+          <span className="text-xs font-semibold text-gray-500">/ 100</span>
         </div>
       </div>
       <div className={`mt-3 px-4 py-1.5 rounded-full text-sm font-bold ${colors.text} ${colors.bg}`}>
@@ -509,7 +509,7 @@ export default function RejectionRiskAnalyzer() {
                     style={{ width: `${result.score}%` }}
                   />
                 </div>
-                <div className="flex justify-between text-xs text-gray-400 mt-1">
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>Low Risk</span>
                   <span>Moderate</span>
                   <span>High</span>
@@ -684,7 +684,7 @@ export default function RejectionRiskAnalyzer() {
           </div>
 
           {/* Disclaimer */}
-          <p className="text-xs text-gray-400 text-center px-4">
+          <p className="text-xs text-gray-500 text-center px-4">
             This tool provides an estimated risk assessment for educational purposes only. It does not guarantee any
             outcome. Actual visa decisions are made solely by immigration authorities based on a comprehensive review of
             your complete application, interview performance, and individual circumstances. For professional guidance,

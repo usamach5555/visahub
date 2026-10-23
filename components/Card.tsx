@@ -61,7 +61,7 @@ export default function Card({
           </p>
         )}
         {meta && (
-          <p className="text-xs text-gray-400 mt-3">{meta}</p>
+          <p className="text-xs text-gray-500 mt-3">{meta}</p>
         )}
       </div>
     </Link>

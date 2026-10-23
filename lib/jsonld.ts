@@ -44,15 +44,15 @@ export function articleSchema(input: ArticleSchemaInput) {
     author: {
       "@type": "Organization",
       name: "VisaProcessInfo Editorial Team",
-      url: "https://www.visaprocessinfo.com/about",
+      url: "https://visaprocessinfo.com/about",
     },
     publisher: {
       "@type": "Organization",
       name: "VisaProcessInfo",
-      url: "https://www.visaprocessinfo.com",
+      url: "https://visaprocessinfo.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.visaprocessinfo.com/icon.svg",
+        url: "https://visaprocessinfo.com/icon.svg",
         width: 60,
         height: 60,
       },
@@ -78,14 +78,9 @@ export function websiteSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "VisaProcessInfo",
-    url: "https://www.visaprocessinfo.com",
+    url: "https://visaprocessinfo.com",
     description:
-      "Comprehensive visa and immigration guides for students, workers, tourists, and immigrants worldwide.",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://www.visaprocessinfo.com/blog?q={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
+      "Comprehensive visa and immigration guides for students, workers, tourists, and immigrants worldwide."
   };
 }
 
@@ -94,17 +89,11 @@ export function organizationSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "VisaProcessInfo",
-    url: "https://www.visaprocessinfo.com",
+    url: "https://visaprocessinfo.com",
     description:
-      "Free visa and immigration guides for 131+ countries — study, work, tourist, and PR pathways.",
-    foundingDate: "2020",
-    numberOfEmployees: {
-      "@type": "QuantitativeValue",
-      value: 4,
-    },
+      "Free visa and immigration guides — study, work, tourist and permanent residence pathways, with links to official government sources.",
     knowsAbout: [
       "Visa Applications",
-      "Immigration Law",
       "Study Abroad",
       "Work Permits",
       "Permanent Residency",

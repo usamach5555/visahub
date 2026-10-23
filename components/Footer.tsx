@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Globe, GraduationCap, Briefcase, Plane, Home, Building2, Newspaper, MapPin, ShieldCheck, BookOpen, RefreshCw, Scale } from "lucide-react";
+import { Globe, GraduationCap, Briefcase, Plane, Home, Building2, MapPin, ShieldCheck, BookOpen, RefreshCw, Scale } from "lucide-react";
 import { COUNTRIES_EXTENDED } from "@/data/countries-extended";
 import { VISA_TYPES } from "@/data/visa-types";
 
@@ -29,8 +29,8 @@ const PROCESS_LINKS = [
 
 const TRUST_SIGNALS = [
   { Icon: ShieldCheck, label: "Verified Sources", desc: "Official government data" },
-  { Icon: BookOpen,    label: "10,000+ Guides",   desc: "131 countries covered" },
-  { Icon: RefreshCw,   label: "Updated Quarterly", desc: "Always current info" },
+  { Icon: BookOpen,    label: "127 Countries",    desc: "Study, work, visit, PR" },
+  { Icon: RefreshCw,   label: "Corrections Welcome", desc: "Report outdated info" },
   { Icon: Scale,       label: "Independent",       desc: "No agency affiliations" },
 ];
 
@@ -49,7 +49,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white leading-tight">{t.label}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{t.desc}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{t.desc}</p>
                 </div>
               </div>
             ))}
@@ -78,12 +78,12 @@ export default function Footer() {
             {/* Editorial commitment */}
             <div className="mt-5 bg-gray-800/50 rounded-xl p-4 border border-gray-700/50 max-w-xs">
               <p className="text-xs font-semibold text-gray-300 mb-1.5">Our Editorial Promise</p>
-              <p className="text-xs text-gray-500 leading-relaxed">
-                Every guide is researched from official government sources, reviewed by immigration professionals, and updated quarterly. We are independent and accept no agency sponsorships.
+              <p className="text-xs text-gray-400 leading-relaxed">
+                Guides are researched from official government sources and corrected when readers report outdated information. We are independent, accept no agency sponsorships, and do not give legal advice.
               </p>
             </div>
 
-            <p className="text-xs text-gray-500 mt-4 leading-relaxed">
+            <p className="text-xs text-gray-400 mt-4 leading-relaxed">
               Always verify requirements with official embassies and government sources before applying.
             </p>
           </div>
@@ -102,7 +102,6 @@ export default function Footer() {
                         width={20}
                         height={14}
                         className="w-full h-full object-cover"
-                        unoptimized
                       />
                     </span>
                     {c.name}
@@ -112,7 +111,7 @@ export default function Footer() {
               <li>
                 <Link href="/#countries" className="text-sm text-accent-400 hover:text-accent-300 transition-colors flex items-center gap-1.5 mt-1">
                   <MapPin className="w-3.5 h-3.5" />
-                  View all 131 countries
+                  View all 127 countries
                 </Link>
               </li>
             </ul>
@@ -133,20 +132,13 @@ export default function Footer() {
                   </li>
                 );
               })}
-              <li>
-                <Link href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 py-1.5">
-                  <Newspaper className="w-3.5 h-3.5 shrink-0" />
-                  Visa Blog
-                </Link>
-              </li>
             </ul>
 
             <h3 className="text-white font-semibold mb-3 text-xs uppercase tracking-wider">Resources</h3>
             <ul className="space-y-1">
-              <li><Link href="/about" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">About Us &amp; Team</Link></li>
+              <li><Link href="/about" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">About Us</Link></li>
               <li><Link href="/editorial-policy" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">Editorial Policy</Link></li>
               <li><Link href="/guides" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">Expert Visa Guides</Link></li>
-              <li><Link href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">Country Guides Blog</Link></li>
               <li><Link href="/contact" className="text-sm text-gray-400 hover:text-white transition-colors py-1.5 block">Contact &amp; Feedback</Link></li>
             </ul>
 
@@ -198,15 +190,15 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-400">
               © {new Date().getFullYear()} VisaProcessInfo. All rights reserved.
             </p>
             <span className="hidden sm:inline text-gray-700">·</span>
-            <p className="text-xs text-gray-600 font-medium">
+            <p className="text-xs text-gray-400 font-medium">
               Independent &middot; Free &middot; No agency affiliations
             </p>
           </div>
-          <div className="flex flex-wrap gap-3 sm:gap-4 text-sm sm:text-xs text-gray-500">
+          <div className="flex flex-wrap gap-3 sm:gap-4 text-sm sm:text-xs text-gray-400">
             <Link href="/about" className="hover:text-white transition-colors py-1">About Us</Link>
             <Link href="/editorial-policy" className="hover:text-white transition-colors py-1">Editorial Policy</Link>
             <Link href="/privacy" className="hover:text-white transition-colors py-1">Privacy Policy</Link>

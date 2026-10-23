@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: "Contact Us",
   description:
     "Contact the VisaProcessInfo team for content corrections, partnership inquiries, advertising, or general questions about our visa and immigration guides.",
-  alternates: { canonical: "https://www.visaprocessinfo.com/contact" },
+  alternates: { canonical: "https://visaprocessinfo.com/contact" },
 };
 
 const TOPICS = [
@@ -137,7 +137,7 @@ export default function ContactPage() {
                   Send Message
                 </button>
               </form>
-              <p className="text-xs text-gray-400 mt-4 flex items-start gap-1.5">
+              <p className="text-xs text-gray-500 mt-4 flex items-start gap-1.5">
                 <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5 text-amber-500" />
                 We do not provide personalised immigration advice. For advice specific to your situation,
                 please consult a licensed immigration consultant or lawyer. We typically respond within 3–5 business days.
@@ -175,7 +175,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-medium text-gray-900">Coverage</p>
-                    <p className="text-gray-600">131+ countries, 10,000+ guides</p>
+                    <p className="text-gray-600">127 countries covered</p>
                   </div>
                 </div>
               </div>
@@ -201,10 +201,10 @@ export default function ContactPage() {
             <div className="bg-primary-50 rounded-2xl border border-primary-100 p-5">
               <h3 className="font-bold text-primary-900 mb-2 text-sm">Looking for visa information?</h3>
               <p className="text-xs text-primary-800 mb-3">
-                Browse our free guides instead of contacting us — we cover 10,000+ visa topics across 131 countries.
+                Browse our free guides instead of contacting us — we cover 127 countries.
               </p>
               <div className="space-y-1.5 text-sm">
-                <Link href="/blog" className="flex items-center gap-1.5 text-primary-700 hover:text-primary-900">
+                <Link href="/guides" className="flex items-center gap-1.5 text-primary-700 hover:text-primary-900">
                   <BookOpen className="w-3.5 h-3.5 shrink-0" />
                   Browse all guides
                 </Link>
@@ -237,7 +237,7 @@ export default function ContactPage() {
               We receive hundreds of messages each week from readers around the world, and we want to be transparent about what you can expect when you reach out. Understanding what we can and cannot help with will ensure you get the right support as quickly as possible.
             </p>
             <p>
-              <strong>Content Corrections:</strong> This is the type of message we most want to receive. If you have found information in one of our guides that is outdated, incorrect, or missing important nuance, please tell us. We review every correction report within 48 hours. If we can verify the issue against official sources, we update the guide immediately and add a note confirming the update date. We take content accuracy extremely seriously — inaccurate immigration information can have life-changing consequences for applicants.
+              <strong>Content Corrections:</strong> This is the type of message we most want to receive. If you have found information in one of our guides that is outdated, incorrect, or missing important nuance, please tell us. We review every correction report. If we can verify the issue against official sources, we update the guide immediately and add a note confirming the update date. We take content accuracy extremely seriously — inaccurate immigration information can have life-changing consequences for applicants.
             </p>
             <p>
               <strong>Partnership and Guest Posts:</strong> We welcome contributions from licensed immigration lawyers, regulated immigration consultants, university international student advisors, and other verified immigration professionals. A quality guest post should be factual, sourced from official government publications, and offer genuine insight beyond what a reader could easily find on an official website. We do not publish advertorial content disguised as editorial, and we do not charge contributors for guest post placement. If your contribution is accepted, it will be reviewed by one of our editors and published with your professional credentials clearly stated.
@@ -301,24 +301,6 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* For media and researchers */}
-        <section>
-          <h2 className="text-3xl font-bold text-primary-800 mb-6">For Media and Researchers</h2>
-          <div className="space-y-5 text-gray-700 leading-relaxed">
-            <p>
-              VisaProcessInfo has been cited as a reference in journalism about international migration, student mobility, skilled worker shortages, and visa policy changes. We are happy to provide background information, data on applicant information needs, and commentary from our editorial team for media enquiries, subject to our availability and editorial discretion.
-            </p>
-            <p>
-              For journalists writing about international student numbers, visa processing delays, skilled worker visa policy changes, or immigration policy in any of our covered countries, our editors can provide on-background commentary based on our experience monitoring immigration policy and supporting applicants. We are particularly knowledgeable about the practical impact of policy changes on applicants — the gap between what policy says and what applicants actually experience in the application process.
-            </p>
-            <p>
-              For academic researchers studying international migration, visa application behaviour, or immigration information ecosystems, we are willing to discuss our reader data and the types of questions applicants most commonly need answered. We maintain strict privacy policies and do not share individual user data, but aggregate insight into the most common information gaps facing visa applicants is something we can speak to from our experience.
-            </p>
-            <p>
-              If you are a policy researcher or government adviser interested in understanding how applicants experience the visa information landscape, we would welcome the opportunity to contribute our perspective. We believe there is significant scope for immigration authorities to improve the accessibility and clarity of their official communications, and we have practical insight into where the most significant information gaps exist.
-            </p>
-          </div>
-        </section>
 
         {/* Frequently asked contact questions */}
         <section>

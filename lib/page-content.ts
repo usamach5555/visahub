@@ -1,6 +1,20 @@
 import { CountryExtended, VISA_TYPE_LABELS, VISA_TYPES_EXTENDED, type VisaTypeExtended } from "@/data/countries-extended";
 import type { PageType } from "@/lib/slug-parser";
 import { COUNTRY_OVERRIDES } from "@/lib/country-specific-content";
+import { CURATED_COMBOS } from "@/lib/index-policy";
+import { COUNTRIES_EXTENDED } from "@/data/countries-extended";
+const COUNTRIES_EXTENDED_LOOKUP = new Map(COUNTRIES_EXTENDED.map((x) => [x.slug, x.name]));
+
+// ── Fees: only show a number where it has been verified ──────────────────────
+// Government fees change often and differ by nationality. Showing a stale or
+// guessed figure on a visa page misleads applicants (and is a YMYL quality
+// problem). Countries without `feesVerifiedOn` get a pointer to the official
+// fee schedule instead of a number.
+export function feeLabel(country: CountryExtended, visaType: VisaTypeExtended): string {
+  if (country.feesVerifiedOn) return `${country.currency} ${country.visaFees[visaType].toLocaleString("en-US")}`;
+  return `the amount on the official fee schedule (${country.officialImmigrationUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")})`;
+}
+
 
 export interface PageContent {
   heroTitle: string;
@@ -187,58 +201,23 @@ const REJECTION_REASONS: Record<VisaTypeExtended, string[]> = {
 
 function buildInternalLinks(country: CountryExtended, visaType: VisaTypeExtended, pageType: PageType) {
   const c = country.slug;
-  const label = VISA_TYPE_LABELS[visaType];
-  const isHubLevel = pageType === "country-hub" || pageType === "embassy";
 
+  // Only link to pages that actually exist (see lib/index-policy.ts): the
+  // country hub, curated guides for this country, and other curated
+  // destinations for the same visa type.
   const links: { label: string; href: string }[] = [
     { label: `${country.name} Visa Information Hub`, href: `/${c}-visa-info` },
-    { label: `${country.name} Embassy Guide`, href: `/${c}-embassy-guide` },
   ];
-
-  if (isHubLevel) {
-    // The country hub and embassy pages sit at the top of the cluster: they
-    // must link out to all 5 visa-type branches (not just one), otherwise the
-    // hub can't pass authority down to — or receive it back from — every
-    // branch, and a crawler landing on the hub has no path to Work/Business/
-    // Immigration/Visit pages at all.
-    for (const vt of VISA_TYPES_EXTENDED) {
-      const vtLabel = VISA_TYPE_LABELS[vt];
-      links.push(
-        { label: `Apply for ${country.name} ${vtLabel}`, href: `/apply-${c}-${vt}-visa` },
-        { label: `${country.name} ${vtLabel} — Full Details`, href: `/${c}-${vt}-visa-details` },
-        { label: `${country.name} ${vtLabel} — Fees`, href: `/${c}-${vt}-visa-fees` },
-      );
+  for (const vt of VISA_TYPES_EXTENDED) {
+    if (CURATED_COMBOS.has(`${c}-${vt}`)) {
+      links.push({ label: `${country.name} ${VISA_TYPE_LABELS[vt]} — Full Guide`, href: `/apply-${c}-${vt}-visa` });
     }
-  } else {
-    // Same-visa-type siblings — every page type within this visa type,
-    // so a reader on any one page can reach every other stage of the
-    // same application journey.
-    links.push(
-      { label: `Apply for ${country.name} ${label}`, href: `/apply-${c}-${visaType}-visa` },
-      { label: `How to Apply for ${country.name} ${label}`, href: `/how-to-apply-${c}-${visaType}-visa` },
-      { label: `${country.name} ${label} Details`, href: `/${c}-${visaType}-visa-details` },
-      { label: `${country.name} ${label} Requirements`, href: `/${c}-${visaType}-visa-requirements` },
-      { label: `${country.name} ${label} Fees`, href: `/${c}-${visaType}-visa-fees` },
-      { label: `${country.name} ${label} Documents`, href: `/${c}-${visaType}-visa-documents` },
-      { label: `${country.name} ${label} Processing Time`, href: `/${c}-${visaType}-visa-processing-time` },
-      { label: `${country.name} ${label} Rejection Reasons`, href: `/${c}-${visaType}-visa-rejection-reasons` },
-      { label: `${country.name} ${label} Interview Tips`, href: `/${c}-${visaType}-visa-interview-tips` },
-      { label: `${country.name} ${label} Success Tips`, href: `/${c}-${visaType}-visa-success-tips` },
-      { label: `${country.name} ${label} Checklist`, href: `/${c}-${visaType}-visa-checklist` },
-      { label: `${country.name} ${label} Extension`, href: `/${c}-${visaType}-visa-extension` },
-      { label: `${country.name} ${label} FAQ`, href: `/${c}-${visaType}-visa-faq` },
-      { label: `${country.name} ${label} Financial Requirements`, href: `/${c}-${visaType}-visa-financial-requirements` },
-      { label: `${country.name} ${label} Language Requirements`, href: `/${c}-${visaType}-visa-language-requirements` },
-    );
-
-    // Cross-visa-type links — connect this visa type's branch to every other
-    // visa type's branch for the same country via their "Details" page (the
-    // natural equivalent entry point), so the cluster is a real mesh rather
-    // than 5 disconnected branches that only meet at the hub.
-    for (const vt of VISA_TYPES_EXTENDED) {
-      if (vt === visaType) continue;
-      const vtLabel = VISA_TYPE_LABELS[vt];
-      links.push({ label: `${country.name} ${vtLabel} Details`, href: `/${c}-${vt}-visa-details` });
+  }
+  for (const combo of CURATED_COMBOS) {
+    if (combo.endsWith(`-${visaType}`) && !combo.startsWith(`${c}-`)) {
+      const other = combo.slice(0, -(visaType.length + 1));
+      const otherName = COUNTRIES_EXTENDED_LOOKUP.get(other) ?? other;
+      links.push({ label: `${otherName} ${VISA_TYPE_LABELS[visaType]} — Full Guide`, href: `/apply-${other}-${visaType}-visa` });
     }
   }
 
@@ -287,7 +266,7 @@ function buildFAQs(country: CountryExtended, visaType: VisaTypeExtended): { ques
   return [
     {
       question: `How much does a ${country.name} ${label} cost in ${yr}?`,
-      answer: `The official government application fee for a ${country.name} ${label} is ${currency} ${fee}, payable directly to the immigration authority and non-refundable regardless of outcome. Beyond this, most applicants also pay for items such as biometric enrollment, a medical examination, document translation, and courier or visa-facilitation-center handling — but the exact amounts for these depend on your local VAC/embassy and change over time, so we don't publish estimated figures for them here. Check ${country.officialImmigrationUrl} and your nearest ${country.name} embassy or VAC for their current fee schedule.`,
+      answer: `The official government application fee for a ${country.name} ${label} is ${feeLabel(country, visaType)}, payable directly to the immigration authority and non-refundable regardless of outcome. Beyond this, most applicants also pay for items such as biometric enrollment, a medical examination, document translation, and courier or visa-facilitation-center handling — but the exact amounts for these depend on your local VAC/embassy and change over time, so we don't publish estimated figures for them here. Check ${country.officialImmigrationUrl} and your nearest ${country.name} embassy or VAC for their current fee schedule.`,
     },
     {
       question: `How long does ${country.name} ${label} processing take?`,
@@ -368,19 +347,19 @@ This guide covers every visa category available for ${country.name}, including e
     {
       heading: `All Visa Types Available for ${country.name}`,
       body: `**Study Visa (Student Permit)**
-For students enrolling in accredited programs at ${country.name} educational institutions. Government fee: ${country.currency} ${country.visaFees.study} | Processing: ${country.processingDays.study} | Difficulty: ${country.difficulty.study}.
+For students enrolling in accredited programs at ${country.name} educational institutions. Government fee: ${feeLabel(country, "study")} | Processing: ${country.processingDays.study} | Difficulty: ${country.difficulty.study}.
 
 **Work Visa (Employment Permit)**
-For professionals with a job offer from a ${country.name} employer. Government fee: ${country.currency} ${country.visaFees.work} | Processing: ${country.processingDays.work} | Difficulty: ${country.difficulty.work}.
+For professionals with a job offer from a ${country.name} employer. Government fee: ${feeLabel(country, "work")} | Processing: ${country.processingDays.work} | Difficulty: ${country.difficulty.work}.
 
 **Business Visa**
-For meetings, conferences, and business exploration in ${country.name}. Government fee: ${country.currency} ${country.visaFees.business} | Processing: ${country.processingDays.business} | Difficulty: ${country.difficulty.business}.
+For meetings, conferences, and business exploration in ${country.name}. Government fee: ${feeLabel(country, "business")} | Processing: ${country.processingDays.business} | Difficulty: ${country.difficulty.business}.
 
 **Visit / Tourist Visa**
-For tourism, family visits, and short-term travel to ${country.name}. Government fee: ${country.currency} ${country.visaFees.visit} | Processing: ${country.processingDays.visit} | Difficulty: ${country.difficulty.visit}.
+For tourism, family visits, and short-term travel to ${country.name}. Government fee: ${feeLabel(country, "visit")} | Processing: ${country.processingDays.visit} | Difficulty: ${country.difficulty.visit}.
 
 **Immigration / Permanent Residency**
-For those seeking long-term settlement in ${country.name}. Government fee: ${country.currency} ${country.visaFees.immigration} | Processing: ${country.processingDays.immigration} | Difficulty: ${country.difficulty.immigration}.
+For those seeking long-term settlement in ${country.name}. Government fee: ${feeLabel(country, "immigration")} | Processing: ${country.processingDays.immigration} | Difficulty: ${country.difficulty.immigration}.
 
 Selecting the correct visa category is critical. Applying under the wrong category leads to immediate refusal and loss of non-refundable fees. If uncertain, consult the ${country.name} embassy in your country or a licensed immigration advisor before submitting your application.`,
     },
@@ -445,7 +424,7 @@ Understanding the country you are applying to visit — its culture, legal syste
 • Complete your visa application form
 • Compile your full document package
 • Book your biometric appointment at the embassy or VAC
-• Pay the government fee of ${country.currency} ${country.visaFees.study} (study), ${country.currency} ${country.visaFees.work} (work), ${country.currency} ${country.visaFees.visit} (visit), or the applicable category fee
+• Pay the government fee of ${feeLabel(country, "study")} (study), ${feeLabel(country, "work")} (work), ${feeLabel(country, "visit")} (visit), or the applicable category fee
 • Submit your application
 
 **During processing (standard time: varies by category — see individual visa guides):**
@@ -486,7 +465,7 @@ Fill out the online application form accurately and completely. Any errors can r
 Upload scanned copies of all required documents before booking your appointment. Formats and file size limits vary by system.
 
 **Step 4: Pay Application Fee**
-Pay the government application fee of ${country.currency} ${country.visaFees.visit} (for tourist) or the applicable fee for your visa category online or at the VAC. Fees are non-refundable.
+Pay the government application fee of ${feeLabel(country, "visit")} (for tourist) or the applicable fee for your visa category online or at the VAC. Fees are non-refundable.
 
 **Step 5: Book Biometric Appointment**
 Select an available appointment slot for biometric enrollment (fingerprints and photograph). Appointment availability varies by location — book early, especially during peak periods (June–September and December–January).
@@ -538,7 +517,7 @@ function sectionsApply(country: CountryExtended, visaType: VisaTypeExtended): { 
       body: `The ${country.name} ${label} is designed for individuals who wish to ${VISA_PURPOSE[visaType]} in ${country.name}. The application process is rated ${diff} difficulty — meaning careful preparation and complete, accurate documentation are essential for a successful outcome.
 
 **Key Application Facts:**
-• Government fee: ${country.currency} ${fee} (non-refundable)
+• Government fee: ${feeLabel(country, visaType)} (non-refundable)
 • Processing time: ${time}
 • Language requirement: ${country.languageRequirement}
 • Official portal: ${country.officialImmigrationUrl}
@@ -613,7 +592,7 @@ If your purpose of visit changes materially after arrival — you get a job offe
     },
     {
       heading: `${country.name} ${label} Fees — What's Confirmed`,
-      body: `**Government Application Fee:** ${country.currency} ${fee}
+      body: `**Government Application Fee:** ${feeLabel(country, visaType)}
 This is the mandatory fee paid to the ${country.name} immigration authority. It is non-refundable regardless of the outcome.
 
 Most applicants also budget for items such as biometric enrollment, a medical examination, document translation, courier or visa-facilitation-center handling, and — if you choose to use one — an immigration consultant. We don't publish estimated amounts for these here, because they're set by third parties (translators, clinics, VACs, consultants) rather than the ${country.name} immigration authority, vary significantly by location, and change independently of the government fee. The one number we can confirm is the official fee above; for everything else, ${country.officialImmigrationUrl} and your nearest ${country.name} embassy or VAC are the sources that will have current, accurate figures.`,
@@ -632,7 +611,7 @@ function sectionsHowTo(country: CountryExtended, visaType: VisaTypeExtended): { 
   return [
     {
       heading: `How to Apply for ${country.name} ${label} — Step-by-Step Guide (${yr})`,
-      body: `This guide walks you through the complete ${country.name} ${label} application process from start to finish. The application is rated ${diff} difficulty. Total processing time after submission is ${time}. Government fee: ${country.currency} ${fee}.
+      body: `This guide walks you through the complete ${country.name} ${label} application process from start to finish. The application is rated ${diff} difficulty. Total processing time after submission is ${time}. Government fee: ${feeLabel(country, visaType)}.
 
 We recommend starting this process at least 4–6 months before your intended travel date. Rushing an application or gathering documents at the last minute significantly increases the risk of errors, missing documents, and refusal.`,
     },
@@ -648,7 +627,7 @@ Create a comprehensive checklist based on official requirements. Start with docu
 Fill out the official ${country.name} ${label} application form completely and accurately. Access it at ${country.officialImmigrationUrl}. Use block capitals where required and double-check every field — name spelling, date format, passport number, and travel dates must exactly match your passport and supporting documents.
 
 **Step 4 — Pay the Application Fee**
-Pay the government fee of ${country.currency} ${fee} via the accepted payment method for your embassy (online payment, bank draft, or in-person at the VAC). Retain the payment receipt — it is a mandatory submission document.
+Pay the government fee of ${feeLabel(country, visaType)} via the accepted payment method for your embassy (online payment, bank draft, or in-person at the VAC). Retain the payment receipt — it is a mandatory submission document.
 
 **Step 5 — Submit Application and Biometrics**
 Submit your completed application package at the designated embassy or VAC. Provide biometric data (fingerprints and photograph). Bring all original documents as well as the copies specified. You will receive a reference number to track your application.
@@ -738,7 +717,7 @@ function sectionsDetails(country: CountryExtended, visaType: VisaTypeExtended): 
       heading: `${country.name} ${label} — Full Details & Legal Framework (${yr})`,
       body: `The ${country.name} ${label} is a formal immigration authorization permitting foreign nationals to enter and remain in ${country.name} for the specific purpose of ${VISA_PURPOSE[visaType]}. Administered by the ${country.name} immigration authority at ${country.officialImmigrationUrl}, this visa category is subject to ${country.name}'s national immigration legislation and policy.
 
-**Classification:** ${diff} difficulty | **Fee:** ${country.currency} ${fee} | **Processing:** ${time}
+**Classification:** ${diff} difficulty | **Fee:** ${feeLabel(country, visaType)} | **Processing:** ${time}
 **Language:** ${country.languageRequirement} | **Region:** ${country.region} | **Capital:** ${country.capital}
 
 The ${label} grants the holder the legal right to ${VISA_PURPOSE[visaType]} for the duration specified on the visa. Any activities beyond the authorized scope — such as working without authorization on a tourist visa, or studying on a work visa — are illegal violations that can result in immediate cancellation of the visa, forced removal from ${country.name}, and a ban on future visa applications.`,
@@ -777,7 +756,7 @@ ${docs.slice(8).map((d, i) => `${i + 9}. ${d}`).join("\n")}
     },
     {
       heading: `Fees, Financial Requirements, and Payment`,
-      body: `**Government Application Fee:** ${country.currency} ${fee} (non-refundable)
+      body: `**Government Application Fee:** ${feeLabel(country, visaType)} (non-refundable)
 
 Beyond this official fee, applicants typically also pay for biometric enrollment, a medical examination, document translation, courier/VAC handling, and — optionally — an immigration consultant. These are set by third parties rather than the ${country.name} immigration authority and vary too much by location to publish a reliable estimate here; see the dedicated Fees guide for this visa type, or check ${country.officialImmigrationUrl} directly.
 
@@ -929,7 +908,7 @@ function sectionsFees(country: CountryExtended, visaType: VisaTypeExtended): { h
   // genuine per-country variance, not a formula applied to every country.
   const otherFees = VISA_TYPES_EXTENDED
     .filter((vt) => vt !== visaType)
-    .map((vt) => `${VISA_TYPE_LABELS[vt]}: ${country.currency} ${country.visaFees[vt]}`)
+    .map((vt) => `${VISA_TYPE_LABELS[vt]}: ${feeLabel(country, vt)}`)
     .join(" · ");
 
   const ancillaryRows = verified
@@ -942,7 +921,7 @@ function sectionsFees(country: CountryExtended, visaType: VisaTypeExtended): { h
   return [
     {
       heading: `${country.name} ${label} — Fees (${yr})`,
-      body: `**Official Government Application Fee:** ${country.currency} ${fee}
+      body: `**Official Government Application Fee:** ${feeLabel(country, visaType)}
 This is the mandatory fee paid directly to the ${country.name} immigration authority. It is non-refundable regardless of the outcome of your application, even if you withdraw before a decision is made. This figure comes directly from our country dataset and is the one number on this page we're confident in without a live source check — always confirm it hasn't changed at ${country.officialImmigrationUrl} before you pay.
 
 **How this compares to ${country.name}'s other visa categories:** ${otherFees}. Fee levels within a country are set by the same immigration authority, so a category priced noticeably higher or lower than the others is often a signal about the complexity or scrutiny level of that pathway.`,
@@ -990,10 +969,10 @@ Payment methods vary by embassy and VAC location. Common options include:
 ${country.name}'s visa fees are set in ${country.currency}. When paying from another currency, exchange rates on the day of payment apply. Check the current exchange rate at a reliable source before calculating your total budget, and allow a buffer for fluctuations between planning and payment.
 
 **Fee Changes:**
-${country.name} visa fees are reviewed periodically and can change without advance notice. Always check the current fee at ${country.officialImmigrationUrl} on the day you submit your application — the ${country.currency} ${fee} figure in this guide reflects our dataset as of ${yr} but should be independently verified before you pay.
+${country.name} visa fees are reviewed periodically and can change without advance notice. Always check the current fee at ${country.officialImmigrationUrl} on the day you submit your application — the ${feeLabel(country, visaType)} figure in this guide reflects our dataset as of ${yr} but should be independently verified before you pay.
 
 **Refund Policy:**
-The government application fee (${country.currency} ${fee}) is non-refundable in almost all cases. VFS/VAC and facilitation fees may be partially refundable if you withdraw before biometric enrollment — check with your specific VAC for their refund policy, as this is set by the VAC operator, not the immigration authority.`,
+The government application fee (${feeLabel(country, visaType)}) is non-refundable in almost all cases. VFS/VAC and facilitation fees may be partially refundable if you withdraw before biometric enrollment — check with your specific VAC for their refund policy, as this is set by the VAC operator, not the immigration authority.`,
     },
     ...sharedExtraSections(country, visaType),
   ];
@@ -1157,7 +1136,7 @@ If your application significantly exceeds the published processing time (${time}
       body: `In genuine time-sensitive situations, some ${country.name} embassies offer priority or expedited processing services. Understanding these options and when they apply can help you manage urgent visa needs.
 
 **Standard Priority Processing**
-Some ${country.name} embassies and VACs offer a priority or expedited processing service for an additional fee, on top of the standard government fee of ${country.currency} ${country.visaFees[visaType as VisaTypeExtended]}. Whether this service is available, how much faster it is, and what it costs varies by embassy/VAC location and isn't something the government fee schedule covers — check directly with your local ${country.name} embassy or VAC (${country.embassyUrl}) for availability and current pricing.
+Some ${country.name} embassies and VACs offer a priority or expedited processing service for an additional fee, on top of the standard government fee of ${feeLabel(country, visaType as VisaTypeExtended)}. Whether this service is available, how much faster it is, and what it costs varies by embassy/VAC location and isn't something the government fee schedule covers — check directly with your local ${country.name} embassy or VAC (${country.embassyUrl}) for availability and current pricing.
 
 Priority processing does not guarantee approval — it only speeds up the assessment timeline. If your application has documentation issues, priority processing will not overcome them.
 
@@ -1510,7 +1489,7 @@ function sectionsChecklist(country: CountryExtended, visaType: VisaTypeExtended)
 ☐ Verified current requirements at ${country.officialImmigrationUrl}
 ☐ Checked the ${country.name} embassy website for your country (requirements may differ by embassy)
 ☐ Confirmed application timeline (processing: ${country.processingDays[visaType]})
-☐ Set budget for all costs (government fee: ${country.currency} ${fee}, plus ancillary costs)
+☐ Set budget for all costs (government fee: ${feeLabel(country, visaType)}, plus ancillary costs)
 ☐ Identified nearest embassy, consulate, or VAC for submission
 
 **Document Gathering:**
@@ -1531,7 +1510,7 @@ ${docs.map((d) => `☐ ${d}`).join("\n")}
 ☐ Application form copy retained for your records
 
 **Payment:**
-☐ Government fee of ${country.currency} ${fee} paid
+☐ Government fee of ${feeLabel(country, visaType)} paid
 ☐ Payment receipt saved and included in document package
 ☐ VFS / facilitation fee paid (if applicable)
 
@@ -1650,7 +1629,7 @@ Extensions are typically applied for through the ${country.name} immigration aut
 • Any documents showing change of circumstances (if applicable)
 
 **Extension Fees:**
-Extension applications are subject to a separate government fee, typically similar to or higher than the original application fee (${country.currency} ${country.visaFees[visaType]}). Check current extension fees at ${country.officialImmigrationUrl}.`,
+Extension applications are subject to a separate government fee, typically similar to or higher than the original application fee (${feeLabel(country, visaType)}). Check current extension fees at ${country.officialImmigrationUrl}.`,
     },
     {
       heading: `Alternatives to Extension — Change of Status`,
@@ -1744,7 +1723,7 @@ This guide explains exactly what financial evidence ${country.name} requires for
     },
     {
       heading: `Minimum Financial Requirements`,
-      body: `**Government Fee (Non-Refundable):** ${country.currency} ${fee}
+      body: `**Government Fee (Non-Refundable):** ${feeLabel(country, visaType)}
 This must be paid as part of your application regardless of outcome.
 
 **Proof of Funds (Separate from Application Fee):**
@@ -1982,19 +1961,19 @@ function sharedExtraSections(country: CountryExtended, visaType: VisaTypeExtende
       heading: `All ${country.name} Visa Categories at a Glance`,
       body: `While you are researching the ${country.name} ${label}, it is useful to understand every available visa option so you can confirm you are applying under the correct category — or explore alternatives if your situation changes.
 
-**Study Visa** — Government fee: ${country.currency} ${country.visaFees.study} | Standard processing: ${country.processingDays.study} | Difficulty: ${country.difficulty.study}
+**Study Visa** — Government fee: ${feeLabel(country, "study")} | Standard processing: ${country.processingDays.study} | Difficulty: ${country.difficulty.study}
 The study visa allows foreign nationals to enroll in accredited educational programs at ${country.name} institutions. Recipients may access limited part-time work rights in many cases. Study visas are often the starting point for applicants who later transition to long-term or permanent residence in ${country.name} after completing their qualifications.
 
-**Work Visa** — Government fee: ${country.currency} ${country.visaFees.work} | Standard processing: ${country.processingDays.work} | Difficulty: ${country.difficulty.work}
+**Work Visa** — Government fee: ${feeLabel(country, "work")} | Standard processing: ${country.processingDays.work} | Difficulty: ${country.difficulty.work}
 The work visa requires a confirmed job offer from a ${country.name}-based employer and meeting specific qualification and salary thresholds. It is one of the more competitive visa categories but provides a clear pathway toward long-term residency for qualified professionals. Employer sponsorship and labour market compliance are central requirements.
 
-**Business Visa** — Government fee: ${country.currency} ${country.visaFees.business} | Standard processing: ${country.processingDays.business} | Difficulty: ${country.difficulty.business}
+**Business Visa** — Government fee: ${feeLabel(country, "business")} | Standard processing: ${country.processingDays.business} | Difficulty: ${country.difficulty.business}
 Designed for professionals attending meetings, conferences, trade events, or negotiations in ${country.name}. The business visa does not authorize paid employment or the ongoing operation of a business within ${country.name}. It is appropriate for short-term commercial activity with an identified host organization or business contact.
 
-**Tourist / Visit Visa** — Government fee: ${country.currency} ${country.visaFees.visit} | Standard processing: ${country.processingDays.visit} | Difficulty: ${country.difficulty.visit}
+**Tourist / Visit Visa** — Government fee: ${feeLabel(country, "visit")} | Standard processing: ${country.processingDays.visit} | Difficulty: ${country.difficulty.visit}
 The most widely applied-for category, the tourist visa covers leisure travel, family visits, and short-term tourism in ${country.name}. It does not permit work or long-term stay. Applicants must demonstrate clear ties to their home country and a defined return plan to satisfy immigration officers of their genuine temporary intent.
 
-**Immigration / Permanent Residency** — Government fee: ${country.currency} ${country.visaFees.immigration} | Standard processing: ${country.processingDays.immigration} | Difficulty: ${country.difficulty.immigration}
+**Immigration / Permanent Residency** — Government fee: ${feeLabel(country, "immigration")} | Standard processing: ${country.processingDays.immigration} | Difficulty: ${country.difficulty.immigration}
 The most complex and documentation-intensive category, the immigration visa is for those seeking permanent settlement in ${country.name}. It requires meeting comprehensive eligibility standards across skills, language, health, and character. Success leads to permanent residence rights and, eventually, eligibility for ${country.name} citizenship.
 
 Applying under the wrong visa category leads to automatic refusal and loss of the non-refundable application fee. If you are unsure which category fits your situation, consult a licensed immigration advisor before submitting.`,
@@ -2095,7 +2074,7 @@ export function generatePageContent(
       heroTitle = `${country.name} Visa & Immigration Guide ${yr}`;
       heroSubtitle = `Complete guide to all visa types, requirements, fees, and processes for ${country.name}. Updated for ${yr}.`;
       metaTitle = `${country.name} Visa Guide ${yr} — Types, Requirements & Fees | VisaProcessInfo`;
-      metaDescription = `Complete ${country.name} visa guide for ${yr}. All visa types, requirements, fees (from ${country.currency} ${country.visaFees.visit}), processing times, and step-by-step guides.`;
+      metaDescription = `Complete ${country.name} visa guide for ${yr}. All visa types, requirements, fees (from ${feeLabel(country, "visit")}), processing times, and step-by-step guides.`;
       break;
 
     case "embassy":
@@ -2109,15 +2088,15 @@ export function generatePageContent(
     case "apply":
       sections = sectionsApply(country, visaType);
       heroTitle = `Apply for ${country.name} ${label} — Complete Guide ${yr}`;
-      heroSubtitle = `Fee: ${country.currency} ${fee} | Processing: ${time} | Difficulty: ${diff}`;
+      heroSubtitle = `Fee: ${feeLabel(country, visaType)} | Processing: ${time} | Difficulty: ${diff}`;
       metaTitle = `Apply for ${country.name} ${label} ${yr} — Requirements, Fees & Process | VisaProcessInfo`;
-      metaDescription = `Complete ${country.name} ${label} application guide for ${yr}. Requirements, documents needed, fee ${country.currency} ${fee}, processing time ${time}, and expert tips for approval.`;
+      metaDescription = `Complete ${country.name} ${label} application guide for ${yr}. Requirements, documents needed, fee ${feeLabel(country, visaType)}, processing time ${time}, and expert tips for approval.`;
       break;
 
     case "how-to":
       sections = sectionsHowTo(country, visaType);
       heroTitle = `How to Apply for ${country.name} ${label} — Step-by-Step ${yr}`;
-      heroSubtitle = `${time} processing | ${country.currency} ${fee} government fee | ${diff} difficulty`;
+      heroSubtitle = `${time} processing | ${feeLabel(country, visaType)} government fee | ${diff} difficulty`;
       metaTitle = `How to Apply for ${country.name} ${label} Step by Step ${yr} | VisaProcessInfo`;
       metaDescription = `Step-by-step guide to applying for a ${country.name} ${label} in ${yr}. From document gathering to approval — complete walkthrough with expert tips.`;
       break;
@@ -2125,15 +2104,15 @@ export function generatePageContent(
     case "details":
       sections = sectionsDetails(country, visaType);
       heroTitle = `${country.name} ${label} — Full Details & Requirements ${yr}`;
-      heroSubtitle = `Fee: ${country.currency} ${fee} | Processing: ${time} | Difficulty: ${diff} | Region: ${country.region}`;
+      heroSubtitle = `Fee: ${feeLabel(country, visaType)} | Processing: ${time} | Difficulty: ${diff} | Region: ${country.region}`;
       metaTitle = `${country.name} ${label} Details — Requirements, Fees & Process ${yr} | VisaProcessInfo`;
-      metaDescription = `${country.name} ${label} complete details for ${yr}. Legal framework, eligibility, documents, fees (${country.currency} ${fee}), processing time (${time}), and approval strategies.`;
+      metaDescription = `${country.name} ${label} complete details for ${yr}. Legal framework, eligibility, documents, fees (${feeLabel(country, visaType)}), processing time (${time}), and approval strategies.`;
       break;
 
     case "requirements":
       sections = sectionsRequirements(country, visaType);
       heroTitle = `${country.name} ${label} Requirements ${yr} — Eligibility Criteria`;
-      heroSubtitle = `Difficulty: ${diff} | Fee: ${country.currency} ${fee} | Language: ${country.languageRequirement}`;
+      heroSubtitle = `Difficulty: ${diff} | Fee: ${feeLabel(country, visaType)} | Language: ${country.languageRequirement}`;
       metaTitle = `${country.name} ${label} Requirements ${yr} — Full Eligibility Guide | VisaProcessInfo`;
       metaDescription = `Complete eligibility and requirements for ${country.name} ${label} in ${yr}. Age, financial, language, health, and character requirements explained in detail.`;
       break;
@@ -2141,9 +2120,9 @@ export function generatePageContent(
     case "fees":
       sections = sectionsFees(country, visaType);
       heroTitle = `${country.name} ${label} Fees ${yr} — Official Cost Guide`;
-      heroSubtitle = `Official government fee: ${country.currency} ${fee} | Processing time: ${time}`;
+      heroSubtitle = `Official government fee: ${feeLabel(country, visaType)} | Processing time: ${time}`;
       metaTitle = `${country.name} ${label} Fees ${yr} — Official Fee & Financial Requirements | VisaProcessInfo`;
-      metaDescription = `${country.name} ${label} fees for ${yr}. Official government fee ${country.currency} ${fee}, financial requirements, and payment methods.`;
+      metaDescription = `${country.name} ${label} fees for ${yr}. Official government fee ${feeLabel(country, visaType)}, financial requirements, and payment methods.`;
       break;
 
     case "documents":
@@ -2262,7 +2241,7 @@ export function generatePageContent(
       { title: "Check Eligibility", description: `Verify you meet all ${country.name} ${label} requirements for your nationality at ${country.officialImmigrationUrl}.` },
       { title: "Gather Documents", description: `Compile all required documents including financial proof, identity documents, and purpose evidence.` },
       { title: "Complete Application", description: `Fill out the official ${country.name} ${label} application form accurately and completely.` },
-      { title: "Pay Fees", description: `Pay the ${country.currency} ${fee} government application fee (non-refundable).` },
+      { title: "Pay Fees", description: `Pay the ${feeLabel(country, visaType)} government application fee (non-refundable).` },
       { title: "Submit & Biometrics", description: `Submit at the designated application center and provide biometric data (fingerprints and photo).` },
       { title: "Await Decision", description: `Track your application; standard processing takes ${time}.` },
     ],

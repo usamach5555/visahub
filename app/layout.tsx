@@ -1,19 +1,31 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { websiteSchema, organizationSchema } from "@/lib/jsonld";
-import { HOMEPAGE_KEYWORDS } from "@/lib/seo-keywords";
+import { SITE_URL } from "@/lib/site";
+
+// Self-hosted Inter (variable, latin subset). Replaces the render-blocking
+// Google Fonts @import: the font is preloaded from our own origin and a
+// size-adjusted fallback avoids layout shift while it loads.
+const inter = localFont({
+  src: "./fonts/InterVariable-latin.woff2",
+  display: "swap",
+  weight: "100 900",
+  variable: "--font-inter",
+  fallback: ["system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
+});
 
 export const metadata: Metadata = {
   title: {
     template: "%s | VisaProcessInfo",
-    default: "VisaProcessInfo — Visa & Immigration Guides for 131 Countries",
+    default: "VisaProcessInfo — Visa Guides for 127 Countries",
   },
   description:
-    "Comprehensive visa and immigration guides for students, workers, tourists, and immigrants. Country-specific requirements, step-by-step processes, and expert tips for 131 countries — updated for 2026.",
-  keywords: HOMEPAGE_KEYWORDS,
-  metadataBase: new URL("https://www.visaprocessinfo.com"),
+    "Free visa and immigration guides for study, work, tourist and PR visas in 127 countries, with links to each country's official immigration site.",
+  metadataBase: new URL(SITE_URL),
   verification: {
     google: "hnBXp2VAGXmFk2-f-7kfvH7Xd7jwZaT-RZcxxbdVZWs",
   },
@@ -48,25 +60,20 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <head>
-        {/* Preconnect hints for performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
-        <link rel="preconnect" href="https://flagcdn.com" />
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
-        {/* Viewport — prevent horizontal scroll on mobile */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        {/* Google AdSense auto ads */}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4441490689171176" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
@@ -80,6 +87,14 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        {/* AdSense loads after the page is interactive so it no longer
+            competes with the main content for bandwidth and CPU. */}
+        <Script
+          id="adsense"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4441490689171176"
+          strategy="lazyOnload"
+          crossOrigin="anonymous"
+        />
       </body>
     </html>
   );

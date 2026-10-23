@@ -360,7 +360,7 @@ export default function DocumentChecklistGenerator() {
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono text-gray-400">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="text-xs font-mono text-gray-500">{String(index + 1).padStart(2, "0")}</span>
                       <span
                         className={`text-sm font-semibold ${
                           checkedItems.has(item.id) ? "text-green-700 line-through" : "text-gray-800"
@@ -419,7 +419,7 @@ export default function DocumentChecklistGenerator() {
             </button>
             <button
               onClick={handlePrint}
-              className="flex items-center justify-center gap-2 bg-accent-500 text-white font-bold py-4 rounded-2xl text-lg hover:opacity-90 transition-colors"
+              className="flex items-center justify-center gap-2 bg-accent-700 text-white font-bold py-4 rounded-2xl text-lg hover:opacity-90 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path

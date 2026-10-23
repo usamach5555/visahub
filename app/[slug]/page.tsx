@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -19,15 +19,14 @@ import {
   CalendarDays,
   Users,
 } from "lucide-react";
-import { parseSlug, generateAllProgrammaticSlugs } from "@/lib/slug-parser";
+import { parseSlug } from "@/lib/slug-parser";
+import { decide, renderedSlugs } from "@/lib/index-policy";
+import { SITE_URL } from "@/lib/site";
 import { generatePageContent } from "@/lib/page-content";
 import { getCountryBySlug } from "@/data/countries-extended";
 import { getCountryImageUrl, getSectionImageUrl, HERO_BLUR_PLACEHOLDER } from "@/lib/images";
 import { howToSchema } from "@/lib/jsonld";
 import AdSlot from "@/components/ads/AdSlot";
-
-// Tier C page types: thin templates with low unique value — noindexed to protect crawl budget
-const TIER_C_PAGE_TYPES = new Set(["interview", "success-tips", "extension", "language"]);
 
 // Page types where FAQPage schema is semantically appropriate (not schema spam)
 const FAQ_SCHEMA_PAGE_TYPES = new Set(["details", "faq", "country-hub", "requirements"]);
@@ -49,8 +48,10 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+// Only hubs and curated guides are pre-built. Every other old programmatic
+// URL is rendered on demand just to issue a permanent redirect.
 export function generateStaticParams() {
-  return generateAllProgrammaticSlugs().map((slug) => ({ slug }));
+  return renderedSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -59,22 +60,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!parsed) return { title: "Page Not Found" };
   const country = getCountryBySlug(parsed.countrySlug);
   if (!country) return { title: "Page Not Found" };
+  const decision = decide(parsed);
+  if (decision.kind === "redirect") return {};
   const content = generatePageContent(country, parsed.visaType, parsed.pageType);
   // OG images should be 1200×630 for social media (hero images use default 1920×1080)
   const imageUrl = getCountryImageUrl(country.slug, country.region, 1200, 630);
-  const isTierC = parsed.pageType !== null && TIER_C_PAGE_TYPES.has(parsed.pageType);
   return {
     // content.metaTitle already ends with "| VisaProcessInfo" (see lib/page-content.ts).
     // Using { absolute: ... } bypasses layout.tsx's "%s | VisaProcessInfo" title
     // template so the suffix isn't appended twice.
     title: { absolute: content.metaTitle },
     description: content.metaDescription,
-    alternates: { canonical: `https://www.visaprocessinfo.com/${slug}` },
-    ...(isTierC && { robots: { index: false, follow: true } }),
+    alternates: { canonical: `${SITE_URL}/${slug}` },
+    ...(!decision.indexable && { robots: { index: false, follow: true } }),
     openGraph: {
       title: content.metaTitle,
       description: content.metaDescription,
-      url: `https://www.visaprocessinfo.com/${slug}`,
+      url: `${SITE_URL}/${slug}`,
       type: "article",
       siteName: "VisaProcessInfo",
       images: [{ url: imageUrl, width: 1200, height: 630, alt: content.heroTitle }],
@@ -154,6 +156,9 @@ export default async function ProgrammaticPage({ params }: Props) {
   const country = getCountryBySlug(parsed.countrySlug);
   if (!country) notFound();
 
+  const decision = decide(parsed);
+  if (decision.kind === "redirect") permanentRedirect(decision.to);
+
   const content = generatePageContent(country, parsed.visaType, parsed.pageType);
   const visaLabel = parsed.visaType.charAt(0).toUpperCase() + parsed.visaType.slice(1);
   const diff = country.difficulty[parsed.visaType];
@@ -173,18 +178,18 @@ export default async function ProgrammaticPage({ params }: Props) {
     author: {
       "@type": "Organization",
       name: "VisaProcessInfo",
-      url: "https://www.visaprocessinfo.com",
+      url: "https://visaprocessinfo.com",
       foundingDate: "2020",
       knowsAbout: ["Visa Applications", "Immigration Law", "Study Abroad", "Work Permits"],
     },
     publisher: {
       "@type": "Organization",
       name: "VisaProcessInfo",
-      url: "https://www.visaprocessinfo.com",
-      logo: { "@type": "ImageObject", url: "https://www.visaprocessinfo.com/favicon.ico" },
+      url: "https://visaprocessinfo.com",
+      logo: { "@type": "ImageObject", url: "https://visaprocessinfo.com/favicon.ico" },
     },
-    url: `https://www.visaprocessinfo.com/${slug}`,
-    mainEntityOfPage: `https://www.visaprocessinfo.com/${slug}`,
+    url: `${SITE_URL}/${slug}`,
+    mainEntityOfPage: `https://visaprocessinfo.com/${slug}`,
     datePublished: CONTENT_LAST_VERIFIED,
     dateModified: CONTENT_LAST_VERIFIED,
     reviewedBy: {
@@ -217,10 +222,10 @@ export default async function ProgrammaticPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.visaprocessinfo.com" },
-      { "@type": "ListItem", position: 2, name: country.name, item: `https://www.visaprocessinfo.com/${country.slug}-visa-info` },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://visaprocessinfo.com" },
+      { "@type": "ListItem", position: 2, name: country.name, item: `https://visaprocessinfo.com/${country.slug}-visa-info` },
       ...(isCountryLevel ? [] : [
-        { "@type": "ListItem", position: 3, name: content.heroTitle, item: `https://www.visaprocessinfo.com/${slug}` },
+        { "@type": "ListItem", position: 3, name: content.heroTitle, item: `https://visaprocessinfo.com/${slug}` },
       ]),
     ],
   };
@@ -267,7 +272,7 @@ export default async function ProgrammaticPage({ params }: Props) {
             {!isCountryLevel && (
               <>
                 <span>/</span>
-                <Link href={`/${country.slug}-${parsed.visaType}-visa-details`} className="hover:text-white transition-colors capitalize">{parsed.visaType} Visa</Link>
+                <span className="capitalize">{parsed.visaType} Visa</span>
                 <span>/</span>
                 <span className="text-white/80">{PAGE_TYPE_BADGE[pt]}</span>
               </>
@@ -283,7 +288,6 @@ export default async function ProgrammaticPage({ params }: Props) {
                 width={160}
                 height={112}
                 className="w-full h-full object-cover"
-                unoptimized
               />
             </div>
             <div>
@@ -321,7 +325,7 @@ export default async function ProgrammaticPage({ params }: Props) {
           {!isCountryLevel && (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { Icon: DollarSign, label: "Government Fee",   value: `${country.currency} ${country.visaFees[parsed.visaType]}` },
+                { Icon: DollarSign, label: "Government Fee",   value: country.feesVerifiedOn ? `${country.currency} ${country.visaFees[parsed.visaType].toLocaleString("en-US")}` : "See official site" },
                 { Icon: Clock,      label: "Processing Time",  value: country.processingDays[parsed.visaType] },
                 { Icon: BarChart3,  label: "Difficulty",       value: diff },
                 { Icon: MapPin,     label: "Capital",          value: country.capital },
@@ -359,14 +363,14 @@ export default async function ProgrammaticPage({ params }: Props) {
                   { label: "Language Requirement",   value: country.languageRequirement },
                   { label: "Region",                 value: country.region },
                   ...(!isCountryLevel ? [
-                    { label: "Visa Fee",             value: `${country.currency} ${country.visaFees[parsed.visaType]}` },
+                    { label: "Visa Fee",             value: country.feesVerifiedOn ? `${country.currency} ${country.visaFees[parsed.visaType].toLocaleString("en-US")}` : "See official site" },
                     { label: "Processing Time",      value: country.processingDays[parsed.visaType] },
                     { label: "Difficulty",           value: diff },
                     { label: "Official Portal",      value: country.officialImmigrationUrl.replace("https://", "").replace("www.", "") },
                   ] : [
-                    { label: "Study Visa Fee",       value: `${country.currency} ${country.visaFees.study}` },
-                    { label: "Work Visa Fee",        value: `${country.currency} ${country.visaFees.work}` },
-                    { label: "Visit Visa Fee",       value: `${country.currency} ${country.visaFees.visit}` },
+                    { label: "Study Visa Fee",       value: country.feesVerifiedOn ? `${country.currency} ${country.visaFees.study.toLocaleString("en-US")}` : "See official site" },
+                    { label: "Work Visa Fee",        value: country.feesVerifiedOn ? `${country.currency} ${country.visaFees.work.toLocaleString("en-US")}` : "See official site" },
+                    { label: "Visit Visa Fee",       value: country.feesVerifiedOn ? `${country.currency} ${country.visaFees.visit.toLocaleString("en-US")}` : "See official site" },
                     { label: "Official Portal",      value: country.officialImmigrationUrl.replace("https://", "").replace("www.", "") },
                   ]),
                 ].map((item) => (
@@ -389,11 +393,11 @@ export default async function ProgrammaticPage({ params }: Props) {
               </div>
               <div className="flex items-center gap-1.5 bg-primary-50 text-primary-700 border border-primary-200 rounded-full px-3 py-1.5 font-medium">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                Verified from official sources
+                Official sources linked
               </div>
               <div className="flex items-center gap-1.5 bg-gray-50 text-gray-600 border border-gray-200 rounded-full px-3 py-1.5 font-medium">
                 <Users className="w-3.5 h-3.5" />
-                Reviewed by immigration editors
+                Independent guide — not legal advice
               </div>
             </div>
 
@@ -511,7 +515,7 @@ export default async function ProgrammaticPage({ params }: Props) {
                   <details key={i} className="group border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
                     <summary className="flex items-center justify-between p-4 sm:p-5 cursor-pointer hover:bg-primary-50/50 transition-colors font-semibold text-gray-900 text-sm gap-3 list-none">
                       <span className="leading-snug">{faq.question}</span>
-                      <ChevronDown className="w-4 h-4 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0" />
+                      <ChevronDown className="w-4 h-4 text-gray-500 group-open:rotate-180 transition-transform duration-200 flex-shrink-0" />
                     </summary>
                     <div className="p-4 sm:p-5 text-sm text-gray-700 leading-relaxed border-t border-gray-100">
                       {faq.answer}

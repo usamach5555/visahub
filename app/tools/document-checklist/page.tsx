@@ -4,7 +4,7 @@ import DocumentChecklistGenerator from "@/components/DocumentChecklistGenerator"
 export const metadata: Metadata = {
   title: "Visa Document Checklist Generator — Complete Visa Documents List",
   description: "Generate a complete visa document checklist for any country and visa type. Track your progress, print or download your personalized checklist. Never miss a required document again.",
-  alternates: { canonical: "https://www.visaprocessinfo.com/tools/document-checklist" },
+  alternates: { canonical: "https://visaprocessinfo.com/tools/document-checklist" },
 };
 
 export default function DocumentChecklistPage() {

@@ -150,6 +150,10 @@ Check real-time wait times: travel.state.gov/content/travel/en/us-visas/visa-inf
     ],
     faqs: [
       {
+        question: "Do I have to pay the USD 100,000 H-1B fee?",
+        answer: "A September 2025 presidential proclamation imposed a USD 100,000 payment on certain new H-1B petitions for workers outside the United States, and it was extended in September 2026 to run until September 2027. However, a federal court vacated the USCIS policy implementing it in June 2026 and the appeals court refused to pause that ruling, so USCIS is not collecting the fee at the time of writing. The situation is still in litigation — check the USCIS H-1B page before filing.",
+      },
+      {
         question: "What is the H-1B lottery and what are my chances of being selected in 2026?",
         answer: "The H-1B visa has an annual cap of 85,000 visas (65,000 regular cap + 20,000 for US master's degree holders). Demand far exceeds supply — USCIS received approximately 470,000 unique registrations for FY2026, meaning overall lottery odds were roughly 18% for regular cap and 22% for master's cap. Process: your employer registers you in the electronic lottery (USCIS MyH-1B portal) during the registration window (typically first two weeks of March). If selected, your employer files the full H-1B petition. Registration fee: USD 215 per beneficiary (2024 rule). Petition fee: USD 730 (small employers) to USD 5,460 (large employers) plus premium processing USD 2,805 (optional, guarantees 15-business-day adjudication).",
       },
@@ -239,7 +243,7 @@ Note: Under DOL regulations, H-1B workers generally cannot pay filing fees — d
       },
       {
         question: "How much is the NHS Immigration Health Surcharge for UK student visa applicants?",
-        answer: "The NHS Immigration Health Surcharge (IHS) is GBP 776 per year of your visa (as of 2024). It is paid upfront for the full duration of your visa when you submit your application online. Examples: 3-year undergraduate degree: GBP 776 × 3 = GBP 2,328. 1-year master's course: GBP 776 × 1 = GBP 776. 4-year degree with placement year: GBP 776 × 4 = GBP 3,104. The IHS gives you access to NHS healthcare on the same terms as UK residents — GP visits, hospital treatment, and prescriptions at UK resident rates. It is paid through the NHS Surcharge website during the visa application process. Children under 18 pay the same rate. Students on government scholarships covering healthcare may be exempt — check with your sponsor.",
+        answer: "The NHS Immigration Health Surcharge (IHS) is GBP 776 per year of your visa (student rate). It is paid upfront for the full duration of your visa when you submit your application online. Examples: 3-year undergraduate degree: GBP 776 × 3 = GBP 2,328. 1-year master's course: GBP 776 × 1 = GBP 776. 4-year degree with placement year: GBP 776 × 4 = GBP 3,104. The IHS gives you access to NHS healthcare on the same terms as UK residents — GP visits, hospital treatment, and prescriptions at UK resident rates. It is paid through the NHS Surcharge website during the visa application process. Children under 18 pay the same rate. Students on government scholarships covering healthcare may be exempt — check with your sponsor.",
       },
       {
         question: "What are the financial requirements for a UK student visa?",
@@ -255,7 +259,7 @@ Note: Under DOL regulations, H-1B workers generally cannot pay filing fees — d
       },
       {
         question: "What is the Graduate Route visa and how do I apply after graduating from a UK university?",
-        answer: "The Graduate Route is a post-study work visa allowing international graduates to remain in the UK to work or look for work for 2 years (3 years for PhD graduates). Eligibility: you must have successfully completed a degree, other graduate-level qualification, or PhD at a Higher Education Provider with a track record of compliance. Apply from inside the UK up to 3 months before your Student visa expires. Fee: GBP 822 (2024). NHS surcharge: GBP 776 per year (GBP 1,552 for 2 years, GBP 2,328 for 3 years). The Graduate Route does not require a job offer — you can work in any job at any salary level. After the Graduate Route, you can switch to a Skilled Worker visa if you have a qualifying job offer (minimum GBP 38,700 salary, or the going rate for the occupation).",
+        answer: "The Graduate Route is a post-study work visa allowing international graduates to remain in the UK to work or look for work for 2 years (3 years for PhD graduates). For applications made on or after 1 January 2027 this falls to 18 months for bachelor's and master's graduates. Eligibility: you must have successfully completed a degree, other graduate-level qualification, or PhD at a Higher Education Provider with a track record of compliance. Apply from inside the UK up to 3 months before your Student visa expires. Fee: GBP 822 (2024). NHS surcharge: GBP 776 per year (GBP 1,552 for 2 years, GBP 2,328 for 3 years). The Graduate Route does not require a job offer — you can work in any job at any salary level. After the Graduate Route, you can switch to a Skilled Worker visa if you have a qualifying job offer (minimum GBP 38,700 salary, or the going rate for the occupation).",
       },
       {
         question: "How long does a UK student visa take to process?",
@@ -276,17 +280,17 @@ Note: Under DOL regulations, H-1B workers generally cannot pay filing fees — d
     ],
     extraSections: [
       {
-        heading: "UK Student Visa — Complete Fee Breakdown 2024–2025",
+        heading: "UK Student Visa — Fee Breakdown (fees from 8 April 2026)",
         body: `| Fee Component | Amount | Notes |
 |---|---|---|
-| Visa application fee | GBP 490 | Paid online; non-refundable |
+| Visa application fee | GBP 558 | Paid online; non-refundable |
 | NHS Immigration Health Surcharge | GBP 776 per year | Paid upfront for full visa duration |
 | UKVCAS biometric appointment | GBP 0–200 | Standard appointments often free; enhanced locations cost more |
 | Priority processing (optional) | GBP 250 extra | Reduces processing to 5 working days |
 | Super Priority (optional) | GBP 800 extra | Next working day decision |
 | IELTS for UKVI test | GBP 180–210 | If required for your nationality |
-| **3-year degree example total** | **~GBP 3,018** | Visa fee + 3 years IHS (GBP 2,328) + biometrics |
-| **1-year master's example total** | **~GBP 1,266** | Visa fee + 1 year IHS (GBP 776) + biometrics |
+| **3-year degree example total** | **~GBP 2,886** | Visa fee + 3 years IHS (GBP 2,328) |
+| **1-year master's example total** | **~GBP 1,334** | Visa fee + 1 year IHS (GBP 776) |
 
 All fees are paid online through the UK Visas and Immigration (UKVI) application portal at apply.ukvisas.homeoffice.gov.uk. IHS is paid through the NHS Surcharge website (nhsbsa.nhs.uk/healthcare-immigration-application), linked from the visa application.`,
       },
@@ -294,10 +298,10 @@ All fees are paid online through the UK Visas and Immigration (UKVI) application
         heading: "UK Student Visa vs Graduate Route vs Skilled Worker — Pathway Comparison",
         body: `| Visa | When | Fee | Work Rights | Duration |
 |---|---|---|---|---|
-| Student Visa | Before arriving / studying | GBP 490 + IHS | 20 hrs/wk term-time, full-time holidays | Duration of course + 4 months |
-| Graduate Route | After graduating (from inside UK) | GBP 822 + IHS | Unrestricted — any job, any salary | 2 years (3 for PhD) |
-| Skilled Worker | After Graduate Route (job offer needed) | GBP 719–1,420 + IHS | Employer-specific | Up to 5 years, renewable |
-| Indefinite Leave to Remain | After 5 years on qualifying visa | GBP 2,885 | Unrestricted | Permanent |
+| Student Visa | Before arriving / studying | GBP 558 + IHS | 20 hrs/wk term-time, full-time holidays | Duration of course + 4 months |
+| Graduate Route | After graduating (from inside UK) | GBP 937 + IHS | Unrestricted — any job, any salary | 2 years (18 months for applications from 1 Jan 2027; 3 years for PhD) |
+| Skilled Worker | After Graduate Route (job offer needed) | GBP 819–1,618 + IHS | Employer-specific | Up to 5 years, renewable |
+| Indefinite Leave to Remain | After qualifying period | GBP 3,226 | Unrestricted | Permanent |
 
 The standard pathway to UK settlement for international graduates: Student Visa → Graduate Route (2 years) → Skilled Worker Visa (3 years) → ILR after 5 continuous qualifying years. Citizenship (British naturalisation) requires 12 months ILR + 5 years total continuous UK residence.`,
       },
@@ -325,11 +329,11 @@ The standard pathway to UK settlement for international graduates: Student Visa 
       },
       {
         question: "Am I eligible for the Visa Waiver Program (ESTA) instead of applying for a B-2 visa?",
-        answer: "The Visa Waiver Program (VWP) allows citizens of 42 designated countries to travel to the US for up to 90 days for tourism or business without a visa, using ESTA authorization. Eligible countries include: UK, Germany, France, Australia, Japan, South Korea, Singapore, and most EU member states. ESTA authorization costs USD 21 and is applied for online at esta.cbp.dhs.gov. ESTA is denied if you have: visited Cuba, Iran, Iraq, Libya, North Korea, Somalia, Sudan, Syria, or Yemen since 2011; been arrested (even without conviction); overstayed a previous US admission; had a prior US visa refusal. If denied ESTA, you must apply for a B-2 visa. Check your eligibility at the official list before applying.",
+        answer: "The Visa Waiver Program (VWP) allows citizens of Visa Waiver Program countries to travel to the US for up to 90 days for tourism or business without a visa, using ESTA authorization. Eligible countries include: UK, Germany, France, Australia, Japan, South Korea, Singapore, and most EU member states. ESTA authorization costs USD 21 and is applied for online at esta.cbp.dhs.gov. ESTA is denied if you have: visited Cuba, Iran, Iraq, Libya, North Korea, Somalia, Sudan, Syria, or Yemen since 2011; been arrested (even without conviction); overstayed a previous US admission; had a prior US visa refusal. If denied ESTA, you must apply for a B-2 visa. Check your eligibility at the official list before applying.",
       },
       {
         question: "What is interview waiver (drop box) eligibility for US B-2 visa applicants?",
-        answer: "The US Embassy interview waiver program (informally called 'drop box') allows eligible applicants to submit their B-2 visa application documents at a designated drop box without attending an in-person interview. General eligibility: applicants who previously held a US nonimmigrant visa that was valid within the past 48 months (4 years). Additional conditions: the previous visa was the same category (B-1/B-2), no refusal since the last visa was issued, no arrest or conviction. Eligibility is ultimately determined by the US Embassy or Consulate — even if you appear eligible, you may be called for an interview. Processing after drop box submission: typically 3–5 business days. Check your country's specific embassy website for drop box procedures — they vary significantly by country.",
+        answer: "Since 2 September 2025 almost all US nonimmigrant visa applicants, including B-1/B-2 applicants of any age, must attend an in-person interview. Interview waivers are now limited to narrow cases such as diplomatic and official visas and some renewals of a full-validity B-1/B-2 visa that expired less than 12 months ago (if you were at least 18 when it was issued). Check the website of your US embassy or consulate, which may apply stricter local rules.",
       },
       {
         question: "How much money do I need to show for a US B-2 tourist visa?",
@@ -948,23 +952,23 @@ Fees are set by EU regulation and are the same at all Schengen member state emba
     ],
     extraSections: [
       {
-        heading: "All UK Visa Categories — Quick Reference 2024",
+        heading: "All UK Visa Categories — Quick Reference (fees from 8 April 2026)",
         body: `| Visa Type | Purpose | Duration | Fee (GBP) | NHS Surcharge |
 |---|---|---|---|---|
-| Standard Visitor | Tourism, family, short business | Up to 6 months | 115 (6 month) | None |
-| Student Visa | Study at licensed institution | Course duration + 4 months | 490 | GBP 776/year |
-| Graduate Route | Post-study work | 2 years (3 PhD) | 822 | GBP 776/year |
-| Skilled Worker | Employment by licensed sponsor | Up to 5 years | 719–1,420 | GBP 1,035/year |
-| Health & Care Worker | NHS / care sector employment | Up to 5 years | Free | Waived |
-| Intra-Company Transfer | Same employer, UK branch | Up to 5 years | 719–1,420 | GBP 1,035/year |
-| Global Talent | Exceptional talent/promise | Up to 5 years | 167 | GBP 1,035/year |
-| Innovator Founder | Establish innovative business | 3 years | 1,486 | GBP 1,035/year |
-| Family Visa (spouse/partner) | Join UK settled person | 2.5 years initial | 1,846 | GBP 1,035/year |
-| Youth Mobility (Tier 5) | Working holiday for 18–30 | 2 years | 298 | GBP 1,035/year |
+| Standard Visitor | Tourism, family, short business | Up to 6 months | 135 (6 month) | None |
+| Student Visa | Study at licensed institution | Course duration + 4 months | 558 | GBP 776/year |
+| Graduate Route | Post-study work | 2 years (18 months from Jan 2027; 3 PhD) | 937 | GBP 1,035/year |
+| Skilled Worker | Employment by licensed sponsor | Up to 5 years | 819–1,618 | GBP 1,035/year |
+| Health & Care Worker | NHS / care sector employment | Up to 5 years | Reduced fee | Exempt |
+| Intra-Company Transfer | Same employer, UK branch | Up to 5 years | See GOV.UK | GBP 1,035/year |
+| Global Talent | Exceptional talent/promise | Up to 5 years | 766 (incl. endorsement) | GBP 1,035/year |
+| Innovator Founder | Establish innovative business | 3 years | 1,357 + endorsement | GBP 1,035/year |
+| Family Visa (spouse/partner) | Join UK settled person | 2.5 years initial | 2,064 | GBP 1,035/year |
+| Youth Mobility Scheme | Working holiday (age limits by country) | 2 years | 340 | GBP 776/year |
 
 **Path to Settlement and Citizenship:**
-Indefinite Leave to Remain (ILR): after 5 years on most qualifying visas (Skilled Worker, Global Talent, etc.) — fee GBP 2,885.
-British Citizenship (naturalisation): 12 months after ILR, with 5 years total continuous residence — fee GBP 1,605.`,
+Indefinite Leave to Remain (ILR): after 5 years on most qualifying visas (Skilled Worker, Global Talent, etc.) — fee GBP 3,226.
+British Citizenship (naturalisation): 12 months after ILR, with 5 years total continuous residence — fee GBP 1,709.`,
       },
     ],
   },
@@ -989,7 +993,7 @@ British Citizenship (naturalisation): 12 months after ILR, with 5 years total co
 | B-1/B-2 | Tourism / Business | Up to 6 months | Show non-immigrant intent |
 | F-1 | Student (academic) | Duration of status | I-20 from SEVP-certified school |
 | J-1 | Exchange visitor | Program duration | DS-2019 from program sponsor |
-| H-1B | Specialty occupation worker | 3 years (6 max) | Lottery, GBP 85,000 annual cap |
+| H-1B | Specialty occupation worker | 3 years (6 max) | Lottery; 85,000 visas a year |
 | L-1 | Intracompany transferee | 3–7 years | 1 year abroad with same company |
 | O-1 | Extraordinary ability | 3 years | Extraordinary recognition in field |
 | TN | NAFTA/USMCA (Canada, Mexico) | 3 years | TN-eligible occupation, border |
@@ -1007,7 +1011,7 @@ British Citizenship (naturalisation): 12 months after ILR, with 5 years total co
 | Family-based (IR-1/CR-1) | Spouses, parents, children of US citizens | Immediate relative: no waiting |
 
 **ESTA Visa Waiver Program:**
-Citizens of 42 countries can enter for 90 days without a visa via ESTA. Apply at esta.cbp.dhs.gov — cost USD 21. Valid 2 years. Not eligible if you have visited Cuba, Iran, Iraq, Libya, North Korea, Somalia, Sudan, Syria, or Yemen since March 1, 2011.`,
+Citizens of Visa Waiver Program countries can enter for 90 days without a visa via ESTA. Apply at esta.cbp.dhs.gov — cost USD 40 (since 30 Sep 2025). Valid 2 years. Not eligible if you have visited Cuba, Iran, Iraq, Libya, North Korea, Somalia, Sudan, Syria, or Yemen since March 1, 2011.`,
       },
     ],
   },

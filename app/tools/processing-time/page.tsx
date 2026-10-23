@@ -4,7 +4,7 @@ import ProcessingTimeEstimator from "@/components/ProcessingTimeEstimator";
 export const metadata: Metadata = {
   title: "Visa Processing Time Estimator — How Long Will Your Visa Take?",
   description: "Estimate your visa processing time for any country. See a full timeline from document preparation to decision, including embassy processing times for study, work, tourist, and business visas.",
-  alternates: { canonical: "https://www.visaprocessinfo.com/tools/processing-time" },
+  alternates: { canonical: "https://visaprocessinfo.com/tools/processing-time" },
 };
 
 export default function ProcessingTimePage() {
@@ -20,7 +20,7 @@ export default function ProcessingTimePage() {
             Visa Processing Time Estimator
           </h1>
           <p className="text-white/80 text-lg leading-relaxed max-w-2xl mx-auto">
-            Find out how long your visa application will take from start to finish. Get a detailed timeline with embassy processing times for 131+ countries.
+            Find out how long your visa application will take from start to finish. Get a detailed timeline with embassy processing times for 127 countries.
           </p>
         </div>
       </div>

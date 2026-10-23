@@ -33,7 +33,7 @@ export default function Breadcrumb({ items, variant = "dark" }: BreadcrumbProps)
         <span key={i} className="flex items-center gap-1.5">
           {/* Chevron separator */}
           <svg
-            className={`w-3.5 h-3.5 shrink-0 ${isLight ? "text-white/40" : "text-gray-400"}`}
+            className={`w-3.5 h-3.5 shrink-0 ${isLight ? "text-white/40" : "text-gray-500"}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

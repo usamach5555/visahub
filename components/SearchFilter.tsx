@@ -4,7 +4,17 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Search, Globe, GraduationCap, Briefcase, Building2, Plane, Home } from "lucide-react";
-import { COUNTRIES_EXTENDED } from "@/data/countries-extended";
+
+/** Minimal country info the directory needs — passed from the server so the
+ *  full country dataset (fees, facts, URLs) is not shipped to the browser. */
+export interface DirectoryCountry {
+  slug: string;
+  name: string;
+  code: string;
+  region: string;
+  capital: string;
+  visitDifficulty: string;
+}
 
 const REGIONS = [
   "All Regions",
@@ -42,27 +52,34 @@ function getDifficultyConfig(diff: string) {
   }
 }
 
-export default function SearchFilter() {
+export default function SearchFilter({ countries }: { countries: DirectoryCountry[] }) {
   const [query, setQuery] = useState("");
   const [activeRegion, setActiveRegion] = useState("All Regions");
   const [activeVisa, setActiveVisa] = useState("all");
+  const [showAll, setShowAll] = useState(false);
 
   const filteredCountries = useMemo(() => {
     const q = query.toLowerCase().trim();
-    return COUNTRIES_EXTENDED.filter((c) => {
+    return countries.filter((c) => {
       const matchesQuery =
         !q || c.name.toLowerCase().includes(q) || c.region.toLowerCase().includes(q) || c.capital.toLowerCase().includes(q);
       const matchesRegion = activeRegion === "All Regions" || c.region === activeRegion;
       return matchesQuery && matchesRegion;
     });
-  }, [query, activeRegion, activeVisa]);
+  }, [countries, query, activeRegion]);
+
+  // Render a short list first; the full directory is one tap away. Keeps the
+  // homepage HTML and DOM small (it used to render 127 flag cards up front).
+  const isFiltering = query.trim() !== "" || activeRegion !== "All Regions";
+  const INITIAL = 24;
+  const visibleCountries = showAll || isFiltering ? filteredCountries : filteredCountries.slice(0, INITIAL);
 
   return (
     <div>
       {/* Search input */}
       <div className="relative max-w-2xl mx-auto mb-6">
         <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-          <Search className="w-5 h-5 text-gray-400" />
+          <Search className="w-5 h-5 text-gray-500" />
         </div>
         <input
           type="search"
@@ -102,7 +119,7 @@ export default function SearchFilter() {
             onClick={() => setActiveRegion(r)}
             className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-150 ${
               activeRegion === r
-                ? "bg-accent-600 text-white border-accent-600 shadow-sm"
+                ? "bg-accent-700 text-white border-accent-700 shadow-sm"
                 : "bg-white text-gray-500 border-gray-200 hover:border-accent-400 hover:text-accent-700"
             }`}
           >
@@ -114,7 +131,7 @@ export default function SearchFilter() {
       {/* Results count */}
       <p className="text-center text-sm text-gray-500 mb-6">
         Showing <span className="font-bold text-gray-900">{filteredCountries.length}</span> of{" "}
-        <span className="font-bold text-gray-900">{COUNTRIES_EXTENDED.length}</span> countries
+        <span className="font-bold text-gray-900">{countries.length}</span> countries
       </p>
 
       {/* Country grid */}
@@ -131,8 +148,8 @@ export default function SearchFilter() {
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
-          {filteredCountries.map((c) => {
-            const diff = getDifficultyConfig(c.difficulty.visit);
+          {visibleCountries.map((c) => {
+            const diff = getDifficultyConfig(c.visitDifficulty);
             return (
               <Link
                 key={c.slug}
@@ -147,7 +164,6 @@ export default function SearchFilter() {
                     width={80}
                     height={56}
                     className="w-full h-full object-cover"
-                    unoptimized
                   />
                 </div>
                 {/* Name */}
@@ -155,16 +171,25 @@ export default function SearchFilter() {
                   {c.name}
                 </span>
                 {/* Region */}
-                <span className="text-xs text-gray-400 -mt-1 line-clamp-1">{c.region}</span>
+                <span className="text-xs text-gray-600 -mt-1 line-clamp-1">{c.region}</span>
                 {/* Difficulty badge */}
                 <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${diff.className}`}>
                   {diff.label}
                 </span>
-                {/* Fee */}
-                <span className="text-xs text-gray-400">{c.currency} {c.visaFees.visit} visit</span>
               </Link>
             );
           })}
+        </div>
+      )}
+      {!showAll && !isFiltering && filteredCountries.length > INITIAL && (
+        <div className="text-center mt-8">
+          <button
+            type="button"
+            onClick={() => setShowAll(true)}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary-800 hover:bg-primary-700 text-white font-semibold rounded-xl transition-colors"
+          >
+            Show all {filteredCountries.length} countries
+          </button>
         </div>
       )}
     </div>

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Disclaimer",
   description:
     "Full disclaimer for VisaProcessInfo. Our content is for general informational purposes only and does not constitute legal or immigration advice. Read before using this website.",
-  alternates: { canonical: "https://www.visaprocessinfo.com/disclaimer" },
+  alternates: { canonical: "https://visaprocessinfo.com/disclaimer" },
 };
 
 export default function DisclaimerPage() {
@@ -80,8 +80,7 @@ export default function DisclaimerPage() {
             <h2 className="text-xl font-bold text-primary-800 mb-3">4. Currency and Accuracy of Information</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               Immigration policies, visa fees, document requirements, processing times, and eligibility
-              criteria change frequently, often without public notice. While our editorial team reviews and
-              updates guides regularly, we cannot guarantee that all information on this website is current
+              criteria change frequently, often without public notice. While we update guides when we learn of changes, we cannot guarantee that all information on this website is current
               at the exact time you access it.
             </p>
             <p className="text-gray-700 leading-relaxed">

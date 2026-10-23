@@ -25,6 +25,12 @@ const nextConfig = {
 
   compress: true,
 
+  // Inline the (small, Tailwind-purged) CSS into the HTML so the first paint
+  // does not wait for a separate render-blocking stylesheet request.
+  experimental: {
+    inlineCss: true,
+  },
+
   typescript: {
     ignoreBuildErrors: true,
   },

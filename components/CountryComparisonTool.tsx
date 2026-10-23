@@ -164,7 +164,7 @@ export default function CountryComparisonTool() {
               {showDropdown && selectedSlugs.length < 3 && (
                 <div className="absolute z-20 w-full mt-1 bg-white rounded-xl border border-gray-200 shadow-lg max-h-56 overflow-y-auto">
                   {filteredCountries.length === 0 ? (
-                    <div className="px-4 py-3 text-sm text-gray-400">No countries found</div>
+                    <div className="px-4 py-3 text-sm text-gray-500">No countries found</div>
                   ) : (
                     filteredCountries.slice(0, 12).map((c) => (
                       <button
@@ -178,7 +178,7 @@ export default function CountryComparisonTool() {
                           className="w-5 h-4 rounded-sm object-cover"
                         />
                         <span className="font-medium text-gray-800">{c.name}</span>
-                        <span className="text-gray-400 text-xs ml-auto">{c.region}</span>
+                        <span className="text-gray-500 text-xs ml-auto">{c.region}</span>
                       </button>
                     ))
                   )}
@@ -251,7 +251,7 @@ export default function CountryComparisonTool() {
           {/* Country Headers */}
           <div className="grid border-b border-gray-100 min-w-[480px]" style={{ gridTemplateColumns: `140px repeat(${selectedCountries.length}, 1fr)` }}>
             <div className="p-4 md:p-6 bg-gray-50 flex items-end">
-              <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Category</span>
+              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Category</span>
             </div>
             {selectedCountries.map((c, idx) => (
               <div key={c.slug} className="p-4 md:p-6 text-center border-l border-gray-100">
@@ -261,7 +261,7 @@ export default function CountryComparisonTool() {
                   className="w-12 h-9 rounded mx-auto mb-2 shadow-sm object-cover"
                 />
                 <h3 className="font-bold text-primary-800 text-base md:text-lg">{c.name}</h3>
-                <p className="text-xs text-gray-400">{c.capital} &middot; {c.region}</p>
+                <p className="text-xs text-gray-500">{c.capital} &middot; {c.region}</p>
               </div>
             ))}
           </div>
@@ -273,7 +273,7 @@ export default function CountryComparisonTool() {
               render: (c: CountryExtended, idx: number) => (
                 <div className={`p-4 md:p-6 text-center border-l border-gray-100 transition-colors ${cellHighlight(idx, analysis.bestFeeIdx)}`}>
                   <span className="text-2xl font-extrabold text-gray-900">${c.visaFees[visaType]}</span>
-                  <p className="text-xs text-gray-400 mt-1">{c.currency}</p>
+                  <p className="text-xs text-gray-500 mt-1">{c.currency}</p>
                   {idx === analysis.bestFeeIdx && selectedCountries.length >= 2 && (
                     <span className="inline-block mt-2 px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full uppercase">Lowest</span>
                   )}
@@ -412,7 +412,7 @@ export default function CountryComparisonTool() {
             </svg>
           </div>
           <h3 className="text-lg font-bold text-gray-700 mb-1">Select at least 2 countries to compare</h3>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-500">
             Use the search above to add countries. You can compare up to 3 countries at once.
           </p>
         </div>

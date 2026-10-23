@@ -29,7 +29,7 @@ export default function NotFound() {
           Back to Home
         </Link>
         <Link
-          href="/blog"
+          href="/guides"
           className="px-6 py-3 border-2 border-primary-800 text-primary-800 rounded-xl font-semibold hover:bg-primary-50 transition-colors"
         >
           Browse Visa Guides

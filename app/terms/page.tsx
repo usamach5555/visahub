@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Terms of Use",
   description:
     "Terms of Use for VisaProcessInfo. By using this website you agree to these terms governing access, content use, intellectual property, disclaimers, and limitation of liability.",
-  alternates: { canonical: "https://www.visaprocessinfo.com/terms" },
+  alternates: { canonical: "https://visaprocessinfo.com/terms" },
 };
 
 export default function TermsPage() {

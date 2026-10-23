@@ -24,8 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: article.title,
     description: article.metaDescription,
-    keywords: article.tags,
-    alternates: { canonical: `https://www.visaprocessinfo.com/guides/${article.slug}` },
+    alternates: { canonical: `https://visaprocessinfo.com/guides/${article.slug}` },
     openGraph: {
       title: article.title,
       description: article.metaDescription,
@@ -59,14 +58,14 @@ export default async function EditorialGuidePage({ params }: Props) {
   const articleLd = articleSchema({
     title: article.title,
     description: article.metaDescription,
-    url: `https://www.visaprocessinfo.com/guides/${article.slug}`,
+    url: `https://visaprocessinfo.com/guides/${article.slug}`,
     publishedAt: article.publishedAt,
   });
 
   const breadcrumbLd = breadcrumbSchema([
-    { name: "Home", url: "https://www.visaprocessinfo.com" },
-    { name: "Visa Guides", url: "https://www.visaprocessinfo.com/guides" },
-    { name: article.title, url: `https://www.visaprocessinfo.com/guides/${article.slug}` },
+    { name: "Home", url: "https://visaprocessinfo.com" },
+    { name: "Visa Guides", url: "https://visaprocessinfo.com/guides" },
+    { name: article.title, url: `https://visaprocessinfo.com/guides/${article.slug}` },
   ]);
 
   return (
@@ -122,7 +121,7 @@ export default async function EditorialGuidePage({ params }: Props) {
                 ✓ Researched from official government sources
               </span>
               <span className="flex items-center gap-1.5 bg-primary-50 text-primary-700 border border-primary-200 rounded-full px-3 py-1.5 font-medium">
-                Reviewed by immigration editors
+                Independent guide — not legal advice
               </span>
             </div>
 
@@ -217,7 +216,7 @@ export default async function EditorialGuidePage({ params }: Props) {
                 <div>
                   <h3 className="font-bold text-gray-900 text-sm mb-1.5">About This Guide</h3>
                   <p className="text-xs text-gray-600 leading-relaxed">
-                    This guide was researched from official government immigration sources and reviewed by our editorial team. Immigration policies and requirements change frequently — always verify current requirements directly with official government portals before submitting any application. This guide does not constitute legal advice.
+                    This guide was researched from official government immigration sources. Immigration policies and requirements change frequently — always verify current requirements directly with official government portals before submitting any application. This guide does not constitute legal advice.
                   </p>
                   <div className="flex flex-wrap gap-3 mt-3">
                     <Link href="/editorial-policy" className="text-xs text-primary-700 font-medium hover:underline">

@@ -9,7 +9,7 @@
 import { NextResponse } from "next/server";
 import { getSitemapCount, CONTENT_LAST_VERIFIED } from "@/lib/sitemap-data";
 
-const BASE = "https://www.visaprocessinfo.com";
+const BASE = "https://visaprocessinfo.com";
 
 export async function GET() {
   const numSitemaps = getSitemapCount();

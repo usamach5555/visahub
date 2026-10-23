@@ -7,7 +7,6 @@ import { faqSchema, breadcrumbSchema, howToSchema } from "@/lib/jsonld";
 import FAQSection from "@/components/FAQSection";
 import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
-import { PROCESS_KEYWORDS } from "@/lib/seo-keywords";
 import { getProcessImageUrl, getSectionImageUrl, HERO_BLUR_PLACEHOLDER } from "@/lib/images";
 import { ShieldCheck, CalendarDays, Users } from "lucide-react";
 
@@ -26,8 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: process.title,
     description: process.metaDescription,
-    alternates: { canonical: `https://www.visaprocessinfo.com/process/${process.slug}` },
-    keywords: PROCESS_KEYWORDS,
+    alternates: { canonical: `https://visaprocessinfo.com/process/${process.slug}` },
   };
 }
 
@@ -45,9 +43,9 @@ export default async function ProcessPage({ params }: Props) {
 
   const faqLd = faqSchema(process.faqs);
   const breadcrumbLd = breadcrumbSchema([
-    { name: "Home", url: "https://www.visaprocessinfo.com" },
-    { name: "Apply Process", url: "https://www.visaprocessinfo.com/process/study-visa-application" },
-    { name: process.title, url: `https://www.visaprocessinfo.com/process/${process.slug}` },
+    { name: "Home", url: "https://visaprocessinfo.com" },
+    { name: "Apply Process", url: "https://visaprocessinfo.com/process/study-visa-application" },
+    { name: process.title, url: `https://visaprocessinfo.com/process/${process.slug}` },
   ]);
   const howToLd = howToSchema(
     process.title,
@@ -131,11 +129,11 @@ export default async function ProcessPage({ params }: Props) {
               </div>
               <div className="flex items-center gap-1.5 bg-primary-50 text-primary-700 border border-primary-200 rounded-full px-3 py-1.5 font-medium">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                Verified from official sources
+                Official sources linked
               </div>
               <div className="flex items-center gap-1.5 bg-gray-50 text-gray-600 border border-gray-200 rounded-full px-3 py-1.5 font-medium">
                 <Users className="w-3.5 h-3.5" />
-                Reviewed by immigration editors
+                Independent guide — not legal advice
               </div>
             </div>
 
@@ -295,7 +293,7 @@ export default async function ProcessPage({ params }: Props) {
                         <p className="font-semibold text-sm text-gray-900 group-hover:text-primary-800 transition-colors leading-snug">
                           {r.title.split(":")[0]}
                         </p>
-                        <p className="text-xs text-gray-400 mt-1">{r.timeRequired}</p>
+                        <p className="text-xs text-gray-500 mt-1">{r.timeRequired}</p>
                       </div>
                     </Link>
                   ))}
@@ -312,25 +310,25 @@ export default async function ProcessPage({ params }: Props) {
               <h3 className="font-bold text-gray-900 mb-4">Quick Summary</h3>
               <dl className="space-y-4 text-sm">
                 <div>
-                  <dt className="text-gray-400 text-xs uppercase tracking-wide mb-1">Time Required</dt>
+                  <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Time Required</dt>
                   <dd className="font-semibold text-gray-900">{process.timeRequired}</dd>
                 </div>
                 <div>
-                  <dt className="text-gray-400 text-xs uppercase tracking-wide mb-1">Estimated Cost</dt>
+                  <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Estimated Cost</dt>
                   <dd className="font-semibold text-gray-900">{process.costEstimate}</dd>
                 </div>
                 <div>
-                  <dt className="text-gray-400 text-xs uppercase tracking-wide mb-1">Steps</dt>
+                  <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Steps</dt>
                   <dd className="font-semibold text-gray-900">{process.steps.length} steps</dd>
                 </div>
                 <div>
-                  <dt className="text-gray-400 text-xs uppercase tracking-wide mb-1">Documents Required</dt>
+                  <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Documents Required</dt>
                   <dd className="font-semibold text-gray-900">{process.requiredDocuments.length} items</dd>
                 </div>
               </dl>
 
               <div className="mt-5 pt-5 border-t border-gray-100">
-                <Link href="/blog" className="block w-full text-center bg-primary-800 text-white font-semibold py-2.5 rounded-xl hover:bg-primary-700 transition-colors text-sm">
+                <Link href="/guides" className="block w-full text-center bg-primary-800 text-white font-semibold py-2.5 rounded-xl hover:bg-primary-700 transition-colors text-sm">
                   Read Country Guides →
                 </Link>
               </div>

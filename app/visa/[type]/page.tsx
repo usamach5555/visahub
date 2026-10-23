@@ -16,13 +16,12 @@ import {
 } from "lucide-react";
 import { VISA_TYPES, getVisaTypeBySlug } from "@/data/visa-types";
 import { COUNTRIES_EXTENDED } from "@/data/countries-extended";
-import { getArticlesByVisaType } from "@/lib/articles";
+import { EDITORIAL_ARTICLES } from "@/data/editorial-articles";
 import { faqSchema, breadcrumbSchema, howToSchema } from "@/lib/jsonld";
 import FAQSection from "@/components/FAQSection";
 import Breadcrumb from "@/components/Breadcrumb";
 import AdSlot from "@/components/ads/AdSlot";
 import Button from "@/components/ui/Button";
-import { VISA_TYPE_KEYWORDS, HOMEPAGE_KEYWORDS, mergeKeywords } from "@/lib/seo-keywords";
 import { getVisaTypeImageUrl, getSectionImageUrl, HERO_BLUR_PLACEHOLDER } from "@/lib/images";
 import { ShieldCheck, CalendarDays, Users } from "lucide-react";
 
@@ -58,9 +57,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const imageUrl = getVisaTypeImageUrl(visa.slug, 1200, 630);
   return {
     title: `${visa.name} Guide ${new Date().getFullYear()} — Requirements, Process & Countries`,
-    description: `Complete ${visa.name.toLowerCase()} guide for ${new Date().getFullYear()}. Requirements, step-by-step process, fees, and country-specific information for 131 destinations worldwide.`,
-    alternates: { canonical: `https://www.visaprocessinfo.com/visa/${visa.slug}` },
-    keywords: mergeKeywords(VISA_TYPE_KEYWORDS[visa.slug] ?? [], HOMEPAGE_KEYWORDS.slice(0, 20)),
+    description: `Complete ${visa.name.toLowerCase()} guide for ${new Date().getFullYear()}. Requirements, step-by-step process, fees, and country-specific information for 127 destinations worldwide.`,
+    alternates: { canonical: `https://visaprocessinfo.com/visa/${visa.slug}` },
     openGraph: {
       images: [{ url: imageUrl, width: 1200, height: 630, alt: `${visa.name} guide` }],
     },
@@ -75,7 +73,11 @@ export default async function VisaTypePage({ params }: Props) {
   // Use top 24 countries from COUNTRIES_EXTENDED for display
   const featuredCountries = COUNTRIES_EXTENDED.slice(0, 24);
   const sidebarCountries = COUNTRIES_EXTENDED.slice(0, 6);
-  const relatedArticles = getArticlesByVisaType(visa.slug);
+  const visaWord = visa.slug === "tourist" ? "visit" : visa.slug;
+  const relatedArticles = EDITORIAL_ARTICLES
+    .filter((a) => (a.title + " " + a.tags.join(" ")).toLowerCase().includes(visaWord))
+    .slice(0, 6)
+    .map((a) => ({ slug: a.slug, title: a.title, readingTimeMinutes: a.readingTimeMinutes }));
 
   const VisaIcon = VISA_LUCIDE[visa.slug] ?? Globe;
   const heroGradient = VISA_HERO_GRADIENT[visa.slug] ?? VISA_HERO_GRADIENT.study;
@@ -83,9 +85,9 @@ export default async function VisaTypePage({ params }: Props) {
 
   const faqLd = faqSchema(visa.faqs);
   const breadcrumbLd = breadcrumbSchema([
-    { name: "Home", url: "https://www.visaprocessinfo.com" },
-    { name: "Visa Types", url: "https://www.visaprocessinfo.com/#visa-types" },
-    { name: visa.name, url: `https://www.visaprocessinfo.com/visa/${visa.slug}` },
+    { name: "Home", url: "https://visaprocessinfo.com" },
+    { name: "Visa Types", url: "https://visaprocessinfo.com/#visa-types" },
+    { name: visa.name, url: `https://visaprocessinfo.com/visa/${visa.slug}` },
   ]);
   const howToLd = howToSchema(
     `How to Apply for a ${visa.name}`,
@@ -142,7 +144,7 @@ export default async function VisaTypePage({ params }: Props) {
             </div>
             <div className="bg-white/15 backdrop-blur-sm border border-white/25 rounded-xl px-4 py-2 text-sm">
               <span className="text-white/60">Available in: </span>
-              <span className="text-white font-medium">131 countries</span>
+              <span className="text-white font-medium">127 countries</span>
             </div>
           </div>
         </div>
@@ -160,11 +162,11 @@ export default async function VisaTypePage({ params }: Props) {
               </div>
               <div className="flex items-center gap-1.5 bg-primary-50 text-primary-700 border border-primary-200 rounded-full px-3 py-1.5 font-medium">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                Verified from official sources
+                Official sources linked
               </div>
               <div className="flex items-center gap-1.5 bg-gray-50 text-gray-600 border border-gray-200 rounded-full px-3 py-1.5 font-medium">
                 <Users className="w-3.5 h-3.5" />
-                Reviewed by immigration editors
+                Independent guide — not legal advice
               </div>
             </div>
 
@@ -215,7 +217,7 @@ export default async function VisaTypePage({ params }: Props) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/5 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
                 <p className="text-white text-sm font-bold drop-shadow-lg">
-                  {visa.name} — Available in 131+ countries worldwide
+                  {visa.name} — Available in 127 countries worldwide
                 </p>
               </div>
             </div>
@@ -242,7 +244,6 @@ export default async function VisaTypePage({ params }: Props) {
                         width={40}
                         height={28}
                         className="w-full h-full object-cover"
-                        unoptimized
                       />
                     </div>
                     <div>
@@ -258,7 +259,7 @@ export default async function VisaTypePage({ params }: Props) {
                   className="inline-flex items-center gap-2 text-sm text-primary-700 hover:text-primary-900 font-semibold transition-colors"
                 >
                   <Globe className="w-4 h-4" />
-                  View all 131 countries
+                  View all 127 countries
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -329,7 +330,7 @@ export default async function VisaTypePage({ params }: Props) {
                   {relatedArticles.map((a) => (
                     <Link
                       key={a.slug}
-                      href={`/blog/${a.slug}`}
+                      href={`/guides/${a.slug}`}
                       className="group flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all"
                     >
                       <div className="w-9 h-9 bg-primary-50 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -337,13 +338,13 @@ export default async function VisaTypePage({ params }: Props) {
                       </div>
                       <div>
                         <p className="font-medium text-gray-900 group-hover:text-primary-800 text-sm leading-snug">{a.title}</p>
-                        <p className="text-xs text-gray-500 mt-1">{a.countryName} &middot; {a.readingTimeMinutes} min read</p>
+                        <p className="text-xs text-gray-500 mt-1">{a.readingTimeMinutes} min read</p>
                       </div>
                     </Link>
                   ))}
                 </div>
                 <div className="mt-4">
-                  <Button href={`/blog?type=${visa.slug}`} variant="outline" size="sm">
+                  <Button href="/guides" variant="outline" size="sm">
                     View All {visa.name} Guides
                   </Button>
                 </div>
@@ -387,7 +388,7 @@ export default async function VisaTypePage({ params }: Props) {
                 </div>
                 <div>
                   <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Countries Available</dt>
-                  <dd className="font-medium text-gray-900">131 countries worldwide</dd>
+                  <dd className="font-medium text-gray-900">127 countries worldwide</dd>
                 </div>
               </dl>
             </div>
@@ -411,7 +412,6 @@ export default async function VisaTypePage({ params }: Props) {
                         width={20}
                         height={14}
                         className="w-full h-full object-cover"
-                        unoptimized
                       />
                     </span>
                     <span className="hover:underline">{c.name}</span>
@@ -423,7 +423,7 @@ export default async function VisaTypePage({ params }: Props) {
                   className="flex items-center gap-1.5 text-sm text-accent-700 font-semibold hover:text-accent-800 pt-1 transition-colors"
                 >
                   <Globe className="w-3.5 h-3.5" />
-                  View all 131 countries
+                  View all 127 countries
                 </Link>
               </div>
             </div>

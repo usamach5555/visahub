@@ -15,7 +15,7 @@ const variantStyles = {
   primary:
     "bg-primary-800 text-white hover:bg-primary-700 shadow-sm hover:shadow-md",
   secondary:
-    "bg-accent-500 text-white hover:bg-accent-600 shadow-sm hover:shadow-md",
+    "bg-accent-700 text-white hover:bg-accent-800 shadow-sm hover:shadow-md",
   outline:
     "border-2 border-primary-800 text-primary-800 hover:bg-primary-50 bg-transparent",
 };

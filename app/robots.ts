@@ -1,6 +1,8 @@
 import { MetadataRoute } from "next";
 
-const BASE = "https://www.visaprocessinfo.com";
+import { SITE_URL } from "@/lib/site";
+
+const BASE = SITE_URL;
 
 /**
  * robots.ts — served at /robots.txt
@@ -23,6 +25,5 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: `${BASE}/sitemap.xml`,
-    host: BASE,
   };
 }

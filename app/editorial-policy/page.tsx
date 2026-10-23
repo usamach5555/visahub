@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Editorial Policy",
   description:
     "VisaProcessInfo editorial policy: how we research, verify, and update visa guides. Our fact-checking process, correction policy, source standards, and update schedule.",
-  alternates: { canonical: "https://www.visaprocessinfo.com/editorial-policy" },
+  alternates: { canonical: "https://visaprocessinfo.com/editorial-policy" },
 };
 
 const sections = [

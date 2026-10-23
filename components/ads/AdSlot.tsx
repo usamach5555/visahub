@@ -39,7 +39,11 @@ const DIMENSIONS: Record<AdSlotProps["slot"], string> = {
 };
 
 export default function AdSlot({ slot, className = "" }: AdSlotProps) {
+  const slotId = SLOT_IDS[slot];
+  const hasRealSlotId = slotId !== "XXXXXXXXXX";
+
   useEffect(() => {
+    if (!hasRealSlotId) return;
     try {
       // Push the ad after the <ins> is mounted
       // @ts-expect-error adsbygoogle is injected by the Google script
@@ -47,23 +51,11 @@ export default function AdSlot({ slot, className = "" }: AdSlotProps) {
     } catch {
       // Silently ignore errors (e.g. ad blocker present)
     }
-  }, []);
+  }, [hasRealSlotId]);
 
-  const slotId = SLOT_IDS[slot];
-  const hasRealSlotId = slotId !== "XXXXXXXXXX";
-
-  // Show placeholder until real slot IDs are configured
-  if (!hasRealSlotId) {
-    return (
-      <div
-        className={`bg-gray-100 border border-dashed border-gray-300 rounded flex items-center justify-center text-xs text-gray-400 ${DIMENSIONS[slot]} ${className}`}
-        aria-label="Advertisement"
-        aria-hidden="true"
-      >
-        <span className="select-none">Ad</span>
-      </div>
-    );
-  }
+  // No manual slot configured yet: render nothing (AdSense auto ads still
+  // run). Previously an empty grey "Ad" box was shown to every visitor.
+  if (!hasRealSlotId) return null;
 
   return (
     <div className={`overflow-hidden ${DIMENSIONS[slot]} ${className}`} aria-label="Advertisement">

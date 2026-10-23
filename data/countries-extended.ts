@@ -22,6 +22,12 @@ export interface CountryExtended {
    * must never fabricate these numbers from visaFees. See lib/page-content.ts
    * sectionsFees() for how this is (optionally) rendered when present.
    */
+  /**
+   * ISO date on which `visaFees` were checked against the official fee schedule.
+   * Leave undefined when the figures have not been verified — pages then point
+   * readers to the official fee schedule instead of showing a number.
+   */
+  feesVerifiedOn?: string;
   verifiedAncillaryCosts?: {
     study?: Partial<Record<"biometric" | "medical" | "vac", { amount: number; source: string }>>;
     work?: Partial<Record<"biometric" | "medical" | "vac", { amount: number; source: string }>>;
@@ -38,7 +44,9 @@ export const COUNTRIES_EXTENDED: CountryExtended[] = [
     languageRequirement: "English (TOEFL/IELTS)",
     popularFor: ["Ivy League universities", "Silicon Valley tech jobs", "Green Card pathways", "Business opportunities"],
     keyFacts: ["World's largest economy", "Over 1 million international students annually", "F-1 visa for students", "H-1B for skilled workers"],
-    visaFees: { study: 185, work: 460, business: 185, visit: 185, immigration: 1760 },
+    // State Dept MRV fee USD 185 (B, F); USCIS I-129 for H-1B varies by employer size — shown as the visa (MRV) fee
+    visaFees: { study: 185, work: 205, business: 185, visit: 185, immigration: 325 },
+    feesVerifiedOn: "2026-10-23",
     processingDays: { study: "30-90 days", work: "3-6 months", business: "30-60 days", visit: "2-8 weeks", immigration: "12-24 months" },
     difficulty: { study: "Complex", work: "Complex", business: "Moderate", visit: "Moderate", immigration: "Complex" },
   },
@@ -48,7 +56,9 @@ export const COUNTRIES_EXTENDED: CountryExtended[] = [
     languageRequirement: "English (IELTS UKVI)",
     popularFor: ["Oxford & Cambridge", "Financial sector", "NHS healthcare", "Creative industries"],
     keyFacts: ["Points-based immigration system", "Graduate Route visa post-study", "Skilled Worker visa", "NHS surcharge required"],
-    visaFees: { study: 490, work: 719, business: 490, visit: 115, immigration: 2885 },
+    // GOV.UK fees from 8 April 2026: Standard Visitor £135, Student £558, Skilled Worker (≤3 yrs, outside UK) £819, ILR £3,226
+    visaFees: { study: 558, work: 819, business: 135, visit: 135, immigration: 3226 },
+    feesVerifiedOn: "2026-10-23",
     processingDays: { study: "3-8 weeks", work: "3-8 weeks", business: "3-8 weeks", visit: "3-4 weeks", immigration: "6-12 months" },
     difficulty: { study: "Moderate", work: "Moderate", business: "Moderate", visit: "Easy", immigration: "Moderate" },
   },

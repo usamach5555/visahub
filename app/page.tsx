@@ -21,14 +21,12 @@ import AdSlot from "@/components/ads/AdSlot";
 import { VISA_TYPES } from "@/data/visa-types";
 import { COUNTRIES_EXTENDED } from "@/data/countries-extended";
 import { faqSchema } from "@/lib/jsonld";
-import { HOMEPAGE_KEYWORDS } from "@/lib/seo-keywords";
 
 export const metadata: Metadata = {
-  title: { absolute: "VisaProcessInfo — Visa & Immigration Guides for 131 Countries" },
+  title: { absolute: "VisaProcessInfo — Visa & Immigration Guides for 127 Countries" },
   description:
-    "Your complete resource for study visas, work visas, tourist visas, and immigration guides for 131 countries worldwide. Step-by-step guides, fee breakdowns, and processing times — updated for 2026.",
-  alternates: { canonical: "https://www.visaprocessinfo.com" },
-  keywords: HOMEPAGE_KEYWORDS,
+    "Your complete resource for study visas, work visas, tourist visas, and immigration guides for 127 countries worldwide. Step-by-step guides, fee breakdowns, and processing times — updated for 2026.",
+  alternates: { canonical: "https://visaprocessinfo.com" },
 };
 
 // 12 featured countries shown in the hero flag strip
@@ -36,7 +34,6 @@ const HERO_SLUGS = ["usa", "uk", "canada", "australia", "germany", "france", "ua
 const heroCountries = COUNTRIES_EXTENDED.filter((c) => HERO_SLUGS.includes(c.slug));
 
 // 24 featured countries for the "Explore" strip at the bottom
-const exploreCountries = COUNTRIES_EXTENDED.slice(0, 24);
 
 // Lucide icon map for VISA_TYPES (data file uses emoji icons)
 const VISA_LUCIDE: Record<string, React.ElementType> = {
@@ -84,7 +81,7 @@ const visaColors: Record<string, { from: string; to: string; badge: string; text
 };
 
 const HOW_IT_WORKS = [
-  { step: "01", Icon: Globe,         title: "Choose Country",      desc: "Select your destination from 131 countries with detailed visa guides." },
+  { step: "01", Icon: Globe,         title: "Choose Country",      desc: "Select your destination from 127 countries with detailed visa guides." },
   { step: "02", Icon: FileText,      title: "Check Requirements",  desc: "Review the exact documents, fees, and eligibility for your visa type." },
   { step: "03", Icon: ClipboardCheck,title: "Prepare & Apply",     desc: "Follow our step-by-step checklist and submit a complete application." },
   { step: "04", Icon: Plane,         title: "Travel Confidently",  desc: "Get your visa approved and travel with all the knowledge you need." },
@@ -118,17 +115,23 @@ export default function HomePage() {
             backgroundSize: "60px 60px",
           }}
         />
-        {/* Glowing orbs */}
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-600/10 rounded-full blur-3xl" />
+        {/* Glow — radial gradients instead of large blur() filters, which were
+            very expensive to paint on mobile and delayed the hero (LCP). */}
+        <div
+          className="absolute inset-0"
+          aria-hidden
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 10% 30%, rgba(34,197,94,0.18), transparent 35%), radial-gradient(circle at 90% 70%, rgba(147,197,253,0.18), transparent 35%)",
+          }}
+        />
 
         {/* Hero content */}
         <div className="relative flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-24 pb-16">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/25 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium text-white mb-8">
+          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/25 rounded-full px-4 py-1.5 text-sm font-medium text-white mb-8">
             <span className="w-2 h-2 bg-accent-400 rounded-full animate-pulse" />
-            Updated for 2026 &middot; 10,000+ Free Visa Guides
+            Free guides &middot; Official sources linked
           </div>
 
           {/* Headline */}
@@ -143,21 +146,21 @@ export default function HomePage() {
           {/* Subheading */}
           <p className="text-lg sm:text-xl text-blue-100/90 max-w-2xl mx-auto mb-10 leading-relaxed">
             Study abroad, work overseas, travel the world, or settle permanently. Step-by-step guides for{" "}
-            <span className="text-white font-semibold">131 countries</span> — 100% free.
+            <span className="text-white font-semibold">127 countries</span> — 100% free.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
             <Link
               href="#countries"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent-500 hover:bg-accent-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 text-base"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent-700 hover:bg-accent-800 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 text-base"
             >
-              Browse 131 Countries
+              Browse 127 Countries
               <ChevronRight className="w-4 h-4" />
             </Link>
             <Link
-              href="/blog"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/15 hover:bg-white/25 border border-white/30 text-white font-bold rounded-2xl backdrop-blur-sm transition-all duration-200 text-base"
+              href="/guides"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/15 hover:bg-white/25 border border-white/30 text-white font-bold rounded-2xl transition-all duration-200 text-base"
             >
               Read Visa Guides
             </Link>
@@ -169,7 +172,7 @@ export default function HomePage() {
               <Link
                 key={c.slug}
                 href={`/${c.slug}-visa-info`}
-                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full px-3 py-1.5 text-sm text-white/90 hover:text-white transition-all duration-150 backdrop-blur-sm"
+                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full px-3 py-1.5 text-sm text-white/90 hover:text-white transition-all duration-150"
               >
                 <span className="w-5 h-3.5 rounded-sm overflow-hidden inline-block shrink-0">
                   <Image
@@ -178,7 +181,6 @@ export default function HomePage() {
                     width={20}
                     height={14}
                     className="w-full h-full object-cover"
-                    unoptimized
                   />
                 </span>
                 <span className="font-medium hidden sm:inline">{c.name}</span>
@@ -188,12 +190,12 @@ export default function HomePage() {
         </div>
 
         {/* Stats strip at bottom of cover */}
-        <div className="relative border-t border-white/10 bg-black/20 backdrop-blur-sm">
+        <div className="relative border-t border-white/10 bg-black/20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
               {[
-                { value: "131+", label: "Countries Covered" },
-                { value: "10,000+", label: "Visa Guides" },
+                { value: "127", label: "Countries Covered" },
+                { value: "6", label: "Free Tools" },
                 { value: "5", label: "Visa Categories" },
                 { value: "Free", label: "Always Free" },
               ].map((s) => (
@@ -281,7 +283,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="inline-block bg-accent-50 text-accent-700 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3">
-              131 Destinations
+              127 Destinations
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-800 mb-4">
               Find Visa Information by Country
@@ -290,7 +292,12 @@ export default function HomePage() {
               Search and filter by destination country and visa type to find exactly what you need.
             </p>
           </div>
-          <SearchFilter />
+          <SearchFilter
+            countries={COUNTRIES_EXTENDED.map((c) => ({
+              slug: c.slug, name: c.name, code: c.code, region: c.region,
+              capital: c.capital, visitDifficulty: c.difficulty.visit,
+            }))}
+          />
         </div>
       </section>
 
@@ -346,7 +353,7 @@ export default function HomePage() {
             </p>
             <Link
               href="#countries"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-accent-500 hover:bg-accent-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-accent-700 hover:bg-accent-800 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
             >
               Explore Countries
               <ChevronRight className="w-4 h-4" />
@@ -363,14 +370,14 @@ export default function HomePage() {
             <BookOpen className="w-12 h-12 text-accent-400" />
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold mb-4 text-white">
-            10,000+ Free Visa Guides — Updated for 2026
+            Free Visa Guides Built on Official Sources
           </h2>
           <p className="text-blue-200 text-base mb-8 max-w-xl mx-auto">
             From step-by-step application walkthroughs to country-specific fee breakdowns — we have every scenario covered.
           </p>
           <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-accent-500 hover:bg-accent-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
+            href="/guides"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-accent-700 hover:bg-accent-800 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
           >
             Browse All Guides
             <ChevronRight className="w-4 h-4" />
@@ -395,8 +402,8 @@ export default function HomePage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
               { icon: "🛡️", title: "Official Sources", desc: "Every guide researched from government portals and embassy websites" },
-              { icon: "📋", title: "Editorially Reviewed", desc: "Reviewed by our editorial team for accuracy before every publication" },
-              { icon: "🔄", title: "Updated Quarterly", desc: "All guides reviewed every quarter with urgent updates within 48 hours" },
+              { icon: "🔗", title: "Sources Linked", desc: "Each guide links to the official immigration portal so you can confirm current rules" },
+              { icon: "✍️", title: "Corrections Welcome", desc: "Spotted something out of date? Tell us and we fix verified errors" },
               { icon: "💰", title: "100% Free", desc: "No paywalls, no agency affiliations, no hidden costs — always free" },
             ].map((item) => (
               <div key={item.title} className="bg-white rounded-2xl border border-gray-100 p-5 text-center shadow-sm">
@@ -476,7 +483,7 @@ export default function HomePage() {
           <article className="prose-article space-y-8">
             <div className="bg-primary-50 border-l-4 border-primary-600 rounded-r-xl p-5">
               <p className="text-gray-700 leading-relaxed">
-                Applying for a visa is often the most stressful part of any international journey. The global immigration landscape changes constantly — governments update policies, introduce digital systems, and adjust fee structures every year. <strong>VisaProcessInfo</strong> provides accurate, easy-to-understand visa information for 131 destination countries, all in one place and completely free.
+                Applying for a visa is often the most stressful part of any international journey. The global immigration landscape changes constantly — governments update policies, introduce digital systems, and adjust fee structures every year. <strong>VisaProcessInfo</strong> provides accurate, easy-to-understand visa information for 127 destination countries, all in one place and completely free.
               </p>
             </div>
 
@@ -505,7 +512,7 @@ export default function HomePage() {
                 <div key={item.title} className="flex gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100">
                   <CheckCircle2 className="w-4 h-4 text-accent-500 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-gray-900 text-sm">{item.title}</h4>
+                    <h3 className="font-semibold text-gray-900 text-sm">{item.title}</h3>
                     <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
@@ -802,47 +809,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── POPULAR COUNTRIES STRIP ────────────────────────────────────────── */}
-      <section className="py-14 bg-gray-50 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-primary-800 text-center mb-2">
-            Featured Destinations
-          </h2>
-          <p className="text-center text-gray-500 text-sm mb-8">131 countries covered — click any to explore visa guides</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
-            {exploreCountries.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/${c.slug}-visa-info`}
-                className="group flex flex-col items-center gap-2.5 p-3 sm:p-4 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-primary-300 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
-              >
-                <div className="w-12 h-8 rounded-md overflow-hidden shadow-sm border border-gray-100">
-                  <Image
-                    src={`https://flagcdn.com/w80/${c.code}.png`}
-                    alt={`${c.name} flag`}
-                    width={80}
-                    height={56}
-                    className="w-full h-full object-cover"
-                    unoptimized
-                  />
-                </div>
-                <span className="text-xs font-semibold text-gray-700 group-hover:text-primary-800 transition-colors text-center leading-tight">
-                  {c.name}
-                </span>
-              </Link>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link
-              href="#countries"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary-800 hover:bg-primary-700 text-white font-semibold rounded-xl transition-colors shadow-sm text-sm"
-            >
-              View All 131 Countries
-              <ChevronRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

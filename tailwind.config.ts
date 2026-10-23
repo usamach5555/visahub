@@ -29,12 +29,13 @@ const config: Config = {
           500: "#22C55E",
           600: "#16A34A",
           700: "#15803D",
+          800: "#166534",
         },
         background: "#F9FAFB",
         foreground: "#111827",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
       typography: {
         DEFAULT: {

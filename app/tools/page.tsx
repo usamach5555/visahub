@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Free Visa Tools — Calculator, Eligibility Checker, Document Checklist & More",
   description: "Free visa application tools: cost calculator, eligibility checker, processing time estimator, document checklist generator, country comparison tool, and rejection risk analyzer. Everything you need to prepare your visa application.",
-  alternates: { canonical: "https://www.visaprocessinfo.com/tools" },
+  alternates: { canonical: "https://visaprocessinfo.com/tools" },
 };
 
 const tools = [
@@ -24,7 +24,7 @@ const tools = [
   },
   {
     title: "Processing Time Estimator",
-    description: "Estimate your total visa processing timeline from document preparation through to decision. See phase-by-phase breakdowns for 131+ countries.",
+    description: "Estimate your total visa processing timeline from document preparation through to decision. See phase-by-phase breakdowns for 127 countries.",
     href: "/tools/processing-time",
     color: "from-primary-800 to-primary-600",
     icon: "⏱",
@@ -99,11 +99,11 @@ export default function ToolsPage() {
         <div className="mt-12 text-center bg-gray-50 rounded-2xl p-8 border border-gray-100">
           <h2 className="text-xl font-bold text-primary-800 mb-3">Why Use Our Tools?</h2>
           <p className="text-gray-600 max-w-2xl mx-auto mb-6">
-            Our visa tools are built with data from official immigration sources covering 131+ countries.
+            Our visa tools are built with data from official immigration sources covering 127 countries.
             They are free, require no sign-up, and provide instant results to help you prepare the strongest possible application.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm">
-            {["100% Free", "No Sign-up Required", "131+ Countries", "Updated for 2026", "Instant Results"].map((badge) => (
+            {["100% Free", "No Sign-up Required", "127 Countries", "Updated for 2026", "Instant Results"].map((badge) => (
               <span key={badge} className="bg-white border border-gray-200 rounded-full px-4 py-2 font-medium text-gray-700">
                 {badge}
               </span>

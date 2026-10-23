@@ -27,12 +27,10 @@ import {
   BarChart3,
   ShieldAlert,
 } from "lucide-react";
-import { COUNTRIES_EXTENDED } from "@/data/countries-extended";
-import { VISA_TYPES } from "@/data/visa-types";
+import { NAV_COUNTRIES, NAV_VISA_TYPES as VISA_TYPES } from "@/lib/nav-data";
 
-// Top 12 countries shown in desktop header dropdown
-const HEADER_SLUGS = ["usa", "uk", "canada", "australia", "germany", "france", "uae", "japan", "netherlands", "singapore", "new-zealand", "ireland"];
-const headerCountries = COUNTRIES_EXTENDED.filter((c) => HEADER_SLUGS.includes(c.slug));
+// Top 12 countries shown in the header dropdown
+const headerCountries = NAV_COUNTRIES;
 
 const VISA_LUCIDE: Record<string, React.ElementType> = {
   study: GraduationCap,
@@ -173,7 +171,7 @@ export default function Header() {
             {/* Countries mega-menu dropdown */}
             <Dropdown label="Countries" scrolled={scrolled}>
               <div className="p-3 w-[520px]">
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-2 pt-0.5 pb-3">Top Destinations</p>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2 pt-0.5 pb-3">Top Destinations</p>
                 <div className="grid grid-cols-3 gap-1">
                   {headerCountries.map((c) => (
                     <Link
@@ -187,7 +185,6 @@ export default function Header() {
                         width={22}
                         height={16}
                         className="rounded-sm object-cover shadow-sm flex-shrink-0"
-                        unoptimized
                       />
                       <span className="font-medium truncate">{c.name}</span>
                     </Link>
@@ -199,7 +196,7 @@ export default function Header() {
                     className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm text-accent-700 hover:bg-accent-50 font-semibold transition-colors bg-gray-50"
                   >
                     <Globe className="w-4 h-4" />
-                    View all 131 countries →
+                    View all 127 countries →
                   </Link>
                 </div>
               </div>
@@ -208,7 +205,7 @@ export default function Header() {
             {/* Visa Types dropdown */}
             <Dropdown label="Visa Types" scrolled={scrolled}>
               <div className="p-2">
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-3 pt-1 pb-2">Categories</p>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider px-3 pt-1 pb-2">Categories</p>
                 {VISA_TYPES.map((v) => {
                   const IconComp = VISA_LUCIDE[v.slug] ?? Globe;
                   return (
@@ -220,7 +217,7 @@ export default function Header() {
                       <IconComp className="w-5 h-5 text-primary-600 shrink-0" />
                       <div>
                         <div className="font-semibold">{v.name}</div>
-                        <div className="text-xs text-gray-400">{v.shortDescription.slice(0, 40)}&hellip;</div>
+                        <div className="text-xs text-gray-500">{v.shortDescription.slice(0, 40)}&hellip;</div>
                       </div>
                     </Link>
                   );
@@ -231,7 +228,7 @@ export default function Header() {
             {/* Processes dropdown */}
             <Dropdown label="Apply Process" scrolled={scrolled}>
               <div className="p-2 w-64">
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-3 pt-1 pb-2">Step-by-Step Guides</p>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider px-3 pt-1 pb-2">Step-by-Step Guides</p>
                 {PROCESSES.map((p) => (
                   <Link
                     key={p.href}
@@ -248,7 +245,7 @@ export default function Header() {
             {/* Tools dropdown */}
             <Dropdown label="Free Tools" scrolled={scrolled}>
               <div className="p-2 w-72">
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-3 pt-1 pb-2">Visa Tools</p>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider px-3 pt-1 pb-2">Visa Tools</p>
                 {[
                   { href: "/tools/eligibility-checker", Icon: CheckSquare, label: "Eligibility Checker", desc: "Check your visa approval chances" },
                   { href: "/tools/cost-calculator", Icon: Calculator, label: "Cost Calculator", desc: "Estimate total visa fees" },
@@ -265,7 +262,7 @@ export default function Header() {
                     <t.Icon className="w-5 h-5 text-primary-600 shrink-0" />
                     <div>
                       <div className="font-semibold">{t.label}</div>
-                      <div className="text-xs text-gray-400">{t.desc}</div>
+                      <div className="text-xs text-gray-500">{t.desc}</div>
                     </div>
                   </Link>
                 ))}
@@ -280,14 +277,14 @@ export default function Header() {
               </div>
             </Dropdown>
 
-            {/* Blog */}
+            {/* Guides */}
             <Link
-              href="/blog"
+              href="/guides"
               className={`px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                 scrolled ? "text-gray-700 hover:text-primary-800 hover:bg-primary-50" : "text-white/90 hover:text-white hover:bg-white/10"
               }`}
             >
-              Blog
+              Guides
             </Link>
 
             {/* About */}
@@ -304,7 +301,7 @@ export default function Header() {
           {/* ── Desktop CTA ── */}
           <div className="hidden lg:flex items-center gap-3">
             <Link
-              href="/blog"
+              href="/guides"
               className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all duration-200 shadow-sm hover:shadow-md ${
                 scrolled ? "bg-primary-800 text-white hover:bg-primary-700" : "bg-white text-primary-800 hover:bg-white/90"
               }`}
@@ -336,7 +333,7 @@ export default function Header() {
                 className="w-full flex items-center justify-between py-3 px-3 text-sm font-semibold text-gray-800 hover:bg-primary-50 rounded-xl transition-colors"
               >
                 <span className="flex items-center gap-2"><Globe className="w-4 h-4 text-primary-600" /> Countries</span>
-                <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${mobileSection === "countries" ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${mobileSection === "countries" ? "rotate-180" : ""}`} />
               </button>
               {mobileSection === "countries" && (
                 <div className="grid grid-cols-2 gap-1 px-3 pb-2">
@@ -353,7 +350,6 @@ export default function Header() {
                         width={20}
                         height={15}
                         className="rounded-sm object-cover shadow-sm flex-shrink-0"
-                        unoptimized
                       />
                       <span className="truncate text-[13px]">{c.name}</span>
                     </Link>
@@ -364,7 +360,7 @@ export default function Header() {
                     className="col-span-2 flex items-center gap-1.5 py-2 px-2 text-sm text-accent-700 font-semibold hover:bg-accent-50 rounded-lg transition-colors"
                   >
                     <Globe className="w-3.5 h-3.5" />
-                    View all 131 countries
+                    View all 127 countries
                   </Link>
                 </div>
               )}
@@ -377,7 +373,7 @@ export default function Header() {
                 className="w-full flex items-center justify-between py-3 px-3 text-sm font-semibold text-gray-800 hover:bg-primary-50 rounded-xl transition-colors"
               >
                 <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 text-primary-600" /> Visa Types</span>
-                <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${mobileSection === "visa" ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${mobileSection === "visa" ? "rotate-180" : ""}`} />
               </button>
               {mobileSection === "visa" && (
                 <div className="space-y-1 px-3 pb-2">
@@ -402,7 +398,7 @@ export default function Header() {
                 className="w-full flex items-center justify-between py-3 px-3 text-sm font-semibold text-gray-800 hover:bg-primary-50 rounded-xl transition-colors"
               >
                 <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-primary-600" /> Apply Process</span>
-                <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${mobileSection === "process" ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${mobileSection === "process" ? "rotate-180" : ""}`} />
               </button>
               {mobileSection === "process" && (
                 <div className="space-y-1 px-3 pb-2">
@@ -424,7 +420,7 @@ export default function Header() {
                 className="w-full flex items-center justify-between py-3 px-3 text-sm font-semibold text-gray-800 hover:bg-primary-50 rounded-xl transition-colors"
               >
                 <span className="flex items-center gap-2"><Calculator className="w-4 h-4 text-primary-600" /> Free Tools</span>
-                <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${mobileSection === "tools" ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${mobileSection === "tools" ? "rotate-180" : ""}`} />
               </button>
               {mobileSection === "tools" && (
                 <div className="space-y-1 px-3 pb-2">
@@ -450,15 +446,15 @@ export default function Header() {
               )}
             </div>
 
-            <Link href="/blog" onClick={() => setMenuOpen(false)}
+            <Link href="/guides" onClick={() => setMenuOpen(false)}
               className="flex items-center gap-2 py-3 px-3 text-sm font-semibold text-gray-800 hover:bg-primary-50 rounded-xl transition-colors">
               <Newspaper className="w-4 h-4 text-primary-600" />
-              Blog
+              Guides
             </Link>
           </div>
 
           <div className="px-4 pb-4 pt-2 border-t border-gray-100">
-            <Link href="/blog" onClick={() => setMenuOpen(false)}
+            <Link href="/guides" onClick={() => setMenuOpen(false)}
               className="block w-full text-center bg-primary-800 text-white font-semibold py-3 rounded-xl hover:bg-primary-700 transition-colors">
               Browse Free Guides
             </Link>
