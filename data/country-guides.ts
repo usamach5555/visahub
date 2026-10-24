@@ -431,4 +431,252 @@ export const COUNTRY_GUIDES: EditorialArticle[] = [
       },
     ],
   },
+
+  {
+    slug: "slovakia-student-visa-residence-permit",
+    title: "Slovakia Student Visa: National Visa, Residence Permit, Documents and Work Rules",
+    metaDescription:
+      "How non-EU students get to study in Slovakia: the national D visa versus the temporary residence permit for study, documents, how to show financial means, fees, the 30-day decision time and work limits.",
+    category: "country-guide",
+    publishedAt: "2026-10-24",
+    lastVerified: "2026-10-24",
+    readingTimeMinutes: 8,
+    tags: ["slovakia student visa", "study in slovakia", "temporary residence for study", "national visa", "non-EU students"],
+    sources: [
+      { label: "Foreign students in Slovakia — Ministry of Foreign and European Affairs of the Slovak Republic", url: "https://www.mzv.sk/en/web/en/visa-and-services/foreign-students-in-slovakia" },
+      { label: "Student in Slovakia — EU Immigration Portal, European Commission", url: "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/student-slovakia_en" },
+    ],
+    sections: [
+      {
+        heading: "Two things people mix up",
+        body: `Studying in Slovakia as a non-EU citizen usually involves two documents, and the Slovak Ministry of Foreign Affairs describes them separately:\n\n- A **national visa**, which lets you travel to Slovakia.\n- A **temporary residence permit for study**, which lets you live and study there for the length of your course.\n\nYou can go straight for the residence permit at a Slovak embassy, or enter on a national visa and apply for the permit at the Foreign Police in Slovakia. Which route you use depends on your embassy and your university, so ask both.`,
+      },
+      {
+        heading: "Do you need a permit for the first 90 days?",
+        body: `No study residence permit is needed for your first 90 days if you meet the Schengen Borders Code conditions for entry and report your arrival to the Foreign Police within three working days. For a full degree you will need the permit, because it covers your whole course.`,
+      },
+      {
+        heading: "Option 1: The national visa",
+        body: `The ministry lists these basic documents:\n\n- Completed national visa application form.\n- Passport valid for at least **90 days after you leave Slovakia**.\n- A 3 × 3.5 cm colour photo.\n- A document confirming the purpose of your stay, for example the admission letter.\n- Health insurance for at least the validity of the visa.\n\nSubmit it at the Slovak embassy responsible for your country of residence, or through an external service provider the ministry has designated. The embassy decides within **30 days**.\n\nFees listed by the ministry:\n\n| Visa purpose | Fee |\n|---|---|\n| Visa tied to a residence permit granted in Slovakia | €14 |\n| Visa to apply for a residence permit at the Foreign Police in Slovakia | €90 |\n| Other specified interests, such as treaty obligations | €50 |\n\nConfirm which fee applies to you with your embassy.`,
+      },
+      {
+        heading: "Option 2: The temporary residence permit for study",
+        body: `You can apply at a Slovak embassy for your citizenship or residence, where there is a personal interview, or at the Foreign Police if you are already in Slovakia on a valid legal basis. You must apply in person.\n\nDocuments:\n\n- A recent 3 × 3.5 cm colour photo and a valid travel document.\n- **Proof of admission** from an accredited Slovak institution (this one may be older than 90 days).\n- A **criminal record extract** from your home country and from any country where you stayed more than 90 days within six consecutive months in the past three years.\n- **Proof of financial security**.\n- Proof of accommodation, which is not required for university students.\n\nForeign documents need an apostille or superlegalisation and an official **Slovak translation**. Submit certified copies, since embassies and the Foreign Police do not return documents. Documents generally must not be more than 90 days old when you apply.`,
+      },
+      {
+        heading: "How to prove you can pay",
+        body: `The ministry accepts any one of these:\n\n- A **bank statement from the last three months** in your name.\n- A scholarship award confirmation.\n- A confirmation from the statutory body of a legal entity that it will fund your stay.\n- An **affidavit from a person who will support you**, with that person's bank statement from the last three months.\n\nNeither official page gives a minimum amount, so ask your embassy what balance it expects.`,
+      },
+      {
+        heading: "Decision time, length and what you must do afterwards",
+        body: `The Foreign Police decide within **30 days**. The permit is granted for the expected length of your studies, up to six years, and can be renewed for up to five years while you keep studying.\n\nAfter approval:\n\n- Arrive in Slovakia within **180 days** of the permit being granted.\n- Report your arrival to the Foreign Police within **three working days**.\n- Get **health insurance** within three working days of collecting your permit.\n- Submit a **medical certificate** (dated no more than 30 days earlier) within 30 days of collecting the permit.\n- Spend more than half of each calendar year in Slovakia, unless you are on mobility in another EU state.`,
+      },
+      {
+        heading: "Work, renewal and after graduation",
+        body: `University students may work up to **20 hours per week** without a work permit (the ministry describes this as up to 80 hours per month). Secondary and language students may work up to 10 hours per week. More than that means changing your residence purpose to employment.\n\nTo renew, apply in person before your current permit expires with a valid passport, a photo, proof of continued study, proof of financial means and a €10 fee. University graduates may renew for nine months to look for work or start a business, and have a 30-day protective period after studies end.\n\nA study permit does not lead directly to long-term residence. Study time counts as half, so you would first need another residence purpose.`,
+      },
+      {
+        heading: "Checklist before you apply",
+        body: `1. Admission letter from the university.\n2. Passport valid long enough, plus photos.\n3. Criminal record extract, apostilled and translated.\n4. Bank statements from the last three months, or your sponsor's affidavit and statements.\n5. Health insurance.\n6. Booking confirmed with your embassy or service provider. Some embassies take appointments only through the university, so ask early.`,
+      },
+    ],
+  },
+
+  {
+    slug: "new-zealand-student-visa-extension-fee-funds",
+    title: "New Zealand Student Visa: Extending, Fees, Funds and Processing Time",
+    metaDescription:
+      "Immigration New Zealand's fee-paying student visa: fee from NZD $850, NZD $20,000 a year in living funds, 80% of applications decided in 7 weeks, and how to extend by applying for a new student visa.",
+    category: "country-guide",
+    publishedAt: "2026-10-24",
+    lastVerified: "2026-10-24",
+    readingTimeMinutes: 6,
+    tags: ["new zealand student visa", "student visa extension", "fee paying student visa", "nz visa processing time", "immigration new zealand"],
+    sources: [
+      { label: "Fee Paying Student Visa — Immigration New Zealand", url: "https://www.immigration.govt.nz/visas/fee-paying-student-visa/" },
+      { label: "Student visa wait times — Immigration New Zealand", url: "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/student-visa-wait-times/" },
+    ],
+    sections: [
+      {
+        heading: "Cost and processing time",
+        body: `Immigration New Zealand lists the **fee-paying student visa** fee as starting from **NZD $850**. It states that **80% of applications are decided within 7 weeks**. Time varies through the year, so apply early and check the wait-times page on the day you apply.\n\nThe visa is normally issued for the period you have paid for, or until your passport expires if that is sooner, for up to **four years**. It can be shorter than your course.`,
+      },
+      {
+        heading: "How to extend a student visa",
+        body: `Immigration New Zealand does not describe a separate "extension" form. If you already hold a student visa you **apply for another student visa** and provide evidence of your **academic progress and attendance**. Start before your current visa expires.\n\nIf your passport is about to expire, renew it and then either apply for a new student visa or have the remaining balance of your visa transferred to the new passport.\n\nIf you apply from inside New Zealand you will normally receive **multiple-entry travel conditions**. Without them, leaving New Zealand ends your visa.`,
+      },
+      {
+        heading: "Money you must show",
+        body: `If you are paying for yourself, Immigration New Zealand requires living-cost funds of:\n\n| Study type | Funds |\n|---|---|\n| Tertiary, English language or other non-compulsory study (one year or more) | NZD $20,000 per year |\n| Same, for under one year | NZD $1,667 per month |\n| Compulsory education (Years 1 to 13) | NZD $17,000 per year, or $1,417 per month |\n\nYou must also have paid tuition for **one course or one year of study, whichever is shorter**, unless you are exempt, and have money for a **ticket out of New Zealand**, separate from living costs.`,
+      },
+      {
+        heading: "Other requirements",
+        body: `- An offer of place from an approved education provider that has signed the Pastoral Care Code of Practice 2021.\n- Good health and good character.\n- A genuine reason to study in New Zealand.\n- Acceptable medical and travel insurance for your whole stay.\n- Evidence that you can leave New Zealand at the end of your stay.\n- Children under 10 need a parent or legal guardian with them unless they live in an approved hostel.\n\nDependants cannot be included in your application.`,
+      },
+      {
+        heading: "Working while you study",
+        body: `You can work part-time up to **25 hours a week** during study. Full-time work during scheduled holidays depends on your visa conditions and requires a course valued at 120 credits. Ages 16 and 17 need written permission from a parent or guardian and the education provider. Practical work experience required by your course is in addition to these hours.`,
+      },
+      {
+        heading: "Common reasons for delay",
+        body: `- Applying close to the course start date in the busy intake.\n- Missing evidence of attendance or progress when extending.\n- Funds that are not clearly in your own name or a named sponsor's name.\n- A passport that will expire before your course ends.\n\nChecking your visa conditions and expiry in your online account before term ends gives you time to renew without a gap.`,
+      },
+    ],
+  },
+
+  {
+    slug: "netherlands-highly-skilled-migrant-salary-2026",
+    title: "Netherlands Work Permit 2026: Highly Skilled Migrant and EU Blue Card Salary Requirements",
+    metaDescription:
+      "The 2026 IND salary thresholds for the Dutch highly skilled migrant permit and EU Blue Card: €5,942 a month for age 30 or over, €4,357 under 30, €3,122 for recent graduates. A table and what counts as salary.",
+    category: "country-guide",
+    publishedAt: "2026-10-24",
+    lastVerified: "2026-10-24",
+    readingTimeMinutes: 5,
+    tags: ["netherlands work permit", "highly skilled migrant", "EU blue card", "IND", "dutch work visa"],
+    sources: [
+      { label: "Required amounts (income requirements) — IND, Netherlands Immigration and Naturalisation Service", url: "https://ind.nl/en/required-amounts-income-requirements" },
+      { label: "Highly skilled migrants — Government of the Netherlands", url: "https://www.government.nl/themes/migration-and-travel/immigration-to-the-netherlands/options-for-entrepreneurs-and-employees-from-abroad/highly-skilled-migrants" },
+    ],
+    sections: [
+      {
+        heading: "How the highly skilled migrant route works",
+        body: `The Netherlands does not let an individual apply for a highly skilled migrant residence permit on their own. A **recognised Dutch employer sponsors you** and applies to the IND on your behalf. The main test is a **minimum gross monthly salary** that depends on your age and situation.\n\nThe IND publishes new amounts every year. The figures below are the **2026 amounts** on the IND's required-amounts page.`,
+      },
+      {
+        heading: "2026 gross monthly salary requirements",
+        body: `| Category | First permit | Extension, same employer | Change of employer |\n|---|---|---|---|\n| Highly skilled migrant, reduced salary criterion | €3,122 | €3,122 | €3,122 |\n| Highly skilled migrant, under 30 | €4,357 | €4,357 | €4,357 if still under 30, €5,942 if 30 or older |\n| Highly skilled migrant, 30 or older | €5,942 | €5,942 | €5,942 |\n| EU Blue Card | €5,942 | €5,942 | €5,942 |\n| EU Blue Card, reduced salary criterion | €4,754 | €4,754 | €4,754 |`,
+      },
+      {
+        heading: "Who gets the reduced salary criterion",
+        body: `The reduced criterion generally applies to **recent graduates, doctoral degree holders and researchers** who apply within **three years** of graduating, being promoted or finishing a research permit. Check the IND's page to see whether you qualify, since the conditions are specific.`,
+      },
+      {
+        heading: "What counts as salary",
+        body: `The IND counts certain fixed allowances toward the salary criterion, for example a thirteenth month paid in monthly instalments, but **holiday allowance is not counted**. Ask your employer to state the gross monthly figure in the contract in a way the IND will accept, since a salary that is only just below the threshold will be refused.\n\nThe IND page does not give amounts for intra-corporate transferees, so look them up separately if that is your route.`,
+      },
+      {
+        heading: "What to do as a candidate",
+        body: `1. Find employers that are **recognised sponsors**. The IND keeps a public register.\n2. Check the offer against the right row in the table for your age and category.\n3. Ask the employer to start the IND application.\n4. Gather your passport, degree documents and any proof the employer asks for.\n\nThe Dutch government also announced in July 2025 that it intends to tighten the highly skilled migrant scheme. Check the IND for changes before you rely on a figure.`,
+      },
+    ],
+  },
+
+  {
+    slug: "italy-student-visa-universitaly-processing-time-funds",
+    title: "Italian Student Visa 2026/27: Universitaly, Processing Time and Funds",
+    metaDescription:
+      "How the Italian national study visa (type D) works for 2026/27: pre-enrolment on Universitaly, applying between 6 months and 15 days before travel, up to 90 days processing, the 30 November 2026 deadline and funds.",
+    category: "country-guide",
+    publishedAt: "2026-10-24",
+    lastVerified: "2026-10-24",
+    readingTimeMinutes: 7,
+    tags: ["italian student visa", "universitaly", "italy study visa", "visa processing time", "type D visa"],
+    sources: [
+      { label: "Student visa guidelines and university enrolment checklist 2026/27 — Embassy of Italy in Abu Dhabi", url: "https://ambabudhabi.esteri.it/wp-content/uploads/2026/07/GUIDELINES-and-UNIVERSITY-ENROLMENT-CHECKLIST-2026-27_rev2.pdf" },
+      { label: "Study visas for 2025/26 — Embassy of Italy in Tel Aviv", url: "https://ambtelaviv.esteri.it/en/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/visti/visti-studio-procedura-per-limmatricolazione-e-visti-anno-accademico-2025-2026/" },
+      { label: "Universitaly portal", url: "https://www.universitaly.it/" },
+    ],
+    sections: [
+      {
+        heading: "Italian missions publish their own rules",
+        body: `Italy's study visa (type D) is applied for at the Italian embassy or consulate in your country, and each mission publishes its own guidance. The figures below come from the 2026/27 guidelines of the **Embassy of Italy in Abu Dhabi** and the 2025/26 page of the **Embassy of Italy in Tel Aviv**. Some details differ between missions and between years, so always read the page for the consulate that will handle your application.`,
+      },
+      {
+        heading: "Step 1: Pre-enrol on Universitaly",
+        body: `Pre-enrolment is done online on **universitaly.it**. You can submit only **one pre-enrolment, for one university and one course**. After the university approves it, you receive an email telling you to contact the embassy. Only after that do you apply for the visa.\n\nTo pre-enrol you typically upload a passport copy, your qualification with the legalisation and Italian translation the university asks for, and a language certificate if the course requires one. Some courses, such as architecture, also need a separate admission exam.`,
+      },
+      {
+        heading: "Step 2: Apply for the visa",
+        body: `For 2026/27, the Abu Dhabi guidelines say:\n\n- Apply **no more than six months and no less than 15 days** before your planned travel date.\n- Students enrolling in a university course must submit the application by **30 November 2026**, even if they will attend classes online.\n- Processing can take **up to 90 calendar days**.\n\nThe 2025/26 Tel Aviv page asked students to apply at least 15 days before departure and to submit by 30 November 2025, and does not state a processing time. If you are asking how long the Italian student visa takes, the safest planning figure is the up-to-90-days published by the mission above, so apply as early as the window allows.`,
+      },
+      {
+        heading: "Funds you must show",
+        body: `The published minimum differs by mission and year:\n\n| Mission and year | Minimum funds shown |\n|---|---|\n| Abu Dhabi, 2026/27 | €10,179.85 per year |\n| Tel Aviv, 2025/26 | €534.41 per month, €6,947.33 per year |\n\nBoth also ask for separate proof of funds for repatriation or a return ticket. The Abu Dhabi guidelines add that only financial resources located in the UAE are accepted, which is a local rule, not a general one. Ask your consulate for the amount and the type of accounts it accepts before you move money.`,
+      },
+      {
+        heading: "Documents most missions ask for",
+        body: `- Signed visa application form and a passport photo.\n- Passport valid for at least 90 days beyond the visa period, with blank pages.\n- The **Universitaly admission letter** from your approved pre-enrolment.\n- Proof of funds, plus proof of repatriation funds.\n- **Proof of accommodation** in Italy (the Abu Dhabi list asks for a stay of at least 30 days).\n- **Health insurance** with full hospitalisation cover.\n- Proof that your qualification is genuine, such as a Declaration of Value, legalisation or a CIMEA verification, translated into Italian by a recognised translator.\n- Language proof if your course requires it. For 2026/27 the Abu Dhabi list asks B1 for Foundation courses taught in Italian, B2 for other Italian-taught courses and a B2 certificate for English-taught courses.\n- Any required admission test result, such as IMAT for medicine.`,
+      },
+      {
+        heading: "After you arrive",
+        body: `You must apply for a **residence permit** (permesso di soggiorno) at the local police headquarters within **eight days** of arriving in Italy, according to the Tel Aviv guidance. Keep your documents together for that appointment.\n\nVisa fees are not stated in the pages we checked for 2026/27, and the Tel Aviv fee was only valid until 30 September 2025, so confirm the current fee with your consulate.`,
+      },
+    ],
+  },
+
+  {
+    slug: "belgium-student-visa-d-financial-requirements",
+    title: "Belgium Student Visa (Visa D): Financial Requirements, Documents and Timeline",
+    metaDescription:
+      "The Belgian Visa D for higher-education students: at least €835 a month for scholarship or blocked-account proof, documents, applying up to 6 months ahead, and an example processing time of up to 2 weeks.",
+    category: "country-guide",
+    publishedAt: "2026-10-24",
+    lastVerified: "2026-10-24",
+    readingTimeMinutes: 5,
+    tags: ["belgium student visa", "visa D", "blocked account belgium", "annex 32", "study in belgium"],
+    sources: [
+      { label: "D visa for students of higher education — Embassy of Belgium in Japan (Belgian federal diplomacy site)", url: "https://japan.diplomatie.belgium.be/en/travel-belgium/visa-belgium/types-visa/d-visa-students-higher-education-minimum-stay-91-days" },
+      { label: "Student's pledge (annex 32) — Belgian diplomacy site", url: "https://unitedarabemirates.diplomatie.belgium.be/en/travel-belgium/visa-belgium/students-pledge-annex-32" },
+    ],
+    sections: [
+      {
+        heading: "Which visa",
+        body: `Students going to Belgium for a higher-education course of more than 90 days need a **D visa (long stay)**. It is applied for at the Belgian embassy or consulate responsible for your place of residence, and each mission publishes its own checklist. The details below come from the Belgian embassy in Japan, which is part of the federal diplomacy website. Treat it as a worked example and check your own mission's list.`,
+      },
+      {
+        heading: "How much money you must show",
+        body: `The embassy page lists three ways to prove means of support:\n\n- A **grant or scholarship** covering at least **€835 per month**.\n- A **blocked account** held at the university, with an attestation from the institution. The page notes monthly repayments of at least €835 after you arrive, or proof of legal, ancillary paid income.\n- A **pledge of financial support** (the student's pledge, annex 32), in which someone commits to cover your costs.\n\nWhich of these your embassy accepts, and the exact amount, can differ, so ask the mission before you transfer money to a blocked account.`,
+      },
+      {
+        heading: "Documents on the embassy list",
+        body: `- Visa application form, printed from the online system and signed to match your passport.\n- Passport issued in the last 10 years, valid at least three months beyond the visa, with three blank consecutive pages.\n- Three passport photos meeting ICAO standards.\n- **Criminal record certificate** for applicants aged 18 or over, apostille-legalised.\n- **Medical certificate** with test results.\n- **Admission letter** from the university.\n- Enrolment certificate if you are studying now, or a graduation certificate if not.\n- **Proof of sufficient means** (above).\n- A CV.\n- Proof you paid the administration fee, for applicants aged 18 or over.\n- Travel health insurance is optional on that list, with a minimum cover of €30,000.\n\nCopies must be A4 and single-sided. Faxed or emailed documents are not accepted unless the embassy says otherwise.`,
+      },
+      {
+        heading: "When to apply and how long it takes",
+        body: `You can submit a complete application **up to six months before** the start of your studies. The Tokyo embassy page says a complete file takes **up to two weeks** to process. Other missions may differ, so allow extra time for document legalisation, which is usually the slowest part.\n\nAn online application form and an electronic appointment are required. Since 1 March 2025 that embassy accepts only electronic payments, not cash.`,
+      },
+      {
+        heading: "Fees",
+        body: `The embassy page does not print the visa fee amount. It notes the visa is free for some nationalities by agreement and links to a pricing page. The administration fee for the Belgian Immigration Office applies to applicants aged 18 or over. Read the pricing page for your mission before paying.`,
+      },
+    ],
+  },
+
+  {
+    slug: "singapore-visit-visa-who-needs-apply-fees",
+    title: "Singapore Visit Visa: Who Needs One, How to Apply and What the Fee Page Says",
+    metaDescription:
+      "ICA's rules for a Singapore entry visa: which passport holders need one, why you cannot apply at the immigration counter, how an agent or overseas mission applies for you, and what a visa does not guarantee.",
+    category: "country-guide",
+    publishedAt: "2026-10-24",
+    lastVerified: "2026-10-24",
+    readingTimeMinutes: 4,
+    tags: ["singapore visa", "singapore visit visa", "ICA singapore", "singapore tourist visa fee", "entry visa"],
+    sources: [
+      { label: "Visa requirements — Immigration & Checkpoints Authority (ICA), Singapore", url: "https://www.ica.gov.sg/enter-transit-depart/entering-singapore/visa_requirements" },
+    ],
+    sections: [
+      {
+        heading: "Do you need a visa?",
+        body: `Singapore's Immigration & Checkpoints Authority (ICA) says you need an entry visa if your travel document was issued by one of the countries or places on its list. That list includes, among others, Afghanistan, Iraq, Pakistan, Russia, Syria and Yemen. You also need one if you travel on a refugee travel document, an alien's passport, a Palestinian Authority passport, a UAE temporary passport, a Hong Kong Document of Identity, a Macao Travel Permit or a PRC Travel Document.\n\nEvery traveller, of any age, must hold an **individually issued travel document**. Collective documents are not accepted.\n\nCheck ICA's visa-requirements page for your nationality, since the full list is long and changes.`,
+      },
+      {
+        heading: "Transit instead of a full visa",
+        body: `Some nationals, including certain Indian and Ukrainian passport holders and selected PRC nationals, may be eligible for a **Visa-Free Transit Facility** if they are only passing through Singapore. That is for transit, not for a holiday visit.`,
+      },
+      {
+        heading: "How to apply",
+        body: `ICA does **not** accept visa applications at immigration counters. Apply in advance:\n\n- If you have a **Local Contact** in Singapore with a Singpass or Corppass account, that person can apply for you online.\n- Otherwise, use an **authorised visa agent** appointed by a Singapore Overseas Mission, or apply through the **nearest Singapore Overseas Mission**.\n\nFor detailed procedures, check with the Singapore mission for your country.`,
+      },
+      {
+        heading: "About the fee",
+        body: `ICA's page does not state the visa fee, processing time or validity. Fees are set and collected through the application channel, so the amount can depend on whether you apply through a mission or an agent, and agents may add their own service charge. Ask the mission or the agent for a full written price before you pay, and be careful of sites that quote a price with no link to an official body.`,
+      },
+      {
+        heading: "A visa does not guarantee entry",
+        body: `ICA is clear on two points:\n\n- A Singapore entry visa is **not an immigration pass**. Having one does not guarantee entry.\n- How long you may stay is **not tied to the visa's validity**. An ICA officer sets your period of stay when you enter, and it appears on your electronic Visit Pass (e-Pass).\n\nIf you need to stay longer than the period you were given, you must apply for a **Short-Term Visit Pass (STVP) extension** before it ends.`,
+      },
+    ],
+  },
 ];
