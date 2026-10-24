@@ -679,4 +679,213 @@ export const COUNTRY_GUIDES: EditorialArticle[] = [
       },
     ],
   },
+
+  {
+    slug: "germany-opportunity-card-requirements-funds",
+    title: "Germany Opportunity Card (Chancenkarte): Requirements, Funds and Work Rules",
+    metaDescription:
+      "How to qualify for Germany's Opportunity Card job-search visa: the skilled-worker route or 6 points, German A1 or English B2, proof of funds of €1,091 a month (€13,092 a year), and the 20-hour part-time work allowance.",
+    category: "country-guide",
+    publishedAt: "2026-10-24",
+    lastVerified: "2026-10-24",
+    readingTimeMinutes: 6,
+    tags: ["opportunity card germany", "chancenkarte", "germany job seeker visa", "points system", "proof of funds"],
+    sources: [
+      { label: "National visa for job search “Opportunity Card” (May 2026) — German Missions in the USA, germany.info", url: "https://www.germany.info/resource/blob/2663778/ab8cb2c068d1819dd3822b81231fe0b9/opportunity-card-data.pdf" },
+      { label: "At a Glance: Job Search Opportunity Card — Make it in Germany", url: "https://www.make-it-in-germany.com/fileadmin/1_Rebrush_2022/a_Fachkraefte/PDF-Dateien/3_Visum_u_Aufenthalt/Visagrafik_EN/Chancenkarte_zur_Jobsuche_EN.pdf" },
+      { label: "Opportunity card (Chancenkarte) — Service Berlin", url: "https://service.berlin.de/dienstleistung/354301/en/" },
+    ],
+    sections: [
+      {
+        heading: "What the Opportunity Card is",
+        body: `The Opportunity Card (Chancenkarte) is a German **national visa for job search**. It lets qualified people from outside the EU come to Germany to look for work. It is issued for a **maximum of one year**.\n\nThe details below come from the German missions' May 2026 information sheet. Each embassy or consulate publishes its own appointment and payment instructions, so use the page for the mission that will handle your application.`,
+      },
+      {
+        heading: "Who is eligible: two routes",
+        body: `You need to meet **one** of these:\n\n- **Route 1, recognised skilled worker.** You hold a foreign qualification that is fully recognised in Germany, or a German university degree or vocational qualification.\n- **Route 2, points.** You reach **at least 6 points** and you have completed vocational or academic training that is recognised in the country where you obtained it. Vocational training must have required at least **two years**.\n\nOn the points route you also need **language proof**: German at CEFR level **A1** or English at CEFR level **B2**. Native speakers of English are usually exempt from English proof.\n\nThe mission's sheet does not print the points table or the age and experience criteria. It refers applicants to the official **Self-Check on make-it-in-germany.com**, which calculates your points.`,
+      },
+      {
+        heading: "How much money you must show",
+        body: `You must prove you can support yourself:\n\n| Requirement | Amount |\n|---|---|\n| Per month | €1,091 |\n| For at least one year | €13,092 |\n\nAccepted ways to show it include:\n\n- A **blocked account**.\n- **Three months of account statements** showing your name and address.\n- A formal **obligation letter** (declaration of commitment).\n- A **part-time work contract in Germany** of up to 20 hours per week.\n\nThis is a higher monthly figure than the student blocked account, which is separate.`,
+      },
+      {
+        heading: "Working while you search",
+        body: `On the Opportunity Card you may:\n\n- Look for work or for self-employment.\n- Hold one or more **part-time jobs totalling up to 20 hours per week**.\n- Do **job trials of up to two weeks per employer**.\n\nIf you find a qualifying job you then change to the appropriate work residence permit in Germany.`,
+      },
+      {
+        heading: "Documents on the checklist",
+        body: `- Completed and signed visa application and the signed declaration.\n- One recent biometric passport photo.\n- A signed passport valid at least **three months beyond** your intended stay, with at least two blank pages, issued (not extended) in the last 10 years.\n- Proof of your residence status in the country where you apply.\n- Proof of address.\n- **Qualification documents**: certificates, degrees, transcripts if the degree does not list courses, and recognition proof where required.\n- **Proof of funds** as above.\n- **Health insurance** covering entry into the Schengen area and your whole stay.\n\nThe mission asks that documents are not stapled and are submitted in the order of its list.`,
+      },
+      {
+        heading: "What it costs",
+        body: `The information sheet does not state an amount for the visa fee. It says the processing fee is paid at the appointment, in cash and/or by card depending on the mission, and that you should confirm the method and amount with the German mission before your appointment.`,
+      },
+      {
+        heading: "How to apply",
+        body: `1. Check your eligibility and score on the official Self-Check.\n2. Gather qualification and funds documents. Get foreign certificates checked for recognition if the route needs it.\n3. Book an appointment with the German mission responsible for you, or use the online application it offers.\n4. Submit your documents in order and pay the fee as the mission directs.\n\nBecause rules and fees for visas change, read the current instructions of your mission before you go.`,
+      },
+    ],
+  },
+
+  {
+    slug: "canada-express-entry-how-it-works",
+    title: "Canada Express Entry: How It Works, Programs and the CRS Score",
+    metaDescription:
+      "IRCC's Express Entry explained: the three programs (Canadian Experience Class, Federal Skilled Worker, Federal Skilled Trades), the four steps from profile to decision, how the CRS ranks candidates and the 60-day profile limit.",
+    category: "country-guide",
+    publishedAt: "2026-10-24",
+    lastVerified: "2026-10-24",
+    readingTimeMinutes: 5,
+    tags: ["express entry", "canada pr", "CRS score", "skilled worker", "IRCC"],
+    sources: [
+      { label: "Immigrate through Express Entry — IRCC", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry.html" },
+      { label: "Express Entry: Create your profile and enter the pool — IRCC", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/create-profile.html" },
+      { label: "Express Entry: Category-based selection — IRCC", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations/category-based-selection.html" },
+    ],
+    sections: [
+      {
+        heading: "What Express Entry is",
+        body: `Express Entry is the online system IRCC uses to manage applications for permanent residence from skilled workers. It is **not a separate visa**. It is the way three federal programs are managed:\n\n- **Canadian Experience Class**\n- **Federal Skilled Worker Program**\n- **Federal Skilled Trades Program**\n\nIf you qualify for more than one, IRCC considers you in that order. You cannot choose the program.`,
+      },
+      {
+        heading: "The four steps",
+        body: `1. **Create a profile and enter the pool.** You sign in to your IRCC secure account, enter your personal details and submit your profile. IRCC then determines which programs you qualify for.\n2. **Get invited.** Candidates with the highest scores are invited to apply in rounds.\n3. **Complete the application.** If you are invited, you submit a full application with your documents.\n4. **IRCC decides.** IRCC reviews the application and makes a decision.\n\nYou have **60 days to complete and submit your Express Entry profile** once you start. If you miss that, you must start again. Your information is saved, so you can exit and resume.`,
+      },
+      {
+        heading: "What the CRS score is",
+        body: `Your profile is ranked with the **Comprehensive Ranking System (CRS)**. It is based on factors such as your skills and work experience, and a valid job offer can improve your score. The people with the highest scores receive invitations.\n\nIRCC offers a tool to calculate your CRS score before you enter the pool. The cut-off in each invitation round changes, so look at the most recent round results rather than assuming a number.`,
+      },
+      {
+        heading: "Category-based rounds",
+        body: `Besides general rounds, IRCC runs **category-based selection** rounds that invite candidates with specific characteristics, such as certain work experience or language skills. IRCC publishes the categories and round details on its category-based selection page. Check it to see whether your background matches a category.`,
+      },
+      {
+        heading: "Proof of funds and documents",
+        body: `Prepare these documents early:\n\n- Language test results.\n- Education credentials, and an assessment if the education is from outside Canada.\n- Job offers, if you have any.\n- Police certificates.\n- **Proof of funds**.\n\nIRCC updates the required settlement funds every year, based on 50% of the low income cut-off totals, and notes that you may need to update your proof of funds in your profile to stay eligible. Check the current table on the IRCC site before you file, since the amounts depend on family size.`,
+      },
+      {
+        heading: "Processing time and fees",
+        body: `IRCC says processing time **varies by program** and links to its processing-time checker. We do not print a figure because it changes. The application fees for the principal applicant, a spouse and a dependent child are listed on IRCC's fee page, which you should read on the day you apply.\n\nA lawyer or consultant is not needed to submit an Express Entry profile. If you do hire someone, make sure they are authorised to represent you.`,
+      },
+    ],
+  },
+
+  {
+    slug: "uae-golden-visa-requirements-categories",
+    title: "UAE Golden Visa: Categories, Requirements and How Long It Lasts",
+    metaDescription:
+      "UAE Golden Visa explained from the government portal: 5 or 10 year residence for investors (AED 2 million), entrepreneurs, specialised talents, outstanding students and frontline heroes — and the benefits.",
+    category: "country-guide",
+    publishedAt: "2026-10-24",
+    lastVerified: "2026-10-24",
+    readingTimeMinutes: 5,
+    tags: ["uae golden visa", "dubai golden visa", "long term residence", "investor visa", "uae residence"],
+    sources: [
+      { label: "Golden Visa — UAE Government portal (u.ae)", url: "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa" },
+      { label: "Federal Authority for Identity, Citizenship, Customs & Port Security (ICP)", url: "https://icp.gov.ae/en/" },
+    ],
+    sections: [
+      {
+        heading: "What the Golden Visa is",
+        body: `The UAE Golden Visa is a **long-term residence visa for foreign talent**. The UAE government portal says it is valid for **5 or 10 years depending on the category**, and it does not need a sponsor. It is renewable.`,
+      },
+      {
+        heading: "Categories at a glance",
+        body: `| Category | Validity | Main requirement |\n|---|---|---|\n| Investors | 10 years for public investments, 5 years for real estate | Minimum capital of AED 2 million; own property, or put money into an establishment paying at least AED 250,000 in annual taxes |\n| Entrepreneurs | 5 years | Proof of an innovative or technical project, documents showing its value, and a letter from a business incubator or relevant emirate authority |\n| Exceptional talent or rare specialisations | 10 years | Varies by subcategory; may include recommendation letters, practical experience or accredited degrees |\n| Outstanding students | 5 years for high-school achievers, 10 years for top university students | Certificates of excellence and recommendation letters |\n| Humanitarian pioneers and frontline heroes | 10 years | Certificates of appreciation, proof of humanitarian contributions, or at least 5 years of service |`,
+      },
+      {
+        heading: "Who counts as exceptional talent",
+        body: `The portal lists doctors, scientists, inventors, creatives, executives, athletes, PhD holders and specialists in priority scientific and engineering fields as examples. The documents you need depend on the subcategory, for example a recommendation letter from the relevant authority or an accredited degree. Creative applicants can request a recommendation letter from the Ministry of Culture.`,
+      },
+      {
+        heading: "What the visa gives you",
+        body: `- A **renewable residence visa** valid for 5 or 10 years.\n- **No sponsor** needed.\n- You can stay **outside the UAE for longer than the usual six-month limit** without losing the visa.\n- You can **sponsor family members**, including your spouse and children.`,
+      },
+      {
+        heading: "How to apply",
+        body: `The portal does not give step-by-step instructions on that page. It points to these official digital services:\n\n- The **ICP eServices** dashboard for Golden Visa applications.\n- The **ICP eligibility checker**.\n- **GDRFA** Golden Visa services (the emirate-level residency authority).\n- The Ministry of Culture, for a recommendation letter for creatives.\n\nUse only these official channels. Third-party sites that promise a guaranteed Golden Visa are not the government, so check the web address before you enter any details or pay a fee.`,
+      },
+      {
+        heading: "Check before you invest",
+        body: `The investor thresholds and eligible property types are set by UAE authorities and can change. Read the current requirement on the ICP or GDRFA service page, and verify the exact value and ownership conditions with the authority before you buy property for the purpose of a visa.`,
+      },
+    ],
+  },
+
+  {
+    slug: "spain-digital-nomad-visa-requirements",
+    title: "Spain Digital Nomad Visa: Income Requirement, Documents and Processing",
+    metaDescription:
+      "The Spanish digital nomad (telework) visa: who qualifies, minimum income of 200% of the monthly minimum wage, the 20% Spanish-client limit, documents, validity of up to one year and the 10-day legal decision period.",
+    category: "country-guide",
+    publishedAt: "2026-10-24",
+    lastVerified: "2026-10-24",
+    readingTimeMinutes: 6,
+    tags: ["spain digital nomad visa", "telework visa", "remote work visa", "spain residence", "digital nomad"],
+    sources: [
+      { label: "Digital Nomad Visa — Consulate General of Spain in London (Spanish Ministry of Foreign Affairs)", url: "https://www.exteriores.gob.es/Consulados/londres/en/ServiciosConsulares/Paginas/Consular/Digital-Nomad-Visa.aspx" },
+      { label: "Telework Visa (Digital Nomad Visa) — Consulate of Spain in Houston", url: "https://www.exteriores.gob.es/Consulados/houston/en/ServiciosConsulares/Paginas/Consular/TELEWORK-Visa-(Digital-Nomad-Visa)-.aspx" },
+    ],
+    sections: [
+      {
+        heading: "Who can apply",
+        body: `Spain's telework visa, popularly called the digital nomad visa, is for people who work **remotely for a company outside Spain**, or who are self-employed, and who work **only through computer and telecommunication systems**.\n\nSelf-employed applicants may also work for a Spanish company, but that work must be **no more than 20% of their professional activity**.\n\nYou also need **either** a degree from a university or business school of recognised standing **or** at least **three years of work experience** in your current field. A spouse or unmarried partner, dependent children and dependent relatives in the ascending line can be included.`,
+      },
+      {
+        heading: "Minimum income",
+        body: `The consulate lists a minimum income of:\n\n- **200% of the Spanish monthly minimum wage (SMI)** for the main applicant.\n- **An extra 75% of the SMI** for the first family member.\n- **An extra 25% of the SMI** for each further family member.\n\nThe consulate page does not state a euro amount, and the minimum wage is updated each year. Look up the current SMI and multiply it yourself, then check the figure with your consulate before you apply.`,
+      },
+      {
+        heading: "Work contract and employer documents",
+        body: `- **Employees:** a company certificate stating the contract length, explicit consent to work remotely in Spain, and the salary.\n- **Self-employed:** a certificate stating the contract length and the terms for remote work in Spain.\n- Proof that you have worked for the foreign company for **at least three months** before applying.\n- A certificate of the company's creation date and business type, where the consulate asks for it.`,
+      },
+      {
+        heading: "Other documents",
+        body: `The London consulate's list includes:\n\n- A completed national visa application form and a recent passport photo.\n- A passport valid for **at least one year**, with two blank pages, issued in the last 10 years.\n- A **criminal record certificate**, generally no older than six months, with a declaration covering the last five years.\n- **Health insurance** covering the risks of Spain's public health system, or a registered S1 form.\n- A **NIE number**, which must be obtained before applying.\n- Degree or employment-history proof of three years of experience.\n- Family relationship documents where applicable.\n\nForeign documents must be legalised or apostilled and, where needed, officially translated into Spanish. Some items on this list are specific to people living in the UK, such as the UK residence permit and proof of residence in the consular district, so use the list from the consulate that covers your country.`,
+      },
+      {
+        heading: "Decision time, validity and refusals",
+        body: `The legal decision period is **10 days**, which can be extended if the consulate asks for an interview or more documents. The visa is valid for **up to one year**, or the length of the residence and work authorisation granted, whichever is shorter. Collect it within one month of notification.\n\nA refusal is notified in writing. You can ask the consulate to reconsider within **one month**, or appeal to the High Court of Justice of Madrid within **two months**.\n\nFees are paid at submission in the local currency and change over time. The consulate page links to its list instead of printing an amount.`,
+      },
+    ],
+  },
+
+  {
+    slug: "visa-bank-statement-how-many-months",
+    title: "How Many Months of Bank Statements Do Visa Offices Ask For?",
+    metaDescription:
+      "Canada asks for at least 6 months of bank statements for a tourist visa, Slovakia accepts a statement from the last 3 months, Germany's Opportunity Card accepts 3 months. What each official source says, and why rules differ.",
+    category: "country-guide",
+    publishedAt: "2026-10-24",
+    lastVerified: "2026-10-24",
+    readingTimeMinutes: 4,
+    tags: ["bank statement for visa", "proof of funds", "how many months", "visa documents", "financial evidence"],
+    sources: [
+      { label: "Apply for a visitor visa — IRCC (Canada)", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/apply-visitor-visa.html" },
+      { label: "Foreign students in Slovakia — Ministry of Foreign and European Affairs, Slovakia", url: "https://www.mzv.sk/en/web/en/visa-and-services/foreign-students-in-slovakia" },
+      { label: "National visa for job search “Opportunity Card” — German missions, germany.info", url: "https://www.germany.info/resource/blob/2663778/ab8cb2c068d1819dd3822b81231fe0b9/opportunity-card-data.pdf" },
+    ],
+    sections: [
+      {
+        heading: "There is no single rule",
+        body: `There is no worldwide standard for how many months of bank statements a visa needs. Each country, and often each embassy or visa type, sets its own. The honest answer to "how many months of bank statement for a visa" is therefore: **whatever the visa office handling your application says**, and the number below is only what we have confirmed on official pages.`,
+      },
+      {
+        heading: "What official pages say",
+        body: `| Visa | What the official source asks | Source |\n|---|---|---|\n| Canada, visitor visa for tourism | Bank statements covering **at least 6 months** (recommended with a travel history, itinerary and employer letter) | IRCC |\n| Slovakia, study residence permit | A bank statement from the **last three months** in your name; documents from a sponsor must not be older than 90 days | Slovak Ministry of Foreign Affairs |\n| Germany, Opportunity Card | **Three months of account statements** showing your name and address, as one accepted way to prove funds | German missions |\n\nThe three cases above are different visas, so their numbers should not be compared like for like.`,
+      },
+      {
+        heading: "What officers actually look at",
+        body: `The number of months is a minimum. What the officer reads is:\n\n- **Regular income** that matches what you say you earn.\n- **A balance that covers the trip or course**, not a sudden large deposit.\n- **Your name and address** on the statement, and the bank's stamp or a downloaded statement that shows the account number clearly.\n- **Consistency** with your other documents, such as employer letters and tax records.\n\nA large deposit shortly before applying without an explanation is a common reason for questions.`,
+      },
+      {
+        heading: "Tips",
+        body: `1. Read the checklist for the exact visa and embassy you are using. Print the page date.\n2. Request statements up to the most recent full month, so they are not out of date by the time you apply.\n3. If you receive money from a sponsor, add a sponsor statement and proof of the relationship.\n4. If an unusual deposit appears, add a short written explanation with proof, for example a sale document.\n5. Keep scans legible and in the order the checklist gives.`,
+      },
+      {
+        heading: "When the official page gives no number",
+        body: `Some official pages simply say "proof of sufficient funds" without naming a period. In that case the number of months is up to the consulate. Ask it directly, or follow the tourist rule of thumb from similar official pages, usually three to six months, but make clear that this is a guess and not a rule.`,
+      },
+    ],
+  },
 ];
