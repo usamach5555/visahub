@@ -39,6 +39,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   rejection: "Rejection Analysis",
   comparison: "Visa Comparison",
   "country-guide": "Country Guide",
+  "visa-update": "Visa Update",
 };
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -46,6 +47,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   rejection: "bg-red-100 text-red-800 border-red-200",
   comparison: "bg-violet-100 text-violet-800 border-violet-200",
   "country-guide": "bg-emerald-100 text-emerald-800 border-emerald-200",
+  "visa-update": "bg-amber-100 text-amber-800 border-amber-200",
 };
 
 export default async function EditorialGuidePage({ params }: Props) {

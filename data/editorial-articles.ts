@@ -1,9 +1,10 @@
 import { COUNTRY_GUIDES } from "./country-guides";
+import { VISA_UPDATES } from "./visa-updates";
 export interface EditorialArticle {
   slug: string;
   title: string;
   metaDescription: string;
-  category: "problem-solving" | "rejection" | "comparison" | "country-guide";
+  category: "problem-solving" | "rejection" | "comparison" | "country-guide" | "visa-update";
   publishedAt: string;
   readingTimeMinutes: number;
   tags: string[];
@@ -14,6 +15,7 @@ export interface EditorialArticle {
 }
 
 export const EDITORIAL_ARTICLES: EditorialArticle[] = [
+  ...VISA_UPDATES,
   ...COUNTRY_GUIDES,
   // ── PROBLEM-SOLVING (10) ─────────────────────────────────────────────────────
   {
