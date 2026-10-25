@@ -1072,7 +1072,7 @@ export const COUNTRY_GUIDES: EditorialArticle[] = [
       },
       {
         heading: "Visa C and Visa D",
-        body: `| Visa | For | Length |\n|---|---|---|\n| **Visa C (short stay)** | Tourism, business or other travel | Up to 90 days in any 180-day period; one, two or multiple entries |\n| **Visa D (long stay)** | Employment, education or family reunification | 90 to 180 days; generally needed by those who plan to apply for a temporary residence permit |`,
+        body: `| Visa | For | Length |\n|---|---|---|\n| Visa C (short stay) | Tourism, business or other travel | Up to 90 days in any 180-day period; one, two or multiple entries |\n| Visa D (long stay) | Employment, education or family reunification | 90 to 180 days; generally needed by those who plan to apply for a temporary residence permit |`,
       },
       {
         heading: "How to apply",
