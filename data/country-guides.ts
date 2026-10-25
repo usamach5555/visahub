@@ -888,4 +888,204 @@ export const COUNTRY_GUIDES: EditorialArticle[] = [
       },
     ],
   },
+
+  {
+    slug: "ireland-short-stay-business-visa-c",
+    title: "Ireland Business Visa (Short Stay C): Fee, Documents and Processing Time",
+    metaDescription:
+      "How to apply for Ireland's short stay (C) business visa: €60 single-entry fee, the 14-day work limit, the AVATS online process, 6 months of bank statements, and the roughly 8-week decision time.",
+    category: "country-guide",
+    publishedAt: "2026-10-25",
+    lastVerified: "2026-10-25",
+    readingTimeMinutes: 6,
+    tags: ["ireland business visa", "short stay C visa", "AVATS", "irish visa fee", "ireland visa documents"],
+    sources: [
+      { label: "Short stay business visa — Immigration Service Delivery, Ireland", url: "https://www.irishimmigration.ie/coming-to-work-in-ireland/what-are-my-options-for-working-in-ireland/coming-to-work-for-less-than-90-days/short-stay-business-visa/" },
+      { label: "Giving your details on AVATS — Immigration Service Delivery", url: "https://www.irishimmigration.ie/coming-to-visit-ireland/giving-your-details-on-avats-for-a-visa-preclearance-application/" },
+    ],
+    sections: [
+      {
+        heading: "What the visa covers",
+        body: `Ireland's short stay **business visa (type C)** is for travellers from visa-required countries who need to do job-related activities in Ireland for a short time. Each traveller needs their own visa, and applicants under 18 apply through a parent or legal guardian.\n\nThe key limit is time: the work must **start and end within a single 14-day period**. Work of **15 days or more** is not covered, and work in more than one 14-day period within 90 days needs separate permission through the **Atypical Working Scheme**. The visa also does not let you rely on Irish public services such as public hospitals.`,
+      },
+      {
+        heading: "Fee",
+        body: `| Visa | Fee |\n|---|---|\n| Single entry | €60 |\n| Multiple entry (approved only in limited circumstances) | €100 |\n\nExtra charges, such as consular fees, may apply, and the fee is **non-refundable**, even if the visa is refused.`,
+      },
+      {
+        heading: "How to apply: AVATS in four steps",
+        body: `1. **Create an online application in AVATS.** Choose visa type "Short Stay (C)", reason for travel "Business", and journey type single or multiple.\n2. **Note your Visa Application Transaction Number** and print the summary sheets.\n3. **Pay the fee** by the method your application office accepts.\n4. **Send your documents** to the office on your summary sheet within **30 days** of creating the AVATS application.\n\nApply about **three months before** you travel.`,
+      },
+      {
+        heading: "Documents on the Irish checklist",
+        body: `- Signed and dated AVATS summary sheets.\n- A signed **cover letter** stating your purpose, travel dates, family in the EU/EEA or Switzerland, and your commitments to follow the visa conditions, avoid public services and leave on time.\n- A **written invitation from each Irish host**, including a statement on who pays what.\n- Accommodation confirmations, or host letters with a utility bill dated within six months as proof of the host's address.\n- A **current passport valid at least six months** beyond your planned departure, plus copies of all previous passports.\n- Two passport photos, signed and labelled with your transaction number.\n- **Proof of funds**, for example an original, certified bank statement covering the **last six months**.\n- **Proof of ties** to your home country, such as employer letters, payslips, business records, or family and property documents.\n- Details and original letters for any past visa refusals.\n- Certified English or Irish translations of any other-language documents.\n\nDocuments must be originals unless the checklist says otherwise. Travel or medical insurance is required before you travel.`,
+      },
+      {
+        heading: "How long it takes",
+        body: `A decision is generally expected about **eight weeks** after your documents are received. The Dublin office publishes waiting times weekly on Tuesdays, so check that page before you plan a fixed meeting date.`,
+      },
+      {
+        heading: "After approval, and if you are refused",
+        body: `A visa lets you **travel** to Ireland but does not guarantee entry, and an immigration officer can still refuse you. Permission to stay can last up to **90 days**, shown on your landing stamp. Extensions are granted only in exceptional circumstances that arise after arrival.\n\nThe Irish site states that **refusals of this visa cannot be appealed**. You would need to submit a new application, so fix the problem named in the refusal before you reapply.`,
+      },
+    ],
+  },
+
+  {
+    slug: "norway-visa-refused-appeal-process",
+    title: "Norway Visa Refused: How to Appeal and the Deadlines That Apply",
+    metaDescription:
+      "If Norway refuses your visa: visa appeals go first to the embassy that refused you, UDI decides if it disagrees, and there is no further appeal. What UDI says about the 3-week limit, fee, documents and Schengen fee of €90.",
+    category: "country-guide",
+    publishedAt: "2026-10-25",
+    lastVerified: "2026-10-25",
+    readingTimeMinutes: 5,
+    tags: ["norway visa rejection", "norway visa appeal", "UDI", "schengen visa refused", "norway visa fee"],
+    sources: [
+      { label: "Appealing a decision — Norwegian Directorate of Immigration (UDI)", url: "https://www.udi.no/en/word-definitions/appealing-a-decision/" },
+      { label: "Visitor's visa — Norway in Canada (Norwegian foreign service)", url: "https://www.norway.no/en/canada/services-info/visitors-visa-res-permit/visitors-visa/" },
+    ],
+    sections: [
+      {
+        heading: "Visa refusals follow a different appeal route",
+        body: `The Norwegian Directorate of Immigration (UDI) explains the general appeal process for residence permits and other cases, and then states that **visa refusals work differently**. An appeal of a visa decision goes **first to the Norwegian embassy or consulate that made the decision**. That mission will either **approve the visa** or **forward your appeal to UDI**.\n\nIf **UDI agrees with the refusal**, there is **no further appeal**. You can always apply again.`,
+      },
+      {
+        heading: "The deadline",
+        body: `UDI's general rule is that you must appeal **within three weeks** of receiving the decision letter. For a visa refusal, read your **refusal letter** closely: it states how and where to send the appeal, and the deadline that applies to your case. If the letter says three weeks, count from the day you or your representative received it.`,
+      },
+      {
+        heading: "What an appeal must contain",
+        body: `UDI says an appeal must be **in writing and signed**, in **Norwegian or English**, and should:\n\n- Name the decision you are contesting and say **how it should be changed**.\n- Give your **reasons**.\n- Include your **case reference numbers** shown on the decision letter.\n- Attach **any new information or documents**. Without new documents, an appeal is likely to be rejected.\n\nThere is **no fee** to appeal. If you cannot gather all documents in time, UDI says to file before the deadline, explain the delay, and you can get up to **two more weeks** to submit them.\n\nThe address or upload route for a visa appeal depends on the mission. If a Norwegian consulate refused you, send the appeal as its rejection letter says, by email or courier. If UDI refused you, upload the appeal through the UDI website.`,
+      },
+      {
+        heading: "Or apply again",
+        body: `Because a visa appeal is decided on the evidence you already gave plus anything new, many applicants do better by **fixing the weakness and reapplying**. The Norwegian pages do not list refusal reasons, but missing or inconsistent documents delay processing. Check the reasons ticked on your refusal letter and address each one.`,
+      },
+      {
+        heading: "Fee, timing and rules for a new application",
+        body: `The Schengen visa fee for Norway is **€90** for adults. Children under six pay nothing and children aged six to under 12 pay €45, and family members of EU/EEA citizens do not pay. A visa centre may add a service fee, for example VFS in Canada charges a service fee and a courier fee on top, so check the total at your own mission.\n\nOther rules stated on the Norwegian foreign service page:\n\n- A stay of up to **90 days in any 180-day period** across the Schengen area.\n- Apply up to **six months before** departure, ideally at least **four weeks** ahead and no later than 15 days before.\n- A passport valid at least **three months** past your Schengen departure.\n- Travel health insurance of at least **€30,000**, valid in all Schengen countries.\n- Processing usually takes up to **15 calendar days** after the consulate receives your application, and up to **45 days** if the case is sent to UDI.`,
+      },
+    ],
+  },
+
+  {
+    slug: "mexico-visa-requirements-financial-proof",
+    title: "Mexico Visa Requirements: Who Needs One, Fee and Financial Proof by Visa Type",
+    metaDescription:
+      "Who can enter Mexico without a visa, the US$56 consular fee, and the financial proof a Mexican consulate lists for tourist, work, temporary resident, permanent resident and student visas — with the validity and 30-day resident-card rule.",
+    category: "country-guide",
+    publishedAt: "2026-10-25",
+    lastVerified: "2026-10-25",
+    readingTimeMinutes: 7,
+    tags: ["mexico visa", "mexico visa requirements", "mexico temporary resident visa", "mexico permanent residency", "mexican consulate"],
+    sources: [
+      { label: "Visas (English) — Consulate General of Mexico in Boston", url: "https://consulmex.sre.gob.mx/boston/index.php/visas-english" },
+    ],
+    sections: [
+      {
+        heading: "Important: one consulate's rules",
+        body: `The figures below come from the **Consulate General of Mexico in Boston**, which publishes them for its own district. Mexican consulates can differ in appointment method, fee currency and financial amounts, and the page itself says requirements may change without notice. Use them as a worked example and confirm with the consulate that covers your place of residence.`,
+      },
+      {
+        heading: "Who does not need a visa",
+        body: `For tourism or unpaid activities for **up to 180 days**, no visa is needed if you:\n\n- hold an approved **APEC Business Travel Card**, or\n- are a citizen or permanent resident of the **US, Canada, Japan, the UK, a Schengen country, Chile or Colombia**, or\n- have a **valid visa** from one of those countries in your passport.\n\nThe consulate warns that some US documents, for example EAD cards, I-797 forms, Advance Parole and I-20 or DS-2019 forms, are **not accepted** for entry. Mexico does not apply a six-month passport-validity rule, but your passport, visas and residence cards must stay valid for the whole trip.`,
+      },
+      {
+        heading: "Fees",
+        body: `The consular fee is **US$56 in cash** for any visa type, and each reapplication needs a new payment. The **work visa** also requires a **US$313 immigration fee** in cash.\n\nThe page gives no general processing time for an initial visa. It does warn: **do not buy your flight ticket before you hold the visa**.`,
+      },
+      {
+        heading: "Financial proof by visa type",
+        body: `Amounts are as listed by the consulate. In most cases you choose at least one option.\n\n| Visa type | Financial proof options |\n|---|---|\n| Non-paid activities (tourist, business, transit), up to 180 days | Balance of US$4,500 over 3 months; or US$1,500 monthly income over 3 months plus a year of stable employment; or students with US$900 monthly income and transcripts |\n| Work (lucrative activities) | Employer must start the process with Mexico's immigration institute (INM) and obtain an authorisation number; you also need a contract or employer letter stating salary and position |\n| Temporary resident | US$75,100 balance over 12 months; or US$4,500 monthly income over 6 months plus a year of employment; or property in Mexico worth more than US$600,500; or marriage to a Mexican national. Remote workers need an original, signed employer letter |\n| Permanent resident | Only for retirees or pensioners, or those with a qualifying family tie. US$300,200 balance over 12 months; or US$7,500 monthly pension over 6 months; or being a parent of a Mexican citizen |\n| Student | Signed acceptance letter from the school; US$15,000 balance over 3 months; or income of US$1,500 over 3 months; or a full scholarship. The page lists an age limit of 25 or younger |`,
+      },
+      {
+        heading: "Dependents, translations and minors",
+        body: `- The primary applicant needs an extra **US$1,500** (after taxes) per dependent, plus a marriage or birth certificate.\n- Documents from other countries need an **apostille or legalisation** and an official Spanish translation.\n- Minors attend with a parent or guardian, or with a notarised authorisation.\n- Each family member needs a **separate appointment**.`,
+      },
+      {
+        heading: "Validity and the 30-day resident-card step",
+        body: `Residence visas (work, permanent, temporary, student) are valid for **six months and one entry**. After you enter Mexico you have **30 days** to get your resident card at an INM office. A visa issued to replace a lost resident card is likely valid for 30 days and one entry, as set by INM.`,
+      },
+      {
+        heading: "If your visa is refused",
+        body: `The consulate page does not describe an appeal. It says an appointment or document submission does not guarantee approval and that missing documents can cause delays or denial. To reapply you pay the fee again, so fix the missing proof first.\n\nThis page covers the consulate in Boston only. Appointments at that office are requested by email at least **three months** before travel and are not booked through the MiConsulado app, so follow the booking rules of your own consulate.`,
+      },
+    ],
+  },
+
+  {
+    slug: "czech-employee-card-and-visa-fees",
+    title: "Czech Republic Employee Card and Visa Fees: Requirements and Processing",
+    metaDescription:
+      "The Czech Employee Card for non-EU workers: vacancy reference number, documents, apply at a Czech mission, a 60-day legal decision time (up to 90) and the fees — €90 Schengen, CZK 2,500 long-stay, CZK 5,000 employee card.",
+    category: "country-guide",
+    publishedAt: "2026-10-25",
+    lastVerified: "2026-10-25",
+    readingTimeMinutes: 6,
+    tags: ["czech employee card", "czech work visa", "czechia visa", "czech visa fees", "long stay visa"],
+    sources: [
+      { label: "Employee Card — Ministry of Foreign Affairs of the Czech Republic", url: "https://mzv.gov.cz/jnp/en/information_for_aliens/long_stay_visa/employment_card.html" },
+      { label: "Visa Fees — Ministry of Foreign Affairs of the Czech Republic", url: "https://mzv.gov.cz/jnp/en/information_for_aliens/visa_fee_schedule/index.html" },
+    ],
+    sections: [
+      {
+        heading: "What the Employee Card is",
+        body: `The **Employee Card** is the Czech work permit card for non-EU workers. It is **issued for a specific job position** and for employment lasting **more than three months**. Citizens of EU countries, Iceland, Liechtenstein, Norway and Switzerland do not need one, nor do family members as defined by Czech law or people with free access to the labour market. Shorter or seasonal work uses other visa types.\n\nYou also need a **vacancy reference number** from the central vacancies database run by the Labour Office. Each position open to foreign nationals shows a reference number beside the job title.`,
+      },
+      {
+        heading: "Documents",
+        body: `The Czech Ministry of Foreign Affairs lists:\n\n- A **passport** and a completed Employee Card application form.\n- **Two photos** and **biometric data** (fingerprints).\n- An **employment contract, work agreement or letter of intent** showing pay at or above the minimum wage and **at least 15 hours of work per week**.\n- An **employment permit**, if the position requires one.\n- **Proof of professional competence**, such as education or qualifications.\n- **Proof of accommodation** and a **criminal record extract**.\n- The fee.\n\nTravel medical insurance is needed only **after** the visa is approved. Applicants in the targeted economic migration programme may submit an employer's declaration instead of some documents.\n\nMost supporting documents must be **no older than 180 days**. Foreign public documents need an apostille or superlegalisation and a Czech translation. The passport and purpose-of-stay documents must be originals, and incomplete applications are not processed.`,
+      },
+      {
+        heading: "Where to apply and how long it takes",
+        body: `Apply **in person at the Czech diplomatic mission** with competence for your location, after booking an appointment (usually by email or phone). The mission forwards your application to the **Ministry of the Interior**, which decides it.\n\nThe **legal time limit is 60 days**, which can extend to **90 days** in exceptional cases or when the Labour Office must give an opinion.`,
+      },
+      {
+        heading: "After approval",
+        body: `If approved you receive a **single-entry long-stay visa valid for 60 days** so you can collect the card. Within that period you visit the local Ministry of the Interior branch, where biometrics are taken and the card is issued. The Czech page does not state how long the card itself is valid. You can apply to extend it at the local branch before it expires. The card also lets you move in the Schengen Area for up to 90 days in any 180-day period for non-gainful purposes.`,
+      },
+      {
+        heading: "Czech visa fees",
+        body: `Fees are paid when you **submit** the application, are **not refunded** if the visa is refused, and can be paid in cash, by card or by bank transfer in EUR or local currency.\n\n| Visa or card | Fee |\n|---|---|\n| Schengen visa (types C, A) | €90 |\n| Schengen visa, children 6 to 11 | €45 (under 6 free) |\n| Long-term visa or residence permit (type D) | CZK 2,500 |\n| Employee Card, Blue Card, intra-company transfer card or entrepreneurship visa | CZK 5,000 |\n\nA reduced Schengen fee of €35 applies to citizens of several countries, including Ukraine, Serbia, Georgia and Armenia. Some nationalities, such as Albania, Japan, South Africa and Turkey, have free long-term visas, and some pay different amounts. Check the Ministry's schedule for your nationality.`,
+      },
+    ],
+  },
+
+  {
+    slug: "serbia-visa-requirements-how-to-apply",
+    title: "Serbia Visa Requirements: Visa-Free Rules, Visa C and D, and How to Apply",
+    metaDescription:
+      "Serbia's Ministry of Foreign Affairs rules: who can enter visa-free with a Schengen, UK, EU or US visa, the difference between Visa C (90 days) and Visa D (90 to 180 days), applying online via welcometoserbia.gov.rs and the documents required.",
+    category: "country-guide",
+    publishedAt: "2026-10-25",
+    lastVerified: "2026-10-25",
+    readingTimeMinutes: 5,
+    tags: ["serbia visa", "serbia tourist visa", "serbia visa requirements", "welcometoserbia", "visa C visa D"],
+    sources: [
+      { label: "Visa Requirements — Ministry of Foreign Affairs of the Republic of Serbia", url: "https://www.mfa.gov.rs/en/citizens/travel-serbia/visa-requirements" },
+    ],
+    sections: [
+      {
+        heading: "Visa-free entry with another visa",
+        body: `Serbia's Ministry of Foreign Affairs says holders of **most national passports** can enter, transit and stay **without a Serbian visa** if they hold a **valid Schengen, UK, EU Member State or US visa**. People with a **residence permit** in the Schengen area, the EU or the US also qualify.\n\nVisa-free stays are limited to **90 days within any six-month period**, and the other visa or residence permit must still be valid. **Emergency travel documents** and travel documents issued under international conventions are excluded.\n\nCheck whether your nationality is eligible on the Ministry's page, since the rule applies to holders of most, not all, passports.`,
+      },
+      {
+        heading: "Visa C and Visa D",
+        body: `| Visa | For | Length |\n|---|---|---|\n| **Visa C (short stay)** | Tourism, business or other travel | Up to 90 days in any 180-day period; one, two or multiple entries |\n| **Visa D (long stay)** | Employment, education or family reunification | 90 to 180 days; generally needed by those who plan to apply for a temporary residence permit |`,
+      },
+      {
+        heading: "How to apply",
+        body: `You can apply:\n\n- **In person** at a Serbian embassy or consulate abroad, or\n- **Online** through **welcometoserbia.gov.rs**. Online applications need a registered account on **eid.gov.rs**.\n\nSince **23 April 2025**, Serbia also issues **Digital Travel Authorizations** to nationals of countries where the service is enabled. Applicants from other countries receive a visa sticker.`,
+      },
+      {
+        heading: "Documents",
+        body: `- A completed application form and a passport photo (3.5 × 4.5 cm).\n- A passport valid **at least 90 days beyond** your planned departure, with at least two consecutive blank pages, issued within the last 10 years.\n- The **visa fee**.\n- **Proof of the purpose** of your stay.\n- An **invitation letter**, depending on purpose: a certified one for a private visit, one from a Serbian company for business, or travel-agency payment proof for tourism.\n- Valid **travel medical insurance**.\n\nShort-stay applicants should also show **funds** for accommodation and living costs and evidence of **intent to leave** Serbia before the visa expires. A transit visa needs an entry visa for your next destination or documents explaining your onward travel. Missions may ask for extra documents, and incomplete applications are not accepted.`,
+      },
+      {
+        heading: "Fees and processing time",
+        body: `The Ministry's visa-requirements page does **not** list the visa fee or the processing time. Contact the nearest Serbian diplomatic mission for both, and be wary of sites that quote a price without a link to the Ministry or a Serbian mission.`,
+      },
+    ],
+  },
 ];
